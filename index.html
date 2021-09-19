@@ -2,111 +2,140 @@
 <html lang="en">
 
 <head>
-    <!-- [if lt IE 9]>
-         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![end if]-->
+    <title>Brian Latchman</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0" />
-    <meta name="description" content="Brian Latchman's Personal Website; Welcome!">
-    <title>Brian Latchman</title>
+    <meta name="description" content="Brian Latchman's Website. Creating tools for people to use, enjoy and explore.">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+
+    <meta property='og:title' content="Brian Latchman" />
+    <meta property='og:image' content='https://latchman.ca/assets/portrait.jpg' />
+    <meta property='og:description' content="Creating tools for people to use, enjoy and explore." />
+    <meta property='og:url' content='https://latchman.ca/' />
+
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <meta property='og:title' content="Brian Latchman's Personal Website"/>
-    <meta property='og:image' content='https://latchman.ca/assets/portrait.jpg'/>
-    <meta property='og:description' content="I'm a Computer Science student at the University of Toronto, passionate about data, design and entrepreneurship. You can see some of my projects here."/>
-    <meta property='og:url' content='https://latchman.ca/'/>
+    <link rel="stylesheet" type="text/css" href="css/new.css">
 </head>
 
 <body>
-    <nav>
-        <div class="hamburgerbtn">
-            <input type="checkbox" id="hamburger">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <ul>
-                <li class="current">
-                    <a href="/index.html">About me</a>
-                </li>
-                <li><a href="/toronto.html">Toronto</a></li>
-                <li><a href="/xo.html">XO</a></li>
-            </ul>
+    <div class="top">
+        <nav>
+            <div>
+                <p><a href="/index">Brian Latchman</a></p>
+                <p>Designer & Programmer</p>
+            </div>
+            <div>
+                <p>Hello from Toronto,</p>
+                <p>Canada</p>
+            </div>
+            <div>
+                <p><a href="/about">About me</a></p>
+                <p><a href="/photos">Photos</a></p>
+            </div>
+            <div class="spacer"></div>
+        </nav>
+
+        <div class="intro">
+            <h3>Howdy, I'm Brian.</h3>
+            <br>
+            <h3>I create tools for people to use, enjoy and explore.</h3>
+            <h3>Previously interned at <a class="underline" href="https://www.microsoft.com/en-us/garage/"
+                    target="_blank">Microsoft</a>
+                and <a class="underline" href="https://www.loblawdigital.co/" target="_blank">Loblaw Digital</a>.</h3>
+            <h3>Co-Founder of Cayendo.</h3>
         </div>
-        <a href="/experimental.html">
-            <div class="logo">b</div>
-        </a>
-    </nav>
+    </div>
 
     <main>
-        <div class="card-container">
-            <div class="fade-in image-card">
-                <img class="top-img" src="assets/portrait2.jpg" alt="Brian Latchman">
-                <img src="assets/portrait.jpg" alt="Brian Latchman">
-                <h3 class="card-content">Hi, I'm Brian! I'm the one with the camera.</h3>
+        <h3 class="title">Selected work</h3>
+        <div class="work-flex">
+            <div class="work-container">
+                <a href="https://betteruoft.ca/" target="_blank">
+                    <div class="work-img uoft-img"></div>
+                </a>
+                <p>Better UofT — UofT made customizable</p>
+                <p class="grey">Chrome extension which provides improved accessibility and customizable themes for UofT
+                    websites.</p>
             </div>
-            <div class="card fade-in">
-                <div class="card-accent"></div>
-                <div class='spacer'></div>
-                <h1 class="title">About me</h1>
-                <div class='spacer'></div>
-                <p>I’m a programmer, designer, and entrepreneur from Toronto, CA. I spend most of my time learning new
-                    CSS
-                    tricks, and a bunch of it solving real-world problems at <a href="https://www.cayendo.ca"
-                        target="_blank">Cayendo</a>.
-                </p>
-                <br>
-                <p>
-                    I'm going into my third year of
-                    studies at the University of Toronto, grateful for all I have learned from starting Cayendo and
-                    turning my solution into a reality that helps others daily.
-                </p>
-                <br>
-                <p>
-                    I’m passionate about user experience. Particularly, I'm interested in how tools affect the
-                    things we make, and how software can influence design thought.
+            <div class="work-container">
+                <a href="https://ooley.me/" target="_blank">
+                    <div class="work-img ooley-img"></div>
+                </a>
+                <p>Ooley — Real time collaborative whiteboard</p>
+                <p class="grey">Peer-to-peer web application where users can simultaneously view and draw on a canvas in
+                    real time.
                 </p>
             </div>
-            <div class="card fade-in">
-                <div class="card-accent"></div>
-                <div class='spacer'></div>
-                <h1 class="title">Contact</h1>
-                <div class='spacer'></div>
-                <p>The best stories are told in person. Let's grab coffee and chat!
+            <div class="work-container">
+                <a href="https://pinecone.tools/" target="_blank">
+                    <div class="work-img pinecone-img"></div>
+                </a>
+                <p>Pinecone — Grade calculator</p>
+                <p class="grey">Progressive web application where students can calculate their academic standing.</p>
+            </div>
+            <div class="work-container">
+                <a href="https://play.google.com/store/apps/details?id=com.Julian.KingsCorner&hl=en_CA&gl=US"
+                    target="_blank">
+                    <div class="work-img kc-img"></div>
+                </a>
+                <p>Kings Corner — Card game</p>
+                <p class="grey">Released on the Google Play Store gaining over 90 thousand downloads and an average 4.2
+                    star rating.
                 </p>
-                <br>
-                <p>
-                    You can reach me through the mediums below or <a href="mailto:latxhman@gmail.com">email</a> me if
-                    you need more words.
-                </p>
-                <br>
-                <a href="https://www.linkedin.com/in/brian-latchman" target="_blank" class="icon-link">
-                    <img src="assets/icons/linkedin.svg" alt="LinkedIn Logo" class="icon">
-                    <span>linkedin.com/in/brian-latchman</span>
+            </div>
+            <div class="work-container">
+                <a href="https://latxh.github.io/shoppies/" target="_blank">
+                    <div class="work-img shoppies-img"></div>
                 </a>
-                <br>
-                <div class='spacer'></div>
-                <a href="https://github.com/latxh" target="_blank" class="icon-link">
-                    <img src="assets/icons/github-image.svg" alt="GitHub Logo" class="icon">
-                    <span>github.com/latxh</span>
-                </a>
-                <br>
-                <div class='spacer'></div>
-                <a href="https://www.instagram.com/latxhman" target="_blank" class="icon-link">
-                    <img src="assets/icons/instagram.svg" alt="GitHub Logo" class="icon">
-                    <span>instagram.com/latxhman</span>
-                </a>
-                <div class='spacer'></div>
-                <div class='spacer'></div>
-                <div class='spacer'></div>
+                <p>The Shoppies — Shopify challenge submission</p>
+                <p class="grey">Movie awards for entrepreneurs; a webpage that can search for movies and favourite
+                    films.</p>
+            </div>
+        </div>
+        <h3 class="title experiences">Experiences</h3>
+        <div class="work-flex">
+            <div class="work-container">
+                <div class="work-img msft-img"></div>
+                <p>Microsoft 2021 — Confidential until announced</p>
+                <p class="grey">If you are interested in learning more about my project, please reach out to me.</p>
+            </div>
+            <div class="work-container loblaw">
+                <div class="work-img loblaw-img"></div>
+                <p>Loblaw Digital 2021 — Coming soon</p>
+                <p class="grey">Enabling data engineers to conduct efficient system monitoring by streamlining the
+                    process of setting up thresholds and complex alerts.</p>
             </div>
         </div>
     </main>
 
-    <footer class="footer-container fade-in">
-        <p>Hello from Toronto. Click the
-        <div class="logo-foot">b</div> for a surprise.</p>
+    <footer>
+        <div class="group">
+            <p>Status</p>
+            <br>
+            <p>Designing software at a venture backed startup.</p>
+        </div>
+        <div class="group">
+            <p>Contact</p>
+            <br>
+            <p><a href="mailto:latxhman@gmail.com" target="_blank">latxhman@gmail.com</a></p>
+            <p><a href="https://www.linkedin.com/in/brian-latchman/" target="_blank">Linkedin</a></p>
+            <p><a href="https://www.instagram.com/latxhman/" target="_blank">Instagram</a></p>
+            <p><a href="https://github.com/latxh/" target="_blank">Github</a></p>
+        </div>
+        <div class="group">
+            <p>Credits</p>
+            <br>
+            <p>Coded by yours truly.</p>
+            <p>All rights reserved.</p>
+        </div>
+        <div class="spacer"></div>
     </footer>
 
+    <canvas id='canvas' style='cursor: default;'>
+    </canvas>
+    <script src='./lib/latch.js'></script>
 </body>
 
 </html>

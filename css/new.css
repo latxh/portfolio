@@ -1,0 +1,218 @@
+@font-face {
+    font-family: 'SF Pro';
+    src: url('fonts/SF-Pro-Display-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    
+}
+
+:root {
+    color-scheme: dark;
+    font-family: 'SF Pro', sans-serif;
+
+    --white: #f5f5f5;
+    --grey: #a4a4a4;
+    --black: #000;
+    --blue: #1A73E8;
+}
+
+::selection {
+    background: var(--black);
+}
+
+body {
+    background-color: var(--black);
+    overflow-y: scroll;
+    margin: 0;
+    padding: 35px 35px 70px 35px;
+}
+
+nav, footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 200px;
+}
+
+footer {
+    margin-top: 150px;
+}
+
+footer > div > p,
+footer > div > a{
+    font-size: 16px;
+}
+
+p {
+    color: var(--white);
+    font-size: 22px;
+    margin: 0;
+}
+
+h3 {
+    color: var(--white);
+    font-size: 28px;
+    line-height: 34px;
+    margin: 0;
+    font-weight: normal;
+}
+
+a:link, a:visited, a:active {
+    cursor: pointer;
+    color: var(--white);
+    text-decoration: none;
+}
+
+a:hover, a:focus, a.underline:hover, a.underline:focus {
+    outline: none;
+    text-decoration: underline;
+    text-decoration-color: var(--blue);
+}
+
+a.underline {
+    text-decoration: underline;
+}
+
+#canvas {
+    opacity: 0.6;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+}
+
+.intro {
+    margin-top: 220px;
+}
+
+.about {
+    max-width: 1200px;
+}
+
+.group {
+    max-width: 250px;
+}
+
+.top {
+    min-height: calc(100vh - 30px);
+}
+
+.title {
+    margin-bottom: 36px;
+}
+
+.experiences {
+    margin-top: 100px;
+}
+
+.camera {
+    font-size: 22px;
+}
+
+.spacer {
+    flex: 1;
+}
+
+.grey {
+    color: var(--grey);
+}
+
+.work-flex {
+    display: flex;
+    gap: 26px;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.work-img {
+    height: 280px;
+    width: 100%;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+}
+
+.work-img.about-img, .work-img.msft-img, .work-img.loblaw-img, .work-img.pinecone-img, .work-img.kc-img, .work-img.ooley-img, .work-img.uoft-img {
+    background-size: cover;                   
+    background-repeat: no-repeat;
+    background-position: center center;  
+}
+
+.work-img.about-img {
+    height: 400px;
+    background-image: url(../assets/portrait.jpg);
+}
+
+.work-img.uoft-img {
+    background-image: url(../assets/projects/uoft.png);
+}
+
+.work-img.shoppies-img {
+    background-image: url(../assets/projects/shoppies.png);
+}
+
+.work-img.ooley-img {
+    background-image: url(../assets/projects/ooley.png);
+}
+
+.work-img.kc-img {
+    background-image: url(../assets/projects/kc.png);
+}
+
+.work-img.pinecone-img {
+    background-image: url(../assets/projects/pinecone.png);
+}
+
+.work-img.msft-img {
+    background-image: url(../assets/projects/msft.jpg);
+}
+
+.work-img.loblaw-img {
+    background-image: url(../assets/projects/loblaw.png);
+}
+
+.work-container {
+    max-width: 475px;
+}
+
+.work-container.loblaw, .work-container.about-container {
+    max-width: 650px;
+}
+
+.work-container > p {
+    font-size: 18px;
+}
+
+.gallery {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.gallery a img, .gallery img {
+    width: 300px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+}
+
+.gallery a:focus img, .work-container a:focus .work-img {
+    border: solid 1px var(--blue);
+    box-shadow: 0 0 0 4px rgba(39, 94, 254, .3);
+    border-radius: 6px;
+}
+
+@media only screen and (max-width: 1190px) and (min-width: 769px){
+    nav, footer {
+        gap: 100px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    nav, footer {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
