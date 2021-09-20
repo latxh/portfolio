@@ -65,7 +65,6 @@ a.underline {
 }
 
 #canvas {
-    opacity: 0.6;
     position: fixed;
     top: 0;
     left: 0;
