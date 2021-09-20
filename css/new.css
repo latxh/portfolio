@@ -3,13 +3,11 @@
     src: url('fonts/SF-Pro-Display-Regular.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
-    
 }
 
 :root {
     color-scheme: dark;
     font-family: 'SF Pro', sans-serif;
-
     --white: #f5f5f5;
     --grey: #a4a4a4;
     --black: #000;
@@ -85,6 +83,10 @@ a.underline {
 
 .intro {
     margin-top: 220px;
+}
+
+.home {
+    margin-bottom: 100px;
 }
 
 .about {
