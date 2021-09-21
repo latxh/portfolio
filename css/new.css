@@ -91,7 +91,7 @@ a.underline {
 }
 
 .top {
-    min-height: calc(100vh - 30px);
+    min-height: calc(100vh - 110px);
 }
 
 .title {
