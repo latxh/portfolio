@@ -43,7 +43,6 @@
 
 body {
     background-color: var(--background);
-    transition: background 0.2s;
     overflow-y: scroll;
     margin: 0;
     padding: 30px 50px 100px 50px;
