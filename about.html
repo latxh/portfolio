@@ -20,37 +20,50 @@
 </head>
 
 <body>
-    <div class="top">
-        <nav>
-            <div>
-                <p><a class="underline" href="/">Brian Latchman</a></p>
-                <p>Designer & Programmer</p>
-            </div>
-            <div>
-                <p>Hello from Toronto,</p>
-                <p>Canada</p>
-            </div>
-            <div>
-                <p><a class="underline" href="/about">About me</a></p>
-                <p><a class="underline" href="/photos">Photos</a></p>
-            </div>
-            <div class="spacer"></div>
-        </nav>
+    <div class="max-width">
+        <div class="top">
+            <nav>
+                <div>
+                    <h3><a href="/">Brian Latchman</a></h3>
+                    <h3>Designer & Programmer</h3>
+                </div>
+                <div class="spacer"></div>
+                <h3><a href="/about">About me</a></h3>
+                <h3><a href="/photos">Photos</a></h3>
+                <div>
+                    <input id="toggle" class="toggle" type="checkbox" title="Toggle dark mode">
+                </div>
+            </nav>
 
-        <div class="intro about">
-            <h3>Hi there, I’m Brian! 👋🏽</h3>
+            <div class="intro about">
+                <h1>Hi there, I’m Brian! 👋🏽</h1>
+                <h1 class="bot-space">I'm the one with the camera.</h1>
+                <img class="about-img" src="/assets/portrait.jpg" alt="">
+            </div>
+        </div>
+
+        <main>
+            <div class="about-text">
+                <h2>I’m currently a Computer Science and Human-Computer Interaction student at the University of
+                    Toronto.
+                    Previously, I worked on payments and rewards at Loblaw Digital and the future of Windows Start at
+                    Microsoft.
+                </h2>
+                <br>
+                <h2>I’m also (not so secretly) a book nerd. Recent reads include <a
+                        href="https://www.goodreads.com/book/show/50623864-the-invisible-life-of-addie-larue"
+                        target="_blank">The Invisible Life of Addie
+                        LaRue</a>, <a href="https://www.goodreads.com/book/show/49127718-anxious-people"
+                        target="_blank">Anxious People</a>, <a
+                        href="https://www.goodreads.com/book/show/52578297-the-midnight-library" target="_blank">The
+                        Midnight Library</a> and <a href="https://www.goodreads.com/book/show/15829770-the-red-winter"
+                        target="_blank">The
+                        Red Winter</a>.</h2>
+                <br>
+                <h2>Currently listening to Donda by Kanye West.</h2>
+            </div>
             <br>
-            <h3>I’m currently a Computer Science and Human-Computer Interaction student at the University of Toronto.
-                Previously, I worked on payments and rewards at Loblaw Digital and the future of Windows at Microsoft.
-            </h3>
-            <br>
-            <h3>I’m also (not so secretly) a book nerd. Recent reads include The Invisible Life of Addie LaRue, Anxious
-                People, The Midnight Library and The Red Winter.</h3>
-            <br>
-            <h3>After hours, you will likely find me cheering for the Toronto Blue Jays and listening to Donda by Kanye
-                West.</h3>
-            <br>
-            <h3 class="title experiences">Experience</h3>
+            <h3 class="bot-space experiences">Experience</h3>
             <p>Microsoft — Software Engineer (UX)</p>
             <p class="grey">May – August 2021</p>
             <p class="grey">Vancouver, British Columbia</p>
@@ -66,47 +79,73 @@
             <p>The Ultimate Dance Connection — Technical PM</p>
             <p class="grey">April 2018 – August 2019</p>
             <p class="grey">London, Ontario</p>
-            <h3 class="title experiences">Education</h3>
+            <h3 class="bot-space experiences">Education</h3>
             <p>University of Toronto</p>
             <p class="grey">BSc, Computer Science, Information Communications Technology</p>
             <p class="grey">Focused in Human-Computer Interaction</p>
             <p class="grey">Class of 2023</p>
-        </div>
+        </main>
+
+        <footer>
+            <div class="group">
+                <h1>Hello from Toronto,</h1>
+                <h1 class="bot-space">Canada</h1>
+            </div>
+            <div class="group">
+                <p>Status</p>
+                <br>
+                <p>Designing software at a venture backed startup.</p>
+            </div>
+            <div class="group">
+                <p>Contact</p>
+                <br>
+                <p><a href="mailto:latxhman@gmail.com" target="_blank">latxhman@gmail.com</a></p>
+                <p><a href="https://www.linkedin.com/in/brian-latchman/" target="_blank">Linkedin</a></p>
+                <p><a href="https://www.instagram.com/latxhman/" target="_blank">Instagram</a></p>
+                <p><a href="https://github.com/latxh/" target="_blank">Github</a></p>
+            </div>
+            <div class="group">
+                <p>Credits</p>
+                <br>
+                <p>Coded by yours truly.</p>
+                <p>All rights reserved.</p>
+            </div>
+            <div class="spacer"></div>
+        </footer>
     </div>
-
-    <main>
-        <div class="work-container about-container experiences">
-            <div class="work-img about-img"></div>
-            <h3 class="camera">I'm the one with the camera.</h3>
-        </div>
-    </main>
-
-    <footer>
-        <div class="group">
-            <p>Status</p>
-            <br>
-            <p>Designing software at a venture backed startup.</p>
-        </div>
-        <div class="group">
-            <p>Contact</p>
-            <br>
-            <p><a href="mailto:latxhman@gmail.com" target="_blank">latxhman@gmail.com</a></p>
-            <p><a href="https://www.linkedin.com/in/brian-latchman/" target="_blank">Linkedin</a></p>
-            <p><a href="https://www.instagram.com/latxhman/" target="_blank">Instagram</a></p>
-            <p><a href="https://github.com/latxh/" target="_blank">Github</a></p>
-        </div>
-        <div class="group">
-            <p>Credits</p>
-            <br>
-            <p>Coded by yours truly.</p>
-            <p>All rights reserved.</p>
-        </div>
-        <div class="spacer"></div>
-    </footer>
 
     <canvas id='canvas' style='cursor: default;'>
     </canvas>
-    <script src='./lib/latch.js'></script>
+    <script src='/lib/latch.js'></script>
+    <script>
+        let toggle = document.getElementById("toggle");
+        let style = document.createElement('style');
+
+        const updateAppearance = () => {
+            localStorage.setItem("appearance", appearance);
+            if (appearance === "system" ? systemDarkMode : appearance === "dark") {
+                toggle.checked = false;
+                document.body.classList.add("dark");
+
+                style.innerHTML = ':root {color-scheme: dark;}';
+                document.head.appendChild(style);
+            } else {
+                toggle.checked = true;
+                document.body.classList.remove("dark");
+
+                style.innerHTML = ':root {color-scheme: light;}';
+                document.head.appendChild(style);
+            }
+        };
+
+        let darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+        let appearance = localStorage.getItem("appearance") ?? "system";
+        let systemDarkMode = darkModeQuery.matches;
+        darkModeQuery.addEventListener("change", (m) => { systemDarkMode = m.matches; updateAppearance(); });
+        updateAppearance();
+
+        toggle.addEventListener("change", (e) => { appearance = appearance === "dark" ? "light" : "dark"; updateAppearance(); });
+    </script>
 </body>
 
 </html>
