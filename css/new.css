@@ -213,10 +213,6 @@ a.underline {
     background-color: hsl(146, 28%, 64%, 0.2);
 }
 
-#live {
-    cursor: default;
-}
-
 #msft, #ld {
     background-color: var(--internship);
     cursor: default;
@@ -231,12 +227,14 @@ a.underline {
 }
 
 #uoft:hover .logo,
+#live:hover .logo,
 #ooley:hover .logo, #pinecone:hover .logo,
 #kc:hover .logo, #shopify:hover .logo {
     transform: scale(1.2);
 }
 
 #uoft:hover .link,
+#live:hover .link,
 #ooley:hover .link, #pinecone:hover .link,
 #kc:hover .link, #shopify:hover .link {
     fill: var(--focus-primary);
