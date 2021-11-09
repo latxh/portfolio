@@ -179,7 +179,7 @@ a.underline {
     justify-content: center;
     align-items: center;
     background-color: hsl(218, 98%, 79%, 0.2);
-    backdrop-filter: blur(3px);
+    backdrop-filter: blur(10px);
     border-radius: 10px;
     border: 2px solid transparent;
     height: 198px;
