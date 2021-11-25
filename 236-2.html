@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r67/three.min.js"></script>
+  <meta charset="utf-8">
+  <title>Concept v2 236</title>
+  <style id="jsbin-css">
+    body,
+    canvas {
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+
+    canvas {
+      position: fixed;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas></canvas>
+  <script id="jsbin-javascript">
+    var Mouse, PI, animloop, camera, canvas, cos, ctx, geometry, material, plane, rainbow, renderer, resizeHandler, scene, sin, start, t, texture;
+
+    scene = new THREE.Scene();
+
+    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+    console.dir(camera);
+
+    renderer = new THREE.WebGLRenderer();
+
+    document.body.appendChild(renderer.domElement);
+
+    canvas = document.createElement('canvas');
+
+    ctx = canvas.getContext('2d');
+
+    Mouse = {
+      x: window.innerWidth / 2,
+      y: window.innerHeight / 2,
+      down: false,
+      events: {
+        move: function (e) {
+          Mouse.x = ((e.pageX + Mouse.x) * 0.5) | 0;
+          return Mouse.y = ((e.pageY + Mouse.y) * 0.5) | 0;
+        },
+        down: function (e) {
+          e.preventDefault();
+          return Mouse.down = !Mouse.down;
+        },
+        up: function (e) {
+          return Mouse.down = !Mouse.down;
+        }
+      }
+    };
+
+    window.addEventListener('mousemove', Mouse.events.move, false);
+
+    window.addEventListener('mousedown', Mouse.events.down, false);
+
+    window.addEventListener('mouseup', Mouse.events.up, false);
+
+    ctx.imageSmoothingEnabled = ctx.mozImageSmoothingEnabled = false;
+
+    texture = new THREE.Texture(canvas);
+
+    texture.needsUpdate = true;
+
+    texture.minFilter = THREE.NearestFilter;
+
+    texture.magFilter = THREE.NearestFilter;
+
+    geometry = new THREE.PlaneGeometry(camera.aspect, 1, 16, 16);
+
+    material = new THREE.MeshBasicMaterial({
+      map: texture,
+      color: 0xFFFFFF
+    });
+
+    plane = new THREE.Mesh(geometry, material);
+
+    scene.add(plane);
+
+    camera.position.z = 0.653;
+
+    PI = Math.PI;
+
+    sin = function (a) {
+      return Math.sin(a);
+    };
+
+    cos = function (a) {
+      return Math.cos(a);
+    };
+
+    t = 0;
+
+    start = Date.now();
+
+    rainbow = function (a, o) {
+      var b, g, r;
+      if (o == null) {
+        o = 1;
+      }
+      r = sin(a + 0 * PI / 3 * o) * 127 + 127;
+      g = sin(a + 2 * PI / 3 * o) * 127 + 127;
+      b = sin(a + 4 * PI / 3 * o) * 127 + 127;
+      return "rgba(" + (r | 0) + ", " + (g | 0) + ", " + (b | 0) + ", 1)";
+    };
+
+    animloop = function () {
+      var i, iPI, rx, ry, spread, vx, vy, vz, x, y, _i, _j, _k, _ref, _ref1, _ref2, _ref3, _ref4;
+      animloop.id = requestAnimationFrame(animloop);
+      renderer.render(scene, camera);
+      t = (Date.now() - start) / 1000;
+      plane.geometry.verticesNeedUpdate = true;
+      texture.needsUpdate = true;
+      ctx.fillStyle = rainbow(t / 4, cos(t / 30) * 0.45 + 0.5);
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      for (x = _i = 0, _ref = canvas.width, _ref1 = canvas.width / 3; _ref1 > 0 ? _i < _ref : _i > _ref; x = _i += _ref1) {
+        for (y = _j = 0, _ref2 = canvas.height, _ref3 = canvas.height / 3; _ref3 > 0 ? _j < _ref2 : _j > _ref2; y = _j += _ref3) {
+          ctx.fillStyle = 'black';
+        }
+      }
+      for (i = _k = 0, _ref4 = plane.geometry.vertices.length; 0 <= _ref4 ? _k < _ref4 : _k > _ref4; i = 0 <= _ref4 ? ++_k : --_k) {
+        vx = plane.geometry.vertices[i].x;
+        vy = plane.geometry.vertices[i].y;
+        vz = plane.geometry.vertices[i].z;
+        iPI = i / plane.geometry.vertices.length * PI;
+        vz = -cos(vy * PI + Mouse.y / canvas.height * PI - PI / 2) * cos(vx / camera.aspect * PI - Mouse.x / canvas.width * PI + PI / 2);
+        vz *= sin(vx / camera.aspect * PI + PI / 2);
+        vz *= sin(vy * PI + PI / 2);
+        vz *= 0.01;
+        plane.geometry.vertices[i].z = vz;
+        plane.geometry.vertices[i].x = vx;
+      }
+      camera.position.x = -(Mouse.x / canvas.width - 0.5) * 0.005;
+      camera.position.y = (Mouse.y / canvas.height - 0.5) * 0.005;
+      plane.rotation.y = -(Mouse.x / canvas.width - 0.5) * 0.02;
+      plane.rotation.x = (Mouse.y / canvas.height - 0.5) * 0.02;
+      if (Mouse.down) {
+        camera.position.z = 0.646;
+      } else {
+        camera.position.z = 0.651;
+      }
+      plane.rotation.z = sin(Mouse.x / canvas.width * PI - PI / 2) + cos(Mouse.y / canvas.height * PI);
+      plane.rotation.z *= PI / 1080;
+      ctx.save();
+      spread = -2;
+      if (ctx.imageSmoothingEnabled !== false || ctx.mozImageSMoothingEnabled !== false) {
+        ctx.imageSmoothingEnabled = ctx.mozImageSmoothingEnabled = false;
+      }
+      if (plane.material.wireframe === false) {
+        ctx.drawImage(renderer.domElement, -spread / 2, -spread / 2, canvas.width + spread, canvas.height + spread);
+      }
+      ctx.restore();
+      if (Mouse.down) {
+        ctx.strokeStyle = rainbow(2 * PI * Math.random());
+        rx = (Math.random() - 0.5) * canvas.width / 30;
+        ry = (Math.random() - 0.5) * canvas.height / 30;
+        ctx.beginPath();
+        ctx.arc(Mouse.x + rx, Mouse.y + ry, 30 * Math.random(), 0, PI * 2, false);
+        return ctx.closePath();
+      }
+    };
+
+    console.dir(plane);
+
+    (resizeHandler = function () {
+      ctx.imageSmoothingEnabled = ctx.mozImageSmoothingEnabled = false;
+      texture.minFilter = THREE.NearestFilter;
+      texture.magFilter = THREE.NearestFilter;
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      return camera.aspect = window.innerWidth / window.innerHeight;
+    })();
+
+    window.addEventListener('resize', resizeHandler, false);
+
+    animloop();
+
+  </script>
