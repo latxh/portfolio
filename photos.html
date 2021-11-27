@@ -15,6 +15,8 @@
     <meta property='og:description' content="Creating tools for people to use, enjoy and explore." />
     <meta property='og:url' content='https://latchman.ca/' />
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r67/three.min.js"></script>
+
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <link rel="stylesheet" type="text/css" href="css/new.css">
 </head>
@@ -131,9 +133,178 @@
         </footer>
     </div>
 
-    <canvas id='canvas' style='cursor: default;'>
+    <script id="jsbin-javascript">
+        (function () {
+            var Mouse, PI, abs, animloop, camera, canvas, cos, ctx, cubes, distance, frame, geometry, hypotenuse, material, offset, renderer, resizeHandler, scene, seed, side, sidehypotenuse, sin, sqrt, start, t, x, xside, y, yside, _i, _j, _ref, _ref1, _ref2, _ref3;
+
+            t = 0;
+
+            start = Date.now();
+
+            seed = Math.random() * 1000;
+
+            frame = 0;
+
+            PI = Math.PI;
+
+            sin = function (a) {
+                return Math.sin(a);
+            };
+
+            cos = function (a) {
+                return Math.cos(a);
+            };
+
+            abs = function (a) {
+                return Math.abs(a);
+            };
+
+            sqrt = function (a) {
+                return Math.sqrt(a);
+            };
+
+            hypotenuse = function (a, b) {
+                return Math.sqrt(a * a + b * b);
+            };
+
+            distance = function (x1, y1, x2, y2) {
+                return hypotenuse(x2 - x1, y2 - y1);
+            };
+
+            scene = new THREE.Scene();
+
+            camera = new THREE.OrthographicCamera(window.innerWidth / -2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / -2, -50 * 100, 30 * 1000);
+
+            renderer = new THREE.WebGLRenderer();
+
+            canvas = document.createElement('canvas');
+
+            ctx = canvas.getContext('2d');
+
+            (resizeHandler = function () {
+                camera.left = canvas.left = window.innerWidth / -2;
+                camera.right = canvas.right = window.innerWidth / 2;
+                camera.bottom = canvas.bottom = window.innerHeight / -2;
+                camera.top = canvas.top = window.innerHeight / 2;
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                return canvas.hyp = hypotenuse(canvas.width, canvas.height);
+            })();
+
+            window.addEventListener('resize', resizeHandler, false);
+
+            document.body.appendChild(renderer.domElement);
+
+            side = hypotenuse(canvas.width, canvas.height) / 40;
+
+            geometry = new THREE.BoxGeometry(side + 1, side + 1, side + 5);
+
+            material = new THREE.MeshBasicMaterial({});
+
+            cubes = [];
+
+            xside = side;
+
+            yside = side;
+
+            sidehypotenuse = hypotenuse(side, side);
+
+            offset = 75;
+
+            for (x = _i = _ref = camera.left * 1.3, _ref1 = camera.right * 1.3; xside > 0 ? _i <= _ref1 : _i >= _ref1; x = _i += xside) {
+                for (y = _j = _ref2 = camera.bottom * 1.3, _ref3 = camera.top * 1.3; yside > 0 ? _j <= _ref3 : _j >= _ref3; y = _j += yside) {
+                    cubes.push(new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({
+                        color: 0x00ffff,
+                        transparent: true,
+                        wireframe: false,
+                        opacity: 1
+                    })));
+                    cubes[cubes.length - 1].position.x = x;
+                    cubes[cubes.length - 1].position.y = y;
+                    cubes[cubes.length - 1].position.z = x + y;
+                    scene.add(cubes[cubes.length - 1]);
+                }
+            }
+
+            camera.position.set(0, 0, side * 10);
+
+            Mouse = {
+                down: false,
+                held: 0,
+                x: canvas.width / 2,
+                y: canvas.height / 2,
+                x0: 0,
+                y0: 0,
+                events: {
+                    move: function (e) {
+                        if ("touches" in e) {
+                            e.preventDefault();
+                            e = e.touches[0];
+                        }
+                        Mouse.x = (Mouse.x + e.pageX) * 0.5;
+                        Mouse.y = (Mouse.y + e.pageY) * 0.5;
+                        Mouse.x0 = Mouse.x - canvas.width / 2;
+                        return Mouse.y0 = Mouse.y - canvas.height / 2;
+                    },
+                    down: function (e) {
+                        return Mouse.down = !Mouse.down;
+                    },
+                    up: function (e) {
+                        return Mouse.down = !Mouse.down;
+                    }
+                }
+            };
+
+            window.addEventListener('mousemove', Mouse.events.move, false);
+
+            window.addEventListener('mousedown', Mouse.events.down, false);
+
+            window.addEventListener('mouseup', Mouse.events.up, false);
+
+            window.addEventListener('touchmove', Mouse.events.move, false);
+
+            window.addEventListener('touchstart', Mouse.events.down, false);
+
+            window.addEventListener('touchstop', Mouse.events.up, false);
+
+            camera.up = new THREE.Vector3(0, 1, 0);
+
+            animloop = function () {
+                var a, b, c, dist, dist0, distneg, g, i, r, _k, _ref4;
+                animloop.id = requestAnimationFrame(animloop);
+                t = (Date.now() - start) / 1000 + seed;
+                frame++;
+                camera.position.set(side * 10, side * 10, -side * 10);
+                camera.lookAt(new THREE.Vector3(0, 0, 0));
+                if (Mouse.down) {
+                    Mouse.held++;
+                }
+                for (i = _k = 0, _ref4 = cubes.length; 0 <= _ref4 ? _k < _ref4 : _k > _ref4; i = 0 <= _ref4 ? ++_k : --_k) {
+                    c = cubes[i];
+                    dist = distance(-Mouse.x0, -Mouse.y0, c.position.x, c.position.y);
+                    dist0 = distance(0, 0, c.position.x, c.position.y);
+                    distneg = distance(Mouse.x0, Mouse.y0, c.position.x, c.position.y);
+                    c.scale.y = 2.25 + 1.25 * sin(dist / canvas.hyp * PI * 7 - t * 0.8 - Mouse.held / 50) * cos(dist / canvas.hyp * PI * 4 - t * 1.5 - Mouse.held / 50) + (1 + sin((distneg - dist) / canvas.hyp * PI * 1));
+                    a = c.position.z;
+                    r = 0.4 + 0.40 * sin(distneg / canvas.hyp * PI * 2 * 0.75 - t / 3.0 + 3 + Mouse.held / 80 + c.scale.y / 3.5);
+                    g = 0.4 + 0.40 * sin(distneg / canvas.hyp * PI * 2 * 0.75 - t / 3.1 + 2 + Mouse.held / 81 + c.scale.y / 3.5);
+                    b = 0.4 + 0.40 * sin(distneg / canvas.hyp * PI * 2 * 0.75 - t / 3.2 + 1 + Mouse.held / 82 + c.scale.y / 3.5);
+                    cubes[i].material.color = new THREE.Color(r, g, b);
+                }
+                return renderer.render(scene, camera);
+            };
+
+            animloop();
+
+        }).call(this);
+
+    </script>
+    <!-- <canvas id='canvas' style='cursor: default;'>
     </canvas>
-    <script src='/lib/latch.js'></script>
+    <script src='/lib/latch.js'></script> -->
     <script>
         let toggle = document.getElementById("toggle");
         let style = document.createElement('style');
