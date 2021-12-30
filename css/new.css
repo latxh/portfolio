@@ -385,6 +385,14 @@ a.underline {
         display: none;
     }
 
+    .banner {
+        height: 130px;
+    }
+
+    .logo {
+        height: 50px;
+    }
+
     .row {
         flex-direction: column;
         gap: 0;
