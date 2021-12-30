@@ -1,5 +1,4 @@
 :root {
-    /* color-scheme: dark; */
     font-family: Arial, Helvetica, sans-serif;
     --background: #f5f5f5;
     --font: #141414;
@@ -57,16 +56,6 @@ canvas {
     z-index: -1;
 }
 
-/* #canvas {
-    opacity: 0.6;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: -1;
-} */
-
 body {
     background-color: var(--background);
     overflow-y: scroll;
@@ -91,31 +80,26 @@ footer {
     margin-bottom: 50px;
 }
 
-h1 {
+h1, h2, h3, p {
     color: var(--font);
-    font-size: 24px;
     margin: 0;
     font-weight: normal;
+}
+
+h1 {
+    font-size: 24px;
 }
 
 h2 {
-    color: var(--font);
     font-size: 20px;
-    margin: 0;
-    font-weight: normal;
 }
 
 h3 {
-    color: var(--font);
     font-size: 18px;
-    margin: 0;
-    font-weight: normal;
 }
 
 p {
-    color: var(--font);
     font-size: 16px;
-    margin: 0;
 }
 
 .grey {
@@ -236,23 +220,6 @@ a.underline {
     background-color: var(--shopify-green);
 }
 
-/* #pinecone {
-    background-color: hsl(19, 100%, 73%, 0.05);
-}
-
-#kc {
-    background-color: hsl(272, 100%, 82%, 0.05);
-}
-
-#msft, #ld {
-    background-color: var(--internship);
-    cursor: default;
-} */
-
-#msft .link, #ld .link {
-    fill: hsl(0, 0%, 8%, 0.5);
-}
-
 .logo {
     height: 80px;
     transition: all 0.2s;
@@ -260,15 +227,15 @@ a.underline {
 
 #uoft:hover .logo,
 #live:hover .logo,
-#ooley:hover .logo, #pinecone:hover .logo,
-#kc:hover .logo, #shopify:hover .logo {
+#ooley:hover .logo,
+#shopify:hover .logo {
     transform: scale(1.2);
 }
 
 #uoft:hover .link,
 #live:hover .link,
-#ooley:hover .link, #pinecone:hover .link,
-#kc:hover .link, #shopify:hover .link {
+#ooley:hover .link,
+#shopify:hover .link {
     fill: var(--focus-primary);
 }
 
@@ -385,6 +352,18 @@ a.underline {
         display: none;
     }
 
+    .top {
+        min-height: 100px;
+    }
+
+    .intro {
+        margin-top: 150px;
+    }
+
+    .intro.home h1 {
+        margin-bottom: 20px;
+    }
+
     .banner {
         height: 130px;
     }
@@ -398,31 +377,11 @@ a.underline {
         gap: 0;
     }
 
-    .top {
-        min-height: 100px;
-    }
-
-    .banner {
-        height: 130px;
-    }
-
-    .logo {
-        height: 50px;
-    }
-
     .link {
         bottom: 10px;
         right: 10px;
         height: 20px;
         width: 20px;
-    }
-
-    .intro {
-        margin-top: 150px;
-    }
-
-    .intro.home h1 {
-        margin-bottom: 20px;
     }
     
     h1 {
