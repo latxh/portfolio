@@ -335,7 +335,11 @@ a.underline {
     }
 
     body {
-        padding: 20px 16px 50px 16px;
+        padding: 16px 16px 50px 16px;
+    }
+
+    canvas {
+        display: none;
     }
 
     nav {
@@ -366,6 +370,22 @@ a.underline {
 
     .banner {
         height: 130px;
+    }
+
+    #live {
+        background-color: hsl(218, 98%, 79%, 0.2);
+    }
+
+    #uoft {
+        background-color: hsl(5, 82%, 69%, 0.2);
+    }
+    
+    #ooley {
+        background-color: hsl(43, 100%, 66%, 0.2);
+    }
+    
+    #shopify {
+        background-color: hsl(146, 28%, 64%, 0.2);
     }
 
     .logo {
