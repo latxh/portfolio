@@ -5,8 +5,8 @@
     --font: #141414;
     --light-font: rgb(20, 20, 20, 0.8);
     --internship: #fff;
-    --card-border: rgb(0, 0, 0, 0.01);
-    --focus-card-border: rgb(0, 0, 0, 0.03);
+    --card-border: rgb(0, 0, 0, 0.02);
+    --focus-card-border: rgb(0, 0, 0, 0.04);
     --focus-primary: hsl(0, 0%, 8%, 0.9);
     --focus-secondary: hsl(0, 0%, 8%, 0.45);
     --focus-tertiary: hsl(0, 0%, 8%, 0.1);
@@ -17,6 +17,11 @@
     --ray-size: calc(var(--size) * -0.4);
     --offset-orthogonal: calc(var(--size) * 0.7);
     --offset-diagonal: calc(var(--size) * 0.5);
+
+    --uoft-red: hsl(5, 82%, 69%, 0.3);
+    --live-blue: hsl(218, 98%, 79%, 0.3);
+    --ooley-yellow: hsl(43, 100%, 66%, 0.3);
+    --shopify-green: hsl(146, 28%, 64%, 0.3);
 }
 
 .dark {
@@ -31,6 +36,11 @@
     --focus-tertiary: hsl(0, 0%, 96%, 0.1);
 
     --canvas-opac: 0.6;
+
+    --uoft-red: hsl(5, 82%, 69%, 0.05);
+    --live-blue: hsl(218, 98%, 79%, 0.05);
+    --ooley-yellow: hsl(43, 100%, 66%, 0.05);
+    --shopify-green: hsl(146, 28%, 64%, 0.05);
 }
 
 ::selection {
@@ -194,8 +204,8 @@ a.underline {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: hsl(218, 98%, 79%, 0.1);
-    backdrop-filter: blur(10px);
+    background-color: var(--live-blue);
+    backdrop-filter: blur(50px);
     border-radius: 10px;
     border: 2px solid var(--card-border);
     height: 198px;
@@ -215,35 +225,36 @@ a.underline {
 }
 
 #uoft {
-    background-color: hsl(5, 82%, 69%, 0.1);
+    background-color: var(--uoft-red);
 }
 
 #ooley {
-    background-color: hsl(43, 100%, 66%, 0.1);
-}
-
-#pinecone {
-    background-color: hsl(19, 100%, 73%, 0.1);
-}
-
-#kc {
-    background-color: hsl(272, 100%, 82%, 0.1);
+    background-color: var(--ooley-yellow);
 }
 
 #shopify {
-    background-color: hsl(146, 28%, 64%, 0.1);
+    background-color: var(--shopify-green);
+}
+
+/* #pinecone {
+    background-color: hsl(19, 100%, 73%, 0.05);
+}
+
+#kc {
+    background-color: hsl(272, 100%, 82%, 0.05);
 }
 
 #msft, #ld {
     background-color: var(--internship);
     cursor: default;
-}
+} */
 
 #msft .link, #ld .link {
     fill: hsl(0, 0%, 8%, 0.5);
 }
 
 .logo {
+    height: 80px;
     transition: all 0.2s;
 }
 
@@ -333,13 +344,17 @@ a.underline {
 @media only screen and (max-width: 1070px) {
     footer {
         flex-direction: column;
-        gap: 20px;
+        gap: 30px;
         margin-top: 80px;
         margin-bottom: 0;
     }
 }
 
 @media only screen and (max-width: 768px) {
+    :root{
+        --size: 1rem;
+    }
+
     body {
         padding: 20px 16px 100px 16px;
     }
@@ -358,13 +373,40 @@ a.underline {
         display: none;
     }
 
+    .banner {
+        height: 130px;
+    }
+
+    .logo {
+        height: 50px;
+    }
+
     .row {
         flex-direction: column;
         gap: 0;
     }
 
+    .link {
+        bottom: 10px;
+        right: 10px;
+        height: 20px;
+        width: 20px;
+    }
+
+    .intro {
+        margin-top: 150px;
+    }
+
+    .intro h1 {
+        margin-bottom: 20px;
+    }
+    
+    .bot-space {
+        margin-bottom: 30px;
+    }
+
     h1 {
-        font-size: 20px;
+        font-size: 18px;
     }
     
     h2 {
