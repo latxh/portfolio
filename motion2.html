@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <head>
-  <title>Paddles</title>
+  <title>Motion</title>
   <style>
     body,
     canvas {
@@ -13,6 +13,7 @@
     canvas {
       background-color: hsl(0, 9%, 9%);
       position: fixed;
+      cursor: auto;
     }
   </style>
   <meta name="description" content="HTML5 canvas animation by Brian Latchman">
@@ -139,8 +140,8 @@
 
   var grid = []
   // Point.size = grid.stride = canvas.hyp / 20
-  grid.populate = function (stride) {
-    grid.stride = stride || canvas.height / 32
+  grid.populate = function () {
+    grid.stride = canvas.hyp / 50
     grid.length = 0
     var row = 0, col = 0, height = grid.stride * 2, width = sqrt(3) / 2 * height, size = grid.stride
     height = height / 1.34
@@ -157,7 +158,8 @@
       row++
     }
   }
-  grid.populate(canvas.hyp / 60)
+
+  grid.populate()
 
   window.addEventListener('resize', grid.populate)
 
@@ -169,16 +171,35 @@
     ctx.fillRect(0, 0, canvas.width, canvas.height)
     for (var i = 0, p; p = grid[i]; i++) {
       p.rotation = -PI / 4
-      p.rotation = -p.angleTo(Mouse.x, Mouse.y) + p.distance(Mouse.x, Mouse.y) / canvas.hyp * PI
-      p.rotation *= -4
-      p.scale.x = sin(p.yPI - PI / 2) * cos(p.xPI)
+      p.rotation = -p.angleTo(Mouse.x, Mouse.y) + p.distance(Mouse.x, Mouse.y) / canvas.hyp * -PI * 1.8 * sin(t / 8)
+      p.rotation = Math.round(p.rotation + t) - t
+      // p.rotation*= -4
+      // p.scale.x = sin(p.yPI - PI/2)*cos(p.xPI)
       // p.scale.x *= p.distance(Mouse.x, Mouse.y)/canvas.hyp*2 + 0.1
-      p.scale.y = sin(p.distance(Mouse.x, Mouse.y) / canvas.hyp * PI + PI / 2) + 1.1
-      p.scale.y *= 0.25
+      // p.scale.y = sin(p.distance(Mouse.x,Mouse.y)  / canvas.hyp * PI  + PI/2) + 1.1
+      // p.scale.y *= 0.25
+      // p.offset.x = cos(p.xPI*2+t)*sin(p.yPI*2+t)*p.size
+      // p.offset.y = sin(p.yPI-t)*cos(p.xPI*2-t)*p.size
       p.draw(function () {
-        // ctx.fillStyle = rainbow(p.rotation,1, 127,255)
+        // ctx.fillStyle = rainbow(p.rotation/4+t/4,p.scale.y, 190,127)
         ctx.fillStyle = 'hsla(0,9%,90%,1)'
-        ctx.fillRect(-p.size / 2 - p.size / 2 * sin(p.angleTo(Mouse.x, Mouse.y)), 0, p.size, p.size / 3)
+        ctx.fillRect(p.size / 2, -1 / 2, -p.size / 2, 1)
+        ctx.rotate(PI)
+        // ctx.fillStyle = 'green'
+        // ctx.fillRect(0,-p.size/2,2,p.size)
+        ctx.save()
+        ctx.translate(-p.size / 2, 0)
+        ctx.rotate(PI / 4)
+        // ctx.fillStyle = 'red'
+        ctx.fillRect(0, -1 / 2, p.size / 2, 1)
+        ctx.fillRect(-1 / 2, 0, 1, -p.size / 2)
+        ctx.restore()
+        // ctx.rotate(PI/4)
+        // ctx.fillRect(-p.size/2,10,p.size,2)
+        // ctx.save()
+        // ct.translate()
+        // ctx.restore()
+        // ctx.fillRect(-p.size/2-p.size/2*sin(p.angleTo(Mouse.x,Mouse.y)),0,p.size,p.size/3)
       })
     }
     // // ctx.strokeStyle = ctx.fillStyle = 'hsl(0,9%,19%)'
