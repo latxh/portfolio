@@ -197,6 +197,7 @@ a.underline {
 }
 
 .banner {
+  font-weight: unset;
   position: relative;
   display: flex;
   justify-content: center;
