@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Hello World</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0" />
+  <meta name="description" content="Hello World">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-touch-fullscreen" content="yes" />
+  <meta property='og:title' content="Brian Latchman" />
+  <meta property='og:image' content='https://latchman.ca/assets/portrait.jpg' />
+  <meta property='og:description' content="Creating tools for people to use, enjoy and explore." />
+  <meta property='og:url' content='https://latchman.ca/' />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r67/three.min.js"></script>
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+  <style id="jsbin-css">
+    * {
+      cursor: crosshair;
+    }
+
+    :root {
+      color-scheme: dark;
+    }
+
+    body,
+    canvas,
+    img {
+      margin: 0;
+      border: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #342E0C;
+      background-image: url('/assets/paint/background.jpg');
+      background-size: cover;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      opacity: 1;
+      pointer-events: none;
+    }
+
+    img {
+      max-width: 100%;
+      opacity: 0.5;
+      z-index: 3;
+      margin: 0px;
+      padding: 0;
+      border: 0;
+      position: relative;
+      display: none;
+    }
+
+    a {
+      text-decoration: none;
+      margin: 0;
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 29px;
+      animation: fadein 3s;
+    }
+
+    a:focus-visible {
+      outline: 2px solid #fff;
+    }
+
+    .underline-animation {
+      display: inline-block;
+      position: relative;
+      color: #fff;
+    }
+
+    .underline-animation:after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      transform: scaleX(0);
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: #fff;
+      transform-origin: bottom right;
+      transition: transform 0.25s ease-out;
+    }
+
+    .underline-animation:hover:after {
+      transform: scaleX(1);
+      transform-origin: bottom left;
+    }
+
+    @keyframes fadein {
+        0% { opacity: 0; }
+        90% {opacity: 0;}
+        100%   { opacity: 1; }
+    }
+
+    #top-left,
+    #top-right,
+    #bot-left {
+      position: absolute;
+    }
+
+    #top-left {
+      top: 16px;
+      left: 16px;
+    }
+
+    #top-right {
+      top: 16px;
+      right: 16px;
+    }
+
+    #bot-left {
+      bottom: 16px;
+      left: 16px;
+    }
+  </style>
+</head>
+
+<body>
+  <a href="/" tabindex="0" id="top-left" class="underline-animation">Latchman</a>
+  <a href="/about" tabindex="0" id="top-right" class="underline-animation">About</a>
+  <a href="/photos" tabindex="0" id="bot-left" class="underline-animation">Photos</a>
+
+  <img src="/assets/paint/sky1.png">
+  <img src="/assets/paint/sky2.png">
+
+  <script id="jsbin-javascript">
+    (function () {
+      var Mouse, PI, abs, animloop, camera, canvas, cos, ctx, cx, cy, distance, frame, geometry, hypotenuse, i, loader, material, materials, objects, planet, renderer, resizeHandler, scene, seed, side, sin, sqrt, start, t, texcan, texctx, teximg, _i, _ref;
+
+      t = 0;
+
+      start = Date.now();
+
+      seed = Math.random();
+
+      frame = 0;
+
+      PI = Math.PI;
+
+      sin = function (a) {
+        return Math.sin(a);
+      };
+
+      cos = function (a) {
+        return Math.cos(a);
+      };
+
+      abs = function (a) {
+        return Math.abs(a);
+      };
+
+      sqrt = function (a) {
+        return Math.sqrt(a);
+      };
+
+      hypotenuse = function (a, b) {
+        return Math.sqrt(a * a + b * b);
+      };
+
+      distance = function (x1, y1, x2, y2) {
+        return hypotenuse(x2 - x1, y2 - y1);
+      };
+
+      scene = new THREE.Scene();
+
+      camera = new THREE.OrthographicCamera(window.innerWidth / -2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / -2, -50 * 100, 30 * 1000);
+
+      renderer = new THREE.WebGLRenderer({
+        alpha: true
+      });
+
+      canvas = document.createElement('canvas');
+
+      ctx = canvas.getContext('2d');
+
+      texcan = document.createElement('canvas');
+
+      texctx = texcan.getContext('2d');
+
+      texcan.width = texcan.height = 256;
+
+      (resizeHandler = function () {
+        camera.left = canvas.left = window.innerWidth / -2;
+        camera.right = canvas.right = window.innerWidth / 2;
+        camera.bottom = canvas.bottom = window.innerHeight / -2;
+        camera.top = canvas.top = window.innerHeight / 2;
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        return canvas.hyp = hypotenuse(canvas.width, canvas.height);
+      })();
+
+      window.addEventListener('resize', resizeHandler, false);
+
+      document.body.appendChild(canvas);
+
+      document.body.appendChild(renderer.domElement);
+
+      Mouse = {
+        down: false,
+        held: 0,
+        x: canvas.width / 2,
+        y: canvas.height / 2,
+        x0: 0,
+        y0: 0,
+        scroll: 0,
+        events: {
+          move: function (e) {
+            if ("touches" in e) {
+              e.preventDefault();
+              e = e.touches[0];
+            }
+            Mouse.x = (Mouse.x + e.clientX) * 0.5;
+            Mouse.y = (Mouse.y + e.clientY) * 0.5;
+            Mouse.x0 = Mouse.x - canvas.width / 2;
+            return Mouse.y0 = Mouse.y - canvas.height / 2;
+          },
+          down: function (e) {
+            return Mouse.down = !Mouse.down;
+          },
+          up: function (e) {
+            return Mouse.down = !Mouse.down;
+          },
+          scroll: function (e) {
+            return Mouse.scroll += e.wheelDelta;
+          }
+        }
+      };
+
+      window.addEventListener('mousemove', Mouse.events.move, false);
+
+      window.addEventListener('mousedown', Mouse.events.down, false);
+
+      window.addEventListener('mouseup', Mouse.events.up, false);
+
+      window.addEventListener('touchmove', Mouse.events.move, false);
+
+      window.addEventListener('touchstart', Mouse.events.down, false);
+
+      window.addEventListener('touchstop', Mouse.events.up, false);
+
+      document.body.addEventListener('mousewheel', Mouse.events.scroll, false);
+
+      side = hypotenuse(canvas.width, canvas.height) / 7;
+
+      geometry = new THREE.SphereGeometry(side * 1.5, 24, 12);
+
+      material = new THREE.MeshBasicMaterial({
+        color: 0x221111,
+        wireframe: true
+      });
+
+      loader = new THREE.TextureLoader();
+
+      loader.crossOrigin = 'anonymous';
+
+      objects = [];
+
+      materials = [];
+
+      for (i = _i = 0, _ref = document.images.length; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
+        loader.load(document.images[i].src, (function (texture) {
+          materials[i] = new THREE.MeshBasicMaterial({
+            map: texture,
+            opacity: 0.8
+          });
+          geometry = new THREE.SphereGeometry(side * 0.7, 16, 16);
+          objects[i] = new THREE.Mesh(geometry, materials[i]);
+          scene.add(objects[i]);
+          console.log(i, objects[i].id);
+          if (objects[i].id === 3) {
+            return console.dir(objects[i]);
+          }
+        }));
+      }
+
+      texcan.texture = new THREE.Texture(texcan);
+
+      texcan.texture.minFilter = THREE.NearestFilter;
+
+      texcan.texture.magFilter = THREE.NearestFilter;
+
+      planet = new THREE.Mesh(new THREE.SphereGeometry(side, 16, 16), new THREE.MeshBasicMaterial({
+        transparent: true,
+        opacity: 0.85,
+        map: texcan.texture,
+        alphaMap: texcan.texture
+      }));
+
+      scene.add(planet);
+
+      console.dir(planet);
+
+      cx = 0;
+
+      cy = 0;
+
+      camera.position.set(0, 0, side * 10);
+
+      camera.up = new THREE.Vector3(0, 1, 0);
+
+      canvas.style.opacity = 0.125;
+
+      teximg = new Image();
+
+      teximg.crossOrigin = 'anonymous';
+
+      teximg.src = document.images[0].src;
+
+      teximg.onload = (function () {
+        console.dir(teximg);
+        return texcan.texture.needsUpdate = true;
+      });
+
+      texctx.imageSmoothingEnabled = false;
+
+      animloop = function () {
+        var hgrad, s, vgrad;
+        animloop.id = requestAnimationFrame(animloop);
+        t = (Date.now() - start) / 1000 + seed;
+        frame++;
+        ctx.imageSmoothingEnabled = false;
+        cx += Mouse.x0 / canvas.width / 40;
+        cy += Mouse.y0 / canvas.height / 40;
+        camera.lookAt(new THREE.Vector3(0, 0, 0));
+        if (Mouse.down) {
+          Mouse.held++;
+        }
+        texctx.fillStyle = "hsla(0,0%," + (50 + 50 * sin(t)) + "%,1)";
+        hgrad = texctx.createLinearGradient(0, texcan.height / 2, texcan.width, texcan.height / 2);
+        hgrad.addColorStop(0, '#282E12');
+        hgrad.addColorStop(Mouse.x0 / canvas.width + 1 / 2, '#40340C');
+        hgrad.addColorStop(1, 'black');
+        texctx.fillStyle = hgrad;
+        texctx.fillRect(0, 0, texcan.width, 1);
+        texctx.fillRect(1, texcan.height - 1, texcan.width - 1, 1);
+        vgrad = texctx.createLinearGradient(texcan.width / 2, 0, texcan.width / 2, texcan.height);
+        vgrad.addColorStop(0, 'black');
+        vgrad.addColorStop(Mouse.y0 / canvas.height + 1 / 2, '#40340C');
+        vgrad.addColorStop(1, '#153947');
+        texctx.fillStyle = vgrad;
+        texctx.fillRect(texcan.width - 1, 1, 1, texcan.height - 1);
+        texctx.fillRect(0, 1, 1, texcan.height - 1);
+        texctx.save();
+        texctx.translate(texcan.width / 2 + Mouse.x0 / canvas.width * 2, texcan.height / 2 + Mouse.y0 / canvas.height * 2);
+        texctx.rotate(sin(Mouse.x0 / canvas.width * PI * 2) * cos(-Mouse.y0 / canvas.height * PI * 2) / 90);
+        texctx.drawImage(texcan, -texcan.width / 2, -texcan.height / 2);
+        texctx.restore();
+        texcan.texture.needsUpdate = true;
+        renderer.render(scene, camera);
+        s = 1;
+        ctx.drawImage(canvas, -s, -s, canvas.width + s * 2, canvas.height + s * 2);
+        ctx.save();
+        ctx.translate(canvas.width / 2 + Mouse.x0 / canvas.width * 2, canvas.height / 2 + Mouse.y0 / canvas.height * 2);
+        ctx.rotate(sin(-Mouse.x0 / canvas.width * PI * 1) * cos(-Mouse.y0 / canvas.height * PI * 1) / 180);
+        ctx.drawImage(canvas, -canvas.width / 2, -canvas.height / 2);
+        ctx.restore();
+        ctx.drawImage(renderer.domElement, 0, 0, canvas.width, canvas.height);
+        return ctx.drawImage(texcan, 0, 0);
+      };
+
+      console.dir(texctx.canvas);
+
+      animloop();
+
+    }).call(this);
+
+  </script>
+</body>
+
+</html>
