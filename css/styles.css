@@ -327,7 +327,6 @@ button:focus-visible {
   left: 0px;
   border-radius: 10px;
   border: 2px solid var(--card-border);
-  background-image: url("/assets/music-vid/weeknd.jpg");
   background-size: 30%;
   background-position: calc(var(--x-pos) + 50%) calc(var(--y-pos) + 50%);
   background-color: var(--background);
