@@ -329,7 +329,6 @@ button:focus-visible {
   border: 2px solid var(--card-border);
   background-size: 30%;
   background-position: calc(var(--x-pos) + 50%) calc(var(--y-pos) + 50%);
-  background-color: var(--background);
   opacity: calc(var(--canvas-opacity) - 0.2);
 }
 
