@@ -80,12 +80,12 @@
             </div>
         </div>
 
-        <main>
+        <main id="projects">
             <h2 class="bot-space">Selected work</h2>
             <div class="row">
                 <div class="wrapper">
                     <a class="banner-link" href="javascript: void(0)">
-                        <div class="banner">
+                        <div id="font-banner" class="banner">
                             <img id="font" src="/assets/pixel-art/text.png" alt="Scroll icon" class="logo">
                             <img id="font-dark" src="/assets/pixel-art/text-dark.png" alt="Dark mode Scroll icon"
                                 class="logo">
@@ -116,7 +116,7 @@
 
                 <div class="wrapper">
                     <a class="banner-link" href="javascript: void(0)">
-                        <div class="banner">
+                        <div id="lime-banner" class="banner">
                             <img id="potion" src="/assets/pixel-art/progress.png" alt="Potion icon" class="logo">
                             <img id="potion-dark" src="/assets/pixel-art/progress-dark.png" alt="Dark mode Potion icon"
                                 class="logo">
@@ -149,7 +149,7 @@
             <div class="row">
                 <div class="wrapper">
                     <a class="banner-link" href="https://www.youtube.com/watch?v=o_v2r8rdGM8" target="_blank">
-                        <div class="banner">
+                        <div id="music-banner" class="banner">
                             <img id="video" src="/assets/pixel-art/video.png" alt="Video icon" class="logo">
                             <img id="video-dark" src="/assets/pixel-art/video-dark.png" alt="Dark mode Video icon"
                                 class="logo">
@@ -171,7 +171,7 @@
 
                 <div class="wrapper">
                     <a class="banner-link" href="/photos">
-                        <div class="banner">
+                        <div id="photos-banner" class="banner">
                             <img id="home" src="/assets/pixel-art/home.png" alt="Home icon" class="logo">
                             <img id="home-dark" src="/assets/pixel-art/home-dark.png" alt="Dark mode Home icon"
                                 class="logo">
@@ -190,7 +190,7 @@
             <div class="row">
                 <div class="wrapper">
                     <a class="banner-link" href="https://record-together.azurewebsites.net/" target="_blank">
-                        <div class="banner">
+                        <div id="live-banner" class="banner">
                             <img id="earth" src="/assets/pixel-art/earth.png" alt="Earth icon" class="logo">
                             <img id="earth-dark" src="/assets/pixel-art/earth-dark.png" alt="Dark mode Earth icon"
                                 class="logo">
@@ -212,7 +212,7 @@
 
                 <div class="wrapper">
                     <a class="banner-link" href="https://betteruoft.ca/" target="_blank">
-                        <div class="banner">
+                        <div id="uoft-banner" class="banner">
                             <img id="brush" src="/assets/pixel-art/brush.png" alt="Brush icon" class="logo">
                             <img id="brush-dark" src="/assets/pixel-art/brush-dark.png" alt="Dark mode Brush icon"
                                 class="logo">
@@ -236,7 +236,7 @@
             <div class="row">
                 <div class="wrapper">
                     <a class="banner-link" href="https://latxh.github.io/shoppies/" target="_blank">
-                        <div class="banner">
+                        <div id="shop-banner" class="banner">
                             <img id="shopify" src="/assets/pixel-art/shop.png" alt="Shopify icon" class="logo">
                             <img id="shopify-dark" src="/assets/pixel-art/shop-dark.png" alt="Dark mode Shopify icon"
                                 class="logo">
@@ -258,7 +258,7 @@
 
                 <div class="wrapper">
                     <a class="banner-link" href="https://ooley.me/" target="_blank">
-                        <div class="banner">
+                        <div id="ooley-banner" class="banner">
                             <img id="scroll-alt" src="/assets/pixel-art/calc.png" alt="Scroll icon" class="logo">
                             <img id="scroll-alt-dark" src="/assets/pixel-art/calc-dark.png" alt="Dark mode Scroll icon"
                                 class="logo">
@@ -562,6 +562,25 @@
 
         const toggleDarkMode = (e) => { appearance = appearance === "dark" ? "light" : "dark"; updateAppearance(); };
         const toggleCanvas = (e) => { motion = motion === "reduce" ? "no-preference" : "reduce"; updateCanvas(); };
+
+        const r = document.querySelector(":root")
+        const el = document.getElementById("projects");
+
+        const ease = (t) => {
+            return t * t * (3 - 2 * t);
+        }
+
+        const lerp = (start, end, value) => {
+            return start + (end - start) * value
+        }
+
+        el.addEventListener("mousemove", (e) => {
+            let rect = el.getBoundingClientRect();
+            let x = e.clientX - rect.left; //x position within the element.
+            let y = e.clientY - rect.top;  //y position within the element.
+            r.style.setProperty('--x-pos', lerp(0, 200, ease(x / rect.width)) + "px");
+            r.style.setProperty('--y-pos', lerp(15, 300, ease(y / rect.height)) + "px");
+        });
     </script>
 </body>
 

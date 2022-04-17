@@ -318,6 +318,60 @@ button:focus-visible {
   transition: border 0.2s;
 }
 
+.banner:hover::before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  border-radius: 10px;
+  border: 2px solid var(--card-border);
+  background-image: url("/assets/music-vid/weeknd.jpg");
+  background-size: 30%;
+  background-position: calc(var(--x-pos) + 50%) calc(var(--y-pos) + 50%);
+  background-color: var(--background);
+  opacity: calc(var(--canvas-opacity) - 0.2);
+}
+
+#font-banner:hover::before {
+  background-image: url("/assets/projects/ooley-dark.jpg");
+  background-size: 15%;
+}
+
+#lime-banner:hover::before {
+  background-image: url("/assets/projects/lime-dark.jpg");
+  background-size: 15%;
+}
+
+#music-banner:hover::before {
+  background-image: url("/assets/music-vid/weeknd-nav.jpg");
+}
+
+#photos-banner:hover::before {
+  background-image: url("/assets/toronto/9.jpg");
+}
+
+#live-banner:hover::before {
+  background-image: url("/assets/projects/live-dark.jpg");
+  background-size: 13%;
+}
+
+#uoft-banner:hover::before {
+  background-image: url("/assets/projects/uoft-dark.jpg");
+  background-size: 13%;
+}
+
+#shop-banner:hover::before {
+  background-image: url("/assets/projects/shop-dark.jpg");
+  background-size: 13%;
+}
+
+#ooley-banner:hover::before {
+  background-image: url("/assets/projects/ooley-dark.jpg");
+  background-size: 15%;
+}
+
 .banner-link:focus-visible {
   box-shadow: none;
   outline: none;
