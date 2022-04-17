@@ -5,35 +5,60 @@
     <title>Brian Latchman</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0" />
-    <meta name="description" content="Brian Latchman's Website. Creating tools for people to use, enjoy and explore.">
+    <meta name="description" content="Creating experiences for people to use, enjoy and explore.">
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-touch-fullscreen" content="yes" />
 
     <meta property='og:title' content="Brian Latchman" />
     <meta property='og:image' content='https://latchman.ca/assets/portrait.jpg' />
-    <meta property='og:description' content="Creating tools for people to use, enjoy and explore." />
+    <meta property='og:description' content="Creating experiences for people to use, enjoy and explore." />
     <meta property='og:url' content='https://latchman.ca/' />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r67/three.min.js"></script>
 
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
-    <link rel="stylesheet" type="text/css" href="css/new.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 
 <body>
     <div class="max-width">
         <div class="top">
             <nav>
-                <div>
-                    <h3><a href="/">Brian Latchman</a></h3>
-                    <h3>Designer & Programmer</h3>
-                </div>
+                <h3><a class="underline-animation" href="/">← Home</a></h3>
                 <div class="spacer"></div>
-                <h3><a href="/about">About me</a></h3>
-                <h3><a href="/photos">Photos</a></h3>
-                <div>
-                    <input id="toggle" class="toggle" type="checkbox" title="Toggle dark mode">
+                <h3><a class="underline-animation" href="/about">About me</a></h3>
+                <h3><a class="underline-animation" href="/photos">Photos</a></h3>
+                <div class="button-wrapper">
+                    <button id="canvas-size" title="Toggle fullscreen canvas" onclick="toggleCanvas()">
+                        <svg id="canvas-on" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24"
+                            width="24px" fill="var(--font-light)">
+                            <path d="M0 0h24v24H0z" fill="none" />
+                            <path
+                                d="M6 13c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm0 4c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm0-8c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm-3 .5c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zM6 5c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm15 5.5c.28 0 .5-.22.5-.5s-.22-.5-.5-.5-.5.22-.5.5.22.5.5.5zM14 7c.55 0 1-.45 1-1s-.45-1-1-1-1 .45-1 1 .45 1 1 1zm0-3.5c.28 0 .5-.22.5-.5s-.22-.5-.5-.5-.5.22-.5.5.22.5.5.5zm-11 10c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zm7 7c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zm0-17c.28 0 .5-.22.5-.5s-.22-.5-.5-.5-.5.22-.5.5.22.5.5.5zM10 7c.55 0 1-.45 1-1s-.45-1-1-1-1 .45-1 1 .45 1 1 1zm0 5.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zm8 .5c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm0 4c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm0-8c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm0-4c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm3 8.5c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zM14 17c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm0 3.5c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zm-4-12c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zm0 8.5c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm4-4.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zm0-4c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z" />
+                        </svg>
+                        <svg id="canvas-off" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24"
+                            width="24px" fill="var(--font-light)">
+                            <path d="M0 0h24v24H0z" fill="none" />
+                            <path
+                                d="M14 7c.55 0 1-.45 1-1s-.45-1-1-1-1 .45-1 1 .45 1 1 1zm-.2 4.48l.2.02c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5-1.5.67-1.5 1.5l.02.2c.09.67.61 1.19 1.28 1.28zM14 3.5c.28 0 .5-.22.5-.5s-.22-.5-.5-.5-.5.22-.5.5.22.5.5.5zm-4 0c.28 0 .5-.22.5-.5s-.22-.5-.5-.5-.5.22-.5.5.22.5.5.5zm11 7c.28 0 .5-.22.5-.5s-.22-.5-.5-.5-.5.22-.5.5.22.5.5.5zM10 7c.55 0 1-.45 1-1s-.45-1-1-1-1 .45-1 1 .45 1 1 1zm8 8c.55 0 1-.45 1-1s-.45-1-1-1-1 .45-1 1 .45 1 1 1zm0-4c.55 0 1-.45 1-1s-.45-1-1-1-1 .45-1 1 .45 1 1 1zm0-4c.55 0 1-.45 1-1s-.45-1-1-1-1 .45-1 1 .45 1 1 1zm-4 13.5c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zM2.5 5.27l3.78 3.78L6 9c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1c0-.1-.03-.19-.06-.28l2.81 2.81c-.71.11-1.25.73-1.25 1.47 0 .83.67 1.5 1.5 1.5.74 0 1.36-.54 1.47-1.25l2.81 2.81c-.09-.03-.18-.06-.28-.06-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1c0-.1-.03-.19-.06-.28l3.78 3.78L20 20.23 3.77 4 2.5 5.27zM10 17c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm11-3.5c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zM6 13c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zM3 9.5c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zm7 11c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zM6 17c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm-3-3.5c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5z" />
+                        </svg>
+                    </button>
+                    <button id="dark-mode" title="Toggle dark mode" onclick="toggleDarkMode()">
+                        <svg id="light" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24"
+                            height="24px" viewBox="0 0 24 24" width="24px" fill="var(--font-light)">
+                            <rect fill="none" height="24" width="24" />
+                            <path
+                                d="M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0 c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2 c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1 C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06 c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41 l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41 c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36 c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z" />
+                        </svg>
+
+                        <svg id="dark" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24"
+                            height="24px" viewBox="0 0 24 24" width="24px" fill="var(--font-light)">
+                            <rect fill="none" height="24" width="24" />
+                            <path
+                                d="M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36c-0.98,1.37-2.58,2.26-4.4,2.26 c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z" />
+                        </svg>
+                    </button>
                 </div>
             </nav>
 
@@ -94,13 +119,13 @@
                 </div>
                 <h2 class="bot-space experiences">People</h2>
                 <div class="gallery">
-                    <img src="assets/photos/foggy_night.jpg" alt="A Foggy Night" style="object-fit: cover;">
-                    <img src="assets/photos/green_nuit.jpg" alt="Green Sweater Portrait" style="object-fit: cover;">
-                    <img src="assets/photos/left_look.jpg" alt="Flannel Portrait" style="object-fit: cover;">
-                    <img src="assets/photos/throw_around.jpg" alt="Motion Blur Photo" style="object-fit: cover;">
-                    <img src="assets/photos/right_look.jpg" alt="GO for UO Magazine" style="object-fit: cover;">
-                    <img src="assets/photos/red_winter.jpg" alt="Red Fog" style="object-fit: cover;">
-                    <img src="assets/photos/winter_uo.jpg" alt="Snow for UO Magazine" style="object-fit: cover;">
+                    <img src="assets/people/foggy_night.jpg" alt="A Foggy Night" style="object-fit: cover;">
+                    <img src="assets/people/green_nuit.jpg" alt="Green Sweater Portrait" style="object-fit: cover;">
+                    <img src="assets/people/left_look.jpg" alt="Flannel Portrait" style="object-fit: cover;">
+                    <img src="assets/people/throw_around.jpg" alt="Motion Blur Photo" style="object-fit: cover;">
+                    <img src="assets/people/right_look.jpg" alt="GO for UO Magazine" style="object-fit: cover;">
+                    <img src="assets/people/red_winter.jpg" alt="Red Fog" style="object-fit: cover;">
+                    <img src="assets/people/winter_uo.jpg" alt="Snow for UO Magazine" style="object-fit: cover;">
                 </div>
             </div>
         </div>
@@ -113,15 +138,19 @@
             <div class="group">
                 <p>Status</p>
                 <br>
-                <p>Enabling creative expression for merchants at Shopify.</p>
+                <p>Going with the flow.</p>
             </div>
             <div class="group">
                 <p>Contact</p>
                 <br>
-                <p><a href="mailto:latxhman@gmail.com" target="_blank">latxhman@gmail.com</a></p>
-                <p><a href="https://www.linkedin.com/in/brian-latchman/" target="_blank">Linkedin</a></p>
-                <p><a href="https://www.instagram.com/latxhman/" target="_blank">Instagram</a></p>
-                <p><a href="https://github.com/latxh/" target="_blank">Github</a></p>
+                <p><a class="underline-animation" href="mailto:latxhman@gmail.com"
+                        target="_blank">latxhman@gmail.com</a></p>
+                <p><a class="underline-animation" href="https://www.linkedin.com/in/brian-latchman/"
+                        target="_blank">Linkedin</a>
+                </p>
+                <p><a class="underline-animation" href="https://www.instagram.com/latxhman/"
+                        target="_blank">Instagram</a></p>
+                <p><a class="underline-animation" href="https://github.com/latxh/" target="_blank">Github</a></p>
             </div>
             <div class="group">
                 <p>Credits</p>
@@ -135,16 +164,11 @@
 
     <script id="jsbin-javascript">
         (function () {
-            var Mouse, PI, abs, animloop, camera, canvas, cos, ctx, cubes, distance, frame, geometry, hypotenuse, material, offset, renderer, resizeHandler, scene, seed, side, sidehypotenuse, sin, sqrt, start, t, x, xside, y, yside, _i, _j, _ref, _ref1, _ref2, _ref3;
-
+            let Mouse, PI, abs, animloop, camera, canvas, cos, ctx, cubes, distance, frame, geometry, hypotenuse, material, offset, renderer, resizeHandler, scene, seed, side, sidehypotenuse, sin, sqrt, start, t, x, xside, y, yside, _i, _j, _ref, _ref1, _ref2, _ref3;
             t = 0;
-
             start = Date.now();
-
-            seed = 700;
-
+            seed = 0;
             frame = 0;
-
             PI = Math.PI;
 
             sin = function (a) {
@@ -172,13 +196,9 @@
             };
 
             scene = new THREE.Scene();
-
             camera = new THREE.OrthographicCamera(window.innerWidth / -2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / -2, -50 * 100, 30 * 1000);
-
             renderer = new THREE.WebGLRenderer();
-
             canvas = document.createElement('canvas');
-
             ctx = canvas.getContext('2d');
 
             (resizeHandler = function () {
@@ -195,23 +215,14 @@
             })();
 
             window.addEventListener('resize', resizeHandler, false);
-
             document.body.appendChild(renderer.domElement);
-
             side = hypotenuse(canvas.width, canvas.height) / 40;
-
             geometry = new THREE.BoxGeometry(side + 1, side + 1, side + 5);
-
             material = new THREE.MeshBasicMaterial({});
-
             cubes = [];
-
             xside = side;
-
             yside = side;
-
             sidehypotenuse = hypotenuse(side, side);
-
             offset = 75;
 
             for (x = _i = _ref = camera.left * 1.3, _ref1 = camera.right * 1.3; xside > 0 ? _i <= _ref1 : _i >= _ref1; x = _i += xside) {
@@ -230,7 +241,6 @@
             }
 
             camera.position.set(0, 0, side * 10);
-
             Mouse = {
                 down: false,
                 held: 0,
@@ -259,17 +269,11 @@
             };
 
             window.addEventListener('mousemove', Mouse.events.move, false);
-
             window.addEventListener('mousedown', Mouse.events.down, false);
-
             window.addEventListener('mouseup', Mouse.events.up, false);
-
             window.addEventListener('touchmove', Mouse.events.move, false);
-
             window.addEventListener('touchstart', Mouse.events.down, false);
-
             window.addEventListener('touchstop', Mouse.events.up, false);
-
             camera.up = new THREE.Vector3(0, 1, 0);
 
             animloop = function () {
@@ -300,39 +304,63 @@
             animloop();
 
         }).call(this);
-
     </script>
-    <!-- <canvas id='canvas' style='cursor: default;'>
-    </canvas>
-    <script src='/lib/latch.js'></script> -->
+
     <script>
-        let toggle = document.getElementById("toggle");
         let style = document.createElement('style');
+        let canvasRef = document.getElementsByTagName('canvas')[0]
+        let sun = document.getElementById('light');
+        let moon = document.getElementById('dark');
+        let canvasOn = document.getElementById('canvas-on');
+        let canvasOff = document.getElementById('canvas-off');
+
+        let darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+        let appearance = localStorage.getItem("appearance") ?? "system";
+        let systemDarkMode = darkModeQuery.matches;
+        let reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+        let motion = localStorage.getItem("motion") ?? "system";
+        let systemReducedMotion = reducedMotionQuery.matches;
 
         const updateAppearance = () => {
             localStorage.setItem("appearance", appearance);
             if (appearance === "system" ? systemDarkMode : appearance === "dark") {
-                toggle.checked = false;
-                document.body.classList.add("dark");
+                sun.classList.remove("hide")
+                moon.classList.add("hide")
 
+                document.body.classList.add("dark");
                 style.innerHTML = ':root {color-scheme: dark;}';
                 document.head.appendChild(style);
             } else {
-                toggle.checked = true;
-                document.body.classList.remove("dark");
+                sun.classList.add("hide")
+                moon.classList.remove("hide")
 
+                document.body.classList.remove("dark");
                 style.innerHTML = ':root {color-scheme: light;}';
                 document.head.appendChild(style);
             }
         };
 
-        let darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
-        let appearance = localStorage.getItem("appearance") ?? "system";
-        let systemDarkMode = darkModeQuery.matches;
-        darkModeQuery.addEventListener("change", (m) => { systemDarkMode = m.matches; updateAppearance(); });
-        updateAppearance();
+        const updateCanvas = () => {
+            localStorage.setItem("motion", motion);
+            if (motion === "system" ? systemReducedMotion : motion === "reduce") {
+                canvasOn.classList.remove("hide")
+                canvasOff.classList.add("hide")
+                canvasRef.classList.add("hide");
+            } else {
+                canvasOn.classList.add("hide")
+                canvasOff.classList.remove("hide")
+                canvasRef.classList.remove("hide");
+            }
+        };
 
-        toggle.addEventListener("change", (e) => { appearance = appearance === "dark" ? "light" : "dark"; updateAppearance(); });
+        darkModeQuery.addEventListener("change", (m) => { systemDarkMode = m.matches; updateAppearance(); });
+        reducedMotionQuery.addEventListener("change", (m) => { systemReducedMotion = m.matches; updateCanvas(); });
+
+        updateAppearance();
+        updateCanvas();
+
+        const toggleDarkMode = (e) => { appearance = appearance === "dark" ? "light" : "dark"; updateAppearance(); };
+        const toggleCanvas = (e) => { motion = motion === "reduce" ? "no-preference" : "reduce"; updateCanvas(); };
     </script>
 </body>
 
