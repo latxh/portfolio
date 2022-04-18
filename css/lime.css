@@ -185,11 +185,11 @@ kbd {
 }
 
 [data-theme=custom]{
-  --background-color: red;
+  --background-color: rgba(246, 246, 247, 1);
   --color: #415462;
-  --h1-color: #1b2832;
-  --h2-color: #24333e;
-  --h3-color: #2c3d49;
+  --h1-color: rgba(32, 34, 35, 1);
+  --h2-color: rgba(32, 34, 35, 1);
+  --h3-color: rgba(32, 34, 35, 1);
   --h4-color: #374956;
   --h5-color: #415462;
   --h6-color: #4d606d;
