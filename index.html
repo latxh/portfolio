@@ -465,10 +465,10 @@
         let canvasOn = document.getElementById('canvas-on');
         let canvasOff = document.getElementById('canvas-off');
 
-        let scrolls = document.getElementById('font');
-        let scrollDark = document.getElementById('font-dark');
-        let potion = document.getElementById('potion');
-        let potionDark = document.getElementById('potion-dark');
+        // let scrolls = document.getElementById('font');
+        // let scrollDark = document.getElementById('font-dark');
+        // let potion = document.getElementById('potion');
+        // let potionDark = document.getElementById('potion-dark');
         let video = document.getElementById('video');
         let videoDark = document.getElementById('video-dark');
         let home = document.getElementById('home');
@@ -492,10 +492,10 @@
         const updateAppearance = () => {
             localStorage.setItem("appearance", appearance);
             if (appearance === "system" ? systemDarkMode : appearance === "dark") {
-                scrolls.classList.add("hide")
-                scrollDark.classList.remove("hide")
-                potion.classList.add("hide")
-                potionDark.classList.remove("hide")
+                // scrolls.classList.add("hide")
+                // scrollDark.classList.remove("hide")
+                // potion.classList.add("hide")
+                // potionDark.classList.remove("hide")
                 video.classList.add("hide")
                 videoDark.classList.remove("hide")
                 home.classList.add("hide")
@@ -516,10 +516,10 @@
                 style.innerHTML = ':root {color-scheme: dark;}';
                 document.head.appendChild(style);
             } else {
-                scrolls.classList.remove("hide")
-                scrollDark.classList.add("hide")
-                potion.classList.remove("hide")
-                potionDark.classList.add("hide")
+                // scrolls.classList.remove("hide")
+                // scrollDark.classList.add("hide")
+                // potion.classList.remove("hide")
+                // potionDark.classList.add("hide")
                 video.classList.remove("hide")
                 videoDark.classList.add("hide")
                 home.classList.remove("hide")
