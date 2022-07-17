@@ -251,12 +251,20 @@ button:focus-visible {
   margin-bottom: 6px;
 }
 
-/* .max-width {
+.head-space {
+  margin-top: 24px;
+}
+
+.text {
   max-width: 1920px;
-} */
+}
 
 .intro {
   margin-top: 220px;
+}
+
+.cs-intro {
+  margin-top: 120px;
 }
 
 .home {
@@ -277,6 +285,10 @@ button:focus-visible {
 
 .top {
   min-height: calc(100vh - 110px);
+}
+
+.cs-top {
+  min-height: calc(100vh - 140px);
 }
 
 .experiences {
@@ -302,7 +314,8 @@ button:focus-visible {
 
 .help-link {
   display: block;
-  width: 230px;
+  min-width: 230px;
+  flex: 1;
   border-radius: 10px;
 }
 
@@ -345,6 +358,54 @@ button:focus-visible {
   max-width: 800px;
   border-radius: 10px;
   margin-bottom: 18px;
+}
+
+.cs-img {
+  background-color: #736FD9;
+  object-fit: contain;
+  height: 400px;
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 18px;
+}
+
+.white {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  max-width: 1000px;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.black {
+  background-color: #000;
+}
+
+.bing {
+  background-color: #48889F;
+}
+
+.trans {
+  background-color: transparent;
+}
+
+.half {
+  flex: 1;
+  min-height: 0px;
+}
+
+#top-btn {
+  display: none;
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  padding: 16px;
+}
+
+.video {
+  border-radius: 10px;
+  height: 600px;
 }
 
 .about-text {
@@ -393,19 +454,19 @@ button:focus-visible {
 }
 
 #music-banner:hover::before {
-  background-image: url("/assets/music-vid/weeknd_dt.jpg");
+  background-image: url("/assets/music-vid/weeknd-nav.jpg");
 }
 
 #photos-banner:hover::before {
-  background-image: url("/assets/toronto/6.jpg");
+  background-image: url("/assets/cs-timeline/timeline.png");
 }
 
 #live-banner:hover::before {
-  background-image: url("/assets/people/left_look.jpg");
+  background-image: url("/assets/cs-music/music.png");
 }
 
 #uoft-banner:hover::before {
-  background-image: url("/assets/toronto/9.jpg");
+  background-image: url("/assets/cs-cantrace/cantrace.png");
 }
 
 #shop-banner:hover::before {
@@ -619,6 +680,7 @@ button:focus-visible {
     min-height: 100px;
   }
 
+  .cs-intro,
   .intro {
     margin-top: 150px;
   }

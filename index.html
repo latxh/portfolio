@@ -31,35 +31,13 @@
                 <h3><a class="underline-animation" href="/about">About me</a></h3>
                 <h3><a class="underline-animation" href="/photos">Photos</a></h3>
                 <div class="button-wrapper">
-                    <button id="canvas-size" title="Toggle fullscreen canvas" onclick="toggleCanvas()">
-                        <svg id="canvas-on" class="hide" xmlns="http://www.w3.org/2000/svg" height="24px"
-                            viewBox="0 0 24 24" width="24px" fill="var(--font-light)">
-                            <path d="M0 0h24v24H0z" fill="none" />
-                            <path
-                                d="M6 13c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm0 4c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm0-8c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm-3 .5c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zM6 5c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm15 5.5c.28 0 .5-.22.5-.5s-.22-.5-.5-.5-.5.22-.5.5.22.5.5.5zM14 7c.55 0 1-.45 1-1s-.45-1-1-1-1 .45-1 1 .45 1 1 1zm0-3.5c.28 0 .5-.22.5-.5s-.22-.5-.5-.5-.5.22-.5.5.22.5.5.5zm-11 10c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zm7 7c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zm0-17c.28 0 .5-.22.5-.5s-.22-.5-.5-.5-.5.22-.5.5.22.5.5.5zM10 7c.55 0 1-.45 1-1s-.45-1-1-1-1 .45-1 1 .45 1 1 1zm0 5.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zm8 .5c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm0 4c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm0-8c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm0-4c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm3 8.5c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zM14 17c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm0 3.5c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zm-4-12c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zm0 8.5c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm4-4.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zm0-4c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z" />
-                        </svg>
-                        <svg id="canvas-off" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24"
-                            width="24px" fill="var(--font-light)">
-                            <path d="M0 0h24v24H0z" fill="none" />
-                            <path
-                                d="M14 7c.55 0 1-.45 1-1s-.45-1-1-1-1 .45-1 1 .45 1 1 1zm-.2 4.48l.2.02c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5-1.5.67-1.5 1.5l.02.2c.09.67.61 1.19 1.28 1.28zM14 3.5c.28 0 .5-.22.5-.5s-.22-.5-.5-.5-.5.22-.5.5.22.5.5.5zm-4 0c.28 0 .5-.22.5-.5s-.22-.5-.5-.5-.5.22-.5.5.22.5.5.5zm11 7c.28 0 .5-.22.5-.5s-.22-.5-.5-.5-.5.22-.5.5.22.5.5.5zM10 7c.55 0 1-.45 1-1s-.45-1-1-1-1 .45-1 1 .45 1 1 1zm8 8c.55 0 1-.45 1-1s-.45-1-1-1-1 .45-1 1 .45 1 1 1zm0-4c.55 0 1-.45 1-1s-.45-1-1-1-1 .45-1 1 .45 1 1 1zm0-4c.55 0 1-.45 1-1s-.45-1-1-1-1 .45-1 1 .45 1 1 1zm-4 13.5c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zM2.5 5.27l3.78 3.78L6 9c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1c0-.1-.03-.19-.06-.28l2.81 2.81c-.71.11-1.25.73-1.25 1.47 0 .83.67 1.5 1.5 1.5.74 0 1.36-.54 1.47-1.25l2.81 2.81c-.09-.03-.18-.06-.28-.06-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1c0-.1-.03-.19-.06-.28l3.78 3.78L20 20.23 3.77 4 2.5 5.27zM10 17c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm11-3.5c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zM6 13c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zM3 9.5c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zm7 11c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zM6 17c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm-3-3.5c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5z" />
-                        </svg>
+                    <button id="canvas-size" title="Toggle visual effects" onclick="toggleCanvas()">
+                        <svg id="canvas-on" class="hide" fill="var(--font-light)" width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7.909 5h1.34a.75.75 0 0 1 .102 1.493L9.25 6.5H7.91a.75.75 0 0 0-.477.17l-.075.073-2.074 2.256h3.466a2.25 2.25 0 0 1 2.237 2.005h2.027A2.25 2.25 0 0 1 15.25 9l3.477-.001-2.083-2.258a.75.75 0 0 0-.448-.234l-.104-.007h-1.345a.75.75 0 0 1-.102-1.493L14.747 5h1.346a2.25 2.25 0 0 1 1.52.592l.133.132 3.642 3.947c.05.055.091.115.122.178.306.384.489.871.489 1.4v3.497a3.25 3.25 0 0 1-3.25 3.25H16.25a3.25 3.25 0 0 1-3.25-3.25l-.001-2.242h-2.001v2.242a3.25 3.25 0 0 1-3.25 3.25H5.25A3.25 3.25 0 0 1 2 14.746V11.25c0-.562.206-1.076.546-1.47l.038-.055.044-.052 3.624-3.945a2.25 2.25 0 0 1 1.469-.72L7.909 5h1.34-1.34Zm.84 5.5H4.25a.75.75 0 0 0-.75.75v3.496c0 .967.784 1.75 1.75 1.75h2.499a1.75 1.75 0 0 0 1.75-1.75V11.25a.75.75 0 0 0-.75-.75Zm11 0H15.25a.75.75 0 0 0-.75.75v3.496c0 .967.784 1.75 1.75 1.75h2.499a1.75 1.75 0 0 0 1.75-1.75V11.25a.75.75 0 0 0-.75-.75Z"/></svg>
+                        <svg id="canvas-off" fill="var(--font-light)" width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3.28 2.22a.75.75 0 1 0-1.06 1.06l3.273 3.274-2.865 3.119-.044.052-.038.055c-.34.394-.546.908-.546 1.47v3.496a3.25 3.25 0 0 0 3.25 3.25h2.499a3.25 3.25 0 0 0 3.25-3.25l-.001-2.242h.445L13 14.061v.685a3.25 3.25 0 0 0 3.25 3.25h.685l3.784 3.785a.75.75 0 0 0 1.061-1.061L3.28 2.22ZM7.94 9l-2.656-.001 1.272-1.384L7.939 9ZM4.25 10.5h4.499a.75.75 0 0 1 .75.75v3.496a1.75 1.75 0 0 1-1.75 1.75H5.25a1.75 1.75 0 0 1-1.75-1.75V11.25a.75.75 0 0 1 .75-.75ZM13.303 10.121l1.197 1.197v-.068a.75.75 0 0 1 .75-.75h4.499a.75.75 0 0 1 .75.75v3.496a1.75 1.75 0 0 1-.993 1.578l1.094 1.094a3.246 3.246 0 0 0 1.399-2.672V11.25c0-.53-.183-1.017-.489-1.4a.748.748 0 0 0-.122-.179l-3.642-3.947-.133-.132A2.25 2.25 0 0 0 16.093 5h-1.346l-.102.007a.75.75 0 0 0 .102 1.493h1.346l.103.007a.75.75 0 0 1 .448.234L18.727 9H15.25c-.831 0-1.557.452-1.947 1.122Z"/></svg>
                     </button>
                     <button id="dark-mode" title="Toggle dark mode" onclick="toggleDarkMode()">
-                        <svg id="light" class="hide" xmlns="http://www.w3.org/2000/svg"
-                            enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px"
-                            fill="var(--font-light)">
-                            <rect fill="none" height="24" width="24" />
-                            <path
-                                d="M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0 c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2 c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1 C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06 c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41 l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41 c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36 c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z" />
-                        </svg>
-
-                        <svg id="dark" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24"
-                            height="24px" viewBox="0 0 24 24" width="24px" fill="var(--font-light)">
-                            <rect fill="none" height="24" width="24" />
-                            <path
-                                d="M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36c-0.98,1.37-2.58,2.26-4.4,2.26 c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z" />
-                        </svg>
+                        <svg id="light" class="hide" fill="var(--font-light)" width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11.996 19.01a.75.75 0 0 1 .743.649l.007.102v1.5a.75.75 0 0 1-1.493.101l-.007-.101v-1.5a.75.75 0 0 1 .75-.75Zm6.022-2.072 1.06 1.06a.75.75 0 1 1-1.06 1.061l-1.06-1.06a.75.75 0 0 1 1.06-1.061Zm-10.983 0a.75.75 0 0 1 0 1.06L5.974 19.06a.75.75 0 0 1-1.06-1.06l1.06-1.061a.75.75 0 0 1 1.06 0ZM12 6.475a5.525 5.525 0 1 1 0 11.05 5.525 5.525 0 0 1 0-11.05Zm0 1.5a4.025 4.025 0 1 0 0 8.05 4.025 4.025 0 0 0 0-8.05Zm9.25 3.293a.75.75 0 0 1 .102 1.493l-.102.007h-1.5a.75.75 0 0 1-.102-1.493l.102-.007h1.5Zm-17-.029a.75.75 0 0 1 .102 1.494l-.102.006h-1.5a.75.75 0 0 1-.102-1.493l.102-.007h1.5Zm1.64-6.37.084.072 1.06 1.06a.75.75 0 0 1-.976 1.134l-.084-.073-1.06-1.06a.75.75 0 0 1 .976-1.134Zm13.188.072a.75.75 0 0 1 .073.977l-.073.084-1.06 1.06a.75.75 0 0 1-1.133-.976l.072-.084 1.06-1.061a.75.75 0 0 1 1.061 0ZM12 1.99a.75.75 0 0 1 .743.648l.007.102v1.5a.75.75 0 0 1-1.493.101l-.007-.102v-1.5a.75.75 0 0 1 .75-.75Z"/></svg>
+                        <svg id="dark" fill="var(--font-light)" width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.026 17.001c-2.762 4.784-8.879 6.423-13.663 3.661a9.964 9.964 0 0 1-3.234-2.983.75.75 0 0 1 .365-1.131c3.767-1.348 5.785-2.911 6.956-5.146 1.232-2.353 1.551-4.93.689-8.464a.75.75 0 0 1 .769-.926 9.961 9.961 0 0 1 4.457 1.327C21.149 6.1 22.788 12.217 20.025 17Zm-8.248-4.903c-1.25 2.388-3.31 4.099-6.817 5.499a8.492 8.492 0 0 0 2.152 1.766 8.501 8.501 0 1 0 8.502-14.725 8.485 8.485 0 0 0-2.792-1.016c.647 3.384.23 6.044-1.045 8.476Z"/></svg>
                     </button>
                 </div>
             </nav>
@@ -68,9 +46,8 @@
                 <h1>What's crackalackin, I'm Brian!</h1>
                 <br>
                 <h1>I'm a designer who believes in creating beautifully engineered experiences to empower people.</h1>
-                <h1>Previously at <a class="underline-animation" href="https://www.microsoft.com"
-                        target="_blank">Microsoft</a>,
-                    <a class="underline-animation" href="https://www.shopify.com/flow" target="_blank">Shopify</a>, <a
+                <h1>Currently at <a class="underline-animation" href="https://www.microsoft.com"
+                        target="_blank">Microsoft</a>. Previously at <a class="underline-animation" href="https://www.shopify.com/flow" target="_blank">Shopify</a>, <a
                         class="underline-animation" href="https://www.microsoft.com/en-us/garage/" target="_blank">The
                         Garage</a>
                     and <a class="underline-animation" href="https://www.loblawdigital.co/" target="_blank">Loblaw
@@ -85,17 +62,59 @@
             <h2 class="bot-space">Selected work</h2>
             <div class="row">
                 <div class="wrapper">
+                    <a class="banner-link" href="/music">
+                        <div id="live-banner" class="banner">
+                            <img id="brush" src="/assets/pixel-art/brush.png" alt="Brush icon" class="logo">
+                            <img id="brush-dark" src="/assets/pixel-art/brush-dark.png" alt="Dark mode Brush icon"
+                                class="logo">
+                            <p class="link">→</p>
+                            <p class="chip yellow">Case Study</p>
+                        </div>
+                    </a>
+
+                    <h2 class="top-space">Apple Music — Redesign</h2>
+                    <p class="grey bot-space">Reimagining Apple's personalized and recommended music experience for devoted listeners on desktop.</p>
+                </div>
+
+                <div class="wrapper">
+                    <a class="banner-link" href="/cantrace">
+                        <div id="uoft-banner" class="banner">
+                            <img id="earth" src="/assets/pixel-art/earth.png" alt="Earth icon" class="logo">
+                            <img id="earth-dark" src="/assets/pixel-art/earth-dark.png" alt="Dark mode Earth icon"
+                                class="logo">
+                            <p class="link">→</p>
+                            <p class="chip cyan">Case Study</p>
+                        </div>
+                    </a>
+
+                    <h2 class="top-space">CanTrace - Contact tracing app</h2>
+                    <p class="grey bot-space">A healthcare driven contact tracing app to mitigate the spread of COVID-19. Presented to the provincial and federal government of Canada.</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="wrapper">
+                    <a class="banner-link" href="/timeline">
+                        <div id="photos-banner" class="banner">
+                            <img id="home" src="/assets/pixel-art/apps.png" alt="Puzzle icon" class="logo">
+                            <img id="home-dark" src="/assets/pixel-art/apps-dark.png" alt="Dark mode Puzzle icon"
+                                class="logo">
+                            <p class="link">→</p>
+                            <p class="chip purple">Case Study</p>
+                        </div>
+                    </a>
+
+                    <h2 class="top-space">Timeline - Digital memories app</h2>
+                    <p class="grey bot-space">A mobile app for parents to add, store and share memories of their child, so they can cherish what matters most.</p>
+                </div>
+
+                <div class="wrapper">
                     <a class="banner-link" href="https://www.youtube.com/watch?v=o_v2r8rdGM8" target="_blank">
                         <div id="music-banner" class="banner">
                             <img id="video" src="/assets/pixel-art/video.png" alt="Video icon" class="logo">
                             <img id="video-dark" src="/assets/pixel-art/video-dark.png" alt="Dark mode Video icon"
                                 class="logo">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="link" height="24px" viewBox="0 0 24 24"
-                                width="24px" fill="#000000">
-                                <path d="M0 0h24v24H0V0z" fill="none" />
-                                <path
-                                    d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" />
-                            </svg>
+                            <svg class="link" width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#000000"><path d="M11.272 7.25a.75.75 0 0 1 .75-.75h4.728a.75.75 0 0 1 .75.75v4.729a.75.75 0 0 1-1.5 0V9.06l-5.22 5.22a.75.75 0 1 1-1.06-1.061L14.94 8h-2.918a.75.75 0 0 1-.75-.75Z"/><path d="M6.157 5.25A3.251 3.251 0 0 1 9.25 3h8.5A3.25 3.25 0 0 1 21 6.25v8.588a3.251 3.251 0 0 1-2 3.001v.136c0 1.05-.53 1.845-1.309 2.344-.75.48-1.717.686-2.693.68h-.002l-4.077-.004H7c-1.157 0-2.164-.362-2.89-1.045-.727-.686-1.11-1.64-1.11-2.7V8.5c0-.865.216-1.683.734-2.296.534-.633 1.31-.954 2.222-.954h.2ZM6 6.75h-.044c-.544 0-.871.179-1.076.421-.22.262-.38.694-.38 1.329v8.75c0 .69.242 1.234.64 1.608.4.377 1.017.637 1.86.637h3.92L15 19.5h.004c.788.004 1.445-.166 1.878-.444.372-.238.582-.55.614-.968H9.25A3.25 3.25 0 0 1 6 14.838V6.75ZM9.25 4.5A1.75 1.75 0 0 0 7.5 6.25v8.588c0 .967.784 1.75 1.75 1.75h8.5a1.75 1.75 0 0 0 1.75-1.75V6.25a1.75 1.75 0 0 0-1.75-1.75h-8.5Z"/></svg>
                             <p class="chip red">Cinematography</p>
                         </div>
                     </a>
@@ -105,180 +124,100 @@
                         Weeknd, filmed
                         in Toronto for XO.</p>
                 </div>
-
-                <div class="wrapper">
-                    <a class="banner-link" href="/photos">
-                        <div id="photos-banner" class="banner">
-                            <img id="home" src="/assets/pixel-art/home.png" alt="Home icon" class="logo">
-                            <img id="home-dark" src="/assets/pixel-art/home-dark.png" alt="Dark mode Home icon"
-                                class="logo">
-                            <p class="link">→</p>
-                            <p class="chip purple">Photography</p>
-                        </div>
-                    </a>
-
-                    <h2 class="top-space">Toronto Is Home - Photos</h2>
-                    <p class="grey bot-space">A collection of my favourite photos, which have accumulated millions of
-                        views and
-                        over 250 thousand likes.</p>
-                </div>
             </div>
 
-            <div class="row">
-                <div class="wrapper">
-                    <a class="banner-link" href="https://record-together.azurewebsites.net/" target="_blank">
-                        <div id="live-banner" class="banner">
-                            <img id="earth" src="/assets/pixel-art/earth.png" alt="Earth icon" class="logo">
-                            <img id="earth-dark" src="/assets/pixel-art/earth-dark.png" alt="Dark mode Earth icon"
-                                class="logo">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="link" height="24px" viewBox="0 0 24 24"
-                                width="24px" fill="#000000">
-                                <path d="M0 0h24v24H0V0z" fill="none" />
-                                <path
-                                    d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" />
-                            </svg>
-                            <p class="chip green">Hackathon</p>
+            <h2 class="bot-space head-space">Recently shipped</h2>
+            <div class="help-wrapper">
+                <a href="http://abyss-online.games/" class="help-link" target="_blank">
+                    <div class="help-item">
+                        <div class="help-img">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="11.071" viewBox="0 0 16 11.071"><path fill="var(--font)" d="M12.252,5a5.534,5.534,0,1,1,.19,11.067l-.19,0H7.512A5.534,5.534,0,1,1,7.322,5l.189,0h4.741Zm0,1.186H7.512a4.348,4.348,0,1,0-.175,8.695l.175,0h4.741a4.348,4.348,0,1,0,.175-8.695l-.175,0ZM6.719,8.162a.593.593,0,0,1,.593.593V9.94H8.5a.593.593,0,1,1,0,1.186H7.312v1.188a.593.593,0,0,1-1.186,0V11.126H4.94a.593.593,0,0,1,0-1.186H6.126V8.755A.593.593,0,0,1,6.719,8.162Zm5.337,2.767a.988.988,0,1,1-.988.988A.988.988,0,0,1,12.056,10.93Zm1.581-2.767a.988.988,0,1,1-.988.988A.988.988,0,0,1,13.638,8.162Z" transform="translate(-1.882 -4.999)"/></svg>
                         </div>
-                    </a>
-
-                    <h2 class="top-space">Live Demo — Microsoft global hackathon</h2>
-                    <p class="grey bot-space">Runner-up in the open category for the largest private hackathon in the
-                        world, for
-                        Microsoft employees.</p>
-                </div>
-
-                <div class="wrapper">
-                    <a class="banner-link" href="https://betteruoft.ca/" target="_blank">
-                        <div id="uoft-banner" class="banner">
-                            <img id="brush" src="/assets/pixel-art/brush.png" alt="Brush icon" class="logo">
-                            <img id="brush-dark" src="/assets/pixel-art/brush-dark.png" alt="Dark mode Brush icon"
-                                class="logo">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="link" height="24px" viewBox="0 0 24 24"
-                                width="24px" fill="#000000">
-                                <path d="M0 0h24v24H0V0z" fill="none" />
-                                <path
-                                    d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" />
-                            </svg>
-                            <p class="chip yellow">Chrome Extension</p>
+                        <div>
+                            <h3>Web Game</h3>
+                            <p class="grey">Abyss</p>
                         </div>
-                    </a>
-
-                    <h2 class="top-space">Better UofT - University experiences made customizable</h2>
-                    <p class="grey bot-space">Chrome extension which provides improved accessibility, responsive layouts
-                        and dark
-                        mode for UofT websites.</p>
-                </div>
+                    </div>
+                </a>
+                <a href="https://fire-video-editor.herokuapp.com/" class="help-link" target="_blank">
+                    <div class="help-item">
+                        <div class="help-img">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14.964" height="16" viewBox="0 0 14.964 16"><path fill="var(--font)" d="M16.315,3.556l.04.129L16.8,5.229a.6.6,0,0,1-.336.717l-.077.028L7.769,8.445h8.964a.6.6,0,0,1,.6.522l.006.08v6.828A2.209,2.209,0,0,1,15.26,18.08l-.133,0H5.085A2.209,2.209,0,0,1,2.88,16.009l0-.135V9.132L2.457,7.669A2.209,2.209,0,0,1,3.844,4.978l.129-.042,9.651-2.767a2.209,2.209,0,0,1,2.691,1.387ZM16.131,9.65H4.081v6.225a1,1,0,0,0,.8.983l.1.016.1,0H15.127a1,1,0,0,0,1-.9l0-.1V9.65ZM5.5,5.751,4.3,6.1a1,1,0,0,0-.712,1.141l.023.1.276.965.237-.068L5.5,5.752ZM9.325,4.656l-2.183.626L5.766,7.764l2.183-.625L9.325,4.656Zm3.821-1.1-2.183.627L9.587,6.668l2.183-.625L13.147,3.56Zm1.485-.187-1.222,2.2,2.063-.592L15.2,4.017a1,1,0,0,0-.566-.645Z" transform="translate(-2.371 -2.083)"/></svg>
+                        </div>
+                        <div>
+                            <h3>Video Editor</h3>
+                            <p class="grey">Fire</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://ooley.me/" class="help-link" target="_blank">
+                    <div class="help-item">
+                        <div class="help-img">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="13.604" viewBox="0 0 16 13.604"><path fill="var(--font)" d="M13.191,3.8,11.989,5H4.6L4.485,5A1.4,1.4,0,0,0,3.2,6.4V8.192L5.288,6.88a1.8,1.8,0,0,1,2.406.455l.076.111A1.8,1.8,0,0,1,7.9,9.112l-.063.133-.966,1.829a.6.6,0,0,0,.746.84l.078-.037L9.1,11.082a.6.6,0,0,1,.661,1l-.068.046-1.412.8a1.8,1.8,0,0,1-2.53-2.294l.056-.116.966-1.829a.6.6,0,0,0-.771-.83L5.927,7.9,3.2,9.609V14a1.4,1.4,0,0,0,1.4,1.4H15.4A1.4,1.4,0,0,0,16.8,14V8.154l1.2-1.2V14a2.6,2.6,0,0,1-2.6,2.6H4.6A2.6,2.6,0,0,1,2,14V6.4A2.6,2.6,0,0,1,4.453,3.8l.147,0Zm4.149-.364.1.1.1.1a1.815,1.815,0,0,1-.1,2.464L14.019,9.518a1.8,1.8,0,0,1-.754.45l-1.862.56a.8.8,0,0,1-.992-1.012L11,7.68a1.81,1.81,0,0,1,.442-.722l3.432-3.426a1.816,1.816,0,0,1,2.464-.1Zm-1.616.944L12.292,7.807a.6.6,0,0,0-.147.24l-.358,1.112,1.133-.34a.6.6,0,0,0,.251-.15L16.6,5.25l.06-.069a.615.615,0,0,0-.93-.8Z" transform="translate(-2 -2.999)"/></svg>
+                        </div>
+                        <div>
+                            <h3>Whiteboard</h3>
+                            <p class="grey">Ooley</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://latxh.github.io/shoppies/" class="help-link" target="_blank">
+                    <div class="help-item">
+                        <div class="help-img">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="11.199" height="16" viewBox="0 0 11.199 16"><g transform="translate(-5 -1.998)"><path fill="var(--font)" d="M11.5,5.613l.73,1.482,1.635.236a.2.2,0,0,1,.114.348L12.8,8.831l.28,1.629a.2.2,0,0,1-.3.215l-1.462-.77-1.461.77a.2.2,0,0,1-.3-.215l.28-1.628L8.657,7.68a.2.2,0,0,1,.114-.349L10.406,7.1l.73-1.482a.2.2,0,0,1,.366,0Z" transform="translate(-0.719 -0.7)"/><path fill="var(--font)" d="M16.2,7.6a5.6,5.6,0,1,0-9.6,3.918V17.4l.006.084a.6.6,0,0,0,.94.406L10.6,15.739l3.055,2.15.071.043A.6.6,0,0,0,14.6,17.4l0-5.881A5.581,5.581,0,0,0,16.2,7.6ZM13.4,12.45v3.792l-2.456-1.728-.08-.048a.6.6,0,0,0-.61.048L7.8,16.242V12.45a5.607,5.607,0,0,0,5.6,0ZM6.2,7.6A4.4,4.4,0,1,1,10.6,12,4.4,4.4,0,0,1,6.2,7.6Z" transform="translate(0 0)"/></g></svg>
+                        </div>
+                        <div>
+                            <h3>Movie Search</h3>
+                            <p class="grey">The Shoppies</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://record-together.azurewebsites.net/" class="help-link" target="_blank">
+                    <div class="help-item">
+                        <div class="help-img">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="17.872" height="13" viewBox="0 0 17.872 13"><path fill="var(--font)" d="M3.492,4H16.044a1.83,1.83,0,0,1,1.831,1.827v9.345A1.827,1.827,0,0,1,16.048,17H3.454a1.828,1.828,0,0,1-1.828-1.827V9.317a1.113,1.113,0,0,0,.171.163A1.125,1.125,0,0,0,2.844,9.6V15.17a.609.609,0,0,0,.609.609H5.687V13.543a1.421,1.421,0,0,1,1.306-1.416l.116,0h5.277a1.422,1.422,0,0,1,1.417,1.3l0,.116v2.234h2.236a.609.609,0,0,0,.609-.609V5.827a.609.609,0,0,0-.609-.609H4.4l-.228-.073a.724.724,0,0,1-.458-.455ZM6.9,15.776H12.59l0-2.234a.2.2,0,0,0-.157-.2l-.046-.006H7.105a.2.2,0,0,0-.2.157l-.006.046v2.234Zm4.572-8.625a2.439,2.439,0,1,1-1.723-.713,2.436,2.436,0,0,1,1.723.713Zm-2.585.861a1.218,1.218,0,1,0,1.723,0A1.218,1.218,0,0,0,8.889,8.012Zm-6.97-.081.244.745a.295.295,0,0,0,.549.019l.007-.019.244-.744a1.534,1.534,0,0,1,.974-.973l.746-.244a.295.295,0,0,0,0-.556H4.668l-.747-.244a1.529,1.529,0,0,1-.973-.973L2.7,4.2a.295.295,0,0,0-.556,0L1.9,4.942,1.9,4.961a1.537,1.537,0,0,1-.953.955L.2,6.16a.3.3,0,0,0-.142.447A.293.293,0,0,0,.2,6.715l.747.244a1.544,1.544,0,0,1,.973.973ZM3.975,9.32l.435-.142a.908.908,0,0,0,.477-.384.928.928,0,0,0,.081-.184l.141-.435a.176.176,0,0,1,.1-.1.171.171,0,0,1,.164.019.18.18,0,0,1,.063.083l.141.435a.893.893,0,0,0,.569.567l.435.141h.008a.172.172,0,0,1,0,.324l-.435.141a.894.894,0,0,0-.569.568l-.141.434a.179.179,0,0,1-.063.081.172.172,0,0,1-.261-.081l-.141-.434a.894.894,0,0,0-.569-.57l-.435-.141a.173.173,0,0,1-.081-.26.162.162,0,0,1,.081-.063Z" transform="translate(-0.004 -4)"/></svg>
+                        </div>
+                        <div>
+                            <h3>Video Calls</h3>
+                            <p class="grey">Live Demo</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://betteruoft.ca/" class="help-link" target="_blank">
+                    <div class="help-item">
+                        <div class="help-img">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15.314" viewBox="0 0 16 15.314"><path fill="var(--font)" d="M3.49,5.1A8.311,8.311,0,0,1,14.214,3.208,8.276,8.276,0,0,1,17.5,13.3c-1.328,3.638-4.828,5.078-7.35,3.248a3.773,3.773,0,0,1-1.488-2.94l-.085-.792L8.545,12.5c-.1-.75-.25-1.085-.566-1.262a1.268,1.268,0,0,0-1.28-.026l-.282.117-.144.063a3.1,3.1,0,0,1-2.039.334l-.16-.038-.132-.038C1.7,10.954,1.373,7.918,3.49,5.1Zm.79,5.39.1.03.108.024a1.86,1.86,0,0,0,1.153-.194l.483-.206a2.449,2.449,0,0,1,2.444.04,2.476,2.476,0,0,1,1.169,2.135l.043.368.044.427.038.339a2.7,2.7,0,0,0,1,2.122c1.826,1.324,4.441.248,5.513-2.688a7.078,7.078,0,0,0-2.8-8.658A7.112,7.112,0,0,0,4.452,5.824c-1.665,2.217-1.461,4.237-.173,4.667Zm9.008-1.6a1,1,0,1,1,1.222.685A1,1,0,0,1,13.287,8.891Zm.4,2.8a1,1,0,1,1,1.229.709,1,1,0,0,1-1.229-.709ZM11.7,6.481a1,1,0,1,1,1.229.709A1,1,0,0,1,11.7,6.481ZM11.678,13.7a1,1,0,1,1,1.222.685A1,1,0,0,1,11.678,13.7Zm-2.806-8a1,1,0,1,1,1.228.71A1,1,0,0,1,8.871,5.7Z" transform="translate(-2.07 -2.028)"/></svg>
+                        </div>
+                        <div>
+                            <h3>Styling Extension</h3>
+                            <p class="grey">Better UofT</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://pinecone.yendo.ca/" class="help-link" target="_blank">
+                    <div class="help-item">
+                        <div class="help-img">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12.8" height="16" viewBox="0 0 12.8 16"><path fill="var(--font)" d="M6.4,6A1.6,1.6,0,0,1,8,4.4h4.8A1.6,1.6,0,0,1,14.4,6v.8a1.6,1.6,0,0,1-1.6,1.6H8A1.6,1.6,0,0,1,6.4,6.8ZM8,5.6a.4.4,0,0,0-.4.4v.8a.4.4,0,0,0,.4.4h4.8a.4.4,0,0,0,.4-.4V6a.4.4,0,0,0-.4-.4ZM7.4,12a1,1,0,1,0-1-1A1,1,0,0,0,7.4,12Zm1,2.2a1,1,0,1,1-1-1A1,1,0,0,1,8.4,14.2Zm5-2.2a1,1,0,1,0-1-1A1,1,0,0,0,13.4,12Zm1,2.2a1,1,0,1,1-1-1A1,1,0,0,1,14.4,14.2Zm-4-2.2a1,1,0,1,0-1-1A1,1,0,0,0,10.4,12Zm1,2.2a1,1,0,1,1-1-1A1,1,0,0,1,11.4,14.2ZM6.6,2A2.6,2.6,0,0,0,4,4.6V15.4A2.6,2.6,0,0,0,6.6,18h7.6a2.6,2.6,0,0,0,2.6-2.6V4.6A2.6,2.6,0,0,0,14.2,2ZM5.2,4.6A1.4,1.4,0,0,1,6.6,3.2h7.6a1.4,1.4,0,0,1,1.4,1.4V15.4a1.4,1.4,0,0,1-1.4,1.4H6.6a1.4,1.4,0,0,1-1.4-1.4Z" transform="translate(-4 -2)"/></svg>
+                        </div>
+                        <div>
+                            <h3>Grades Calculator</h3>
+                            <p class="grey">Pinecone</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="/lime" class="help-link" target="_blank">
+                    <div class="help-item">
+                        <div class="help-img">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="14.408" viewBox="0 0 16 14.408"><path fill="var(--font)" d="M3.6,3h.8A1.6,1.6,0,0,1,6,4.481L6,4.6V15.807a1.6,1.6,0,0,1-1.481,1.6l-.12,0H3.6A1.6,1.6,0,0,1,2,15.927l0-.12V4.6A1.6,1.6,0,0,1,3.481,3L3.6,3h0ZM8.4,3h.8a1.6,1.6,0,0,1,1.6,1.481l0,.12V15.807a1.6,1.6,0,0,1-1.481,1.6l-.12,0H8.4a1.6,1.6,0,0,1-1.6-1.481l0-.12V4.6A1.6,1.6,0,0,1,8.283,3L8.4,3h0Zm5.582,1.6A1.6,1.6,0,0,1,15.5,5.678l.038.126,2.413,9.4a1.6,1.6,0,0,1-1.037,1.915l-.115.034-.776.2a1.6,1.6,0,0,1-1.911-1.028l-.038-.124L11.659,6.8A1.6,1.6,0,0,1,12.7,4.885l.114-.034.775-.2a1.593,1.593,0,0,1,.4-.051ZM4.4,4.2H3.6a.4.4,0,0,0-.394.328L3.2,4.6V15.807a.4.4,0,0,0,.328.394l.072.006h.8a.4.4,0,0,0,.394-.328l.006-.072V4.6a.4.4,0,0,0-.328-.394Zm4.8,0H8.4a.4.4,0,0,0-.394.328L8,4.6V15.807a.4.4,0,0,0,.328.394l.072.006h.8a.4.4,0,0,0,.394-.328l.006-.072V4.6a.4.4,0,0,0-.328-.394Zm4.783,1.6-.05,0-.05.01-.775.2a.4.4,0,0,0-.3.408l.012.08,2.414,9.4a.4.4,0,0,0,.387.3l.05,0,.05-.01.776-.2a.4.4,0,0,0,.3-.415l-.012-.07L14.373,6.1a.4.4,0,0,0-.387-.3Z" transform="translate(-2 -3)"/></svg>
+                        </div>
+                        <div>
+                            <h3>Classless Styling</h3>
+                            <p class="grey">Lime</p>
+                        </div>
+                    </div>
+                </a>
             </div>
 
-            <div class="row">
-                <div class="wrapper">
-                    <a class="banner-link" href="https://latxh.github.io/shoppies/" target="_blank">
-                        <div id="shop-banner" class="banner">
-                            <img id="shopify" src="/assets/pixel-art/shop.png" alt="Shopify icon" class="logo">
-                            <img id="shopify-dark" src="/assets/pixel-art/shop-dark.png" alt="Dark mode Shopify icon"
-                                class="logo">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="link" height="24px" viewBox="0 0 24 24"
-                                width="24px" fill="#000000">
-                                <path d="M0 0h24v24H0V0z" fill="none" />
-                                <path
-                                    d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" />
-                            </svg>
-                            <p class="chip green">Interaction Design</p>
-                        </div>
-                    </a>
-
-                    <h2 class="top-space">The Shoppies — UX engineering challenge</h2>
-                    <p class="grey bot-space">Movie awards for entrepreneurs; a webpage that can search for movies and
-                        favourite
-                        films.</p>
-                </div>
-
-                <div class="wrapper">
-                    <a class="banner-link" href="https://ooley.me/" target="_blank">
-                        <div id="ooley-banner" class="banner">
-                            <img id="scroll-alt" src="/assets/pixel-art/calc.png" alt="Scroll icon" class="logo">
-                            <img id="scroll-alt-dark" src="/assets/pixel-art/calc-dark.png" alt="Dark mode Scroll icon"
-                                class="logo">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="link" height="24px" viewBox="0 0 24 24"
-                                width="24px" fill="#000000">
-                                <path d="M0 0h24v24H0V0z" fill="none" />
-                                <path
-                                    d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" />
-                            </svg>
-                            <p class="chip cyan">Web Canvas</p>
-                        </div>
-                    </a>
-
-                    <h2 class="top-space">Ooley — Real time collaborative whiteboard</h2>
-                    <p class="grey bot-space">Peer-to-peer web application where users can simultaneously view and draw
-                        on a
-                        canvas in real time.</p>
-                </div>
-            </div>
-
-            <!-- <div class="row">
-                <div class="wrapper">
-                    <a class="banner-link" href="javascript: void(0)">
-                        <div id="font-banner" class="banner">
-                            <img id="font" src="/assets/pixel-art/text.png" alt="Scroll icon" class="logo">
-                            <img id="font-dark" src="/assets/pixel-art/text-dark.png" alt="Dark mode Scroll icon"
-                                class="logo">
-                            <svg class="link" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24"
-                                height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
-                                <g>
-                                    <rect fill="none" height="24" width="24" />
-                                </g>
-                                <g>
-                                    <g>
-                                        <rect height="8.48"
-                                            transform="matrix(0.7071 -0.7071 0.7071 0.7071 -6.8717 17.6255)" width="3"
-                                            x="16.34" y="12.87" />
-                                        <path
-                                            d="M17.5,10c1.93,0,3.5-1.57,3.5-3.5c0-0.58-0.16-1.12-0.41-1.6l-2.7,2.7L16.4,6.11l2.7-2.7C18.62,3.16,18.08,3,17.5,3 C15.57,3,14,4.57,14,6.5c0,0.41,0.08,0.8,0.21,1.16l-1.85,1.85l-1.78-1.78l0.71-0.71L9.88,5.61L12,3.49 c-1.17-1.17-3.07-1.17-4.24,0L4.22,7.03l1.41,1.41H2.81L2.1,9.15l3.54,3.54l0.71-0.71V9.15l1.41,1.41l0.71-0.71l1.78,1.78 l-7.41,7.41l2.12,2.12L16.34,9.79C16.7,9.92,17.09,10,17.5,10z" />
-                                    </g>
-                                </g>
-                            </svg>
-                            <p class="chip blue">Coming Soon</p>
-                        </div>
-                    </a>
-
-                    <h2 class="top-space">Ooley — Display typeface</h2>
-                    <p class="grey bot-space">A display typeface, inspired by the dramatic, yet graceful movement of
-                        ballet and
-                        swing dancing.</p>
-                </div>
-
-                <div class="wrapper">
-                    <a class="banner-link" href="javascript: void(0)">
-                        <div id="lime-banner" class="banner">
-                            <img id="potion" src="/assets/pixel-art/progress.png" alt="Potion icon" class="logo">
-                            <img id="potion-dark" src="/assets/pixel-art/progress-dark.png" alt="Dark mode Potion icon"
-                                class="logo">
-                            <svg class="link" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24"
-                                height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
-                                <g>
-                                    <rect fill="none" height="24" width="24" />
-                                </g>
-                                <g>
-                                    <g>
-                                        <rect height="8.48"
-                                            transform="matrix(0.7071 -0.7071 0.7071 0.7071 -6.8717 17.6255)" width="3"
-                                            x="16.34" y="12.87" />
-                                        <path
-                                            d="M17.5,10c1.93,0,3.5-1.57,3.5-3.5c0-0.58-0.16-1.12-0.41-1.6l-2.7,2.7L16.4,6.11l2.7-2.7C18.62,3.16,18.08,3,17.5,3 C15.57,3,14,4.57,14,6.5c0,0.41,0.08,0.8,0.21,1.16l-1.85,1.85l-1.78-1.78l0.71-0.71L9.88,5.61L12,3.49 c-1.17-1.17-3.07-1.17-4.24,0L4.22,7.03l1.41,1.41H2.81L2.1,9.15l3.54,3.54l0.71-0.71V9.15l1.41,1.41l0.71-0.71l1.78,1.78 l-7.41,7.41l2.12,2.12L16.34,9.79C16.7,9.92,17.09,10,17.5,10z" />
-                                    </g>
-                                </g>
-                            </svg>
-                            <p class="chip blue">Coming Soon</p>
-                        </div>
-                    </a>
-
-                    <h2 class="top-space">Lime - Emojis and classless components</h2>
-                    <p class="grey bot-space">A minimal CSS framework which provides elegant styles for all native HTML
-                        elements,
-                        without classes.</p>
-                </div>
-            </div> -->
         </main>
 
         <footer>
@@ -477,10 +416,10 @@
         let earthDark = document.getElementById('earth-dark');
         let brush = document.getElementById('brush');
         let brushDark = document.getElementById('brush-dark');
-        let shop = document.getElementById('shopify');
-        let shopDark = document.getElementById('shopify-dark');
-        let scrollAlt = document.getElementById('scroll-alt');
-        let scrollAltDark = document.getElementById('scroll-alt-dark');
+        // let shop = document.getElementById('shopify');
+        // let shopDark = document.getElementById('shopify-dark');
+        // let scrollAlt = document.getElementById('scroll-alt');
+        // let scrollAltDark = document.getElementById('scroll-alt-dark');
 
         let darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
         let appearance = localStorage.getItem("appearance") ?? "system";
@@ -504,10 +443,10 @@
                 earthDark.classList.remove("hide")
                 brush.classList.add("hide")
                 brushDark.classList.remove("hide")
-                shop.classList.add("hide")
-                shopDark.classList.remove("hide")
-                scrollAlt.classList.add("hide")
-                scrollAltDark.classList.remove("hide")
+                // shop.classList.add("hide")
+                // shopDark.classList.remove("hide")
+                // scrollAlt.classList.add("hide")
+                // scrollAltDark.classList.remove("hide")
 
                 sun.classList.remove("hide")
                 moon.classList.add("hide")
@@ -528,10 +467,10 @@
                 earthDark.classList.add("hide")
                 brush.classList.remove("hide")
                 brushDark.classList.add("hide")
-                shop.classList.remove("hide")
-                shopDark.classList.add("hide")
-                scrollAlt.classList.remove("hide")
-                scrollAltDark.classList.add("hide")
+                // shop.classList.remove("hide")
+                // shopDark.classList.add("hide")
+                // scrollAlt.classList.remove("hide")
+                // scrollAltDark.classList.add("hide")
 
                 sun.classList.add("hide")
                 moon.classList.remove("hide")
