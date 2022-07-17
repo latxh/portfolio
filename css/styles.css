@@ -292,7 +292,7 @@ button:focus-visible {
 }
 
 .cs-top {
-  min-height: calc(100vh - 140px);
+  min-height: calc(100vh - 320px);
 }
 
 .experiences {
