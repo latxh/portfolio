@@ -319,6 +319,7 @@
         const updateAppearance = () => {
             localStorage.setItem("appearance", appearance);
             if (appearance === "system" ? systemDarkMode : appearance === "dark") {
+                appearance = "dark";
                 document.body.classList.add("dark");
                 style.innerHTML = ':root {color-scheme: dark;}';
                 document.head.appendChild(style);

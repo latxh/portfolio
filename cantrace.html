@@ -391,7 +391,8 @@
             if (appearance === "system" ? systemDarkMode : appearance === "dark") {
                 sun.classList.remove("hide")
                 moon.classList.add("hide")
-
+                
+                appearance = "dark";
                 document.body.classList.add("dark");
                 style.innerHTML = ':root {color-scheme: dark;}';
                 document.head.appendChild(style);
