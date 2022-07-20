@@ -45,156 +45,155 @@
             </nav>
 
             <div class="cs-intro">
-                <img class="cs-img" src="/assets/cs-cantrace/header.png" alt="CanTrace case study header image">
+                <img class="about max-width center cs-img bot-space-xl" src="/assets/cs-cantrace/header.png" alt="CanTrace case study header image">
+                <main class="about center">
+                    <h1 class="bot-space-l">Overview</h1>
+                    <div class="text row bot-space-xl">
+                        <div>
+                            <h2 class="bot-space-s">Problem</h2>
+                            <p class="grey about bot-space-m">As quarantine restrictions began to relax, we needed to find a way to more efficiently monitor COVID-19 transmission and prevent additional waves of virus transmission. At the time, the isolation and quarantine measures in place were in the hope of reducing occurrences of novel cases and flattening the curve, however we needed something to expedite and aid the process.</p>
+                            <h2 class="bot-space-s">Solution</h2>
+                            <p class="grey about bot-space-m">Contact tracing is an integral practice that the healthcare system employs to ensure isolation of at-risk contacts however the practice is done manually; so we created an app that automated the process. CanTrace bridges the gap between technology and healthcare to create an effective tool to fight against infection, expedite recovery, and preserve civil liberties for the common good of all Canadians.</p>
+                        </div>
+                        
+                        <div>
+                            <h2 class="bot-space-s">Timeline</h2>
+                            <p class="grey about bot-space-m">16 weeks, April - August 2020</p>
+                            <h2 class="bot-space-s">Team</h2>
+                            <p class="grey about bot-space-m">~34 people (medical professionals, public health specialists, privacy experts, developers and me!)</p>
+                            <h2 class="bot-space-s">Roles and responsibilities</h2>
+                            <p class="grey about bot-space-m">I was one of two product designers on the team. I worked through the entire design process with the team to create the mobile app.</p>
+                        </div>
+                    </div>
+        
+                    <h1 class="bot-space-l">Discover</h1>
+                    <h2 class="bot-space-s">Understanding our goal and contact tracing</h2>
+                    <p class="grey about bot-space-m">Contact tracing is a process involving a public health agent identifying, assessing, and monitoring individuals infected by a communicable disease, in order to mitigate transmission. While contact-tracing is an effective tool, it is labor-intensive, time-consuming, and subject to recall error. These shortcomings became strikingly evident due to COVID-19’s marked infectivity, particularly in densely populated environments, straining public health resources. As a result, our goal was to work on a digital contact tracing solution that involved using a smartphone app to track the proximity between people, which addressed the limitations of physical contact tracing due to the significant speed and scalability potential. We wanted to create a product for Canada as contact tracing apps natively help expedite and centralize the entire process to make the process simpler.</p>
+                    <h2 class="bot-space-s">Secondary market research</h2>
+                    <p class="grey about bot-space-m">In order to understand our target market, identify new opportunities and set realistic targets based on concrete data, we conducted market research in two key areas. We looked into the rate of downloads of contact tracing apps in many countries to set realistic targets and investigate why they are so high/low. In addition, we researched Canadian government survey data to understand our target market and who exactly we were building our product for.</p>
+                    <div class="row bot-space-m">
+                        <div class="half">
+                            <img class="cs-img white cs-spacing-alt bot-space-m" src="/assets/cs-cantrace/graph1.png" alt="Graph illustrating willingness of Canadians to use a contact tracing app">
+                        </div>
+                        <div class="half">
+                            <img class="cs-img white cs-spacing-alt" src="/assets/cs-cantrace/graph2.png" alt="Graph illustrating contact tracing app adoption rate in different countries">
+                        </div>
+                    </div>
+                    <p class="grey bot-space-l">Figure 1: Willingness of Canadians to use a contact tracing app. Figure 2: Contact tracing app adoption rate in different countries</p>
+        
+                    <h2 class="bot-space-s">Takeaways</h2>
+                    <p class="grey about bot-space-s">1.) Age is an important factor in the likelihood of using such an app as older Canadians are more likely to use the app than young Canadians</p>
+                    <p class="grey about bot-space-s">2.) Concerns about privacy and government access to location data are the leading reasons against using a contact tracing app</p>
+                    <p class="grey about bot-space-s">3.) Secondary reasons are poor healthcare integration and guidance in-app</p>
+                    <p class="grey about bot-space-m">4.) The above factors seemed to be leading factors in downloading contact tracing apps in other countries as well</p>
+                    
+                    <h2 class="bot-space-s">Figuring out the right technology</h2>
+                    <p class="grey about bot-space-m">Keeping the user in mind, we investigated several different technologies to conduct tracing safely and reliably as that was a key factor for users. Various technical modalities exist to determine proximity traces, including Bluetooth Low Energy (BLE), Global Positioning System (GPS), WiFi and Quick Response (QR) codes, among others. However, GPS and BLE dominated global discussions and were the most commonly used methods. GPS configures proximity by using timing and location measurements to identify overlap between app users’ paths. It poses the benefits of providing location context of exposures, and critical geolocation data to public health to identify infection hotspots and analyze disease spread. However, GPS is unable to resolve between objects within 4.9 meters of each other, and signal accuracy is undermined near physical barriers (like tall buildings).</p>
+                    <p class="grey about bot-space-m">BLE possesses key advantages over GPS including its ability to detect short distances between individuals and better discern proximity between those confined to the same geographical coordinates yet separated by elevation like in multi-storey buildings. Additionally, it is operational underground such as in tunnels or subways where satellite signalling is obstructed. Importantly, BLE’s capacity to configure proximity traces without processing or storing sensitive location data draws fewer privacy concerns. Based on these factors, we focused on building our product around BLE.</p>
+                    <img class="cs-img white bot-space-m" src="/assets/cs-cantrace/table1.png" alt="Table comparing Bluetooth and GPS">
+        
+                    <h2 class="bot-space-s">The Apple/Google API</h2>
+                    <p class="grey about bot-space-m">Contact tracing apps using BLE were initially hampered by a limitation on devices using Apple’s iOS operating system which required phones to be perpetually “awake”, and apps open in the foreground to keep BLE readings active. Furthermore, BLE communications were stifled from signalling inter-compatibility issues between Android and iOS devices. Consequently, app adoption rates were significantly reduced, which further minimized their contact tracing potential. As a result, Google and Apple partnered to create an Application Program Interface (API), a program that mediated interactions between different software, which effectively resolved these limitations. The API was also lauded for preserving user privacy by operating within the decentralized framework and barring the co-existence of GPS technology on contact tracing apps adoptings it. Due to its technical and privacy advantages, it became the standard operating software for contact tracing apps like ours.</p>
+                    
+                    <h2 class="bot-space-s">Further researching other apps</h2>
+                    <p class="grey about bot-space-m">After figuring out what technology and how effective certain methods can be, we collected data from a few different contact tracing apps and investigated what may be the reason behind low adoption rates, technologies they used and how much they kept the user's privacy in mind. After conducting this research, it only supported our prior research and we knew we were on the right track to solve the user's biggest problems against such an app.</p>
+                    <img class="cs-img white bot-space-m" src="/assets/cs-cantrace/table2.png" alt="Table comparing contact tracing apps from other countries">
+        
+                    <h2 class="bot-space-s">Takeaways on low adoption rates</h2>
+                    <p class="grey about bot-space-m">1.) Bluetooth tracking technology using BLE is safer than GPS tracking</p>
+                    <p class="grey about bot-space-m">2.) Integrate Apple/Google API to optimize performance and security</p>
+                    <p class="grey about bot-space-m">3.) Very shallow level of healthcare integration and user guidance</p>
+                    
+                    <h2 class="bot-space-s">Storyboarding</h2>
+                    <p class="grey about bot-space-m">We mapped out our user's journey to understand what kinds of interactions our product needs to support and outline the steps the user needs to go through to successfully use our product.</p>
+                    <img class="cs-img cs-spacing-alt white bot-space-m" src="/assets/cs-cantrace/time.png" alt="CanTrace user journey">
+                    <p class="grey about bot-space-m">Robert would then receive a notification on CanTrace and be guided by healthcare professionals on how he should take care of himself directly. This is how we were able to empathize and understand the real impact of an app like this. Our oldest are the most vulnerable against this virus, so let's do it for them and everyone on the front-line.</p>
+        
+                    <h2 class="bot-space-s">Understanding the user</h2>
+                    <p class="grey about bot-space-m">Taking what we learned from our research, storyboarding and our problems in mind, it was important to understand the types of users who were going to be using the product. Going back to these personas throughout the process kept us aligned with our user goals, empathize and helped us solve the problems more efficiently. In addition to our research, knowing that this virus does not discriminate and has no barriers, we knew the most important people we were creating this for were the elderly. And on the other side of the spectrum, we had someone younger. What this also helped us understand better is how simple and easy-to-use we must create our product.</p>
+                    <img class="cs-img white bot-space-m" src="/assets/cs-cantrace/persona1.png" alt="Elderly user persona">
+                    <img class="cs-img white bot-space-m" src="/assets/cs-cantrace/persona2.png" alt="Younger user persona">
+        
+                    <h2 class="bot-space-s">Problem definition</h2>
+                    <p class="grey about bot-space-m">Through our research, we narrowed our problem definition down to three main points for the product we were creating. Already released contact tracing apps fell short, they only focused primarily on notifying users if they had an exposure risk and nothing more.</p>
+                    <img class="cs-img cs-spacing white bot-space-m" src="/assets/cs-cantrace/api.png" alt="CanTrace problem definition">
+                    
+                    <h2 class="bot-space-s">User flow</h2>
+                    <p class="grey about bot-space-m">What's missing from current apps?</p>
+                    <img class="cs-img cs-spacing white bot-space-m" src="/assets/cs-cantrace/userflow1.png" alt="CanTrace user flow diagram">
+                    
+                    <h2 class="bot-space-s">Our solution</h2>
+                    <p class="grey about bot-space-m">Our design recommendations operated within the API framework, capitalizing on its privacy and technical advantages, while incorporating user-centric features and healthcare elements to integrate conventional contact tracing efforts. Broadly, these recommendations augmented the API exposure notification platform with evidence-based characteristics to optimize both privacy and efficacy, help maximize app adoption rates, and minimize disease transmission. Without healthcare integration, apps did little to support contact tracing efforts by public health. Our solution was bridges the gap between technology and healthcare to create an effective tool to fight against infection, expedite recovery, and preserve civil liberties for the common good of all Canadians.</p>
+                    <img class="cs-img white bot-space-m" src="/assets/cs-cantrace/solution.png" alt="CanTrace solution diagram">
+                    
+                    <h2 class="bot-space-s">Revised user flow</h2>
+                    <img class="cs-img cs-spacing white bot-space-xl" src="/assets/cs-cantrace/userflow2.png" alt="CanTrace updated user flow diagram">
+                    
+                    <h1 class="bot-space-l">Develop</h1>
+                    <h2 class="bot-space-s">Wireframes</h2>
+                    <p class="grey about bot-space-m">These early wireframes provided an overall idea of how we wanted the app to look. They provided a clear vision of how our users are going to interact with our product and allowed us to further investigate any pain points.</p>
+                    <img class="cs-img cs-spacing white bot-space-m" src="/assets/cs-cantrace/low-fi.png" alt="CanTrace wireframes">
+                    
+                    <h2 class="bot-space-s">Iterations</h2>
+                    <p class="grey about bot-space-m">Implemented app branding into visual design striving for a more professional look.</p>
+                    <img class="cs-img cs-spacing white bot-space-m" src="/assets/cs-cantrace/iterations.png" alt="CanTrace visual design iterations">
+                    
+                    <h2 class="bot-space-s">Measuring success (User testing)</h2>
+                    <p class="grey about bot-space-m">There are many ways of defining KPIs to measure the success of our implementation and design. Using the prototype I built, we conducted user testing to ensure all areas of the app were implemented correctly and users were able to complete various tasks seamlessly. What we learned from these was that we created an app that was extremely easy to use and straightforward - considering people of all ages were going to use it.</p>
+                    <div class="row bot-space-m">
+                        <div>
+                            <h2 class="bot-space-s">Tasks</h2>
+                            <p class="grey about bot-space-s">1.) Onboarding, set up local health unit</p>
+                            <p class="grey about bot-space-s">2.) Uploading positive diagnosis</p>
+                            <p class="grey about bot-space-m">3.) Completing self-assessment after close contact</p>
+                        </div>
+                        <div>
+                            <h2 class="bot-space-s">Completion Rate</h2>
+                            <h1 class="bot-space-m">12/12</h1>
+                        </div>
+                        <div>
+                            <h2 class="bot-space-s">Error-Free Rate</h2>
+                            <h1 class="bot-space-m">11/12</h1>
+                        </div>
+                    </div>
+        
+                    <h2 class="bot-space-s">Mid-fidelity mockups</h2>
+                    <p class="grey about bot-space-m">At this point, we were right at the final design stage receiving direct feedback. We knew exactly how users were going to interact with our app and the overall design to follow.</p>
+                    <img class="cs-img cs-spacing white bot-space-m" src="/assets/cs-cantrace/mid-fi.png" alt="CanTrace mid-fidelity mockups">
+                    
+                    <h2 class="bot-space-s">Design system</h2>
+                    <img class="cs-img white bot-space-m" src="/assets/cs-cantrace/system.png" alt="CanTrace design system overview">
+                    
+                    <h2 class="bot-space-s">The simplest onboarding process out there</h2>
+                    <p class="grey about bot-space-m">The idea of getting your users familiar with the app and its features is extremely important. This process allows us to strategically communicate with our users and facilitate a positive user experience right from the get-go.</p>
+                    <h2 class="bot-space-s">You're also stratified to your local public health unit</h2>
+                    <p class="grey about bot-space-m">To enable accurate healthcare integration while maximizing privacy and security - the user's province and postal code is solicited to assign them a unit closest to them. No personal information is saved.</p>        
+                    <h2 class="bot-space-s">If you've tested positive for COVID-19</h2>
+                    <p class="grey about bot-space-m">Just enter the verification code texted to you by your public health unit. The app will then provide you with the resources and material to help guide you through your diagnosis.</p>
+                    <h2 class="bot-space-s">If you came in close contact with someone who tested positive for COVID-19</h2>
+                    <p class="grey about bot-space-m">Risk levels may vary on the situation. Therefore, we implemented a contact tracing triage self-assessment tool to assess your risk; and provide advice accordingly.</p>
+                    <div class="row sp-bet bot-space-m">
+                        <video class="video bot-space-m" controls autoplay muted>
+                            <source src="/assets/cs-cantrace/vid2.mp4" type="video/mp4">
+                            Your browser does not support HTML video.
+                        </video>
+                        <video class="video bot-space-m" controls autoplay muted>
+                            <source src="/assets/cs-cantrace/vid3.mp4" type="video/mp4">
+                            Your browser does not support HTML video.
+                        </video>
+                        <video class="video bot-space-m" controls autoplay muted>
+                            <source src="/assets/cs-cantrace/vid1.mp4" type="video/mp4">
+                            Your browser does not support HTML video.
+                        </video>
+                    </div>
+                    <img class="cs-img cs-spacing white bot-space-xl" src="/assets/cs-cantrace/poster.png" alt="CanTrace mobile app header image">
+        
+                    <h1 class="bot-space-l">Learnings, reflections and outcome</h1>
+                    <p class="grey about bot-space-m">When you're building a product that can potentially be used by 36 million people, the way your mind thinks changes a little. You get that extra motivation to complete the product with pristine perfection and work with your colleagues in going through the entire design process thoroughly and effectively. The most challenging aspect of the whole experience was to earn the trust of the user. Privacy and security were the biggest reasons people had against using such an app. So as a product designer, it was key to empathize with the user and understand that you need to design an experience that is simple to use and earns the trust of the users directly. All while keeping in mind that this app would be used by people of all ages. The way I solved this was looking at other apps that have a large age demographic and have a privacy aspect to it. In addition, I frequently communicated with our lawyer and privacy experts about the design and content to perfect the design.</p>
+                    <p class="grey about bot-space-m">By the time we presented our product to the government, they had already started developing their own app with Shopify and Blackberry and so we did not have much of a chance. But in retrospect, some features of our app were added into the COVID Alert app officially released by the federal government. The biggest learning I would take from this whole experience is to think swiftly, you never know when the opportunity may close.</p>
+                </main>
             </div>
         </div>
-
-        <main class="about center">
-            <h1 class="bot-space">Overview</h1>
-            <div class="text row">
-                <div>
-                    <h2 class="top-space">Problem</h2>
-                    <p class="grey about bot-space">As quarantine restrictions began to relax, we needed to find a way to more efficiently monitor COVID-19 transmission and prevent additional waves of virus transmission. At the time, the isolation and quarantine measures in place were in the hope of reducing occurrences of novel cases and flattening the curve, however we needed something to expedite and aid the process.</p>
-                    <h2 class="top-space">Solution</h2>
-                    <p class="grey about bot-space">Contact tracing is an integral practice that the healthcare system employs to ensure isolation of at-risk contacts however the practice is done manually; so we created an app that automated the process. CanTrace bridges the gap between technology and healthcare to create an effective tool to fight against infection, expedite recovery, and preserve civil liberties for the common good of all Canadians.</p>
-                </div>
-                
-                <div>
-                    <h2 class="top-space">Timeline</h2>
-                    <p class="grey about bot-space">16 weeks, April - August 2020</p>
-                    <h2 class="top-space">Team</h2>
-                    <p class="grey about bot-space">~34 people (medical professionals, public health specialists, privacy experts, developers and me!)</p>
-                    <h2 class="top-space">Roles and responsibilities</h2>
-                    <p class="grey about bot-space">I was one of two product designers on the team. I worked through the entire design process with the team to create the mobile app.</p>
-                </div>
-            </div>
-
-            <h1 class="bot-space head-space">Discover</h1>
-            <h2 class="top-space">Understanding our goal and contact tracing</h2>
-            <p class="grey about bot-space">Contact tracing is a process involving a public health agent identifying, assessing, and monitoring individuals infected by a communicable disease, in order to mitigate transmission. While contact-tracing is an effective tool, it is labor-intensive, time-consuming, and subject to recall error. These shortcomings became strikingly evident due to COVID-19’s marked infectivity, particularly in densely populated environments, straining public health resources. As a result, our goal was to work on a digital contact tracing solution that involved using a smartphone app to track the proximity between people, which addressed the limitations of physical contact tracing due to the significant speed and scalability potential. We wanted to create a product for Canada as contact tracing apps natively help expedite and centralize the entire process to make the process simpler.</p>
-            <h2 class="top-space">Secondary market research</h2>
-            <p class="grey about bot-space">In order to understand our target market, identify new opportunities and set realistic targets based on concrete data, we conducted market research in two key areas. We looked into the rate of downloads of contact tracing apps in many countries to set realistic targets and investigate why they are so high/low. In addition, we researched Canadian government survey data to understand our target market and who exactly we were building our product for.</p>
-            <div class="row bot-space">
-                <div class="half">
-                    <img class="white bot-space" src="/assets/cs-cantrace/graph1.png" alt="Graph illustrating willingness of Canadians to use a contact tracing app">
-                </div>
-                <div class="half">
-                    <img class="white" src="/assets/cs-cantrace/graph2.png" alt="Graph illustrating contact tracing app adoption rate in different countries">
-                </div>
-            </div>
-            <p class="grey">Figure 1: Willingness of Canadians to use a contact tracing app. Figure 2: Contact tracing app adoption rate in different countries</p>
-
-            <h2 class="head-space">Takeaways</h2>
-            <p class="grey about top-space">1.) Age is an important factor in the likelihood of using such an app as older Canadians are more likely to use the app than young Canadians</p>
-            <p class="grey about top-space">2.) Concerns about privacy and government access to location data are the leading reasons against using a contact tracing app</p>
-            <p class="grey about top-space">3.) Secondary reasons are poor healthcare integration and guidance in-app</p>
-            <p class="grey about top-space">4.) The above factors seemed to be leading factors in downloading contact tracing apps in other countries as well</p>
-            
-            <h2 class="head-space">Figuring out the right technology</h2>
-            <p class="grey about top-space">Keeping the user in mind, we investigated several different technologies to conduct tracing safely and reliably as that was a key factor for users. Various technical modalities exist to determine proximity traces, including Bluetooth Low Energy (BLE), Global Positioning System (GPS), WiFi and Quick Response (QR) codes, among others. However, GPS and BLE dominated global discussions and were the most commonly used methods. GPS configures proximity by using timing and location measurements to identify overlap between app users’ paths. It poses the benefits of providing location context of exposures, and critical geolocation data to public health to identify infection hotspots and analyze disease spread. However, GPS is unable to resolve between objects within 4.9 meters of each other, and signal accuracy is undermined near physical barriers (like tall buildings).</p>
-            <p class="grey about top-space">BLE possesses key advantages over GPS including its ability to detect short distances between individuals and better discern proximity between those confined to the same geographical coordinates yet separated by elevation like in multi-storey buildings. Additionally, it is operational underground such as in tunnels or subways where satellite signalling is obstructed. Importantly, BLE’s capacity to configure proximity traces without processing or storing sensitive location data draws fewer privacy concerns. Based on these factors, we focused on building our product around BLE.</p>
-            <img class="cs-img white head-space" src="/assets/cs-cantrace/table1.png" alt="Table comparing Bluetooth and GPS">
-
-            <h2 class="head-space">The Apple/Google API</h2>
-            <p class="grey about top-space">Contact tracing apps using BLE were initially hampered by a limitation on devices using Apple’s iOS operating system which required phones to be perpetually “awake”, and apps open in the foreground to keep BLE readings active. Furthermore, BLE communications were stifled from signalling inter-compatibility issues between Android and iOS devices. Consequently, app adoption rates were significantly reduced, which further minimized their contact tracing potential. As a result, Google and Apple partnered to create an Application Program Interface (API), a program that mediated interactions between different software, which effectively resolved these limitations. The API was also lauded for preserving user privacy by operating within the decentralized framework and barring the co-existence of GPS technology on contact tracing apps adoptings it. Due to its technical and privacy advantages, it became the standard operating software for contact tracing apps like ours.</p>
-            
-            <h2 class="head-space">Further researching other apps</h2>
-            <p class="grey about top-space">After figuring out what technology and how effective certain methods can be, we collected data from a few different contact tracing apps and investigated what may be the reason behind low adoption rates, technologies they used and how much they kept the user's privacy in mind. After conducting this research, it only supported our prior research and we knew we were on the right track to solve the user's biggest problems against such an app.</p>
-            <img class="cs-img white head-space" src="/assets/cs-cantrace/table2.png" alt="Table comparing contact tracing apps from other countries">
-
-            <h2 class="head-space">Takeaways on low adoption rates</h2>
-            <p class="grey about top-space">1.) Bluetooth tracking technology using BLE is safer than GPS tracking</p>
-            <p class="grey about top-space">2.) Integrate Apple/Google API to optimize performance and security</p>
-            <p class="grey about top-space">3.) Very shallow level of healthcare integration and user guidance</p>
-            
-            <h2 class="head-space">Storyboarding</h2>
-            <p class="grey about top-space">We mapped out our user's journey to understand what kinds of interactions our product needs to support and outline the steps the user needs to go through to successfully use our product.</p>
-            <img class="cs-img white head-space" src="/assets/cs-cantrace/time.png" alt="CanTrace user journey">
-            <p class="grey about top-space">Robert would then receive a notification on CanTrace and be guided by healthcare professionals on how he should take care of himself directly. This is how we were able to empathize and understand the real impact of an app like this. Our oldest are the most vulnerable against this virus, so let's do it for them and everyone on the front-line.</p>
-
-            <h2 class="head-space">Understanding the user</h2>
-            <p class="grey about top-space">Taking what we learned from our research, storyboarding and our problems in mind, it was important to understand the types of users who were going to be using the product. Going back to these personas throughout the process kept us aligned with our user goals, empathize and helped us solve the problems more efficiently. In addition to our research, knowing that this virus does not discriminate and has no barriers, we knew the most important people we were creating this for were the elderly. And on the other side of the spectrum, we had someone younger. What this also helped us understand better is how simple and easy-to-use we must create our product.</p>
-            <img class="cs-img white head-space" src="/assets/cs-cantrace/persona1.png" alt="Elderly user persona">
-            <img class="cs-img white head-space" src="/assets/cs-cantrace/persona2.png" alt="Younger user persona">
-
-            <h2 class="head-space">Problem definition</h2>
-            <p class="grey about top-space">Through our research, we narrowed our problem definition down to three main points for the product we were creating. Already released contact tracing apps fell short, they only focused primarily on notifying users if they had an exposure risk and nothing more.</p>
-            <img class="cs-img white head-space" src="/assets/cs-cantrace/api.png" alt="CanTrace problem definition">
-            
-            <h2 class="head-space">User flow</h2>
-            <p class="grey about top-space">What's missing from current apps?</p>
-            <img class="cs-img white head-space" src="/assets/cs-cantrace/userflow1.png" alt="CanTrace user flow diagram">
-            
-            <h2 class="head-space">Our solution</h2>
-            <p class="grey about top-space">Our design recommendations operated within the API framework, capitalizing on its privacy and technical advantages, while incorporating user-centric features and healthcare elements to integrate conventional contact tracing efforts. Broadly, these recommendations augmented the API exposure notification platform with evidence-based characteristics to optimize both privacy and efficacy, help maximize app adoption rates, and minimize disease transmission. Without healthcare integration, apps did little to support contact tracing efforts by public health. Our solution was bridges the gap between technology and healthcare to create an effective tool to fight against infection, expedite recovery, and preserve civil liberties for the common good of all Canadians.</p>
-            <img class="cs-img white head-space" src="/assets/cs-cantrace/solution.png" alt="CanTrace solution diagram">
-            
-            <h2 class="head-space">Revised user flow</h2>
-            <img class="cs-img white head-space" src="/assets/cs-cantrace/userflow2.png" alt="CanTrace updated user flow diagram">
-            
-            <h1 class="bot-space head-space">Develop</h1>
-            <h2 class="head-space">Wireframes</h2>
-            <p class="grey about top-space">These early wireframes provided an overall idea of how we wanted the app to look. They provided a clear vision of how our users are going to interact with our product and allowed us to further investigate any pain points.</p>
-            <img class="cs-img white head-space" src="/assets/cs-cantrace/low-fi.png" alt="CanTrace wireframes">
-            
-            <h2 class="head-space">Iterations</h2>
-            <p class="grey about top-space">Implemented app branding into visual design striving for a more professional look.</p>
-            <img class="cs-img white head-space" src="/assets/cs-cantrace/iterations.png" alt="CanTrace visual design iterations">
-            
-            <h2 class="head-space">Measuring success (User testing)</h2>
-            <p class="grey about top-space">There are many ways of defining KPIs to measure the success of our implementation and design. Using the prototype I built, we conducted user testing to ensure all areas of the app were implemented correctly and users were able to complete various tasks seamlessly. What we learned from these was that we created an app that was extremely easy to use and straightforward - considering people of all ages were going to use it.</p>
-            <div class="row bot-space">
-                <div>
-                    <h2 class="head-space">Tasks</h2>
-                    <p class="grey about top-space">1.) Onboarding, set up local health unit</p>
-                    <p class="grey about top-space">2.) Uploading positive diagnosis</p>
-                    <p class="grey about top-space">3.) Completing self-assessment after close contact</p>
-                </div>
-                <div>
-                    <h2 class="head-space">Completion Rate</h2>
-                    <h1 class="top-space">12/12</h1>
-                </div>
-                <div>
-                    <h2 class="head-space">Error-Free Rate</h2>
-                    <h1 class="top-space">11/12</h1>
-                </div>
-            </div>
-
-            <h2 class="head-space">Mid-fidelity mockups</h2>
-            <p class="grey about top-space">At this point, we were right at the final design stage receiving direct feedback. We knew exactly how users were going to interact with our app and the overall design to follow.</p>
-            <img class="cs-img white head-space" src="/assets/cs-cantrace/mid-fi.png" alt="CanTrace mid-fidelity mockups">
-            
-            <h2 class="head-space">Design system</h2>
-            <img class="cs-img white head-space" src="/assets/cs-cantrace/system.png" alt="CanTrace design system overview">
-            
-            <h2 class="head-space">The simplest onboarding process out there</h2>
-            <p class="grey about top-space">The idea of getting your users familiar with the app and its features is extremely important. This process allows us to strategically communicate with our users and facilitate a positive user experience right from the get-go.</p>
-            <h2 class="head-space">You're also stratified to your local public health unit</h2>
-            <p class="grey about top-space">To enable accurate healthcare integration while maximizing privacy and security - the user's province and postal code is solicited to assign them a unit closest to them. No personal information is saved.</p>        
-            <h2 class="head-space">If you've tested positive for COVID-19</h2>
-            <p class="grey about top-space">Just enter the verification code texted to you by your public health unit. The app will then provide you with the resources and material to help guide you through your diagnosis.</p>
-            <h2 class="head-space">If you came in close contact with someone who tested positive for COVID-19</h2>
-            <p class="grey about top-space">Risk levels may vary on the situation. Therefore, we implemented a contact tracing triage self-assessment tool to assess your risk; and provide advice accordingly.</p>
-            <div class="row top-space">
-                <video class="video bot-space" controls autoplay muted>
-                    <source src="/assets/cs-cantrace/vid2.mp4" type="video/mp4">
-                    Your browser does not support HTML video.
-                </video>
-                <video class="video bot-space" controls autoplay muted>
-                    <source src="/assets/cs-cantrace/vid3.mp4" type="video/mp4">
-                    Your browser does not support HTML video.
-                </video>
-                <video class="video bot-space" controls autoplay muted>
-                    <source src="/assets/cs-cantrace/vid1.mp4" type="video/mp4">
-                    Your browser does not support HTML video.
-                </video>
-            </div>
-            <img class="cs-img white head-space" src="/assets/cs-cantrace/poster.png" alt="CanTrace mobile app header image">
-
-            <h1 class="bot-space head-space">Learnings, reflections and outcome</h1>
-            <p class="grey about top-space">When you're building a product that can potentially be used by 36 million people, the way your mind thinks changes a little. You get that extra motivation to complete the product with pristine perfection and work with your colleagues in going through the entire design process thoroughly and effectively. The most challenging aspect of the whole experience was to earn the trust of the user. Privacy and security were the biggest reasons people had against using such an app. So as a product designer, it was key to empathize with the user and understand that you need to design an experience that is simple to use and earns the trust of the users directly. All while keeping in mind that this app would be used by people of all ages. The way I solved this was looking at other apps that have a large age demographic and have a privacy aspect to it. In addition, I frequently communicated with our lawyer and privacy experts about the design and content to perfect the design.</p>
-            <p class="grey about top-space">By the time we presented our product to the government, they had already started developing their own app with Shopify and Blackberry and so we did not have much of a chance. But in retrospect, some features of our app were added into the COVID Alert app officially released by the federal government. The biggest learning I would take from this whole experience is to think swiftly, you never know when the opportunity may close.</p>
-        </main>
 
         <footer>
             <div class="group">
