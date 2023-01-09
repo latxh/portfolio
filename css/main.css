@@ -56,6 +56,10 @@ hr {
     background-color: var(--button-hover);
 }
 
+.work-item:hover .work-icon{
+    background-color: var(--icon-blue);
+}
+
 .work-item-line {
     flex: 1;
     border-top: 2px dotted var(--font-3);
@@ -67,6 +71,7 @@ hr {
     min-height: 40px;
     background-color: var(--button-hover);
     border-radius: 12px;
+    transition: background-color 0.2s;
 }
 
 .work-info {
