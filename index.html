@@ -1,1 +1,449 @@
-<!DOCTYPE html><html lang="en"><head> <title>Brian Latchman</title> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/> <meta name="description" content="Creating experiences for people to use, enjoy and explore."> <meta name="apple-mobile-web-app-capable" content="yes"/> <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/> <meta name="apple-touch-fullscreen" content="yes"/> <meta property='og:title' content="Brian Latchman"/> <meta property='og:image' content='https://latchman.ca/assets/portrait.jpg'/> <meta property='og:description' content="Creating experiences for people to use, enjoy and explore."/> <meta property='og:url' content='https://latchman.ca/'/> <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r67/three.min.js"></script> <link rel="icon" type="image/x-icon" href="assets/favicon.ico"> <link rel="stylesheet" type="text/css" href="css/new-styles.css"> <link rel="stylesheet" type="text/css" href="css/nav.css"> <link rel="stylesheet" type="text/css" href="css/main.css"> <link rel="stylesheet" type="text/css" href="css/footer.css"> <link rel="stylesheet" type="text/css" href="css/underline.css"></head><body> <div class="site-wrapper"> <nav class="row"> <a href="/"> <h6>Brian <hr class="hide-title-break"> Latchman </h6> </a> <div class="button-wrapper row"> <button id="canvas-state" class="blur" title="Toggle visual effects" onclick="toggleCanvas()"> <svg id="canvas-on" class="hide" fill="var(--font-2)" width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M7.909 5h1.34a.75.75 0 0 1 .102 1.493L9.25 6.5H7.91a.75.75 0 0 0-.477.17l-.075.073-2.074 2.256h3.466a2.25 2.25 0 0 1 2.237 2.005h2.027A2.25 2.25 0 0 1 15.25 9l3.477-.001-2.083-2.258a.75.75 0 0 0-.448-.234l-.104-.007h-1.345a.75.75 0 0 1-.102-1.493L14.747 5h1.346a2.25 2.25 0 0 1 1.52.592l.133.132 3.642 3.947c.05.055.091.115.122.178.306.384.489.871.489 1.4v3.497a3.25 3.25 0 0 1-3.25 3.25H16.25a3.25 3.25 0 0 1-3.25-3.25l-.001-2.242h-2.001v2.242a3.25 3.25 0 0 1-3.25 3.25H5.25A3.25 3.25 0 0 1 2 14.746V11.25c0-.562.206-1.076.546-1.47l.038-.055.044-.052 3.624-3.945a2.25 2.25 0 0 1 1.469-.72L7.909 5h1.34-1.34Zm.84 5.5H4.25a.75.75 0 0 0-.75.75v3.496c0 .967.784 1.75 1.75 1.75h2.499a1.75 1.75 0 0 0 1.75-1.75V11.25a.75.75 0 0 0-.75-.75Zm11 0H15.25a.75.75 0 0 0-.75.75v3.496c0 .967.784 1.75 1.75 1.75h2.499a1.75 1.75 0 0 0 1.75-1.75V11.25a.75.75 0 0 0-.75-.75Z"/> </svg> <svg id="canvas-off" fill="var(--font-2)" width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M3.28 2.22a.75.75 0 1 0-1.06 1.06l3.273 3.274-2.865 3.119-.044.052-.038.055c-.34.394-.546.908-.546 1.47v3.496a3.25 3.25 0 0 0 3.25 3.25h2.499a3.25 3.25 0 0 0 3.25-3.25l-.001-2.242h.445L13 14.061v.685a3.25 3.25 0 0 0 3.25 3.25h.685l3.784 3.785a.75.75 0 0 0 1.061-1.061L3.28 2.22ZM7.94 9l-2.656-.001 1.272-1.384L7.939 9ZM4.25 10.5h4.499a.75.75 0 0 1 .75.75v3.496a1.75 1.75 0 0 1-1.75 1.75H5.25a1.75 1.75 0 0 1-1.75-1.75V11.25a.75.75 0 0 1 .75-.75ZM13.303 10.121l1.197 1.197v-.068a.75.75 0 0 1 .75-.75h4.499a.75.75 0 0 1 .75.75v3.496a1.75 1.75 0 0 1-.993 1.578l1.094 1.094a3.246 3.246 0 0 0 1.399-2.672V11.25c0-.53-.183-1.017-.489-1.4a.748.748 0 0 0-.122-.179l-3.642-3.947-.133-.132A2.25 2.25 0 0 0 16.093 5h-1.346l-.102.007a.75.75 0 0 0 .102 1.493h1.346l.103.007a.75.75 0 0 1 .448.234L18.727 9H15.25c-.831 0-1.557.452-1.947 1.122Z"/> </svg> </button> <button id="dark-mode" class="blur" title="Toggle dark mode" onclick="toggleDarkMode()"> <svg id="light" class="hide" fill="var(--font-2)" width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M11.996 19.01a.75.75 0 0 1 .743.649l.007.102v1.5a.75.75 0 0 1-1.493.101l-.007-.101v-1.5a.75.75 0 0 1 .75-.75Zm6.022-2.072 1.06 1.06a.75.75 0 1 1-1.06 1.061l-1.06-1.06a.75.75 0 0 1 1.06-1.061Zm-10.983 0a.75.75 0 0 1 0 1.06L5.974 19.06a.75.75 0 0 1-1.06-1.06l1.06-1.061a.75.75 0 0 1 1.06 0ZM12 6.475a5.525 5.525 0 1 1 0 11.05 5.525 5.525 0 0 1 0-11.05Zm0 1.5a4.025 4.025 0 1 0 0 8.05 4.025 4.025 0 0 0 0-8.05Zm9.25 3.293a.75.75 0 0 1 .102 1.493l-.102.007h-1.5a.75.75 0 0 1-.102-1.493l.102-.007h1.5Zm-17-.029a.75.75 0 0 1 .102 1.494l-.102.006h-1.5a.75.75 0 0 1-.102-1.493l.102-.007h1.5Zm1.64-6.37.084.072 1.06 1.06a.75.75 0 0 1-.976 1.134l-.084-.073-1.06-1.06a.75.75 0 0 1 .976-1.134Zm13.188.072a.75.75 0 0 1 .073.977l-.073.084-1.06 1.06a.75.75 0 0 1-1.133-.976l.072-.084 1.06-1.061a.75.75 0 0 1 1.061 0ZM12 1.99a.75.75 0 0 1 .743.648l.007.102v1.5a.75.75 0 0 1-1.493.101l-.007-.102v-1.5a.75.75 0 0 1 .75-.75Z"/> </svg> <svg id="dark" fill="var(--font-2)" width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M20.026 17.001c-2.762 4.784-8.879 6.423-13.663 3.661a9.964 9.964 0 0 1-3.234-2.983.75.75 0 0 1 .365-1.131c3.767-1.348 5.785-2.911 6.956-5.146 1.232-2.353 1.551-4.93.689-8.464a.75.75 0 0 1 .769-.926 9.961 9.961 0 0 1 4.457 1.327C21.149 6.1 22.788 12.217 20.025 17Zm-8.248-4.903c-1.25 2.388-3.31 4.099-6.817 5.499a8.492 8.492 0 0 0 2.152 1.766 8.501 8.501 0 1 0 8.502-14.725 8.485 8.485 0 0 0-2.792-1.016c.647 3.384.23 6.044-1.045 8.476Z"/> </svg> </button> </div></nav> <div class="top"> <div class="top-content"> <h1> What's crackalackin, I'm Brian! <hr size="16px"> I'm a designer creating beautifully engineered experiences that empower people. <hr size="16px" class="hide-title-break"> Incoming UX Engineer at Microsoft. </h1> </div></div><main> <div class="row title-wrapper"> <h2>Selected work</h2> <a href="/404" class="underline"> <span>View all</span><svg viewBox="0 0 13 20"> <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5"/> </svg> </a> </div><div class="work-wrapper"> <a class="work-item blur row" href="https://www.start.gg/" target="_blank"> <div class="work-info row"> <div class="work-icon row"> <svg width="24" height="24" fill="var(--font-1)" viewBox="0 0 24 24"> <path d="M9.58888 4.53283C9.00704 4.242 8.36819 4.19606 7.78661 4.30687L6.48575 4.55472C5.53781 4.73533 4.72192 5.34413 4.28156 6.20507C2.7779 9.14479 1.64093 11.5527 1.20238 13.6066C0.750052 15.725 1.02659 17.5392 2.38948 19.1905C3.29323 20.2855 4.84203 20.0642 5.64924 19.1508C6.26388 18.4552 6.96374 17.6498 7.64825 16.8561C8.09902 16.3334 8.75335 16.0326 9.44089 16.0326H14.562C15.2496 16.0326 15.9039 16.3334 16.3547 16.8561C17.0392 17.6498 17.7391 18.4552 18.3537 19.1508C19.1609 20.0642 20.7097 20.2855 21.6135 19.1905C22.9763 17.5392 23.2529 15.725 22.8006 13.6066C22.362 11.5527 21.225 9.14479 19.7214 6.20507C19.281 5.34413 18.4651 4.73533 17.5172 4.55472L16.2163 4.30687C15.6347 4.19606 14.9959 4.242 14.4141 4.53284C14.2561 4.61181 14.094 4.69671 13.9307 4.78521C13.5399 4.99696 13.1207 5.11156 12.7063 5.11156H11.2966C10.8822 5.11156 10.463 4.99696 10.0723 4.78522C9.90894 4.69671 9.74688 4.61181 9.58888 4.53283ZM8.0807 5.85038C8.38356 5.79268 8.66282 5.82658 8.88634 5.93831C9.02625 6.00825 9.17275 6.08492 9.3236 6.16667C9.91708 6.4883 10.5915 6.68284 11.2966 6.68284H12.7063C13.4114 6.68284 14.0859 6.4883 14.6793 6.16667C14.8302 6.08492 14.9767 6.00825 15.1166 5.93831C15.3401 5.82658 15.6194 5.79268 15.9222 5.85038L17.2231 6.09824C17.6967 6.18848 18.1038 6.49314 18.3225 6.9206C19.8407 9.8888 20.8756 12.1161 21.2639 13.9347C21.6385 15.6888 21.3969 16.9844 20.4016 18.1903C20.3055 18.3067 20.1745 18.3612 20.0187 18.3541C19.854 18.3467 19.6699 18.2673 19.5311 18.1103C18.9223 17.4214 18.227 16.6213 17.5446 15.8299C16.7971 14.9632 15.7093 14.4613 14.562 14.4613H9.44089C8.29365 14.4613 7.20587 14.9632 6.45836 15.8299C5.77588 16.6213 5.08058 17.4214 4.47182 18.1103C4.33305 18.2673 4.14895 18.3467 3.98422 18.3541C3.82844 18.3612 3.69741 18.3067 3.60133 18.1903C2.60607 16.9844 2.36448 15.6888 2.73902 13.9347C3.12733 12.1161 4.16224 9.88881 5.68046 6.9206C5.8991 6.49314 6.3062 6.18848 6.77984 6.09824L8.0807 5.85038ZM12.0012 10.5747C12.6087 10.5747 13.1012 10.0822 13.1012 9.47473C13.1012 8.86723 12.6087 8.37476 12.0012 8.37476C11.3937 8.37476 10.9012 8.86723 10.9012 9.47473C10.9012 10.0822 11.3937 10.5747 12.0012 10.5747Z"/> </svg> </div><div> <h3 class="clamp-text">Start.gg (formerly smash.gg)</h3> <p class="clamp-text">Exploring the future of content driven gaming experiences</p></div></div><div class="work-item-line"></div><p class="work-item-date">2022</p></a> <a class="work-item blur row" href="https://latxh.github.io/casual-games/" target="_blank"> <div class="work-info row"> <div class="work-icon row"> <svg width="24" height="24" fill="var(--font-1)" viewBox="0 0 24 24"> <path d="M15.353 4.11763C14.1185 4.11763 13.1178 5.11839 13.1178 6.35289C13.1178 6.50687 13.1333 6.65666 13.1626 6.80098C13.1964 6.96722 13.1528 7.13981 13.0442 7.27011C12.9355 7.4004 12.7736 7.47429 12.604 7.47096C12.589 7.47066 12.574 7.47052 12.559 7.47052C12.1898 7.47052 11.8415 7.56003 11.5346 7.71853C11.3666 7.38057 11.1571 7.06689 10.9128 6.78415C11.2444 6.59691 11.611 6.46449 12.0005 6.39919L12.0002 6.35289C12.0002 4.50114 13.5013 3 15.353 3C17.2048 3 18.7059 4.50114 18.7059 6.35289L18.7056 6.39919C20.2915 6.6651 21.5 8.04431 21.5 9.70578C21.5 11.5575 19.9989 13.0587 18.1471 13.0587C17.9023 13.0587 17.6635 13.0324 17.4333 12.9824L17.6786 13.9951C17.9768 15.2261 17.0443 16.4115 15.7778 16.4115H14.9258C13.6586 16.4115 12.7259 15.2248 13.0253 13.9935L13.5287 11.9233C13.6017 11.6234 13.9039 11.4394 14.2038 11.5123C14.5037 11.5852 14.6876 11.8875 14.6147 12.1873L14.1113 14.2576C13.983 14.7853 14.3827 15.2939 14.9258 15.2939H15.7778C16.3206 15.2939 16.7202 14.7858 16.5924 14.2583L16.0905 12.1864C16.0367 11.9642 16.1236 11.7316 16.31 11.5992C16.4964 11.4668 16.7446 11.4613 16.9367 11.5854C17.2852 11.8104 17.7001 11.941 18.1471 11.941C19.3816 11.941 20.3824 10.9403 20.3824 9.70578C20.3824 8.47128 19.3816 7.47052 18.1471 7.47052C18.1321 7.47052 18.1171 7.47067 18.1021 7.47096C17.9325 7.4743 17.7705 7.4004 17.6619 7.27011C17.5533 7.13981 17.5097 6.96722 17.5435 6.80098C17.5728 6.65667 17.5883 6.50687 17.5883 6.35289C17.5883 5.11839 16.5875 4.11763 15.353 4.11763ZM5.29407 9.70578C5.29407 8.47128 6.29483 7.47052 7.52933 7.47052C8.76383 7.47052 9.76459 8.47128 9.76459 9.70578C9.76459 10.2096 9.59856 10.6731 9.31798 11.0466C9.19082 11.2159 9.17026 11.4425 9.26489 11.6319C9.35951 11.8214 9.55306 11.941 9.76479 11.941H10.3234C10.632 11.941 10.8822 12.1912 10.8822 12.4998C10.8822 12.8085 10.632 13.0587 10.3234 13.0587H9.08612C8.92609 13.0587 8.77374 13.1273 8.66768 13.2471C8.56161 13.3669 8.51201 13.5265 8.53144 13.6853C8.86908 16.4457 10.3296 18.0296 11.148 18.7141C11.3426 18.8768 11.441 19.0819 11.441 19.2601C11.441 19.5386 11.2153 19.7644 10.9368 19.7644H4.1219C3.8434 19.7644 3.61763 19.5386 3.61763 19.2601C3.61763 19.0819 3.7161 18.8768 3.91066 18.7141C4.72904 18.0296 6.18958 16.4457 6.52723 13.6853C6.54666 13.5265 6.49705 13.3669 6.39099 13.2471C6.28492 13.1273 6.13257 13.0587 5.97255 13.0587H4.73526C4.42663 13.0587 4.17644 12.8085 4.17644 12.4998C4.17644 12.1912 4.42663 11.941 4.73526 11.941H5.29387C5.5056 11.941 5.69915 11.8214 5.79378 11.6319C5.8884 11.4425 5.86784 11.2159 5.74068 11.0466C5.46011 10.6731 5.29407 10.2096 5.29407 9.70578ZM7.52933 6.35289C5.67758 6.35289 4.17644 7.85403 4.17644 9.70578C4.17644 10.1114 4.24866 10.5006 4.38091 10.8609C3.62522 11.0235 3.05881 11.6955 3.05881 12.4998C3.05881 13.4257 3.80938 14.1763 4.73526 14.1763H5.31541C4.90106 16.1857 3.8048 17.3456 3.19362 17.8568C2.80585 18.1812 2.5 18.6792 2.5 19.2601C2.5 20.1559 3.22615 20.882 4.1219 20.882H10.9368C11.8325 20.882 12.5587 20.1559 12.5587 19.2601C12.5587 18.6792 12.2528 18.1812 11.865 17.8568C11.2539 17.3456 10.1576 16.1857 9.74325 14.1763H10.3234C11.2493 14.1763 11.9998 13.4257 11.9998 12.4998C11.9998 11.6955 11.4334 11.0235 10.6778 10.8609C10.81 10.5006 10.8822 10.1114 10.8822 9.70578C10.8822 7.85403 9.38108 6.35289 7.52933 6.35289Z"/> </svg> </div><div> <h3 class="clamp-text">Casual Games Redesign</h3> <p class="clamp-text">A fresh take on gaming in the web browser</p></div></div><div class="work-item-line"></div><p class="work-item-date">2022</p></a> <a class="work-item blur row" href="https://www.shopify.com/flow" target="_blank"> <div class="work-info row"> <div class="work-icon row"> <svg width="24" height="24" fill="var(--font-1)" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M18.78 2.22a.75.75 0 1 0-1.06 1.06L19.44 5h-6.19a2.75 2.75 0 0 0-2.75 2.75v9.497c0 .69-.56 1.25-1.25 1.25H7.958a3 3 0 1 0-.128 1.5h1.42a2.75 2.75 0 0 0 2.75-2.75V7.75c0-.69.56-1.25 1.25-1.25h6.19l-1.72 1.72a.75.75 0 0 0 1.06 1.06l3-3a.75.75 0 0 0 0-1.06l-3-3ZM3.5 19a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z"/> </svg> </div><div> <h3 class="clamp-text">Shopify Flow</h3> <p class="clamp-text">Automate everything</p></div></div><div class="work-item-line"></div><p class="work-item-date">2022</p></a> <a class="work-item blur row" href="https://betteruoft.ca/" target="_blank"> <div class="work-info row"> <div class="work-icon row"> <svg width="24" height="24" fill="var(--font-1)" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M3.839 5.858c2.94-3.916 9.03-5.055 13.364-2.36 4.28 2.66 5.854 7.777 4.1 12.577-1.655 4.533-6.016 6.328-9.159 4.048-1.177-.854-1.634-1.925-1.854-3.664l-.106-.987-.045-.398c-.123-.934-.311-1.352-.705-1.572-.535-.298-.892-.305-1.595-.033l-.351.146-.179.078c-1.014.44-1.688.595-2.541.416l-.2-.047-.164-.047c-2.789-.864-3.202-4.647-.565-8.157Zm.984 6.716.123.037.134.03c.439.087.814.015 1.437-.242l.602-.257c1.202-.493 1.985-.54 3.046.05.917.512 1.275 1.298 1.457 2.66l.053.459.055.532.047.422c.172 1.361.485 2.09 1.248 2.644 2.275 1.65 5.534.309 6.87-3.349 1.516-4.152.174-8.514-3.484-10.789-3.675-2.284-8.899-1.306-11.373 1.987-2.075 2.763-1.82 5.28-.215 5.816Zm11.225-1.994a1.25 1.25 0 1 1 2.414-.647 1.25 1.25 0 0 1-2.414.647Zm.494 3.488a1.25 1.25 0 1 1 2.415-.647 1.25 1.25 0 0 1-2.415.647ZM14.07 7.577a1.25 1.25 0 1 1 2.415-.647 1.25 1.25 0 0 1-2.415.647Zm-.028 8.998a1.25 1.25 0 1 1 2.414-.647 1.25 1.25 0 0 1-2.414.647Zm-3.497-9.97a1.25 1.25 0 1 1 2.415-.646 1.25 1.25 0 0 1-2.415.646Z"/> </svg> </div><div> <h3 class="clamp-text">Better UofT</h3> <p class="clamp-text">Chrome extension that improves University of Toronto websites</p></div></div><div class="work-item-line"></div><p class="work-item-date">2021</p></a> <a class="work-item blur row" href="https://www.youtube.com/watch?v=o_v2r8rdGM8" target="_blank"> <div class="work-info row"> <div class="work-icon row"> <svg width="24" height="24" fill="var(--font-1)" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M13.925 2.503a2.25 2.25 0 0 1 1.94 1.11L16.679 5h2.071A3.25 3.25 0 0 1 22 8.25v9.5A3.25 3.25 0 0 1 18.75 21H5.25A3.25 3.25 0 0 1 2 17.75v-9.5A3.25 3.25 0 0 1 5.25 5h2.08l.875-1.424a2.25 2.25 0 0 1 1.917-1.073h3.803Zm0 1.5h-3.803a.75.75 0 0 0-.574.268l-.065.09L8.39 6.141a.75.75 0 0 1-.639.358h-2.5A1.75 1.75 0 0 0 3.5 8.25v9.5c0 .966.784 1.75 1.75 1.75h13.5a1.75 1.75 0 0 0 1.75-1.75v-9.5a1.75 1.75 0 0 0-1.75-1.75h-2.5a.75.75 0 0 1-.647-.37l-1.032-1.757a.75.75 0 0 0-.646-.37ZM12 8a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9Zm0 1.5a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/> </svg> </div><div> <h3 class="clamp-text">Price On My Head</h3> <p class="clamp-text">Contributed to Nav and The Weeknd's music video, filmed in Toronto</p></div></div><div class="work-item-line"></div><p class="work-item-date">2019</p></a> </div><h2 class="row title-wrapper">About me</h2> <div class="work-wrapper"> <h3>Typography, motion design, copywriting, performance— the web is an endless medium of opportunity and creativity of which I’ve only scratched the surface.</h3> <h3>I'm a computer science student in my final year at the University of Toronto. I have previously worked on payments and rewards at Loblaw, the Flow automation app at Shopify and the future of content driven gaming experiences at Microsoft.</h3> <h3>The best way to get in touch is by direct messaging me, or email if you need more words.</h3> <br></div><div class="social-links"> <a href="mailto:latxhman@gmail.com" target="_blank" class="underline"> <span>latxhman@gmail.com</span><svg viewBox="0 0 13 20"> <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5"/> </svg> </a> <hr size="16px" class="hide-title-break"> <a href="https://www.linkedin.com/in/brian-latchman/" target="_blank" class="underline"> <span>Linkedin</span><svg viewBox="0 0 13 20"> <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5"/> </svg> </a> <hr size="16px" target="_blank" class="hide-title-break"> <a href="https://www.instagram.com/latxhman/" class="underline"> <span>Instagram</span><svg viewBox="0 0 13 20"> <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5"/> </svg> </a> <hr size="16px" target="_blank" class="hide-title-break"> <a href="https://github.com/latxh/" class="underline"> <span>Github</span><svg viewBox="0 0 13 20"> <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5"/> </svg> </a> </div></main> </div><footer id="footer" class="blur" onclick="toggleMessage()"> <div class="footer-wrapper"> <div class="random-message-wrapper row"> <p id="random-message" class="clamp-text"></p><p class="clamp-text">2023 TM</p></div><div id="hidden-message" class="hide"> <p class="hidden-message-text">I’m reciting that <i>quality affects all aspects</i> of my pursuits. This skill develops while <i>doing</i>. Not thinking, not imagining, <i>doing</i>. It is learned through experimenting, consistency and pacing.</p></div></div></footer> <script>(function (){let Mouse, PI, abs, animloop, camera, canvas, cos, ctx, cubes, distance, frame, geometry, hypotenuse, material, offset, renderer, resizeHandler, scene, seed, side, sidehypotenuse, sin, sqrt, start, t, x, xside, y, yside, _i, _j, _ref, _ref1, _ref2, _ref3; t=0; start=Date.now(); seed=-25; frame=0; PI=Math.PI; sin=function (a){return Math.sin(a);}; cos=function (a){return Math.cos(a);}; abs=function (a){return Math.abs(a);}; sqrt=function (a){return Math.sqrt(a);}; hypotenuse=function (a, b){return Math.sqrt(a * a + b * b);}; distance=function (x1, y1, x2, y2){return hypotenuse(x2 - x1, y2 - y1);}; scene=new THREE.Scene(); camera=new THREE.OrthographicCamera(window.innerWidth / -2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / -2, -50 * 100, 30 * 1000); renderer=new THREE.WebGLRenderer(); canvas=document.createElement('canvas'); ctx=canvas.getContext('2d'); (resizeHandler=function (){camera.left=canvas.left=window.innerWidth / -2; camera.right=canvas.right=window.innerWidth / 2; camera.bottom=canvas.bottom=window.innerHeight / -2; camera.top=canvas.top=window.innerHeight / 2; camera.aspect=window.innerWidth / window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight); canvas.width=window.innerWidth; canvas.height=window.innerHeight; return canvas.hyp=hypotenuse(canvas.width, canvas.height);})(); window.addEventListener('resize', resizeHandler, false); document.body.appendChild(renderer.domElement); side=hypotenuse(canvas.width, canvas.height) / 40; geometry=new THREE.BoxGeometry(side + 1, side + 1, side + 5); material=new THREE.MeshBasicMaterial({}); cubes=[]; xside=side; yside=side; sidehypotenuse=hypotenuse(side, side); offset=75; for (x=_i=_ref=camera.left * 1.3, _ref1=camera.right * 1.3; xside > 0 ? _i <=_ref1 : _i >=_ref1; x=_i +=xside){for (y=_j=_ref2=camera.bottom * 1.3, _ref3=camera.top * 1.3; yside > 0 ? _j <=_ref3 : _j >=_ref3; y=_j +=yside){cubes.push(new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({color: 0x00ffff, transparent: true, wireframe: false, opacity: 1}))); cubes[cubes.length - 1].position.x=x; cubes[cubes.length - 1].position.y=y; cubes[cubes.length - 1].position.z=x + y; scene.add(cubes[cubes.length - 1]);}}camera.position.set(0, 0, side * 10); Mouse={down: false, held: 0, x: canvas.width / 2, y: canvas.height / 2, x0: 0, y0: 0, events:{move: function (e){if ("touches" in e){e.preventDefault(); e=e.touches[0];}Mouse.x=(Mouse.x + e.pageX) * 0.5; Mouse.y=(Mouse.y + e.pageY) * 0.5; Mouse.x0=Mouse.x - canvas.width / 2; return Mouse.y0=Mouse.y - canvas.height / 2;}, down: function (e){return Mouse.down=!Mouse.down;}, up: function (e){return Mouse.down=!Mouse.down;}}}; window.addEventListener('mousemove', Mouse.events.move, false); window.addEventListener('mousedown', Mouse.events.down, false); window.addEventListener('mouseup', Mouse.events.up, false); window.addEventListener('touchmove', Mouse.events.move, false); window.addEventListener('touchstart', Mouse.events.down, false); window.addEventListener('touchstop', Mouse.events.up, false); camera.up=new THREE.Vector3(0, 1, 0); animloop=function (){var a, b, c, dist, dist0, distneg, g, i, r, _k, _ref4; animloop.id=requestAnimationFrame(animloop); t=(Date.now() - start) / 1000 + seed; frame++; camera.position.set(side * 10, side * 10, -side * 10); camera.lookAt(new THREE.Vector3(0, 0, 0)); if (Mouse.down){Mouse.held++;}for (i=_k=0, _ref4=cubes.length; 0 <=_ref4 ? _k < _ref4 : _k > _ref4; i=0 <=_ref4 ? ++_k : --_k){c=cubes[i]; dist=distance(-Mouse.x0, -Mouse.y0, c.position.x, c.position.y); dist0=distance(0, 0, c.position.x, c.position.y); distneg=distance(Mouse.x0, Mouse.y0, c.position.x, c.position.y); c.scale.y=2.25 + 1.25 * sin(dist / canvas.hyp * PI * 7 - t * 0.8 - Mouse.held / 50) * cos(dist / canvas.hyp * PI * 4 - t * 1.5 - Mouse.held / 50) + (1 + sin((distneg - dist) / canvas.hyp * PI * 1)); a=c.position.z; r=0.4 + 0.40 * sin(distneg / canvas.hyp * PI * 2 * 0.75 - t / 3.0 + 3 + Mouse.held / 80 + c.scale.y / 3.5); g=0.4 + 0.40 * sin(distneg / canvas.hyp * PI * 2 * 0.75 - t / 3.1 + 2 + Mouse.held / 81 + c.scale.y / 3.5); b=0.4 + 0.40 * sin(distneg / canvas.hyp * PI * 2 * 0.75 - t / 3.2 + 1 + Mouse.held / 82 + c.scale.y / 3.5); cubes[i].material.color=new THREE.Color(r, g, b);}return renderer.render(scene, camera);}; animloop();}).call(this); </script> <script>let style=document.createElement('style'); let canvasRef=document.getElementsByTagName('canvas')[0] let sun=document.getElementById('light'); let moon=document.getElementById('dark'); let canvasOn=document.getElementById('canvas-on'); let canvasOff=document.getElementById('canvas-off'); let messageList=['Trying to paint with code.', 'Going with the flow.', 'Hello from Toronto, Canada.', 'I love easter eggs.', 'Coded by yours truly.', 'Listening to Pursuit of Happiness by Kid Cudi.', 'Reading The Red Winter by Henry H. Neff.', 'What are you about? Answer quick!']; let darkModeQuery=window.matchMedia("(prefers-color-scheme: dark)"); let appearance=localStorage.getItem("appearance") ?? "system"; let systemDarkMode=darkModeQuery.matches; let reducedMotionQuery=window.matchMedia("(prefers-reduced-motion: reduce)"); let motion=localStorage.getItem("motion") ?? "system"; let systemReducedMotion=reducedMotionQuery.matches; const updateAppearance=()=>{localStorage.setItem("appearance", appearance); if (appearance==="system" ? systemDarkMode : appearance==="dark"){sun.classList.remove("hide") moon.classList.add("hide") appearance="dark"; document.body.classList.add("dark"); style.innerHTML=':root{color-scheme: dark;}'; document.head.appendChild(style);}else{sun.classList.add("hide") moon.classList.remove("hide") document.body.classList.remove("dark"); style.innerHTML=':root{color-scheme: light;}'; document.head.appendChild(style);}}; const updateCanvas=()=>{localStorage.setItem("motion", motion); if (motion==="system" ? systemReducedMotion : motion==="reduce"){canvasOn.classList.remove("hide") canvasOff.classList.add("hide") canvasRef.classList.add("hide");}else{canvasOn.classList.add("hide") canvasOff.classList.remove("hide") canvasRef.classList.remove("hide");}}; darkModeQuery.addEventListener("change", (m)=>{systemDarkMode=m.matches; updateAppearance();}); reducedMotionQuery.addEventListener("change", (m)=>{systemReducedMotion=m.matches; updateCanvas();}); updateAppearance(); updateCanvas(); const toggleDarkMode=(e)=>{appearance=appearance==="dark" ? "light" : "dark"; updateAppearance();}; const toggleCanvas=(e)=>{motion=motion==="reduce" ? "no-preference" : "reduce"; updateCanvas();}; document.getElementById('random-message').innerHTML=messageList[Math.floor(Math.random() * messageList.length)]; function toggleMessage(){let footer=document.getElementById('footer'); let hiddenMessage=document.getElementById("hidden-message"); hiddenMessage.style.display="block"; footer.style.cursor="auto";}; </script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Brian Latchman</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="description" content="Creating experiences for people to use, enjoy and explore.">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+
+    <meta property='og:title' content="Brian Latchman" />
+    <meta property='og:image' content='https://latchman.ca/assets/portrait.jpg' />
+    <meta property='og:description' content="Creating experiences for people to use, enjoy and explore." />
+    <meta property='og:url' content='https://latchman.ca/' />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r67/three.min.js"></script>
+
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="css/new-styles.css">
+    <link rel="stylesheet" type="text/css" href="css/nav.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/footer.css">
+    <link rel="stylesheet" type="text/css" href="css/underline.css">
+</head>
+
+<body>
+    <div class="site-wrapper">
+        <nav class="row">
+            <a href="/">
+                <h6>Brian
+                    <hr class="hide-title-break"> Latchman
+                </h6>
+            </a>
+            <div class="button-wrapper row">
+                <button id="canvas-state" class="blur" title="Toggle visual effects" onclick="toggleCanvas()">
+                    <svg id="canvas-on" class="hide" fill="var(--font-2)" width="24" height="24" fill="none"
+                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M7.909 5h1.34a.75.75 0 0 1 .102 1.493L9.25 6.5H7.91a.75.75 0 0 0-.477.17l-.075.073-2.074 2.256h3.466a2.25 2.25 0 0 1 2.237 2.005h2.027A2.25 2.25 0 0 1 15.25 9l3.477-.001-2.083-2.258a.75.75 0 0 0-.448-.234l-.104-.007h-1.345a.75.75 0 0 1-.102-1.493L14.747 5h1.346a2.25 2.25 0 0 1 1.52.592l.133.132 3.642 3.947c.05.055.091.115.122.178.306.384.489.871.489 1.4v3.497a3.25 3.25 0 0 1-3.25 3.25H16.25a3.25 3.25 0 0 1-3.25-3.25l-.001-2.242h-2.001v2.242a3.25 3.25 0 0 1-3.25 3.25H5.25A3.25 3.25 0 0 1 2 14.746V11.25c0-.562.206-1.076.546-1.47l.038-.055.044-.052 3.624-3.945a2.25 2.25 0 0 1 1.469-.72L7.909 5h1.34-1.34Zm.84 5.5H4.25a.75.75 0 0 0-.75.75v3.496c0 .967.784 1.75 1.75 1.75h2.499a1.75 1.75 0 0 0 1.75-1.75V11.25a.75.75 0 0 0-.75-.75Zm11 0H15.25a.75.75 0 0 0-.75.75v3.496c0 .967.784 1.75 1.75 1.75h2.499a1.75 1.75 0 0 0 1.75-1.75V11.25a.75.75 0 0 0-.75-.75Z" />
+                    </svg>
+                    <svg id="canvas-off" fill="var(--font-2)" width="24" height="24" fill="none" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M3.28 2.22a.75.75 0 1 0-1.06 1.06l3.273 3.274-2.865 3.119-.044.052-.038.055c-.34.394-.546.908-.546 1.47v3.496a3.25 3.25 0 0 0 3.25 3.25h2.499a3.25 3.25 0 0 0 3.25-3.25l-.001-2.242h.445L13 14.061v.685a3.25 3.25 0 0 0 3.25 3.25h.685l3.784 3.785a.75.75 0 0 0 1.061-1.061L3.28 2.22ZM7.94 9l-2.656-.001 1.272-1.384L7.939 9ZM4.25 10.5h4.499a.75.75 0 0 1 .75.75v3.496a1.75 1.75 0 0 1-1.75 1.75H5.25a1.75 1.75 0 0 1-1.75-1.75V11.25a.75.75 0 0 1 .75-.75ZM13.303 10.121l1.197 1.197v-.068a.75.75 0 0 1 .75-.75h4.499a.75.75 0 0 1 .75.75v3.496a1.75 1.75 0 0 1-.993 1.578l1.094 1.094a3.246 3.246 0 0 0 1.399-2.672V11.25c0-.53-.183-1.017-.489-1.4a.748.748 0 0 0-.122-.179l-3.642-3.947-.133-.132A2.25 2.25 0 0 0 16.093 5h-1.346l-.102.007a.75.75 0 0 0 .102 1.493h1.346l.103.007a.75.75 0 0 1 .448.234L18.727 9H15.25c-.831 0-1.557.452-1.947 1.122Z" />
+                    </svg>
+                </button>
+
+                <button id="dark-mode" class="blur" title="Toggle dark mode" onclick="toggleDarkMode()">
+                    <svg id="light" class="hide" fill="var(--font-2)" width="24" height="24" fill="none"
+                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M11.996 19.01a.75.75 0 0 1 .743.649l.007.102v1.5a.75.75 0 0 1-1.493.101l-.007-.101v-1.5a.75.75 0 0 1 .75-.75Zm6.022-2.072 1.06 1.06a.75.75 0 1 1-1.06 1.061l-1.06-1.06a.75.75 0 0 1 1.06-1.061Zm-10.983 0a.75.75 0 0 1 0 1.06L5.974 19.06a.75.75 0 0 1-1.06-1.06l1.06-1.061a.75.75 0 0 1 1.06 0ZM12 6.475a5.525 5.525 0 1 1 0 11.05 5.525 5.525 0 0 1 0-11.05Zm0 1.5a4.025 4.025 0 1 0 0 8.05 4.025 4.025 0 0 0 0-8.05Zm9.25 3.293a.75.75 0 0 1 .102 1.493l-.102.007h-1.5a.75.75 0 0 1-.102-1.493l.102-.007h1.5Zm-17-.029a.75.75 0 0 1 .102 1.494l-.102.006h-1.5a.75.75 0 0 1-.102-1.493l.102-.007h1.5Zm1.64-6.37.084.072 1.06 1.06a.75.75 0 0 1-.976 1.134l-.084-.073-1.06-1.06a.75.75 0 0 1 .976-1.134Zm13.188.072a.75.75 0 0 1 .073.977l-.073.084-1.06 1.06a.75.75 0 0 1-1.133-.976l.072-.084 1.06-1.061a.75.75 0 0 1 1.061 0ZM12 1.99a.75.75 0 0 1 .743.648l.007.102v1.5a.75.75 0 0 1-1.493.101l-.007-.102v-1.5a.75.75 0 0 1 .75-.75Z" />
+                    </svg>
+                    <svg id="dark" fill="var(--font-2)" width="24" height="24" fill="none" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M20.026 17.001c-2.762 4.784-8.879 6.423-13.663 3.661a9.964 9.964 0 0 1-3.234-2.983.75.75 0 0 1 .365-1.131c3.767-1.348 5.785-2.911 6.956-5.146 1.232-2.353 1.551-4.93.689-8.464a.75.75 0 0 1 .769-.926 9.961 9.961 0 0 1 4.457 1.327C21.149 6.1 22.788 12.217 20.025 17Zm-8.248-4.903c-1.25 2.388-3.31 4.099-6.817 5.499a8.492 8.492 0 0 0 2.152 1.766 8.501 8.501 0 1 0 8.502-14.725 8.485 8.485 0 0 0-2.792-1.016c.647 3.384.23 6.044-1.045 8.476Z" />
+                    </svg>
+                </button>
+            </div>
+        </nav>
+
+        <div class="top">
+            <div class="top-content">
+                <h1>
+                    What's crackalackin, I'm Brian!
+                    <hr size="16px">
+                    I'm a designer creating beautifully engineered experiences that empower people.
+                    <hr size="16px" class="hide-title-break"> Incoming UX Engineer at Microsoft.
+                </h1>
+            </div>
+        </div>
+
+        <main>
+            <div class="row title-wrapper">
+                <h2>Selected work</h2>
+                <a href="/404" class="underline">
+                    <span>View all</span><svg viewBox="0 0 13 20">
+                        <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5" />
+                    </svg>
+                </a>
+            </div>
+
+            <div class="work-wrapper">
+                <a class="work-item blur row" href="https://www.start.gg/"
+                    target="_blank">
+                    <div class="work-info row">
+                        <div class="work-icon row">
+                            <svg width="24" height="24" fill="var(--font-1)" viewBox="0 0 24 24">
+                                <path d="M9.58888 4.53283C9.00704 4.242 8.36819 4.19606 7.78661 4.30687L6.48575 4.55472C5.53781 4.73533 4.72192 5.34413 4.28156 6.20507C2.7779 9.14479 1.64093 11.5527 1.20238 13.6066C0.750052 15.725 1.02659 17.5392 2.38948 19.1905C3.29323 20.2855 4.84203 20.0642 5.64924 19.1508C6.26388 18.4552 6.96374 17.6498 7.64825 16.8561C8.09902 16.3334 8.75335 16.0326 9.44089 16.0326H14.562C15.2496 16.0326 15.9039 16.3334 16.3547 16.8561C17.0392 17.6498 17.7391 18.4552 18.3537 19.1508C19.1609 20.0642 20.7097 20.2855 21.6135 19.1905C22.9763 17.5392 23.2529 15.725 22.8006 13.6066C22.362 11.5527 21.225 9.14479 19.7214 6.20507C19.281 5.34413 18.4651 4.73533 17.5172 4.55472L16.2163 4.30687C15.6347 4.19606 14.9959 4.242 14.4141 4.53284C14.2561 4.61181 14.094 4.69671 13.9307 4.78521C13.5399 4.99696 13.1207 5.11156 12.7063 5.11156H11.2966C10.8822 5.11156 10.463 4.99696 10.0723 4.78522C9.90894 4.69671 9.74688 4.61181 9.58888 4.53283ZM8.0807 5.85038C8.38356 5.79268 8.66282 5.82658 8.88634 5.93831C9.02625 6.00825 9.17275 6.08492 9.3236 6.16667C9.91708 6.4883 10.5915 6.68284 11.2966 6.68284H12.7063C13.4114 6.68284 14.0859 6.4883 14.6793 6.16667C14.8302 6.08492 14.9767 6.00825 15.1166 5.93831C15.3401 5.82658 15.6194 5.79268 15.9222 5.85038L17.2231 6.09824C17.6967 6.18848 18.1038 6.49314 18.3225 6.9206C19.8407 9.8888 20.8756 12.1161 21.2639 13.9347C21.6385 15.6888 21.3969 16.9844 20.4016 18.1903C20.3055 18.3067 20.1745 18.3612 20.0187 18.3541C19.854 18.3467 19.6699 18.2673 19.5311 18.1103C18.9223 17.4214 18.227 16.6213 17.5446 15.8299C16.7971 14.9632 15.7093 14.4613 14.562 14.4613H9.44089C8.29365 14.4613 7.20587 14.9632 6.45836 15.8299C5.77588 16.6213 5.08058 17.4214 4.47182 18.1103C4.33305 18.2673 4.14895 18.3467 3.98422 18.3541C3.82844 18.3612 3.69741 18.3067 3.60133 18.1903C2.60607 16.9844 2.36448 15.6888 2.73902 13.9347C3.12733 12.1161 4.16224 9.88881 5.68046 6.9206C5.8991 6.49314 6.3062 6.18848 6.77984 6.09824L8.0807 5.85038ZM12.0012 10.5747C12.6087 10.5747 13.1012 10.0822 13.1012 9.47473C13.1012 8.86723 12.6087 8.37476 12.0012 8.37476C11.3937 8.37476 10.9012 8.86723 10.9012 9.47473C10.9012 10.0822 11.3937 10.5747 12.0012 10.5747Z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="clamp-text">Start.gg (formerly smash.gg)</h3>
+                            <p class="clamp-text">Exploring the future of content driven gaming experiences</p>
+                        </div>
+                    </div>
+                    <div class="work-item-line"></div>
+                    <p class="work-item-date">2022</p>
+                </a>
+
+                <a class="work-item blur row" href="https://latxh.github.io/casual-games/" target="_blank">
+                    <div class="work-info row">
+                        <div class="work-icon row">
+                            <svg width="24" height="24" fill="var(--font-1)" viewBox="0 0 24 24">
+                                <path d="M15.353 4.11763C14.1185 4.11763 13.1178 5.11839 13.1178 6.35289C13.1178 6.50687 13.1333 6.65666 13.1626 6.80098C13.1964 6.96722 13.1528 7.13981 13.0442 7.27011C12.9355 7.4004 12.7736 7.47429 12.604 7.47096C12.589 7.47066 12.574 7.47052 12.559 7.47052C12.1898 7.47052 11.8415 7.56003 11.5346 7.71853C11.3666 7.38057 11.1571 7.06689 10.9128 6.78415C11.2444 6.59691 11.611 6.46449 12.0005 6.39919L12.0002 6.35289C12.0002 4.50114 13.5013 3 15.353 3C17.2048 3 18.7059 4.50114 18.7059 6.35289L18.7056 6.39919C20.2915 6.6651 21.5 8.04431 21.5 9.70578C21.5 11.5575 19.9989 13.0587 18.1471 13.0587C17.9023 13.0587 17.6635 13.0324 17.4333 12.9824L17.6786 13.9951C17.9768 15.2261 17.0443 16.4115 15.7778 16.4115H14.9258C13.6586 16.4115 12.7259 15.2248 13.0253 13.9935L13.5287 11.9233C13.6017 11.6234 13.9039 11.4394 14.2038 11.5123C14.5037 11.5852 14.6876 11.8875 14.6147 12.1873L14.1113 14.2576C13.983 14.7853 14.3827 15.2939 14.9258 15.2939H15.7778C16.3206 15.2939 16.7202 14.7858 16.5924 14.2583L16.0905 12.1864C16.0367 11.9642 16.1236 11.7316 16.31 11.5992C16.4964 11.4668 16.7446 11.4613 16.9367 11.5854C17.2852 11.8104 17.7001 11.941 18.1471 11.941C19.3816 11.941 20.3824 10.9403 20.3824 9.70578C20.3824 8.47128 19.3816 7.47052 18.1471 7.47052C18.1321 7.47052 18.1171 7.47067 18.1021 7.47096C17.9325 7.4743 17.7705 7.4004 17.6619 7.27011C17.5533 7.13981 17.5097 6.96722 17.5435 6.80098C17.5728 6.65667 17.5883 6.50687 17.5883 6.35289C17.5883 5.11839 16.5875 4.11763 15.353 4.11763ZM5.29407 9.70578C5.29407 8.47128 6.29483 7.47052 7.52933 7.47052C8.76383 7.47052 9.76459 8.47128 9.76459 9.70578C9.76459 10.2096 9.59856 10.6731 9.31798 11.0466C9.19082 11.2159 9.17026 11.4425 9.26489 11.6319C9.35951 11.8214 9.55306 11.941 9.76479 11.941H10.3234C10.632 11.941 10.8822 12.1912 10.8822 12.4998C10.8822 12.8085 10.632 13.0587 10.3234 13.0587H9.08612C8.92609 13.0587 8.77374 13.1273 8.66768 13.2471C8.56161 13.3669 8.51201 13.5265 8.53144 13.6853C8.86908 16.4457 10.3296 18.0296 11.148 18.7141C11.3426 18.8768 11.441 19.0819 11.441 19.2601C11.441 19.5386 11.2153 19.7644 10.9368 19.7644H4.1219C3.8434 19.7644 3.61763 19.5386 3.61763 19.2601C3.61763 19.0819 3.7161 18.8768 3.91066 18.7141C4.72904 18.0296 6.18958 16.4457 6.52723 13.6853C6.54666 13.5265 6.49705 13.3669 6.39099 13.2471C6.28492 13.1273 6.13257 13.0587 5.97255 13.0587H4.73526C4.42663 13.0587 4.17644 12.8085 4.17644 12.4998C4.17644 12.1912 4.42663 11.941 4.73526 11.941H5.29387C5.5056 11.941 5.69915 11.8214 5.79378 11.6319C5.8884 11.4425 5.86784 11.2159 5.74068 11.0466C5.46011 10.6731 5.29407 10.2096 5.29407 9.70578ZM7.52933 6.35289C5.67758 6.35289 4.17644 7.85403 4.17644 9.70578C4.17644 10.1114 4.24866 10.5006 4.38091 10.8609C3.62522 11.0235 3.05881 11.6955 3.05881 12.4998C3.05881 13.4257 3.80938 14.1763 4.73526 14.1763H5.31541C4.90106 16.1857 3.8048 17.3456 3.19362 17.8568C2.80585 18.1812 2.5 18.6792 2.5 19.2601C2.5 20.1559 3.22615 20.882 4.1219 20.882H10.9368C11.8325 20.882 12.5587 20.1559 12.5587 19.2601C12.5587 18.6792 12.2528 18.1812 11.865 17.8568C11.2539 17.3456 10.1576 16.1857 9.74325 14.1763H10.3234C11.2493 14.1763 11.9998 13.4257 11.9998 12.4998C11.9998 11.6955 11.4334 11.0235 10.6778 10.8609C10.81 10.5006 10.8822 10.1114 10.8822 9.70578C10.8822 7.85403 9.38108 6.35289 7.52933 6.35289Z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="clamp-text">Casual Games Redesign</h3>
+                            <p class="clamp-text">A fresh take on gaming in the web browser</p>
+                        </div>
+                    </div>
+                    <div class="work-item-line"></div>
+                    <p class="work-item-date">2022</p>
+                </a>
+
+                <a class="work-item blur row" href="https://www.shopify.com/flow" target="_blank">
+                    <div class="work-info row">
+                        <div class="work-icon row">
+                            <svg width="24" height="24" fill="var(--font-1)" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M18.78 2.22a.75.75 0 1 0-1.06 1.06L19.44 5h-6.19a2.75 2.75 0 0 0-2.75 2.75v9.497c0 .69-.56 1.25-1.25 1.25H7.958a3 3 0 1 0-.128 1.5h1.42a2.75 2.75 0 0 0 2.75-2.75V7.75c0-.69.56-1.25 1.25-1.25h6.19l-1.72 1.72a.75.75 0 0 0 1.06 1.06l3-3a.75.75 0 0 0 0-1.06l-3-3ZM3.5 19a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="clamp-text">Shopify Flow</h3>
+                            <p class="clamp-text">Automate everything</p>
+                        </div>
+                    </div>
+                    <div class="work-item-line"></div>
+                    <p class="work-item-date">2022</p>
+                </a>
+
+                <a class="work-item blur row" href="https://betteruoft.ca/" target="_blank">
+                    <div class="work-info row">
+                        <div class="work-icon row">
+                            <svg width="24" height="24" fill="var(--font-1)" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M3.839 5.858c2.94-3.916 9.03-5.055 13.364-2.36 4.28 2.66 5.854 7.777 4.1 12.577-1.655 4.533-6.016 6.328-9.159 4.048-1.177-.854-1.634-1.925-1.854-3.664l-.106-.987-.045-.398c-.123-.934-.311-1.352-.705-1.572-.535-.298-.892-.305-1.595-.033l-.351.146-.179.078c-1.014.44-1.688.595-2.541.416l-.2-.047-.164-.047c-2.789-.864-3.202-4.647-.565-8.157Zm.984 6.716.123.037.134.03c.439.087.814.015 1.437-.242l.602-.257c1.202-.493 1.985-.54 3.046.05.917.512 1.275 1.298 1.457 2.66l.053.459.055.532.047.422c.172 1.361.485 2.09 1.248 2.644 2.275 1.65 5.534.309 6.87-3.349 1.516-4.152.174-8.514-3.484-10.789-3.675-2.284-8.899-1.306-11.373 1.987-2.075 2.763-1.82 5.28-.215 5.816Zm11.225-1.994a1.25 1.25 0 1 1 2.414-.647 1.25 1.25 0 0 1-2.414.647Zm.494 3.488a1.25 1.25 0 1 1 2.415-.647 1.25 1.25 0 0 1-2.415.647ZM14.07 7.577a1.25 1.25 0 1 1 2.415-.647 1.25 1.25 0 0 1-2.415.647Zm-.028 8.998a1.25 1.25 0 1 1 2.414-.647 1.25 1.25 0 0 1-2.414.647Zm-3.497-9.97a1.25 1.25 0 1 1 2.415-.646 1.25 1.25 0 0 1-2.415.646Z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="clamp-text">Better UofT</h3>
+                            <p class="clamp-text">Chrome extension that improves University of Toronto websites</p>
+                        </div>
+                    </div>
+                    <div class="work-item-line"></div>
+                    <p class="work-item-date">2021</p>
+                </a>
+
+                <a class="work-item blur row" href="https://www.youtube.com/watch?v=o_v2r8rdGM8" target="_blank">
+                    <div class="work-info row">
+                        <div class="work-icon row">
+                            <svg width="24" height="24" fill="var(--font-1)" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M13.925 2.503a2.25 2.25 0 0 1 1.94 1.11L16.679 5h2.071A3.25 3.25 0 0 1 22 8.25v9.5A3.25 3.25 0 0 1 18.75 21H5.25A3.25 3.25 0 0 1 2 17.75v-9.5A3.25 3.25 0 0 1 5.25 5h2.08l.875-1.424a2.25 2.25 0 0 1 1.917-1.073h3.803Zm0 1.5h-3.803a.75.75 0 0 0-.574.268l-.065.09L8.39 6.141a.75.75 0 0 1-.639.358h-2.5A1.75 1.75 0 0 0 3.5 8.25v9.5c0 .966.784 1.75 1.75 1.75h13.5a1.75 1.75 0 0 0 1.75-1.75v-9.5a1.75 1.75 0 0 0-1.75-1.75h-2.5a.75.75 0 0 1-.647-.37l-1.032-1.757a.75.75 0 0 0-.646-.37ZM12 8a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9Zm0 1.5a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="clamp-text">Price On My Head</h3>
+                            <p class="clamp-text">Contributed to Nav and The Weeknd's music video, filmed in Toronto</p>
+                        </div>
+                    </div>
+                    <div class="work-item-line"></div>
+                    <p class="work-item-date">2019</p>
+                </a>
+
+            </div>
+
+            <h2 class="row title-wrapper">About me</h2>
+
+
+            <div class="work-wrapper">
+                <h3>Typography, motion design, copywriting, performance— the web is an endless medium of opportunity and
+                    creativity of which I’ve only scratched the surface.</h3>
+                <h3>I'm a computer science student in my final year at the University of Toronto. I have previously
+                    worked on payments and rewards at Loblaw, the Flow automation app at Shopify and the future of
+                    content driven gaming experiences at Microsoft.</h3>
+                <h3>The best way to get in touch is by direct messaging me, or email if you need more words.</h3>
+                <br>
+            </div>
+
+            <div class="social-links">
+                <a href="mailto:latxhman@gmail.com" target="_blank" class="underline">
+                    <span>latxhman@gmail.com</span><svg viewBox="0 0 13 20">
+                        <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5" />
+                    </svg>
+                </a>
+                <hr size="16px" class="hide-title-break">
+                <a href="https://www.linkedin.com/in/brian-latchman/" target="_blank" class="underline">
+                    <span>Linkedin</span><svg viewBox="0 0 13 20">
+                        <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5" />
+                    </svg>
+                </a>
+                <hr size="16px" target="_blank" class="hide-title-break">
+                <a href="https://www.instagram.com/latxhman/" class="underline">
+                    <span>Instagram</span><svg viewBox="0 0 13 20">
+                        <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5" />
+                    </svg>
+                </a>
+                <hr size="16px" target="_blank" class="hide-title-break">
+                <a href="https://github.com/latxh/" class="underline">
+                    <span>Github</span><svg viewBox="0 0 13 20">
+                        <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5" />
+                    </svg>
+                </a>
+            </div>
+        </main>
+
+    </div>
+
+    <footer id="footer" class="blur" onclick="toggleMessage()">
+        <div class="footer-wrapper">
+            <div class="random-message-wrapper row">
+                <p id="random-message" class="clamp-text"></p>
+                <p class="clamp-text">2023 TM</p>
+            </div>
+
+            <div id="hidden-message" class="hide">
+
+                <p class="hidden-message-text">I’m reciting that <i>quality affects all aspects</i> of my pursuits. This
+                    skill develops while <i>doing</i>. Not thinking, not imagining, <i>doing</i>. It is learned through
+                    experimenting, consistency and pacing.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Canvas script -->
+    <script>
+        (function () {
+            let Mouse, PI, abs, animloop, camera, canvas, cos, ctx, cubes, distance, frame, geometry, hypotenuse, material, offset, renderer, resizeHandler, scene, seed, side, sidehypotenuse, sin, sqrt, start, t, x, xside, y, yside, _i, _j, _ref, _ref1, _ref2, _ref3;
+            t = 0;
+            start = Date.now();
+            seed = -25;
+            frame = 0;
+            PI = Math.PI;
+
+            sin = function (a) {
+                return Math.sin(a);
+            };
+
+            cos = function (a) {
+                return Math.cos(a);
+            };
+
+            abs = function (a) {
+                return Math.abs(a);
+            };
+
+            sqrt = function (a) {
+                return Math.sqrt(a);
+            };
+
+            hypotenuse = function (a, b) {
+                return Math.sqrt(a * a + b * b);
+            };
+
+            distance = function (x1, y1, x2, y2) {
+                return hypotenuse(x2 - x1, y2 - y1);
+            };
+
+            scene = new THREE.Scene();
+            camera = new THREE.OrthographicCamera(window.innerWidth / -2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / -2, -50 * 100, 30 * 1000);
+            renderer = new THREE.WebGLRenderer();
+            canvas = document.createElement('canvas');
+            ctx = canvas.getContext('2d');
+
+            (resizeHandler = function () {
+                camera.left = canvas.left = window.innerWidth / -2;
+                camera.right = canvas.right = window.innerWidth / 2;
+                camera.bottom = canvas.bottom = window.innerHeight / -2;
+                camera.top = canvas.top = window.innerHeight / 2;
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                return canvas.hyp = hypotenuse(canvas.width, canvas.height);
+            })();
+
+            window.addEventListener('resize', resizeHandler, false);
+            document.body.appendChild(renderer.domElement);
+            side = hypotenuse(canvas.width, canvas.height) / 40;
+            geometry = new THREE.BoxGeometry(side + 1, side + 1, side + 5);
+            material = new THREE.MeshBasicMaterial({});
+            cubes = [];
+            xside = side;
+            yside = side;
+            sidehypotenuse = hypotenuse(side, side);
+            offset = 75;
+
+            for (x = _i = _ref = camera.left * 1.3, _ref1 = camera.right * 1.3; xside > 0 ? _i <= _ref1 : _i >= _ref1; x = _i += xside) {
+                for (y = _j = _ref2 = camera.bottom * 1.3, _ref3 = camera.top * 1.3; yside > 0 ? _j <= _ref3 : _j >= _ref3; y = _j += yside) {
+                    cubes.push(new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({
+                        color: 0x00ffff,
+                        transparent: true,
+                        wireframe: false,
+                        opacity: 1
+                    })));
+                    cubes[cubes.length - 1].position.x = x;
+                    cubes[cubes.length - 1].position.y = y;
+                    cubes[cubes.length - 1].position.z = x + y;
+                    scene.add(cubes[cubes.length - 1]);
+                }
+            }
+
+            camera.position.set(0, 0, side * 10);
+            Mouse = {
+                down: false,
+                held: 0,
+                x: canvas.width / 2,
+                y: canvas.height / 2,
+                x0: 0,
+                y0: 0,
+                events: {
+                    move: function (e) {
+                        if ("touches" in e) {
+                            e.preventDefault();
+                            e = e.touches[0];
+                        }
+                        Mouse.x = (Mouse.x + e.pageX) * 0.5;
+                        Mouse.y = (Mouse.y + e.pageY) * 0.5;
+                        Mouse.x0 = Mouse.x - canvas.width / 2;
+                        return Mouse.y0 = Mouse.y - canvas.height / 2;
+                    },
+                    down: function (e) {
+                        return Mouse.down = !Mouse.down;
+                    },
+                    up: function (e) {
+                        return Mouse.down = !Mouse.down;
+                    }
+                }
+            };
+
+            window.addEventListener('mousemove', Mouse.events.move, false);
+            window.addEventListener('mousedown', Mouse.events.down, false);
+            window.addEventListener('mouseup', Mouse.events.up, false);
+            window.addEventListener('touchmove', Mouse.events.move, false);
+            window.addEventListener('touchstart', Mouse.events.down, false);
+            window.addEventListener('touchstop', Mouse.events.up, false);
+            camera.up = new THREE.Vector3(0, 1, 0);
+
+            animloop = function () {
+                var a, b, c, dist, dist0, distneg, g, i, r, _k, _ref4;
+                animloop.id = requestAnimationFrame(animloop);
+                t = (Date.now() - start) / 1000 + seed;
+                frame++;
+                camera.position.set(side * 10, side * 10, -side * 10);
+                camera.lookAt(new THREE.Vector3(0, 0, 0));
+                if (Mouse.down) {
+                    Mouse.held++;
+                }
+                for (i = _k = 0, _ref4 = cubes.length; 0 <= _ref4 ? _k < _ref4 : _k > _ref4; i = 0 <= _ref4 ? ++_k : --_k) {
+                    c = cubes[i];
+                    dist = distance(-Mouse.x0, -Mouse.y0, c.position.x, c.position.y);
+                    dist0 = distance(0, 0, c.position.x, c.position.y);
+                    distneg = distance(Mouse.x0, Mouse.y0, c.position.x, c.position.y);
+                    c.scale.y = 2.25 + 1.25 * sin(dist / canvas.hyp * PI * 7 - t * 0.8 - Mouse.held / 50) * cos(dist / canvas.hyp * PI * 4 - t * 1.5 - Mouse.held / 50) + (1 + sin((distneg - dist) / canvas.hyp * PI * 1));
+                    a = c.position.z;
+                    r = 0.4 + 0.40 * sin(distneg / canvas.hyp * PI * 2 * 0.75 - t / 3.0 + 3 + Mouse.held / 80 + c.scale.y / 3.5);
+                    g = 0.4 + 0.40 * sin(distneg / canvas.hyp * PI * 2 * 0.75 - t / 3.1 + 2 + Mouse.held / 81 + c.scale.y / 3.5);
+                    b = 0.4 + 0.40 * sin(distneg / canvas.hyp * PI * 2 * 0.75 - t / 3.2 + 1 + Mouse.held / 82 + c.scale.y / 3.5);
+                    cubes[i].material.color = new THREE.Color(r, g, b);
+                }
+                return renderer.render(scene, camera);
+            };
+
+            animloop();
+
+        }).call(this);
+    </script>
+
+    <!-- Dark mode, motion preferences and footer text script -->
+    <script>
+        let style = document.createElement('style');
+        let canvasRef = document.getElementsByTagName('canvas')[0]
+        let sun = document.getElementById('light');
+        let moon = document.getElementById('dark');
+        let canvasOn = document.getElementById('canvas-on');
+        let canvasOff = document.getElementById('canvas-off');
+        let messageList = ['Trying to paint with code.', 'Going with the flow.', 'Hello from Toronto, Canada.', 'I love easter eggs.', 'Coded by yours truly.', 'Listening to Pursuit of Happiness by Kid Cudi.', 'Reading The Red Winter by Henry H. Neff.', 'What are you about? Answer quick!'];
+
+        let darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+        let appearance = localStorage.getItem("appearance") ?? "system";
+        let systemDarkMode = darkModeQuery.matches;
+
+        let reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+        let motion = localStorage.getItem("motion") ?? "system";
+        let systemReducedMotion = reducedMotionQuery.matches;
+
+        const updateAppearance = () => {
+            localStorage.setItem("appearance", appearance);
+            if (appearance === "system" ? systemDarkMode : appearance === "dark") {
+                sun.classList.remove("hide")
+                moon.classList.add("hide")
+
+                appearance = "dark";
+                document.body.classList.add("dark");
+                style.innerHTML = ':root {color-scheme: dark;}';
+                document.head.appendChild(style);
+            } else {
+                sun.classList.add("hide")
+                moon.classList.remove("hide")
+
+                document.body.classList.remove("dark");
+                style.innerHTML = ':root {color-scheme: light;}';
+                document.head.appendChild(style);
+            }
+        };
+
+        const updateCanvas = () => {
+            localStorage.setItem("motion", motion);
+            if (motion === "system" ? systemReducedMotion : motion === "reduce") {
+                canvasOn.classList.remove("hide")
+                canvasOff.classList.add("hide")
+                canvasRef.classList.add("hide");
+            } else {
+                canvasOn.classList.add("hide")
+                canvasOff.classList.remove("hide")
+                canvasRef.classList.remove("hide");
+            }
+        };
+
+        darkModeQuery.addEventListener("change", (m) => { systemDarkMode = m.matches; updateAppearance(); });
+        reducedMotionQuery.addEventListener("change", (m) => { systemReducedMotion = m.matches; updateCanvas(); });
+
+        updateAppearance();
+        updateCanvas();
+
+        const toggleDarkMode = (e) => { appearance = appearance === "dark" ? "light" : "dark"; updateAppearance(); };
+        const toggleCanvas = (e) => { motion = motion === "reduce" ? "no-preference" : "reduce"; updateCanvas(); };
+
+        document.getElementById('random-message').innerHTML = messageList[Math.floor(Math.random() * messageList.length)];
+
+        function toggleMessage() {
+            let footer = document.getElementById('footer');
+            let hiddenMessage = document.getElementById("hidden-message");
+            hiddenMessage.style.display = "block";
+            footer.style.cursor = "auto";
+        };
+    </script>
+</body>
+
+</html>
