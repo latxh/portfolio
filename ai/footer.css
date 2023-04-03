@@ -22,6 +22,7 @@ footer button:hover {
     background-color: hsla(0, 0%, 100%, 0.15);
 }
 
+footer h1,
 footer h3 {
     color: #fff;
     margin-inline: auto;
