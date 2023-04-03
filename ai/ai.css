@@ -27,6 +27,9 @@
     --grad-1: #EADEFF;
     --grad-2: #DFEAFF;
     --grad-3: #F1FCFF;
+
+    --green: #009E4C;
+    --red: #F52500;
 }
 
 .dark {
@@ -51,6 +54,9 @@
     --grad-1: #14192E;
     --grad-2: #2A345E;
     --grad-3: #2C294E;
+
+    --green: #64F0A7;
+    --red: #F06464;
 }
 
 ::selection {

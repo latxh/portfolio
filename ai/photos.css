@@ -1,19 +1,52 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
 .guess-pair {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 24px;
+}
+
+.images {
     display: flex;
     flex-direction: row;
 }
 
-.guess-pair img {
-    width: 50%;
-    max-width: 376px;
-    margin-top: 20px;
+.images img {
+    aspect-ratio: 1/1;
+    width: 100%;
+    max-width: 500px;
     cursor: pointer;
+    transition: all 0.2s;
+}
+
+.images img:hover {
+    opacity: 0.8;
+}
+
+.right-text {
+    text-align: right;
 }
 
 .correct-choice {
-    border: 5px solid green;
+    border: 8px solid var(--green);
 }
 
 .incorrect-choice {
-    border: 5px solid red;
+    border: 8px solid var(--red);
+}
+
+.credits {
+    font-family: monospace;
+    color: var(--font-2);
+}
+
+@media only screen and (max-width: 1100px) {
+    .images {
+        flex-direction: column;
+    }
 }
