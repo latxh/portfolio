@@ -51,32 +51,6 @@ button {
     margin-right: 8px;
 }
 
-@property --num {
-    syntax: "<integer>";
-    initial-value: 0;
-    inherits: false;
-}
-
-.reward-points {
-    animation: counter 1s ease-in-out;
-    animation-fill-mode: forwards;
-    counter-reset: num var(--num);
-}
-
-.reward-points::after {
-    content: counter(num);
-}
-
-@keyframes counter {
-    from {
-        --num: 0;
-    }
-
-    to {
-        --num: 431;
-    }
-}
-
 @media (prefers-reduced-motion: no-preference) {
     button:active svg {
         transform: scale(0.8);
