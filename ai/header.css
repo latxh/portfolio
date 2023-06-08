@@ -67,24 +67,12 @@ button {
     }
 }
 
-.large-logo {
-    display: block;
-}
-
 .small-logo {
-    display: none;
+    display: block;
 }
 
 @media only screen and (max-width: 670px) {
     .header-inner {
         padding: 12px;
-    }
-
-    .large-logo {
-        display: none;
-    }
-
-    .small-logo {
-        display: block;
     }
 }

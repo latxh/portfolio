@@ -19,6 +19,17 @@
     height: 270px;
 }
 
+.nvidia-img {
+    background-color: #147CBB;
+    background-image: url("./photos/nvidia.png");
+    border-radius: 24px;
+    height: 800px;
+    width: 100%;
+    background-size:     contain;
+    background-repeat:   no-repeat;
+    background-position: center center;
+}
+
 .section-text {
     max-width: 700px;
 }
@@ -37,5 +48,9 @@
 
     .right {
         flex-direction: column-reverse;
+    }
+
+    .nvidia-img {
+        height: 400px;
     }
 }
