@@ -31,6 +31,7 @@
     --selection-background: #FECF3B;
     --selection-font: var(--font-1);
   
+    --footer: #fff;
     --background: #EDEDED;
     --font-1: #141414;
     --font-2: #141414B3;
@@ -50,7 +51,8 @@
 
     --selection-background: var(--focus-blue);
     --selection-font: var(--font-1);
-  
+
+    --footer: #000;
     --background: #141414;
     --font-1: #EDEDED;
     --font-2: #F5F5F5B3;
@@ -224,6 +226,10 @@ nav, .top, main, .footer-wrapper {
     .work-item-date,
     canvas, #canvas-state {
         display: none;
+    }
+
+    .footer-filled {
+        background-color: transparent !important;
     }
 
     main .work-info {
