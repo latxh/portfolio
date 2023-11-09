@@ -8,7 +8,17 @@
     display: none;
 }
 
+.underline:focus-visible {
+    outline: transparent;
+}
+
+.underline:focus-visible span {
+    outline: 2px solid var(--focus-blue);
+    outline-offset: 6px;
+}
+
 @media (prefers-reduced-motion: no-preference) {
+    .underline:focus-visible span,
     a:focus-visible,
     button:focus-visible {
         transition: outline-offset 0.075s ease-out;
