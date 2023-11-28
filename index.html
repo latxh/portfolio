@@ -24,6 +24,7 @@
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="css/footer.css">
     <link rel="stylesheet" type="text/css" href="css/underline.css">
+    <link rel="stylesheet" type="text/css" href="css/music.css">
 </head>
 
 <body>
@@ -102,6 +103,18 @@
                 </a>
             </div>
         </main>
+
+        <a id="music-link" class="music-link">
+            <div id="music">
+                <img id="album-cover" class="album-cover" alt="Album art">
+                <div class="music-details">
+                    <p class="music-title">MUSIC PICK</p>
+                    <p id="song-name">Song Name</p>
+                    <p id="artist-name" class="artist-name">by Travis Scott</p>
+                </div>
+                <img class="music-anim" src="assets/music/music-anim.gif" alt="Music playing animation">
+            </div>
+        </a>
 
     </div>
 
@@ -272,7 +285,14 @@
         let canvasOn = document.getElementById('canvas-on');
         let canvasOff = document.getElementById('canvas-off');
         let messageList = ['Painting with code', 'Going with the flow', 'Hello from Toronto, Canada', 'Meapless in Seattle, S3 E27', 'I love easter eggs', 'Coded by yours truly', 'Listening to 90210 by Travis Scott', 'Awaiting Book 7 of the Red Rising Saga', 'Coming live from the one after five', 'Coming live from the three, two time'];
-
+        let musicList = [
+            ['https://www.youtube.com/watch?v=X0WVU2xoD2o', '/assets/music/rodeo.png', '90210', 'by Travis Scott'],
+            ['https://www.youtube.com/watch?v=dMV31MWIjLE', '/assets/music/orange.png', 'Pyramids', 'by Frank Ocean'],
+            ['https://www.youtube.com/watch?v=O3tnOVideSo', '/assets/music/mj.png', 'Baby Be Mine', 'by Michael Jackson'],
+            ['https://www.youtube.com/watch?v=P891n88xOCc', '/assets/music/halo-ost.png', 'Zeta Halo', 'by Curtis Schweitzer'],
+            ['https://www.youtube.com/watch?v=T5-faDLv1Vs', '/assets/music/mc.png', 'Mice On Venus', 'by C418']
+        ];
+        
         let darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
         let appearance = localStorage.getItem("appearance") ?? "system";
         let systemDarkMode = darkModeQuery.matches;
@@ -331,6 +351,13 @@
             hiddenMessage.style.display = "block";
             footer.style.cursor = "auto";
         };
+
+        let song = musicList[Math.floor(Math.random() * musicList.length)];
+        document.getElementById('music-link').href = song[0];
+        document.getElementById('album-cover').src = song[1];
+        document.getElementById('song-name').innerHTML = song[2];
+        document.getElementById('artist-name').innerHTML = song[3];
+
     </script>
 </body>
 

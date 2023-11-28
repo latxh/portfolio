@@ -48,11 +48,13 @@ button:hover svg {
 }
 
 a:focus-visible,
-button:focus-visible {
+button:focus-visible,
+.music-link:focus-visible #music {
     outline: 2px solid var(--focus-blue);
 }
 
 a:not(:active):focus-visible,
-button:not(:active):focus-visible {
+button:not(:active):focus-visible,
+.music-link:not(:active):focus-visible #music {
     outline-offset: 0.3rem;
 }

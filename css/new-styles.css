@@ -41,6 +41,10 @@
     --button-hover: rgb(20, 20, 20, 0.15);
     --button-shadow: rgb(0, 0, 0, 0.1);
 
+    --music-background: #FFFFFF;
+    --music-border: #DBDBDB;
+    --music-hover: #D3D3D3;
+
     --icon-blue: #69AAFF;
     --hidden-message-background:#F7ECD4;
     --hidden-message-font:#9b6900;
@@ -61,6 +65,10 @@
     --button: rgb(245, 245, 245, 0.05);
     --button-hover: rgb(245, 245, 245, 0.20);
     --button-shadow: rgb(255, 255, 255, 0.15);
+
+    --music-background: #3F3F3F;
+    --music-border: #444444;
+    --music-hover: #222;
 
     --icon-blue: #1A73E8;
     --hidden-message-background: #433820;
@@ -174,6 +182,7 @@ nav, .top, main, .footer-wrapper {
         max-width: 612px;
     }
 
+    div#music,
     .work-item-line {
         display: none;
     }
