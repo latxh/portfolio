@@ -192,6 +192,10 @@ nav, .top, main, .footer-wrapper {
         height: 72px;
         padding: 8px 12px;
     }
+    
+    h1 {
+        text-wrap: balance;
+    }
 }
 
 @media only screen and (max-width: 670px) {
