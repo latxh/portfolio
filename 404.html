@@ -153,9 +153,9 @@
                 <p id="random-message" class="clamp-text"></p>
                 <p class="clamp-text">2024 TM</p>
             </div>
-
+    
             <div id="hidden-message" class="hide">
-
+    
                 <p class="hidden-message-text">If you're a fox, play the hare. If you're the hare, play the fox.</p>
             </div>
         </div>
@@ -215,7 +215,7 @@
 
             window.addEventListener('resize', resizeHandler, false);
             document.body.appendChild(renderer.domElement);
-            side = hypotenuse(canvas.width, canvas.height) / 40;
+            side = hypotenuse(canvas.width, canvas.height) / 45;
             geometry = new THREE.BoxGeometry(side + 1, side + 1, side + 5);
             material = new THREE.MeshBasicMaterial({});
             cubes = [];
