@@ -19,6 +19,7 @@
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <link rel="stylesheet" type="text/css" href="css/core-styles.css">
     <link rel="stylesheet" type="text/css" href="css/nav.css">
+    <link rel="stylesheet" type="text/css" href="css/tooltip.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="css/underline.css">
     <link rel="stylesheet" type="text/css" href="css/footer.css">
@@ -38,7 +39,8 @@
             </a>
 
             <div class="button-wrapper row">
-                <button id="canvas-state" class="blur" title="Toggle visual effects" onclick="toggleCanvas()">
+                <button id="canvas-state" class="blur" onclick="toggleCanvas()">
+                    <p class="tool-tip">Toggle visual effects</p>
                     <svg id="canvas-on" class="hide" fill="var(--font-2)" width="24" height="24" fill="none"
                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -51,7 +53,8 @@
                     </svg>
                 </button>
 
-                <button id="dark-mode" class="blur" title="Toggle dark mode" onclick="toggleDarkMode()">
+                <button id="dark-mode" class="blur" onclick="toggleDarkMode()">
+                    <p class="tool-tip">Toggle dark mode</p>
                     <svg id="light" class="hide" fill="var(--font-2)" width="24" height="24" fill="none"
                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path

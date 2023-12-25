@@ -1,0 +1,32 @@
+button .tool-tip {
+  font-family: Latch, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  text-align: center;
+  color: var(--font-1);
+  background-color: var(--button-hover);
+  border: none;
+  /* border-bottom: 1px solid var(--button-shadow); */
+  border-radius: 8px;
+  position: absolute;
+  z-index: 1;
+  width: 156px;
+  margin-left: -78px;
+  padding: 4px;
+  top: 125%;
+  left: 50%;
+
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s;
+  transition-delay: 0.4s;
+}
+
+/* .dark button .tool-tip {
+  border: none;
+  border-top: 1px solid var(--button-shadow);
+} */
+
+button:hover .tool-tip {
+  visibility: visible;
+  opacity: 1;
+}
