@@ -46,8 +46,8 @@
   --music-hover: #d3d3d3;
 
   --icon-blue: #69aaff;
-  --hidden-message-background: #f7ecd4;
-  --hidden-message-font: #9b6900;
+  --hidden-message-background: #D4E3F7;
+  --hidden-message-font: #00439B;
 }
 
 .dark {
@@ -71,8 +71,8 @@
   --music-hover: #222;
 
   --icon-blue: #1a73e8;
-  --hidden-message-background: #433820;
-  --hidden-message-font: #efd98f;
+  --hidden-message-background: #202F43;
+  --hidden-message-font: #8FB9EF;
 }
 
 ::selection {
