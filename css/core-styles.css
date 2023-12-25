@@ -41,7 +41,7 @@
   --button-hover: rgb(20, 20, 20, 0.15);
   --button-shadow: rgb(0, 0, 0, 0.1);
 
-  --music-background: #ffffff;
+  --music-background: #fff;
   --music-border: #dbdbdb;
   --music-hover: #d3d3d3;
 
@@ -66,8 +66,8 @@
   --button-hover: rgb(245, 245, 245, 0.2);
   --button-shadow: rgb(255, 255, 255, 0.15);
 
-  --music-background: #3f3f3f;
-  --music-border: #444444;
+  --music-background: #000;
+  --music-border: #444;
   --music-hover: #222;
 
   --icon-blue: #1a73e8;
