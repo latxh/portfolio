@@ -1,25 +1,25 @@
 footer {
-    cursor: help;
-    padding: 24px 0;
+  cursor: help;
+  padding: 24px 0;
 }
 
 .footer-filled {
-    background-color: var(--footer);
+  background-color: var(--footer);
 }
 
 .random-message-wrapper {
-    justify-content: space-between;
+  justify-content: space-between;
 }
 
 #hidden-message {
-    margin-top: 12px;
-    padding: 12px 16px;
-    width: 100%;
-    border-radius: 8px;
-    background-color: var(--hidden-message-background);
-    color: var(--hidden-message-font);
+  margin-top: 12px;
+  padding: 12px 16px;
+  width: 100%;
+  border-radius: 8px;
+  background-color: var(--hidden-message-background);
+  color: var(--hidden-message-font);
 }
 
 .hidden-message-text {
-    color: var(--hidden-message-font);
+  color: var(--hidden-message-font);
 }

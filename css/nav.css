@@ -1,10 +1,10 @@
 nav {
-    gap: 8px;
-    justify-content: space-between;
+  gap: 8px;
+  justify-content: space-between;
 }
 
 .button-wrapper {
-    gap: 24px;
+  gap: 24px;
 }
 
 a,
@@ -16,45 +16,45 @@ a:active {
 }
 
 button {
-    cursor: pointer;
-    height: 42px;
-    width: 42px;
-    padding: 8px;
-    border-radius: 48px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    border-bottom: 1px solid var(--button-shadow);
-    background-color: var(--button);
-    transition: background-color 0.2s;
+  cursor: pointer;
+  height: 42px;
+  width: 42px;
+  padding: 8px;
+  border-radius: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-bottom: 1px solid var(--button-shadow);
+  background-color: var(--button);
+  transition: background-color 0.2s;
 }
 
 .dark button {
-    border-bottom: none;
-    border-top: 1px solid var(--button-shadow);
+  border-bottom: none;
+  border-top: 1px solid var(--button-shadow);
 }
 
 button svg {
-    transition: all 0.2s;
+  transition: all 0.2s;
 }
 
 button:hover {
-    background-color: var(--button-hover);
+  background-color: var(--button-hover);
 }
 
 button:hover svg {
-    fill: var(--font-1);
+  fill: var(--font-1);
 }
 
 a:focus-visible,
 button:focus-visible,
 .music-link:focus-visible #music {
-    outline: 2px solid var(--focus-blue);
+  outline: 2px solid var(--focus-blue);
 }
 
 a:not(:active):focus-visible,
 button:not(:active):focus-visible,
 .music-link:not(:active):focus-visible #music {
-    outline-offset: 0.3rem;
+  outline-offset: 0.3rem;
 }
