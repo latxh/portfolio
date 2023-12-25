@@ -122,9 +122,13 @@
                 <p id="random-message" class="clamp-text"></p>
                 <p class="clamp-text">2024 TM</p>
             </div>
-
+    
             <div id="hidden-message" class="hide">
-                <p class="hidden-message-text">For me, understanding and articulating why something feels right does not come as intuitively as designing something to feel right. But they are two sides of the same coin. There must be a reason. It can be as simple as a particular spring curve or something more innate, like metaphors. Analyzing and making sense of design details beyond just "it feels nice" helps nurture taste, amplify level of execution, and grow appreciation for how hard the pursuit of excellence is.</p>
+                <p class="hidden-message-text">For me, understanding and articulating why something feels right does not
+                    come as intuitively as designing something to feel right. But they are two sides of the same coin. There
+                    must be a reason. It can be as simple as a particular spring curve or something more innate, like
+                    metaphors. Analyzing and making sense of design details beyond just "it feels nice" helps nurture taste,
+                    amplify level of execution, and grow appreciation for how hard the pursuit of excellence is.</p>
             </div>
         </div>
     </footer>
@@ -184,7 +188,7 @@
 
             window.addEventListener('resize', resizeHandler, false);
             document.body.appendChild(renderer.domElement);
-            side = hypotenuse(canvas.width, canvas.height) / 40;
+            side = hypotenuse(canvas.width, canvas.height) / 45;
             geometry = new THREE.BoxGeometry(side + 1, side + 1, side + 5);
             material = new THREE.MeshBasicMaterial({});
             cubes = [];
@@ -282,7 +286,11 @@
         let moon = document.getElementById('dark');
         let canvasOn = document.getElementById('canvas-on');
         let canvasOff = document.getElementById('canvas-off');
-        let messageList = ['Painting with code', 'Going with the flow', 'Hello from Toronto, Canada', 'Meapless in Seattle, S3 E27', 'I love easter eggs', 'Coded by yours truly', 'Listening to 90210 by Travis Scott', 'Awaiting Book 7 of the Red Rising Saga', 'Coming live from the one after five', 'Coming live from the three, two time'];
+
+        let messageList = ['Painting with code', 'Going with the flow', 'Hello from Toronto, Canada', 'Meapless in Seattle, S3 E27',
+        'I love easter eggs', 'Coded by yours truly', 'Listening to 90210 by Travis Scott', 'Awaiting Book 7 of the Red Rising Saga',
+        'Coming live from the one after five', 'Coming live from the three, two time'];
+        
         let musicList = [
             ['https://www.youtube.com/watch?v=X0WVU2xoD2o', '/assets/music/rodeo.png', '90210', 'by Travis Scott'],
             ['https://www.youtube.com/watch?v=dMV31MWIjLE', '/assets/music/orange.png', 'Pyramids', 'by Frank Ocean'],
