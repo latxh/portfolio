@@ -258,6 +258,7 @@ main,
     gap: 12px;
   }
 
+  .tool-tip,
   .work-item-date,
   canvas,
   #canvas-state {
