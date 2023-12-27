@@ -2,6 +2,10 @@
   margin-top: 48px;
 }
 
+.bot-space {
+  margin-bottom: 48px;
+}
+
 .new-work {
   width: 100%;
   gap: 16px;

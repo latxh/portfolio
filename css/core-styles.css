@@ -195,6 +195,7 @@ main,
     display: flex !important;
   }
 
+  .new-work-label,
   .new-work {
     display: none;
   }
