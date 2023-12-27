@@ -1,0 +1,30 @@
+.link-title {
+  perspective: 1000px;
+}
+
+.link-title span {
+  position: relative;
+  display: inline-block;
+  padding: 0;
+  transition: transform 0.3s;
+  transform-origin: 50% 0;
+  transform-style: preserve-3d;
+}
+
+.link-title span:before {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: attr(data-hover);
+  transition: color 0.3s;
+  transform: rotateX(-90deg);
+  transform-origin: 50% 0;
+  text-align: center;
+}
+
+.link-item:hover span,
+.link-item:focus span {
+  transform: rotateX(90deg) translateY(-36px);
+}

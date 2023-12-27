@@ -23,8 +23,9 @@ hr {
 }
 
 .work-wrapper {
+  /* default to display none except on smaller screen sizes */
+  display: none;
   width: 100%;
-  display: flex;
   flex-direction: column;
   gap: 12px;
   margin-bottom: 48px;
