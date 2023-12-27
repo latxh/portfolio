@@ -324,6 +324,57 @@
         let canvasOn = document.getElementById('canvas-on');
         let canvasOff = document.getElementById('canvas-off');
 
+        let darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+        let appearance = localStorage.getItem("appearance") ?? "system";
+        let systemDarkMode = darkModeQuery.matches;
+
+        let reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+        let motion = localStorage.getItem("motion") ?? "system";
+        let systemReducedMotion = reducedMotionQuery.matches;
+
+        const updateAppearance = () => {
+            localStorage.setItem("appearance", appearance);
+            if (appearance === "system" ? systemDarkMode : appearance === "dark") {
+                sun.classList.remove("hide");
+                moon.classList.add("hide");
+
+                appearance = "dark";
+                document.body.classList.add("dark");
+                style.innerHTML = ':root {color-scheme: dark;}';
+                document.head.appendChild(style);
+            } else {
+                sun.classList.add("hide");
+                moon.classList.remove("hide");
+
+                document.body.classList.remove("dark");
+                style.innerHTML = ':root {color-scheme: light;}';
+                document.head.appendChild(style);
+            }
+        };
+
+        const updateCanvas = () => {
+            localStorage.setItem("motion", motion);
+            if (motion === "system" ? systemReducedMotion : motion === "reduce") {
+                canvasOn.classList.remove("hide");
+                canvasOff.classList.add("hide");
+                canvasRef.classList.add("hide");
+            } else {
+                canvasOn.classList.add("hide");
+                canvasOff.classList.remove("hide");
+                canvasRef.classList.remove("hide");
+            }
+        };
+
+        darkModeQuery.addEventListener("change", (m) => { systemDarkMode = m.matches; updateAppearance(); });
+        reducedMotionQuery.addEventListener("change", (m) => { systemReducedMotion = m.matches; updateCanvas(); });
+
+        updateAppearance();
+        updateCanvas();
+
+        const toggleDarkMode = (e) => { appearance = appearance === "dark" ? "light" : "dark"; updateAppearance(); };
+        const toggleCanvas = (e) => { motion = motion === "reduce" ? "no-preference" : "reduce"; updateCanvas(); };
+
+
         let messageList = ['Painting with code', 'Going with the flow', 'Hello from Toronto, Canada', 'Meapless in Seattle, S3 E27',
         'I love easter eggs', 'Coded by yours truly', 'Listening to 90210 by Travis Scott', 'Awaiting Book 7 of the Red Rising Saga',
         'Coming live from the one after five', 'Coming live from the three, two time'];
@@ -344,56 +395,6 @@
             ['https://www.youtube.com/watch?v=ML8Yq1Rd6I0', '/assets/music/waves.png', 'Waves', 'by Kanye'],
             ['https://www.youtube.com/watch?v=_h2WpMH_q-I', '/assets/music/ye.png', 'Devil in a New Dress', 'by Kanye']
         ];
-        
-        let darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
-        let appearance = localStorage.getItem("appearance") ?? "system";
-        let systemDarkMode = darkModeQuery.matches;
-
-        let reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-        let motion = localStorage.getItem("motion") ?? "system";
-        let systemReducedMotion = reducedMotionQuery.matches;
-
-        const updateAppearance = () => {
-            localStorage.setItem("appearance", appearance);
-            if (appearance === "system" ? systemDarkMode : appearance === "dark") {
-                sun.classList.remove("hide")
-                moon.classList.add("hide")
-
-                appearance = "dark";
-                document.body.classList.add("dark");
-                style.innerHTML = ':root {color-scheme: dark;}';
-                document.head.appendChild(style);
-            } else {
-                sun.classList.add("hide")
-                moon.classList.remove("hide")
-
-                document.body.classList.remove("dark");
-                style.innerHTML = ':root {color-scheme: light;}';
-                document.head.appendChild(style);
-            }
-        };
-
-        const updateCanvas = () => {
-            localStorage.setItem("motion", motion);
-            if (motion === "system" ? systemReducedMotion : motion === "reduce") {
-                canvasOn.classList.remove("hide")
-                canvasOff.classList.add("hide")
-                canvasRef.classList.add("hide");
-            } else {
-                canvasOn.classList.add("hide")
-                canvasOff.classList.remove("hide")
-                canvasRef.classList.remove("hide");
-            }
-        };
-
-        darkModeQuery.addEventListener("change", (m) => { systemDarkMode = m.matches; updateAppearance(); });
-        reducedMotionQuery.addEventListener("change", (m) => { systemReducedMotion = m.matches; updateCanvas(); });
-
-        updateAppearance();
-        updateCanvas();
-
-        const toggleDarkMode = (e) => { appearance = appearance === "dark" ? "light" : "dark"; updateAppearance(); };
-        const toggleCanvas = (e) => { motion = motion === "reduce" ? "no-preference" : "reduce"; updateCanvas(); };
 
         document.getElementById('random-message').innerHTML = messageList[Math.floor(Math.random() * messageList.length)];
 
@@ -409,7 +410,6 @@
         document.getElementById('album-cover').src = song[1];
         document.getElementById('song-name').innerHTML = song[2];
         document.getElementById('artist-name').innerHTML = song[3];
-
     </script>
 </body>
 

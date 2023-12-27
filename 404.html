@@ -361,16 +361,16 @@
         const updateAppearance = () => {
             localStorage.setItem("appearance", appearance);
             if (appearance === "system" ? systemDarkMode : appearance === "dark") {
-                sun.classList.remove("hide")
-                moon.classList.add("hide")
+                sun.classList.remove("hide");
+                moon.classList.add("hide");
 
                 appearance = "dark";
                 document.body.classList.add("dark");
                 style.innerHTML = ':root {color-scheme: dark;}';
                 document.head.appendChild(style);
             } else {
-                sun.classList.add("hide")
-                moon.classList.remove("hide")
+                sun.classList.add("hide");
+                moon.classList.remove("hide");
 
                 document.body.classList.remove("dark");
                 style.innerHTML = ':root {color-scheme: light;}';
@@ -381,12 +381,12 @@
         const updateCanvas = () => {
             localStorage.setItem("motion", motion);
             if (motion === "system" ? systemReducedMotion : motion === "reduce") {
-                canvasOn.classList.remove("hide")
-                canvasOff.classList.add("hide")
+                canvasOn.classList.remove("hide");
+                canvasOff.classList.add("hide");
                 canvasRef.classList.add("hide");
             } else {
-                canvasOn.classList.add("hide")
-                canvasOff.classList.remove("hide")
+                canvasOn.classList.add("hide");
+                canvasOff.classList.remove("hide");
                 canvasRef.classList.remove("hide");
             }
         };
