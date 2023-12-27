@@ -60,20 +60,51 @@ hr {
   background-color: var(--icon-blue);
 }
 
+.work-item:hover .work-icon:before {
+  border-bottom: 12px solid var(--icon-blue);
+}
+
+.work-item:hover .work-icon:after {
+  border-top: 12px solid var(--icon-blue);
+}
+
 .work-item-line {
   flex: 1;
   border-top: 2px dotted var(--font-3);
 }
 
+.work-icon:before {
+  content: " ";
+  width: 0; height: 0;
+  border-bottom: 12px solid var(--button-hover);
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  position: absolute;
+  top: -12px;
+  transition: all 0.2s;
+}
+
 .work-icon {
   justify-content: center;
   min-width: 40px;
-  min-height: 40px;
+  height: 24px;
   background-color: var(--button-hover);
-  border-radius: 12px;
-  transition: background-color 0.2s;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.work-icon:after {
+  content: "";
+  width: 0;
+  position: absolute;
+  bottom: -12px;
+  border-top: 12px solid var(--button-hover);
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  transition: all 0.2s;
 }
 
 .work-info {
+  position: relative;
   gap: 12px;
 }
