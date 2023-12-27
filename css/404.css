@@ -12,9 +12,10 @@
   justify-content: space-between;
   flex: 1;
   height: 318px;
-  background-color: #79be2d;
+  background-color: var(--music-background);
   border-radius: 24px;
   outline: 1px solid var(--music-border);
+  transition: background-color 0.2s;
 }
 
 .link-text {
@@ -24,14 +25,8 @@
   padding: 0 0 24px 24px;
 }
 
-.link-text h1 {
-  color: #141414;
-  font-weight: 600;
-}
-
 .link-text h3 {
-  color: #141414b3;
-  font-weight: 600;
+  color: var(--font-2);
 }
 
 .link-img {
@@ -49,6 +44,10 @@
 
 .flow-img {
   padding: 24px;
+}
+
+.link-item:hover {
+  background-color: var(--music-hover);
 }
 
 .link-item:hover img,
