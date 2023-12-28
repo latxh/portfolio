@@ -46,8 +46,8 @@
   --music-hover: #d3d3d3;
 
   --icon-blue: #fecf3b;
-  --hidden-message-background: #D4E3F7;
-  --hidden-message-font: #00439B;
+  --hidden-message-background: #d4e3f7;
+  --hidden-message-font: #00439b;
 }
 
 .dark {
@@ -71,8 +71,8 @@
   --music-hover: #000;
 
   --icon-blue: #1a73e8;
-  --hidden-message-background: #202F43;
-  --hidden-message-font: #8FB9EF;
+  --hidden-message-background: #202f43;
+  --hidden-message-font: #8fb9ef;
 }
 
 ::selection {
@@ -284,5 +284,11 @@ main,
 
   .hide-title-break {
     display: block;
+  }
+}
+
+@media only screen and (max-height: 1080px) {
+  .site-wrapper .top-content {
+    margin-bottom: 36px;
   }
 }
