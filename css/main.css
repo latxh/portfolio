@@ -21,3 +21,64 @@ hr {
   visibility: hidden;
   margin: 0;
 }
+
+.top-space {
+  margin-top: 48px;
+}
+
+.bot-space {
+  margin-bottom: 48px;
+}
+
+.new-work {
+  width: 100%;
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+.link-item {
+  justify-content: space-between;
+  flex: 1;
+  height: 318px;
+  background-color: var(--music-background);
+  border-radius: 24px;
+  outline: 1px solid var(--music-border);
+  transition: background-color 0.2s;
+}
+
+.link-text {
+  height: 100%;
+  align-items: start;
+  justify-content: flex-end;
+  padding: 0 0 24px 24px;
+}
+
+.link-text h3 {
+  color: var(--font-2);
+}
+
+.link-img {
+  height: 318px;
+  overflow: hidden;
+  border-radius: 0 24px 24px 0;
+}
+
+.link-img img {
+  height: 318px;
+  margin-right: -1px;
+  object-fit: cover;
+  transition: all 0.3s ease;
+}
+
+.flow-img {
+  padding: 24px;
+}
+
+.link-item:hover {
+  background-color: var(--music-hover);
+}
+
+.link-item:hover img,
+.link-item:focus img {
+  transform: scale(1.1);
+}
