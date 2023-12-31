@@ -191,13 +191,13 @@ main,
     max-width: 828px;
   }
 
-  .work-wrapper {
-    display: flex !important;
+  .new-work {
+    flex-direction: column;
   }
 
-  .new-work-label,
-  .new-work {
-    display: none;
+  a.link-item {
+    width: 100%;
+    flex: auto;
   }
 }
 
@@ -209,15 +209,9 @@ main,
     max-width: 612px;
   }
 
-  div#music,
-  .work-item-line {
+  .tool-tip,
+  div#music {
     display: none;
-  }
-
-  main .work-item {
-    justify-content: space-between;
-    height: 72px;
-    padding: 8px 12px;
   }
 
   h1 {
@@ -267,8 +261,6 @@ main,
     gap: 12px;
   }
 
-  .tool-tip,
-  .work-item-date,
   canvas,
   #canvas-state {
     display: none;
@@ -278,12 +270,26 @@ main,
     background-color: transparent !important;
   }
 
-  main .work-info {
-    gap: 12px;
-  }
-
   .hide-title-break {
     display: block;
+  }
+
+  div.link-img img,
+  div.link-img,
+  a.link-item {
+    height: 200px;
+  }
+
+  .flow-img {
+    padding: 12px;
+  }
+
+  div.link-text {
+    padding: 0 0 16px 16px;
+  }
+
+  .site-wrapper {
+    margin-bottom: 0;
   }
 }
 

@@ -36,7 +36,7 @@
 .link-img {
   height: 318px;
   overflow: hidden;
-  border-radius: 24px;
+  border-radius: 0 24px 24px 0;
 }
 
 .link-img img {
