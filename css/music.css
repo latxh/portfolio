@@ -14,8 +14,12 @@
   /* border: none;
   border-bottom: 1px solid var(--button-shadow); */
   outline: 2px solid transparent;
-  background-color: var(--button);
+  background-color: var(--music-background);
   transition: all 0.2s;
+}
+
+.canvas-on #music {
+  background-color: var(--button);
 }
 
 /* .dark #music {
@@ -24,6 +28,10 @@
 } */
 
 #music:hover {
+  background-color: var(--music-hover);
+}
+
+.canvas-on #music:hover {
   background-color: var(--button-hover);
 }
 

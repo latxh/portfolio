@@ -51,12 +51,19 @@ button:hover svg {
 
 a:focus-visible,
 button:focus-visible,
-.music-link:focus-visible #music {
+.music-link:focus-visible #music,
+.canvas-on .link-item:focus-visible {
   outline: 2px solid var(--focus-blue);
 }
 
 a:not(:active):focus-visible,
 button:not(:active):focus-visible,
 .music-link:not(:active):focus-visible #music {
+  outline-offset: 0.3rem;
+}
+
+.canvas-off .link-item:hover,
+.canvas-off .music-link:hover #music {
+  outline: 2px solid var(--focus-blue);
   outline-offset: 0.3rem;
 }

@@ -331,10 +331,14 @@
                 canvasOn.classList.remove("hide");
                 canvasOff.classList.add("hide");
                 canvasRef.classList.add("hide");
+                document.body.classList.add("canvas-off");
+                document.body.classList.remove("canvas-on");
             } else {
                 canvasOn.classList.add("hide");
                 canvasOff.classList.remove("hide");
                 canvasRef.classList.remove("hide");
+                document.body.classList.remove("canvas-off");
+                document.body.classList.add("canvas-on");
             }
         };
 

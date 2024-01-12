@@ -42,8 +42,12 @@ hr {
   height: 318px;
   background-color: var(--music-background);
   border-radius: 24px;
+  outline: 2px solid transparent;
+  transition: all 0.2s;
+}
+
+.canvas-on .link-item {
   outline: 1px solid var(--music-border);
-  transition: background-color 0.2s;
 }
 
 .link-text {
