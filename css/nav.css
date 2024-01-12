@@ -35,6 +35,7 @@ button {
   border-top: 1px solid var(--button-shadow);
 }
 
+#music svg,
 button svg {
   transition: all 0.2s;
 }
@@ -43,6 +44,7 @@ button:hover {
   background-color: var(--button-hover);
 }
 
+#music:hover svg,
 button:hover svg {
   fill: var(--font-1);
 }
