@@ -36,6 +36,10 @@ hr {
   margin-bottom: 48px;
 }
 
+.first-row {
+  margin-bottom: 16px;
+}
+
 .link-item {
   justify-content: space-between;
   flex: 1;

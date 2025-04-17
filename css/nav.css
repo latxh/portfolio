@@ -12,6 +12,14 @@ nav {
   color: var(--font-1);
 }
 
+.canvas-on .name-logo h6 {
+  color: var(--font-1);
+}
+
+.canvas-on .name-logo:hover h6 {
+  color: var(--font-2);
+}
+
 .button-wrapper {
   gap: 24px;
 }

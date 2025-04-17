@@ -1,315 +1,498 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <title>404 Page Not Found</title>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Creating experiences for people to use, enjoy and explore.">
+    <meta
+      name="description"
+      content="Creating experiences for people to use, enjoy and explore."
+    />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
     <meta name="apple-touch-fullscreen" content="yes" />
 
-    <meta property='og:title' content="Brian Latchman" />
-    <meta property='og:image' content='https://latchman.ca/assets/portrait.jpg' />
-    <meta property='og:description' content="Creating experiences for people to use, enjoy and explore." />
-    <meta property='og:url' content='https://latchman.ca/' />
+    <meta property="og:title" content="Brian Latchman" />
+    <meta
+      property="og:image"
+      content="https://latchman.ca/assets/portrait.jpg"
+    />
+    <meta
+      property="og:description"
+      content="Creating experiences for people to use, enjoy and explore."
+    />
+    <meta property="og:url" content="https://latchman.ca/" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r67/three.min.js"></script>
 
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
-    <link rel="stylesheet" type="text/css" href="css/core-styles.css">
-    <link rel="stylesheet" type="text/css" href="css/nav.css">
-    <link rel="stylesheet" type="text/css" href="css/tooltip.css">
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-    <link rel="stylesheet" type="text/css" href="css/underline.css">
-    <link rel="stylesheet" type="text/css" href="css/footer.css">
-</head>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="css/core-styles.css" />
+    <link rel="stylesheet" type="text/css" href="css/nav.css" />
+    <link rel="stylesheet" type="text/css" href="css/tooltip.css" />
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link rel="stylesheet" type="text/css" href="css/underline.css" />
+    <link rel="stylesheet" type="text/css" href="css/footer.css" />
+  </head>
 
-<body>
+  <body>
     <div class="site-wrapper">
+      <nav class="row">
+        <a class="name-logo" href="/">
+          <h6>Brian Latchman</h6>
+        </a>
 
-        <nav class="row">
-            <a class="name-logo" href="/">
-                <h6>Brian Latchman</h6>
-            </a>
+        <div class="button-wrapper row">
+          <button
+            id="canvas-state"
+            aria-label="Toggle visual effects"
+            onclick="toggleCanvas()"
+          >
+            <p class="tool-tip">Toggle visual effects</p>
+            <svg
+              id="canvas-on"
+              class="hide"
+              aria-hidden="true"
+              fill="var(--font-2)"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M7.909 5h1.34a.75.75 0 0 1 .102 1.493L9.25 6.5H7.91a.75.75 0 0 0-.477.17l-.075.073-2.074 2.256h3.466a2.25 2.25 0 0 1 2.237 2.005h2.027A2.25 2.25 0 0 1 15.25 9l3.477-.001-2.083-2.258a.75.75 0 0 0-.448-.234l-.104-.007h-1.345a.75.75 0 0 1-.102-1.493L14.747 5h1.346a2.25 2.25 0 0 1 1.52.592l.133.132 3.642 3.947c.05.055.091.115.122.178.306.384.489.871.489 1.4v3.497a3.25 3.25 0 0 1-3.25 3.25H16.25a3.25 3.25 0 0 1-3.25-3.25l-.001-2.242h-2.001v2.242a3.25 3.25 0 0 1-3.25 3.25H5.25A3.25 3.25 0 0 1 2 14.746V11.25c0-.562.206-1.076.546-1.47l.038-.055.044-.052 3.624-3.945a2.25 2.25 0 0 1 1.469-.72L7.909 5h1.34-1.34Zm.84 5.5H4.25a.75.75 0 0 0-.75.75v3.496c0 .967.784 1.75 1.75 1.75h2.499a1.75 1.75 0 0 0 1.75-1.75V11.25a.75.75 0 0 0-.75-.75Zm11 0H15.25a.75.75 0 0 0-.75.75v3.496c0 .967.784 1.75 1.75 1.75h2.499a1.75 1.75 0 0 0 1.75-1.75V11.25a.75.75 0 0 0-.75-.75Z"
+              />
+            </svg>
+            <svg
+              id="canvas-off"
+              aria-hidden="true"
+              fill="var(--font-2)"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M3.28 2.22a.75.75 0 1 0-1.06 1.06l3.273 3.274-2.865 3.119-.044.052-.038.055c-.34.394-.546.908-.546 1.47v3.496a3.25 3.25 0 0 0 3.25 3.25h2.499a3.25 3.25 0 0 0 3.25-3.25l-.001-2.242h.445L13 14.061v.685a3.25 3.25 0 0 0 3.25 3.25h.685l3.784 3.785a.75.75 0 0 0 1.061-1.061L3.28 2.22ZM7.94 9l-2.656-.001 1.272-1.384L7.939 9ZM4.25 10.5h4.499a.75.75 0 0 1 .75.75v3.496a1.75 1.75 0 0 1-1.75 1.75H5.25a1.75 1.75 0 0 1-1.75-1.75V11.25a.75.75 0 0 1 .75-.75ZM13.303 10.121l1.197 1.197v-.068a.75.75 0 0 1 .75-.75h4.499a.75.75 0 0 1 .75.75v3.496a1.75 1.75 0 0 1-.993 1.578l1.094 1.094a3.246 3.246 0 0 0 1.399-2.672V11.25c0-.53-.183-1.017-.489-1.4a.748.748 0 0 0-.122-.179l-3.642-3.947-.133-.132A2.25 2.25 0 0 0 16.093 5h-1.346l-.102.007a.75.75 0 0 0 .102 1.493h1.346l.103.007a.75.75 0 0 1 .448.234L18.727 9H15.25c-.831 0-1.557.452-1.947 1.122Z"
+              />
+            </svg>
+          </button>
+        </div>
+      </nav>
 
-            <div class="button-wrapper row">
-                <button id="canvas-state" aria-label="Toggle visual effects" onclick="toggleCanvas()">
-                    <p class="tool-tip">Toggle visual effects</p>
-                    <svg id="canvas-on" class="hide" aria-hidden="true" fill="var(--font-2)" width="24" height="24"
-                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M7.909 5h1.34a.75.75 0 0 1 .102 1.493L9.25 6.5H7.91a.75.75 0 0 0-.477.17l-.075.073-2.074 2.256h3.466a2.25 2.25 0 0 1 2.237 2.005h2.027A2.25 2.25 0 0 1 15.25 9l3.477-.001-2.083-2.258a.75.75 0 0 0-.448-.234l-.104-.007h-1.345a.75.75 0 0 1-.102-1.493L14.747 5h1.346a2.25 2.25 0 0 1 1.52.592l.133.132 3.642 3.947c.05.055.091.115.122.178.306.384.489.871.489 1.4v3.497a3.25 3.25 0 0 1-3.25 3.25H16.25a3.25 3.25 0 0 1-3.25-3.25l-.001-2.242h-2.001v2.242a3.25 3.25 0 0 1-3.25 3.25H5.25A3.25 3.25 0 0 1 2 14.746V11.25c0-.562.206-1.076.546-1.47l.038-.055.044-.052 3.624-3.945a2.25 2.25 0 0 1 1.469-.72L7.909 5h1.34-1.34Zm.84 5.5H4.25a.75.75 0 0 0-.75.75v3.496c0 .967.784 1.75 1.75 1.75h2.499a1.75 1.75 0 0 0 1.75-1.75V11.25a.75.75 0 0 0-.75-.75Zm11 0H15.25a.75.75 0 0 0-.75.75v3.496c0 .967.784 1.75 1.75 1.75h2.499a1.75 1.75 0 0 0 1.75-1.75V11.25a.75.75 0 0 0-.75-.75Z" />
-                    </svg>
-                    <svg id="canvas-off" aria-hidden="true" fill="var(--font-2)" width="24" height="24"
-                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M3.28 2.22a.75.75 0 1 0-1.06 1.06l3.273 3.274-2.865 3.119-.044.052-.038.055c-.34.394-.546.908-.546 1.47v3.496a3.25 3.25 0 0 0 3.25 3.25h2.499a3.25 3.25 0 0 0 3.25-3.25l-.001-2.242h.445L13 14.061v.685a3.25 3.25 0 0 0 3.25 3.25h.685l3.784 3.785a.75.75 0 0 0 1.061-1.061L3.28 2.22ZM7.94 9l-2.656-.001 1.272-1.384L7.939 9ZM4.25 10.5h4.499a.75.75 0 0 1 .75.75v3.496a1.75 1.75 0 0 1-1.75 1.75H5.25a1.75 1.75 0 0 1-1.75-1.75V11.25a.75.75 0 0 1 .75-.75ZM13.303 10.121l1.197 1.197v-.068a.75.75 0 0 1 .75-.75h4.499a.75.75 0 0 1 .75.75v3.496a1.75 1.75 0 0 1-.993 1.578l1.094 1.094a3.246 3.246 0 0 0 1.399-2.672V11.25c0-.53-.183-1.017-.489-1.4a.748.748 0 0 0-.122-.179l-3.642-3.947-.133-.132A2.25 2.25 0 0 0 16.093 5h-1.346l-.102.007a.75.75 0 0 0 .102 1.493h1.346l.103.007a.75.75 0 0 1 .448.234L18.727 9H15.25c-.831 0-1.557.452-1.947 1.122Z" />
-                    </svg>
-                </button>
+      <main>
+        <div class="col title-wrapper top-space">
+          <h1>Ruh roh, page not found</h1>
+          <hr size="16px" />
+          <h2>Check out my work</h2>
+        </div>
+
+        <div class="new-work first-row row">
+          <a
+            class="link-item row"
+            href="https://copilot.microsoft.com/daily"
+            target="_blank"
+          >
+            <div class="link-text col">
+              <h1>Copilot Daily</h1>
+              <hr size="8px" />
+              <h3>Discover something new</h3>
             </div>
-        </nav>
-
-        <main>
-            <div class="col title-wrapper top-space">
-                <h1>Ruh roh, page not found</h1>
-                <hr size="16px">
-                <h2>Check out my work</h2>
+            <div class="link-img">
+              <img src="assets/work/copilot.png" alt="Copilot Discover feed" />
             </div>
+          </a>
 
-            <div class="new-work row">
-                <a class="link-item row" href="https://www.start.gg/" target="_blank">
-                    <div class="link-text col">
-                        <h1>Start.gg</h1>
-                        <hr size="8px">
-                        <h3>Powering esport communities</h3>
-                    </div>
-                    <div class="link-img">
-                        <img src="assets/work/startgg.png" alt="Start.gg logo on headphones">
-                    </div>
-                </a>
-
-                <a class="link-item row" href="https://www.shopify.com/flow" target="_blank">
-                    <div class="link-text col">
-                        <h1>Shopify Flow</h1>
-                        <hr size="8px">
-                        <h3>Automate everything</h3>
-                    </div>
-                    <div class="link-img">
-                        <img src="assets/work/flow.png" alt="Shopify Flow product demonstration">
-                    </div>
-                </a>
+          <a
+            class="link-item row"
+            href="https://aka.ms/msnstudio"
+            target="_blank"
+          >
+            <div class="link-text col">
+              <h1>MSN Studio</h1>
+              <hr size="8px" />
+              <h3>Component workshop</h3>
             </div>
-
-            <div class="social-links">
-                <a href="mailto:latxhman@gmail.com" target="_blank" class="underline">
-                    <span>latxhman@gmail.com</span><svg viewBox="0 0 13 20">
-                        <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5" />
-                    </svg>
-                </a>
-                <hr size="16px">
-                <a href="https://www.linkedin.com/in/brian-latchman/" target="_blank" class="underline">
-                    <span>Linkedin</span><svg viewBox="0 0 13 20">
-                        <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5" />
-                    </svg>
-                </a>
-                <hr size="16px">
-                <a href="https://www.instagram.com/latxhman/" target="_blank" class="underline">
-                    <span>Instagram</span><svg viewBox="0 0 13 20">
-                        <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5" />
-                    </svg>
-                </a>
-                <hr size="16px">
-                <a href="https://github.com/latxh/" target="_blank" class="underline">
-                    <span>Github</span><svg viewBox="0 0 13 20">
-                        <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5" />
-                    </svg>
-                </a>
+            <div class="link-img">
+              <img src="assets/work/msn.png" alt="MSN butterfly" />
             </div>
-        </main>
+          </a>
+        </div>
+
+        <div class="new-work row">
+          <a class="link-item row" href="https://www.start.gg/" target="_blank">
+            <div class="link-text col">
+              <h1>Start.gg</h1>
+              <hr size="8px" />
+              <h3>Powering esport communities</h3>
+            </div>
+            <div class="link-img">
+              <img
+                src="assets/work/startgg.png"
+                alt="Start.gg logo on headphones"
+              />
+            </div>
+          </a>
+
+          <a
+            class="link-item row"
+            href="https://www.shopify.com/flow"
+            target="_blank"
+          >
+            <div class="link-text col">
+              <h1>Shopify Flow</h1>
+              <hr size="8px" />
+              <h3>Automate everything</h3>
+            </div>
+            <div class="link-img">
+              <img
+                src="assets/work/flow.png"
+                alt="Shopify Flow product demonstration"
+              />
+            </div>
+          </a>
+        </div>
+
+        <div class="social-links">
+          <a href="mailto:latxhman@gmail.com" target="_blank" class="underline">
+            <span>latxhman@gmail.com</span
+            ><svg viewBox="0 0 13 20">
+              <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5" />
+            </svg>
+          </a>
+          <hr size="16px" />
+          <a
+            href="https://www.linkedin.com/in/brian-latchman/"
+            target="_blank"
+            class="underline"
+          >
+            <span>Linkedin</span
+            ><svg viewBox="0 0 13 20">
+              <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5" />
+            </svg>
+          </a>
+          <hr size="16px" />
+          <a
+            href="https://www.instagram.com/latxhman/"
+            target="_blank"
+            class="underline"
+          >
+            <span>Instagram</span
+            ><svg viewBox="0 0 13 20">
+              <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5" />
+            </svg>
+          </a>
+          <hr size="16px" />
+          <a href="https://github.com/latxh/" target="_blank" class="underline">
+            <span>Github</span
+            ><svg viewBox="0 0 13 20">
+              <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5" />
+            </svg>
+          </a>
+        </div>
+      </main>
     </div>
 
     <footer id="footer" onclick="toggleMessage()">
-        <div class="footer-wrapper">
-            <div class="random-message-wrapper row">
-                <p id="random-message" class="clamp-text"></p>
-                <p class="clamp-text">2025 TM</p>
-            </div>
-
-            <div id="hidden-message" class="hide">
-
-                <p class="hidden-message-text">If you're a fox, play the hare. If you're the hare, play the fox.</p>
-            </div>
+      <div class="footer-wrapper">
+        <div class="random-message-wrapper row">
+          <p id="random-message" class="clamp-text"></p>
+          <p class="clamp-text">2025 TM</p>
         </div>
+
+        <div id="hidden-message" class="hide">
+          <p class="hidden-message-text">
+            If you're a fox, play the hare. If you're the hare, play the fox.
+          </p>
+        </div>
+      </div>
     </footer>
 
     <!-- Canvas script -->
     <script>
-        (function () {
-            let Mouse, PI, abs, animloop, camera, canvas, cos, ctx, cubes, distance, frame, geometry, hypotenuse, material, offset, renderer, resizeHandler, scene, seed, side, sidehypotenuse, sin, sqrt, start, t, x, xside, y, yside, _i, _j, _ref, _ref1, _ref2, _ref3;
-            t = 0;
-            start = Date.now();
-            seed = 2000;
-            frame = 0;
-            PI = Math.PI;
+      (function () {
+        let Mouse,
+          PI,
+          abs,
+          animloop,
+          camera,
+          canvas,
+          cos,
+          ctx,
+          cubes,
+          distance,
+          frame,
+          geometry,
+          hypotenuse,
+          material,
+          offset,
+          renderer,
+          resizeHandler,
+          scene,
+          seed,
+          side,
+          sidehypotenuse,
+          sin,
+          sqrt,
+          start,
+          t,
+          x,
+          xside,
+          y,
+          yside,
+          _i,
+          _j,
+          _ref,
+          _ref1,
+          _ref2,
+          _ref3;
+        t = 0;
+        start = Date.now();
+        seed = 2000;
+        frame = 0;
+        PI = Math.PI;
 
-            sin = function (a) {
-                return Math.sin(a);
-            };
+        sin = function (a) {
+          return Math.sin(a);
+        };
 
-            cos = function (a) {
-                return Math.cos(a);
-            };
+        cos = function (a) {
+          return Math.cos(a);
+        };
 
-            abs = function (a) {
-                return Math.abs(a);
-            };
+        abs = function (a) {
+          return Math.abs(a);
+        };
 
-            sqrt = function (a) {
-                return Math.sqrt(a);
-            };
+        sqrt = function (a) {
+          return Math.sqrt(a);
+        };
 
-            hypotenuse = function (a, b) {
-                return Math.sqrt(a * a + b * b);
-            };
+        hypotenuse = function (a, b) {
+          return Math.sqrt(a * a + b * b);
+        };
 
-            distance = function (x1, y1, x2, y2) {
-                return hypotenuse(x2 - x1, y2 - y1);
-            };
+        distance = function (x1, y1, x2, y2) {
+          return hypotenuse(x2 - x1, y2 - y1);
+        };
 
-            scene = new THREE.Scene();
-            camera = new THREE.OrthographicCamera(window.innerWidth / -2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / -2, -50 * 100, 30 * 1000);
-            renderer = new THREE.WebGLRenderer();
-            canvas = document.createElement('canvas');
-            ctx = canvas.getContext('2d');
+        scene = new THREE.Scene();
+        camera = new THREE.OrthographicCamera(
+          window.innerWidth / -2,
+          window.innerWidth / 2,
+          window.innerHeight / 2,
+          window.innerHeight / -2,
+          -50 * 100,
+          30 * 1000
+        );
+        renderer = new THREE.WebGLRenderer();
+        canvas = document.createElement("canvas");
+        ctx = canvas.getContext("2d");
 
-            (resizeHandler = function () {
-                camera.left = canvas.left = window.innerWidth / -2;
-                camera.right = canvas.right = window.innerWidth / 2;
-                camera.bottom = canvas.bottom = window.innerHeight / -2;
-                camera.top = canvas.top = window.innerHeight / 2;
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-                return canvas.hyp = hypotenuse(canvas.width, canvas.height);
-            })();
+        (resizeHandler = function () {
+          camera.left = canvas.left = window.innerWidth / -2;
+          camera.right = canvas.right = window.innerWidth / 2;
+          camera.bottom = canvas.bottom = window.innerHeight / -2;
+          camera.top = canvas.top = window.innerHeight / 2;
+          camera.aspect = window.innerWidth / window.innerHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(window.innerWidth, window.innerHeight);
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+          return (canvas.hyp = hypotenuse(canvas.width, canvas.height));
+        })();
 
-            window.addEventListener('resize', resizeHandler, false);
-            document.body.appendChild(renderer.domElement);
-            side = hypotenuse(canvas.width, canvas.height) / 45;
-            geometry = new THREE.BoxGeometry(side + 1, side + 1, side + 5);
-            material = new THREE.MeshBasicMaterial({});
-            cubes = [];
-            xside = side;
-            yside = side;
-            sidehypotenuse = hypotenuse(side, side);
-            offset = 75;
+        window.addEventListener("resize", resizeHandler, false);
+        document.body.appendChild(renderer.domElement);
+        side = hypotenuse(canvas.width, canvas.height) / 45;
+        geometry = new THREE.BoxGeometry(side + 1, side + 1, side + 5);
+        material = new THREE.MeshBasicMaterial({});
+        cubes = [];
+        xside = side;
+        yside = side;
+        sidehypotenuse = hypotenuse(side, side);
+        offset = 75;
 
-            for (x = _i = _ref = camera.left * 1.3, _ref1 = camera.right * 1.3; xside > 0 ? _i <= _ref1 : _i >= _ref1; x = _i += xside) {
-                for (y = _j = _ref2 = camera.bottom * 1.3, _ref3 = camera.top * 1.3; yside > 0 ? _j <= _ref3 : _j >= _ref3; y = _j += yside) {
-                    cubes.push(new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({
-                        color: 0x00ffff,
-                        transparent: true,
-                        wireframe: false,
-                        opacity: 1
-                    })));
-                    cubes[cubes.length - 1].position.x = x;
-                    cubes[cubes.length - 1].position.y = y;
-                    cubes[cubes.length - 1].position.z = x + y;
-                    scene.add(cubes[cubes.length - 1]);
-                }
-            }
+        for (
+          x = _i = _ref = camera.left * 1.3, _ref1 = camera.right * 1.3;
+          xside > 0 ? _i <= _ref1 : _i >= _ref1;
+          x = _i += xside
+        ) {
+          for (
+            y = _j = _ref2 = camera.bottom * 1.3, _ref3 = camera.top * 1.3;
+            yside > 0 ? _j <= _ref3 : _j >= _ref3;
+            y = _j += yside
+          ) {
+            cubes.push(
+              new THREE.Mesh(
+                geometry,
+                new THREE.MeshBasicMaterial({
+                  color: 0x00ffff,
+                  transparent: true,
+                  wireframe: false,
+                  opacity: 1,
+                })
+              )
+            );
+            cubes[cubes.length - 1].position.x = x;
+            cubes[cubes.length - 1].position.y = y;
+            cubes[cubes.length - 1].position.z = x + y;
+            scene.add(cubes[cubes.length - 1]);
+          }
+        }
 
-            camera.position.set(0, 0, side * 10);
-            Mouse = {
-                down: false,
-                held: 0,
-                x: canvas.width / 2,
-                y: canvas.height / 2,
-                x0: 0,
-                y0: 0,
-                events: {
-                    move: function (e) {
-                        if ("touches" in e) {
-                            e.preventDefault();
-                            e = e.touches[0];
-                        }
-                        Mouse.x = (Mouse.x + e.pageX) * 0.5;
-                        Mouse.y = (Mouse.y + e.pageY) * 0.5;
-                        Mouse.x0 = Mouse.x - canvas.width / 2;
-                        return Mouse.y0 = Mouse.y - canvas.height / 2;
-                    },
-                    down: function (e) {
-                        return Mouse.down = !Mouse.down;
-                    },
-                    up: function (e) {
-                        return Mouse.down = !Mouse.down;
-                    }
-                }
-            };
+        camera.position.set(0, 0, side * 10);
+        Mouse = {
+          down: false,
+          held: 0,
+          x: canvas.width / 2,
+          y: canvas.height / 2,
+          x0: 0,
+          y0: 0,
+          events: {
+            move: function (e) {
+              if ("touches" in e) {
+                e.preventDefault();
+                e = e.touches[0];
+              }
+              Mouse.x = (Mouse.x + e.pageX) * 0.5;
+              Mouse.y = (Mouse.y + e.pageY) * 0.5;
+              Mouse.x0 = Mouse.x - canvas.width / 2;
+              return (Mouse.y0 = Mouse.y - canvas.height / 2);
+            },
+            down: function (e) {
+              return (Mouse.down = !Mouse.down);
+            },
+            up: function (e) {
+              return (Mouse.down = !Mouse.down);
+            },
+          },
+        };
 
-            window.addEventListener('mousemove', Mouse.events.move, false);
-            window.addEventListener('mousedown', Mouse.events.down, false);
-            window.addEventListener('mouseup', Mouse.events.up, false);
-            window.addEventListener('touchmove', Mouse.events.move, false);
-            window.addEventListener('touchstart', Mouse.events.down, false);
-            window.addEventListener('touchstop', Mouse.events.up, false);
-            camera.up = new THREE.Vector3(0, 1, 0);
+        window.addEventListener("mousemove", Mouse.events.move, false);
+        window.addEventListener("mousedown", Mouse.events.down, false);
+        window.addEventListener("mouseup", Mouse.events.up, false);
+        window.addEventListener("touchmove", Mouse.events.move, false);
+        window.addEventListener("touchstart", Mouse.events.down, false);
+        window.addEventListener("touchstop", Mouse.events.up, false);
+        camera.up = new THREE.Vector3(0, 1, 0);
 
-            animloop = function () {
-                var a, b, c, dist, dist0, distneg, g, i, r, _k, _ref4;
-                animloop.id = requestAnimationFrame(animloop);
-                t = (Date.now() - start) / 1000 + seed;
-                frame++;
-                camera.position.set(side * 10, side * 10, -side * 10);
-                camera.lookAt(new THREE.Vector3(0, 0, 0));
-                if (Mouse.down) {
-                    Mouse.held++;
-                }
-                for (i = _k = 0, _ref4 = cubes.length; 0 <= _ref4 ? _k < _ref4 : _k > _ref4; i = 0 <= _ref4 ? ++_k : --_k) {
-                    c = cubes[i];
-                    dist = distance(-Mouse.x0, -Mouse.y0, c.position.x, c.position.y);
-                    dist0 = distance(0, 0, c.position.x, c.position.y);
-                    distneg = distance(Mouse.x0, Mouse.y0, c.position.x, c.position.y);
-                    c.scale.y = 2.25 + 1.25 * sin(dist / canvas.hyp * PI * 7 - t * 0.8 - Mouse.held / 50) * cos(dist / canvas.hyp * PI * 4 - t * 1.5 - Mouse.held / 50) + (1 + sin((distneg - dist) / canvas.hyp * PI * 1));
-                    a = c.position.z;
-                    r = 0.4 + 0.40 * sin(distneg / canvas.hyp * PI * 2 * 0.75 - t / 3.0 + 3 + Mouse.held / 80 + c.scale.y / 3.5);
-                    g = 0.4 + 0.40 * sin(distneg / canvas.hyp * PI * 2 * 0.75 - t / 3.1 + 2 + Mouse.held / 81 + c.scale.y / 3.5);
-                    b = 0.4 + 0.40 * sin(distneg / canvas.hyp * PI * 2 * 0.75 - t / 3.2 + 1 + Mouse.held / 82 + c.scale.y / 3.5);
-                    cubes[i].material.color = new THREE.Color(r, g, b);
-                }
-                return renderer.render(scene, camera);
-            };
+        animloop = function () {
+          var a, b, c, dist, dist0, distneg, g, i, r, _k, _ref4;
+          animloop.id = requestAnimationFrame(animloop);
+          t = (Date.now() - start) / 1000 + seed;
+          frame++;
+          camera.position.set(side * 10, side * 10, -side * 10);
+          camera.lookAt(new THREE.Vector3(0, 0, 0));
+          if (Mouse.down) {
+            Mouse.held++;
+          }
+          for (
+            i = _k = 0, _ref4 = cubes.length;
+            0 <= _ref4 ? _k < _ref4 : _k > _ref4;
+            i = 0 <= _ref4 ? ++_k : --_k
+          ) {
+            c = cubes[i];
+            dist = distance(-Mouse.x0, -Mouse.y0, c.position.x, c.position.y);
+            dist0 = distance(0, 0, c.position.x, c.position.y);
+            distneg = distance(Mouse.x0, Mouse.y0, c.position.x, c.position.y);
+            c.scale.y =
+              2.25 +
+              1.25 *
+                sin((dist / canvas.hyp) * PI * 7 - t * 0.8 - Mouse.held / 50) *
+                cos((dist / canvas.hyp) * PI * 4 - t * 1.5 - Mouse.held / 50) +
+              (1 + sin(((distneg - dist) / canvas.hyp) * PI * 1));
+            a = c.position.z;
+            r =
+              0.4 +
+              0.4 *
+                sin(
+                  (distneg / canvas.hyp) * PI * 2 * 0.75 -
+                    t / 3.0 +
+                    3 +
+                    Mouse.held / 80 +
+                    c.scale.y / 3.5
+                );
+            g =
+              0.4 +
+              0.4 *
+                sin(
+                  (distneg / canvas.hyp) * PI * 2 * 0.75 -
+                    t / 3.1 +
+                    2 +
+                    Mouse.held / 81 +
+                    c.scale.y / 3.5
+                );
+            b =
+              0.4 +
+              0.4 *
+                sin(
+                  (distneg / canvas.hyp) * PI * 2 * 0.75 -
+                    t / 3.2 +
+                    1 +
+                    Mouse.held / 82 +
+                    c.scale.y / 3.5
+                );
+            cubes[i].material.color = new THREE.Color(r, g, b);
+          }
+          return renderer.render(scene, camera);
+        };
 
-            animloop();
-
-        }).call(this);
+        animloop();
+      }).call(this);
     </script>
 
     <!-- Motion preferences, music widget and footer text script -->
     <script>
-        let canvasRef = document.getElementsByTagName('canvas')[0]
-        let canvasButtonOn = document.getElementById('canvas-on');
-        let canvasButtonOff = document.getElementById('canvas-off');
-        let hiddenMessage = document.getElementById("hidden-message");
+      let canvasRef = document.getElementsByTagName("canvas")[0];
+      let canvasButtonOn = document.getElementById("canvas-on");
+      let canvasButtonOff = document.getElementById("canvas-off");
+      let hiddenMessage = document.getElementById("hidden-message");
 
-        let reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-        let motion = localStorage.getItem("motion") ?? "system";
-        let systemReducedMotion = reducedMotionQuery.matches;
+      let reducedMotionQuery = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      );
+      let motion = localStorage.getItem("motion") ?? "system";
+      let systemReducedMotion = reducedMotionQuery.matches;
 
-        const updateCanvas = () => {
-            localStorage.setItem("motion", motion);
-            if (motion === "system" ? systemReducedMotion : motion === "reduce") {
-                canvasButtonOn.classList.remove("hide");
-                canvasButtonOff.classList.add("hide");
-                canvasRef.classList.remove("show");
-                document.body.classList.add("canvas-off");
-                document.body.classList.remove("canvas-on");
-            } else {
-                canvasButtonOn.classList.add("hide");
-                canvasButtonOff.classList.remove("hide");
-                canvasRef.classList.add("show");
-                document.body.classList.remove("canvas-off");
-                document.body.classList.add("canvas-on");
-            }
-        };
+      const updateCanvas = () => {
+        localStorage.setItem("motion", motion);
+        if (motion === "system" ? systemReducedMotion : motion === "reduce") {
+          canvasButtonOn.classList.remove("hide");
+          canvasButtonOff.classList.add("hide");
+          canvasRef.classList.remove("show");
+          document.body.classList.add("canvas-off");
+          document.body.classList.remove("canvas-on");
+        } else {
+          canvasButtonOn.classList.add("hide");
+          canvasButtonOff.classList.remove("hide");
+          canvasRef.classList.add("show");
+          document.body.classList.remove("canvas-off");
+          document.body.classList.add("canvas-on");
+        }
+      };
 
-        reducedMotionQuery.addEventListener("change", (m) => { systemReducedMotion = m.matches; updateCanvas(); });
-
+      reducedMotionQuery.addEventListener("change", (m) => {
+        systemReducedMotion = m.matches;
         updateCanvas();
+      });
 
-        const toggleCanvas = (e) => { motion = motion === "reduce" ? "no-preference" : "reduce"; updateCanvas(); };
+      updateCanvas();
 
-        function toggleMessage() {
-            hiddenMessage.classList.toggle("hide");
-        };
+      const toggleCanvas = (e) => {
+        motion = motion === "reduce" ? "no-preference" : "reduce";
+        updateCanvas();
+      };
 
-        let messageList = ['404'];
+      function toggleMessage() {
+        hiddenMessage.classList.toggle("hide");
+      }
 
-        document.getElementById('random-message').innerHTML = messageList[Math.floor(Math.random() * messageList.length)];
+      let messageList = ["404"];
+
+      document.getElementById("random-message").innerHTML =
+        messageList[Math.floor(Math.random() * messageList.length)];
     </script>
-</body>
-
+  </body>
 </html>
