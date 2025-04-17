@@ -24,6 +24,7 @@
 }
 
 :root {
+  color-scheme: dark;
   font-family: Latch, Arial, Helvetica, sans-serif;
   --canvas-opacity: 0.6;
   --focus-blue: #1a73e8;
