@@ -3,6 +3,15 @@ nav {
   justify-content: space-between;
 }
 
+.name-logo h6 {
+  color: var(--font-2);
+  transition: all 0.2s;
+}
+
+.name-logo:hover h6 {
+  color: var(--font-1);
+}
+
 .button-wrapper {
   gap: 24px;
 }
@@ -16,6 +25,7 @@ a:active {
 }
 
 button {
+  position: relative;
   cursor: pointer;
   height: 42px;
   width: 42px;
@@ -25,14 +35,8 @@ button {
   justify-content: center;
   align-items: center;
   border: none;
-  border-bottom: 1px solid var(--button-shadow);
   background-color: var(--button);
   transition: background-color 0.2s;
-}
-
-.dark button {
-  border-bottom: none;
-  border-top: 1px solid var(--button-shadow);
 }
 
 #music svg,

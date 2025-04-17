@@ -1,6 +1,9 @@
 footer {
-  cursor: help;
   padding: 24px 0;
+}
+
+.footer-wrapper {
+  position: relative;
 }
 
 .footer-filled {
@@ -8,6 +11,7 @@ footer {
 }
 
 .random-message-wrapper {
+  cursor: help;
   justify-content: space-between;
 }
 

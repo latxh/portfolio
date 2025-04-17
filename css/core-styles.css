@@ -25,54 +25,29 @@
 
 :root {
   font-family: Latch, Arial, Helvetica, sans-serif;
-  --canvas-opacity: 0.4;
-  --focus-blue: #1a73e8;
-
-  --selection-background: #fecf3b;
-  --selection-font: var(--font-1);
-
-  --footer: #fff;
-  --background: #ededed;
-  --font-1: #141414;
-  --font-2: #141414b3;
-  --font-3: rgba(20, 20, 20, 0.3);
-
-  --button: rgb(20, 20, 20, 0.05);
-  --button-hover: rgb(20, 20, 20, 0.15);
-  --button-shadow: rgb(0, 0, 0, 0.1);
-
-  --music-background: #fff;
-  --music-border: #dbdbdb;
-  --music-hover: #d3d3d3;
-
-  --icon-blue: #fecf3b;
-  --hidden-message-background: #d4e3f7;
-  --hidden-message-font: #00439b;
-}
-
-.dark {
   --canvas-opacity: 0.6;
+  --focus-blue: #1a73e8;
 
   --selection-background: var(--focus-blue);
   --selection-font: var(--font-1);
 
-  --footer: #000;
-  --background: #141414;
-  --font-1: #ededed;
-  --font-2: #f5f5f5b3;
-  --font-3: rgba(245, 245, 245, 0.3);
+  --footer: #17181a;
+  --background: #101112;
+  --font-1: #f3f4f5;
+  --font-2: #9fa4ab;
 
-  --button: rgb(245, 245, 245, 0.05);
-  --button-hover: rgb(245, 245, 245, 0.2);
-  --button-shadow: rgb(255, 255, 255, 0.15);
+  --button: #323338;
+  --button-hover: #28292b;
 
-  --music-background: #222;
-  --music-border: #444;
+  --work-background: var(--footer);
+
+  --music-background: #28292b;
+  --music-border: #323338;
   --music-hover: #000;
 
   --icon-blue: #1a73e8;
-  --hidden-message-background: #202f43;
   --hidden-message-font: #8fb9ef;
+  --hidden-message-background: #2f3849;
 }
 
 ::selection {
@@ -80,17 +55,16 @@
   color: var(--selection-font);
 }
 
-.hide-title-break,
 .hide {
   display: none;
 }
 
-.blur {
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
+.show {
+  display: block;
 }
 
 canvas {
+  display: none;
   opacity: var(--canvas-opacity);
   position: fixed;
   top: 0;
@@ -131,15 +105,6 @@ p,
 a {
   color: var(--font-1);
   margin: 0;
-  font-weight: 600;
-}
-
-.dark h1,
-.dark h2,
-.dark h3,
-.dark h6,
-.dark p,
-.dark a {
   font-weight: 400;
 }
 
@@ -156,7 +121,6 @@ h6 {
   font-size: 18px;
 }
 
-/* removed h3 due to text clipping */
 p {
   line-height: 20px;
 }
@@ -261,17 +225,13 @@ main,
     gap: 12px;
   }
 
-  canvas,
+  .show,
   #canvas-state {
     display: none;
   }
 
   .footer-filled {
     background-color: transparent !important;
-  }
-
-  .hide-title-break {
-    display: block;
   }
 
   div.link-img img,

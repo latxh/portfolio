@@ -24,7 +24,6 @@
     <link rel="stylesheet" type="text/css" href="css/tooltip.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="css/underline.css">
-    <!-- <link rel="stylesheet" type="text/css" href="css/text-flip.css"> -->
     <link rel="stylesheet" type="text/css" href="css/footer.css">
     <link rel="stylesheet" type="text/css" href="css/music.css">
 </head>
@@ -33,16 +32,12 @@
     <div class="site-wrapper">
 
         <nav class="row">
-            <a href="/">
-                <h6>
-                    Brian
-                    <hr class="hide-title-break">
-                    Latchman
-                </h6>
+            <a class="name-logo" href="/">
+                <h6>Brian Latchman</h6>
             </a>
 
             <div class="button-wrapper row">
-                <button id="canvas-state" class="blur" aria-label="Toggle visual effects" onclick="toggleCanvas()">
+                <button id="canvas-state" aria-label="Toggle visual effects" onclick="toggleCanvas()">
                     <p class="tool-tip">Toggle visual effects</p>
                     <svg id="canvas-on" class="hide" aria-hidden="true" fill="var(--font-2)" width="24" height="24"
                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -55,58 +50,29 @@
                             d="M3.28 2.22a.75.75 0 1 0-1.06 1.06l3.273 3.274-2.865 3.119-.044.052-.038.055c-.34.394-.546.908-.546 1.47v3.496a3.25 3.25 0 0 0 3.25 3.25h2.499a3.25 3.25 0 0 0 3.25-3.25l-.001-2.242h.445L13 14.061v.685a3.25 3.25 0 0 0 3.25 3.25h.685l3.784 3.785a.75.75 0 0 0 1.061-1.061L3.28 2.22ZM7.94 9l-2.656-.001 1.272-1.384L7.939 9ZM4.25 10.5h4.499a.75.75 0 0 1 .75.75v3.496a1.75 1.75 0 0 1-1.75 1.75H5.25a1.75 1.75 0 0 1-1.75-1.75V11.25a.75.75 0 0 1 .75-.75ZM13.303 10.121l1.197 1.197v-.068a.75.75 0 0 1 .75-.75h4.499a.75.75 0 0 1 .75.75v3.496a1.75 1.75 0 0 1-.993 1.578l1.094 1.094a3.246 3.246 0 0 0 1.399-2.672V11.25c0-.53-.183-1.017-.489-1.4a.748.748 0 0 0-.122-.179l-3.642-3.947-.133-.132A2.25 2.25 0 0 0 16.093 5h-1.346l-.102.007a.75.75 0 0 0 .102 1.493h1.346l.103.007a.75.75 0 0 1 .448.234L18.727 9H15.25c-.831 0-1.557.452-1.947 1.122Z" />
                     </svg>
                 </button>
-
-                <button id="dark-mode" class="blur" aria-label="Toggle dark mode" onclick="toggleDarkMode()">
-                    <p class="tool-tip">Toggle dark mode</p>
-                    <svg id="light" class="hide" aria-hidden="true" fill="var(--font-2)" width="24" height="24"
-                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M11.996 19.01a.75.75 0 0 1 .743.649l.007.102v1.5a.75.75 0 0 1-1.493.101l-.007-.101v-1.5a.75.75 0 0 1 .75-.75Zm6.022-2.072 1.06 1.06a.75.75 0 1 1-1.06 1.061l-1.06-1.06a.75.75 0 0 1 1.06-1.061Zm-10.983 0a.75.75 0 0 1 0 1.06L5.974 19.06a.75.75 0 0 1-1.06-1.06l1.06-1.061a.75.75 0 0 1 1.06 0ZM12 6.475a5.525 5.525 0 1 1 0 11.05 5.525 5.525 0 0 1 0-11.05Zm0 1.5a4.025 4.025 0 1 0 0 8.05 4.025 4.025 0 0 0 0-8.05Zm9.25 3.293a.75.75 0 0 1 .102 1.493l-.102.007h-1.5a.75.75 0 0 1-.102-1.493l.102-.007h1.5Zm-17-.029a.75.75 0 0 1 .102 1.494l-.102.006h-1.5a.75.75 0 0 1-.102-1.493l.102-.007h1.5Zm1.64-6.37.084.072 1.06 1.06a.75.75 0 0 1-.976 1.134l-.084-.073-1.06-1.06a.75.75 0 0 1 .976-1.134Zm13.188.072a.75.75 0 0 1 .073.977l-.073.084-1.06 1.06a.75.75 0 0 1-1.133-.976l.072-.084 1.06-1.061a.75.75 0 0 1 1.061 0ZM12 1.99a.75.75 0 0 1 .743.648l.007.102v1.5a.75.75 0 0 1-1.493.101l-.007-.102v-1.5a.75.75 0 0 1 .75-.75Z" />
-                    </svg>
-                    <svg id="dark" fill="var(--font-2)" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M20.026 17.001c-2.762 4.784-8.879 6.423-13.663 3.661a9.964 9.964 0 0 1-3.234-2.983.75.75 0 0 1 .365-1.131c3.767-1.348 5.785-2.911 6.956-5.146 1.232-2.353 1.551-4.93.689-8.464a.75.75 0 0 1 .769-.926 9.961 9.961 0 0 1 4.457 1.327C21.149 6.1 22.788 12.217 20.025 17Zm-8.248-4.903c-1.25 2.388-3.31 4.099-6.817 5.499a8.492 8.492 0 0 0 2.152 1.766 8.501 8.501 0 1 0 8.502-14.725 8.485 8.485 0 0 0-2.792-1.016c.647 3.384.23 6.044-1.045 8.476Z" />
-                    </svg>
-                </button>
             </div>
         </nav>
-
-        <a id="music-link" class="music-link" target="_blank">
-            <div id="music" class="blur">
-                <img id="album-cover" class="album-cover" alt="Album art">
-                <div class="music-details">
-                    <p id="song-name">Song Name</p>
-                    <p id="artist-name" class="artist-name">by Artist Name</p>
-                </div>
-                <svg fill="var(--font-2)" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M6.25 4.5A1.75 1.75 0 0 0 4.5 6.25v11.5c0 .966.783 1.75 1.75 1.75h11.5a1.75 1.75 0 0 0 1.75-1.75v-4a.75.75 0 0 1 1.5 0v4A3.25 3.25 0 0 1 17.75 21H6.25A3.25 3.25 0 0 1 3 17.75V6.25A3.25 3.25 0 0 1 6.25 3h4a.75.75 0 0 1 0 1.5h-4ZM13 3.75a.75.75 0 0 1 .75-.75h6.5a.75.75 0 0 1 .75.75v6.5a.75.75 0 0 1-1.5 0V5.56l-5.22 5.22a.75.75 0 0 1-1.06-1.06l5.22-5.22h-4.69a.75.75 0 0 1-.75-.75Z" />
-                </svg>
-            </div>
-        </a>
 
         <div class="top">
             <div class="top-content">
                 <h1>
                     What's crackalackin, I'm Brian!
                     <hr size="16px">
-                    Creating beautifully engineered experiences for people to use, enjoy and explore at Microsoft.
+                    Creating beautifully engineered experiences for people to use, enjoy and explore at ____.
                 </h1>
             </div>
         </div>
 
         <main>
             <div class="new-work-label">
-                <h2>Check out my latest work</h2>
+                <h2>Check out my work</h2>
                 <hr size="16px">
             </div>
 
             <div class="new-work row">
                 <a class="link-item row" href="https://www.start.gg/" target="_blank">
                     <div class="link-text col">
-                        <h1 class="link-title"><span data-hover="Start.gg">Start.gg</span></h1>
+                        <h1>Start.gg</h1>
                         <hr size="8px">
                         <h3>Powering esport communities</h3>
                     </div>
@@ -117,48 +83,64 @@
 
                 <a class="link-item row" href="https://www.shopify.com/flow" target="_blank">
                     <div class="link-text col">
-                        <h1 class="link-title"><span data-hover="Shopify Flow">Shopify Flow</span></h1>
+                        <h1>Shopify Flow</h1>
                         <hr size="8px">
                         <h3>Automate everything</h3>
                     </div>
                     <div class="link-img">
-                        <img class="flow-img" src="assets/work/flow.png" alt="Shopify Flow product demonstration">
+                        <img src="assets/work/flow.png" alt="Shopify Flow product demonstration">
                     </div>
-                </a>
-            </div>
-
-            <div class="social-links bot-space">
-                <a href="mailto:latxhman@gmail.com" target="_blank" class="underline">
-                    <span>latxhman@gmail.com</span><svg viewBox="0 0 13 20">
-                        <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5" />
-                    </svg>
-                </a>
-                <hr size="16px" class="hide-title-break">
-                <a href="https://www.linkedin.com/in/brian-latchman/" target="_blank" class="underline">
-                    <span>Linkedin</span><svg viewBox="0 0 13 20">
-                        <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5" />
-                    </svg>
-                </a>
-                <hr size="16px" class="hide-title-break">
-                <a href="https://www.instagram.com/latxhman/" target="_blank" class="underline">
-                    <span>Instagram</span><svg viewBox="0 0 13 20">
-                        <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5" />
-                    </svg>
-                </a>
-                <hr size="16px" class="hide-title-break">
-                <a href="https://github.com/latxh/" target="_blank" class="underline">
-                    <span>Github</span><svg viewBox="0 0 13 20">
-                        <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5" />
-                    </svg>
                 </a>
             </div>
         </main>
 
     </div>
 
-    <footer id="footer" class="footer-filled" onclick="toggleMessage()">
+    <footer id="footer" class="footer-filled">
+
         <div class="footer-wrapper">
-            <div class="random-message-wrapper row">
+            <div class="social-links bot-space">
+                <a href="mailto:latxhman@gmail.com" target="_blank" class="underline">
+                    <span>latxhman@gmail.com</span><svg viewBox="0 0 13 20">
+                        <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5" />
+                    </svg>
+                </a>
+                <hr size="16px">
+                <a href="https://www.linkedin.com/in/brian-latchman/" target="_blank" class="underline">
+                    <span>Linkedin</span><svg viewBox="0 0 13 20">
+                        <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5" />
+                    </svg>
+                </a>
+                <hr size="16px">
+                <a href="https://www.instagram.com/latxhman/" target="_blank" class="underline">
+                    <span>Instagram</span><svg viewBox="0 0 13 20">
+                        <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5" />
+                    </svg>
+                </a>
+                <hr size="16px">
+                <a href="https://github.com/latxh/" target="_blank" class="underline">
+                    <span>Github</span><svg viewBox="0 0 13 20">
+                        <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5" />
+                    </svg>
+                </a>
+            </div>
+
+            <a id="music-link" class="music-link" target="_blank">
+                <div id="music">
+                    <img id="album-cover" class="album-cover" alt="Album art">
+                    <div class="music-details">
+                        <p id="song-name">Song Name</p>
+                        <p id="artist-name" class="artist-name">by Artist Name</p>
+                    </div>
+                    <svg fill="var(--font-2)" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M6.25 4.5A1.75 1.75 0 0 0 4.5 6.25v11.5c0 .966.783 1.75 1.75 1.75h11.5a1.75 1.75 0 0 0 1.75-1.75v-4a.75.75 0 0 1 1.5 0v4A3.25 3.25 0 0 1 17.75 21H6.25A3.25 3.25 0 0 1 3 17.75V6.25A3.25 3.25 0 0 1 6.25 3h4a.75.75 0 0 1 0 1.5h-4ZM13 3.75a.75.75 0 0 1 .75-.75h6.5a.75.75 0 0 1 .75.75v6.5a.75.75 0 0 1-1.5 0V5.56l-5.22 5.22a.75.75 0 0 1-1.06-1.06l5.22-5.22h-4.69a.75.75 0 0 1-.75-.75Z" />
+                    </svg>
+                </div>
+            </a>
+
+            <div class="random-message-wrapper row" onclick="toggleMessage()">
                 <p id="random-message" class="clamp-text"></p>
                 <p class="clamp-text">2025 TM</p>
             </div>
@@ -317,73 +299,47 @@
         }).call(this);
     </script>
 
-    <!-- Dark mode, motion preferences, music widget and footer text script -->
+    <!-- Motion preferences, music widget and footer text script -->
     <script>
-        let style = document.createElement('style');
         let canvasRef = document.getElementsByTagName('canvas')[0]
-        let sun = document.getElementById('light');
-        let moon = document.getElementById('dark');
-        let canvasOn = document.getElementById('canvas-on');
-        let canvasOff = document.getElementById('canvas-off');
-
-        let darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
-        let appearance = localStorage.getItem("appearance") ?? "system";
-        let systemDarkMode = darkModeQuery.matches;
+        let canvasButtonOn = document.getElementById('canvas-on');
+        let canvasButtonOff = document.getElementById('canvas-off');
+        let hiddenMessage = document.getElementById("hidden-message");
 
         let reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
         let motion = localStorage.getItem("motion") ?? "system";
         let systemReducedMotion = reducedMotionQuery.matches;
 
-        const updateAppearance = () => {
-            localStorage.setItem("appearance", appearance);
-            if (appearance === "system" ? systemDarkMode : appearance === "dark") {
-                sun.classList.remove("hide");
-                moon.classList.add("hide");
-
-                appearance = "dark";
-                document.body.classList.add("dark");
-                style.innerHTML = ':root {color-scheme: dark;}';
-                document.head.appendChild(style);
-            } else {
-                sun.classList.add("hide");
-                moon.classList.remove("hide");
-
-                document.body.classList.remove("dark");
-                style.innerHTML = ':root {color-scheme: light;}';
-                document.head.appendChild(style);
-            }
-        };
-
         const updateCanvas = () => {
             localStorage.setItem("motion", motion);
             if (motion === "system" ? systemReducedMotion : motion === "reduce") {
-                canvasOn.classList.remove("hide");
-                canvasOff.classList.add("hide");
-                canvasRef.classList.add("hide");
+                canvasButtonOn.classList.remove("hide");
+                canvasButtonOff.classList.add("hide");
+                canvasRef.classList.remove("show");
                 document.body.classList.add("canvas-off");
                 document.body.classList.remove("canvas-on");
             } else {
-                canvasOn.classList.add("hide");
-                canvasOff.classList.remove("hide");
-                canvasRef.classList.remove("hide");
+                canvasButtonOn.classList.add("hide");
+                canvasButtonOff.classList.remove("hide");
+                canvasRef.classList.add("show");
                 document.body.classList.remove("canvas-off");
                 document.body.classList.add("canvas-on");
             }
         };
 
-        darkModeQuery.addEventListener("change", (m) => { systemDarkMode = m.matches; updateAppearance(); });
         reducedMotionQuery.addEventListener("change", (m) => { systemReducedMotion = m.matches; updateCanvas(); });
 
-        updateAppearance();
         updateCanvas();
 
-        const toggleDarkMode = (e) => { appearance = appearance === "dark" ? "light" : "dark"; updateAppearance(); };
         const toggleCanvas = (e) => { motion = motion === "reduce" ? "no-preference" : "reduce"; updateCanvas(); };
 
+        function toggleMessage() {
+            hiddenMessage.classList.toggle("hide");
+        };
 
-        let messageList = ['Painting with code', 'Going with the flow', 'Hello from Toronto, Canada', 'Meapless in Seattle, S3 E27',
+        let messageList = ['Painting with code', 'Going with the flow', 'Hello from Toronto, Canada', 'Meapless in Seattle',
             'I love easter eggs', 'Coded by yours truly', 'Awaiting Book 7 of the Red Rising Saga',
-            'Coming live from the one after five', 'Coming live from the three, two time'];
+            'Crafted in the PNW', 'Hi Calgary'];
 
         let musicList = [
             ['https://www.youtube.com/watch?v=X0WVU2xoD2o', '/assets/music/rodeo.png', '90210', 'by Travis Scott'],
@@ -402,13 +358,6 @@
         ];
 
         document.getElementById('random-message').innerHTML = messageList[Math.floor(Math.random() * messageList.length)];
-
-        function toggleMessage() {
-            let footer = document.getElementById('footer');
-            let hiddenMessage = document.getElementById("hidden-message");
-            hiddenMessage.style.display = "block";
-            footer.style.cursor = "auto";
-        };
 
         let song = musicList[Math.floor(Math.random() * musicList.length)];
         document.getElementById('music-link').href = song[0];
