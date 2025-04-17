@@ -16,8 +16,8 @@ button .tool-tip {
 
   visibility: hidden;
   opacity: 0;
-  transition: opacity 0.2s;
-  transition-delay: 0.4s;
+  transition: all 0.2s;
+  transition-delay: 0.2s;
 }
 
 button:hover .tool-tip {
