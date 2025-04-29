@@ -72,6 +72,7 @@ hr {
 }
 
 .link-img img {
+  user-select: none;
   height: 318px;
   margin-right: -1px;
   object-fit: cover;

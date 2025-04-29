@@ -52,8 +52,8 @@
 }
 
 ::selection {
-  background: var(--selection-background);
-  color: var(--selection-font);
+  background: var(--font-1);
+  color: var(--background);
 }
 
 .hide {
