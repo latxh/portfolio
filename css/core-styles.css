@@ -29,11 +29,8 @@
   --canvas-opacity: 0.6;
   --focus-blue: #1a73e8;
 
-  --selection-background: var(--focus-blue);
-  --selection-font: var(--font-1);
-
-  --footer: #17181a;
   --background: #101112;
+  --footer: #17181a;
   --font-1: #f3f4f5;
   --font-2: #9fa4ab;
 
@@ -41,12 +38,10 @@
   --button-hover: #28292b;
 
   --work-background: var(--footer);
-
   --music-background: #28292b;
   --music-border: #323338;
   --music-hover: #000;
 
-  --icon-blue: #1a73e8;
   --hidden-message-font: #8fb9ef;
   --hidden-message-background: #2f3849;
 }
