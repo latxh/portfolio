@@ -16,6 +16,8 @@ button .tool-tip {
 
   visibility: hidden;
   opacity: 0;
+  transform: scale(0.9);
+  transform-origin: top;
   transition: all 0.2s;
   transition-delay: 0.2s;
 }
@@ -23,4 +25,5 @@ button .tool-tip {
 button:hover .tool-tip {
   visibility: visible;
   opacity: 1;
+  transform: scale(1);
 }
