@@ -3,20 +3,24 @@ nav {
   justify-content: space-between;
 }
 
-.name-logo h6 {
+.name-logo h6,
+a.name-logo {
   color: var(--font-2);
   transition: all 0.2s;
 }
 
-.name-logo:hover h6 {
+.name-logo:hover h6,
+a.name-logo:hover {
   color: var(--font-1);
 }
 
-.canvas-on .name-logo h6 {
+.canvas-on .name-logo h6,
+.canvas-on a.name-logo {
   color: var(--font-1);
 }
 
-.canvas-on .name-logo:hover h6 {
+.canvas-on .name-logo:hover h6,
+.canvas-on a.name-logo:hover {
   color: var(--font-2);
 }
 
