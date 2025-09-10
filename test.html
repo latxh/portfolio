@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pure HTML/CSS Carousel</title>
+    <style>
+        :root {
+            --canvas-opacity: 0.6;
+            --focus-blue: #1a73e8;
+
+            --background: #101112;
+            --footer: #17181a;
+            --font-1: #f3f4f5;
+            --font-2: #9fa4ab;
+
+            --button: #323338;
+            --button-hover: #28292b;
+
+            --work-background: var(--footer);
+            --music-background: #28292b;
+            --music-border: #323338;
+            --music-hover: #000;
+
+            --hidden-message-font: #8fb9ef;
+            --hidden-message-background: #2f3849;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--background);
+        }
+
+        .carousel-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .carousel {
+            position: relative;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1000px;
+        }
+
+        /* Hide radio buttons */
+        .carousel input[type="radio"] {
+            display: none;
+        }
+
+        .carousel-cards {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card {
+            position: absolute;
+            width: 540px;
+            height: 320px;
+            border-radius: 24px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1), outline 0.2s, outline-offset 0.2s;
+            cursor: pointer;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            outline: 2px solid transparent;
+        }
+
+        .card:hover {
+        outline: 2px solid var(--focus-blue);
+        outline-offset: 0.3rem;
+        }
+
+        /* Card backgrounds */
+        .card-1 {
+            background-color: var(--work-background);
+
+        }
+
+        .card-2 {
+            background-color: var(--work-background);
+
+        }
+
+        .card-3 {
+            background-color: var(--work-background);
+
+        }
+
+        /* Default positions - show card 2 as active */
+        .card-1 {
+            transform: translateX(-20%) scale(0.85);
+            opacity: 0.7;
+            z-index: 10;
+        }
+
+        .card-2 {
+            transform: translateX(0) scale(1);
+            opacity: 1;
+            z-index: 30;
+        }
+
+        .card-3 {
+            transform: translateX(20%) scale(0.85);
+            opacity: 0.7;
+            z-index: 10;
+        }
+
+        /* When card 1 is selected */
+        #card1:checked~.carousel-cards .card-1 {
+            transform: translateX(0) scale(1);
+            opacity: 1;
+            z-index: 30;
+        }
+
+        #card1:checked~.carousel-cards .card-2 {
+            transform: translateX(20%) scale(0.85);
+            opacity: 0.7;
+            z-index: 10;
+        }
+
+        #card1:checked~.carousel-cards .card-3 {
+            transform: translateX(-20%) scale(0.85);
+            opacity: 0.7;
+            z-index: 10;
+        }
+
+        /* When card 2 is selected (default) */
+        #card2:checked~.carousel-cards .card-1 {
+            transform: translateX(-20%) scale(0.85);
+            opacity: 0.7;
+            z-index: 10;
+        }
+
+        #card2:checked~.carousel-cards .card-2 {
+            transform: translateX(0) scale(1);
+            opacity: 1;
+            z-index: 30;
+        }
+
+        #card2:checked~.carousel-cards .card-3 {
+            transform: translateX(20%) scale(0.85);
+            opacity: 0.7;
+            z-index: 10;
+        }
+
+        /* When card 3 is selected */
+        #card3:checked~.carousel-cards .card-1 {
+            transform: translateX(20%) scale(0.85);
+            opacity: 0.7;
+            z-index: 10;
+        }
+
+        #card3:checked~.carousel-cards .card-2 {
+            transform: translateX(-20%) scale(0.85);
+            opacity: 0.7;
+            z-index: 10;
+        }
+
+        #card3:checked~.carousel-cards .card-3 {
+            transform: translateX(0) scale(1);
+            opacity: 1;
+            z-index: 30;
+        }
+
+        /* Active card gets enhanced shadow and floating animation */
+        #card1:checked~.carousel-cards .card-1,
+        #card2:checked~.carousel-cards .card-2,
+        #card3:checked~.carousel-cards .card-3 {
+            /* box-shadow: 0 25px 50px -12px hsl(240, 100%, 70%, 0.4); */
+        }
+
+        /* Disable links on inactive cards */
+        .card a {
+            pointer-events: none;
+        }
+
+        /* Enable links only on active cards */
+        #card1:checked~.carousel-cards .card-1 a,
+        #card2:checked~.carousel-cards .card-2 a,
+        #card3:checked~.carousel-cards .card-3 a {
+            pointer-events: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="carousel-container">
+
+        <div class="carousel">
+            <input type="radio" id="card1" name="carousel" />
+            <input type="radio" id="card2" name="carousel" checked />
+            <input type="radio" id="card3" name="carousel" />
+
+
+            <div class="carousel-cards">
+                <label for="card1" class="card card-1">
+                    <a class="link-item row" href="https://copilot.microsoft.com/daily" target="_blank">
+                        <div class="link-text col">
+                          <h1>Copilot Daily</h1>
+                          <hr size="8px" />
+                          <h3>Discover something new</h3>
+                        </div>
+                        <div class="link-img">
+                          <img src="assets/work/copilot.png" alt="Copilot Discover feed" />
+                        </div>
+                      </a>
+                </label>
+
+                <label for="card2" class="card card-2">
+                    <a class="link-item row" href="https://aka.ms/msnstudio" target="_blank">
+                        <div class="link-text col">
+                          <h1>MSN Studio</h1>
+                          <hr size="8px" />
+                          <h3>Component workshop</h3>
+                        </div>
+                        <div class="link-img">
+                          <img src="assets/work/msn.png" alt="MSN butterfly" />
+                        </div>
+                      </a>
+                </label>
+
+                <label for="card3" class="card card-3">
+                    <a class="link-item row" href="https://www.start.gg/" target="_blank">
+                        <div class="link-text col">
+                          <h1>Start.gg</h1>
+                          <hr size="8px" />
+                          <h3>Powering esport communities</h3>
+                        </div>
+                        <div class="link-img">
+                          <img src="assets/work/startgg.png" alt="Start.gg logo on headphones" />
+                        </div>
+                      </a>
+                </label>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
