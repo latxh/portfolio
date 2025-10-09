@@ -344,13 +344,30 @@
                 this.iceServers = [
                     { urls: 'stun:stun.l.google.com:19302' },
                     { urls: 'stun:stun1.l.google.com:19302' },
-                    { urls: 'stun:stun2.l.google.com:19302' }
+                    { urls: 'stun:stun2.l.google.com:19302' },
+                    // Free TURN servers from Open Relay
+                    {
+                        urls: 'turn:openrelay.metered.ca:80',
+                        username: 'openrelayproject',
+                        credential: 'openrelayproject'
+                    },
+                    {
+                        urls: 'turn:openrelay.metered.ca:443',
+                        username: 'openrelayproject',
+                        credential: 'openrelayproject'
+                    },
+                    {
+                        urls: 'turn:openrelay.metered.ca:443?transport=tcp',
+                        username: 'openrelayproject',
+                        credential: 'openrelayproject'
+                    }
                 ];
             }
 
             async createOffer() {
                 this.isHost = true;
                 this.pc = new RTCPeerConnection({ iceServers: this.iceServers });
+                this.setupConnectionMonitoring();
                 
                 this.dataChannel = this.pc.createDataChannel('whiteboard');
                 this.setupDataChannel();
@@ -378,6 +395,7 @@
             async createAnswer(offerJson) {
                 this.isHost = false;
                 this.pc = new RTCPeerConnection({ iceServers: this.iceServers });
+                this.setupConnectionMonitoring();
                 
                 this.pc.ondatachannel = (event) => {
                     this.dataChannel = event.channel;
@@ -400,6 +418,44 @@
                     };
                     checkState();
                 });
+            }
+
+            setupConnectionMonitoring() {
+                this.pc.oniceconnectionstatechange = () => {
+                    console.log('ICE connection state:', this.pc.iceConnectionState);
+                    const status = document.getElementById('connectionStatus');
+                    
+                    switch (this.pc.iceConnectionState) {
+                        case 'connected':
+                        case 'completed':
+                            status.textContent = 'Connected (ICE)';
+                            status.className = 'connection-status connected';
+                            break;
+                        case 'disconnected':
+                            status.textContent = 'Disconnected (ICE)';
+                            status.className = 'connection-status disconnected';
+                            break;
+                        case 'failed':
+                            status.textContent = 'Connection Failed';
+                            status.className = 'connection-status disconnected';
+                            console.error('ICE connection failed');
+                            break;
+                        case 'checking':
+                            status.textContent = 'Connecting...';
+                            status.className = 'connection-status';
+                            break;
+                    }
+                };
+
+                this.pc.onicegatheringstatechange = () => {
+                    console.log('ICE gathering state:', this.pc.iceGatheringState);
+                };
+
+                this.pc.onicecandidate = (event) => {
+                    if (event.candidate) {
+                        console.log('ICE candidate:', event.candidate.type, event.candidate.protocol);
+                    }
+                };
             }
 
             setupDataChannel() {
