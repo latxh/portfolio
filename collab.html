@@ -208,6 +208,48 @@
         .copy-btn:hover {
             background: #218838;
         }
+
+        .debug-panel {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.85);
+            color: #0f0;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            padding: 10px;
+            border-radius: 8px;
+            max-width: 400px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 100;
+            display: none;
+        }
+
+        .debug-panel.visible {
+            display: block;
+        }
+
+        .debug-panel div {
+            margin: 2px 0;
+        }
+
+        .debug-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #333;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 11px;
+            z-index: 100;
+        }
+
+        .debug-toggle:hover {
+            background: #555;
+        }
     </style>
 </head>
 <body>
@@ -226,6 +268,9 @@
     </div>
 
     <div class="connection-status disconnected" id="connectionStatus">Disconnected</div>
+
+    <div class="debug-toggle" id="debugToggle">Debug Info</div>
+    <div class="debug-panel" id="debugPanel"></div>
 
     <div class="connection-modal" id="connectionModal">
         <div class="modal-content">
@@ -342,10 +387,13 @@
                 this.onConnectionChange = null;
                 
                 this.iceServers = [
+                    // Multiple STUN servers for redundancy
                     { urls: 'stun:stun.l.google.com:19302' },
                     { urls: 'stun:stun1.l.google.com:19302' },
                     { urls: 'stun:stun2.l.google.com:19302' },
-                    // Free TURN servers from Open Relay
+                    { urls: 'stun:stun3.l.google.com:19302' },
+                    { urls: 'stun:stun4.l.google.com:19302' },
+                    // Free TURN servers from Open Relay (metered.ca)
                     {
                         urls: 'turn:openrelay.metered.ca:80',
                         username: 'openrelayproject',
@@ -360,13 +408,33 @@
                         urls: 'turn:openrelay.metered.ca:443?transport=tcp',
                         username: 'openrelayproject',
                         credential: 'openrelayproject'
+                    },
+                    // Alternative free TURN server (Twilio)
+                    {
+                        urls: 'turn:global.turn.twilio.com:3478?transport=udp',
+                        username: 'f4b4035eaa76f4a55de5f4351567653ee4ff6fa97b50b6b334fcc1be9c27212d',
+                        credential: '2zlWWqRrzN0Ys9eKYOjKTIg+BXCJJ9TsFbJEBQhFwAg='
+                    },
+                    {
+                        urls: 'turn:global.turn.twilio.com:3478?transport=tcp',
+                        username: 'f4b4035eaa76f4a55de5f4351567653ee4ff6fa97b50b6b334fcc1be9c27212d',
+                        credential: '2zlWWqRrzN0Ys9eKYOjKTIg+BXCJJ9TsFbJEBQhFwAg='
+                    },
+                    {
+                        urls: 'turn:global.turn.twilio.com:443?transport=tcp',
+                        username: 'f4b4035eaa76f4a55de5f4351567653ee4ff6fa97b50b6b334fcc1be9c27212d',
+                        credential: '2zlWWqRrzN0Ys9eKYOjKTIg+BXCJJ9TsFbJEBQhFwAg='
                     }
                 ];
             }
 
             async createOffer() {
                 this.isHost = true;
-                this.pc = new RTCPeerConnection({ iceServers: this.iceServers });
+                this.log('Creating offer with ' + this.iceServers.length + ' ICE servers');
+                this.pc = new RTCPeerConnection({ 
+                    iceServers: this.iceServers,
+                    iceCandidatePoolSize: 10
+                });
                 this.setupConnectionMonitoring();
                 
                 this.dataChannel = this.pc.createDataChannel('whiteboard');
@@ -375,9 +443,18 @@
                 const offer = await this.pc.createOffer();
                 await this.pc.setLocalDescription(offer);
                 
-                return new Promise((resolve) => {
+                this.log('📡 Gathering ICE candidates...');
+                
+                return new Promise((resolve, reject) => {
+                    const timeout = setTimeout(() => {
+                        this.log('⏱️ ICE gathering timeout, using what we have');
+                        resolve(JSON.stringify(this.pc.localDescription));
+                    }, 10000); // 10 second timeout
+                    
                     const checkState = () => {
                         if (this.pc.iceGatheringState === 'complete') {
+                            clearTimeout(timeout);
+                            this.log('✔️ ICE gathering complete');
                             resolve(JSON.stringify(this.pc.localDescription));
                         } else {
                             setTimeout(checkState, 100);
@@ -387,14 +464,33 @@
                 });
             }
 
+            log(message) {
+                if (this.debug && this.debug.log) {
+                    this.debug.log(message);
+                } else {
+                    console.log(message);
+                }
+            }
+
             async handleAnswer(answerJson) {
-                const answer = JSON.parse(answerJson);
-                await this.pc.setRemoteDescription(new RTCSessionDescription(answer));
+                try {
+                    this.log('📥 Handling answer from peer');
+                    const answer = JSON.parse(answerJson);
+                    await this.pc.setRemoteDescription(new RTCSessionDescription(answer));
+                    this.log('✅ Remote description (answer) set successfully');
+                } catch (error) {
+                    this.log('❌ Error handling answer: ' + error.message);
+                    throw error;
+                }
             }
 
             async createAnswer(offerJson) {
                 this.isHost = false;
-                this.pc = new RTCPeerConnection({ iceServers: this.iceServers });
+                this.log('Creating answer with ' + this.iceServers.length + ' ICE servers');
+                this.pc = new RTCPeerConnection({ 
+                    iceServers: this.iceServers,
+                    iceCandidatePoolSize: 10
+                });
                 this.setupConnectionMonitoring();
                 
                 this.pc.ondatachannel = (event) => {
@@ -403,14 +499,24 @@
                 };
                 
                 const offer = JSON.parse(offerJson);
+                this.log('📥 Setting remote description (offer)');
                 await this.pc.setRemoteDescription(new RTCSessionDescription(offer));
                 
                 const answer = await this.pc.createAnswer();
                 await this.pc.setLocalDescription(answer);
                 
-                return new Promise((resolve) => {
+                this.log('📡 Gathering ICE candidates for answer...');
+                
+                return new Promise((resolve, reject) => {
+                    const timeout = setTimeout(() => {
+                        this.log('⏱️ ICE gathering timeout, using what we have');
+                        resolve(JSON.stringify(this.pc.localDescription));
+                    }, 10000); // 10 second timeout
+                    
                     const checkState = () => {
                         if (this.pc.iceGatheringState === 'complete') {
+                            clearTimeout(timeout);
+                            this.log('✔️ ICE gathering complete');
                             resolve(JSON.stringify(this.pc.localDescription));
                         } else {
                             setTimeout(checkState, 100);
@@ -421,40 +527,60 @@
             }
 
             setupConnectionMonitoring() {
+                this.candidateCount = { host: 0, srflx: 0, relay: 0 };
+                
                 this.pc.oniceconnectionstatechange = () => {
-                    console.log('ICE connection state:', this.pc.iceConnectionState);
+                    this.log('🔗 ICE state: ' + this.pc.iceConnectionState);
                     const status = document.getElementById('connectionStatus');
                     
                     switch (this.pc.iceConnectionState) {
                         case 'connected':
                         case 'completed':
-                            status.textContent = 'Connected (ICE)';
+                            status.textContent = 'Connected ✓';
                             status.className = 'connection-status connected';
+                            this.log('✅ Connection established!');
                             break;
                         case 'disconnected':
-                            status.textContent = 'Disconnected (ICE)';
+                            status.textContent = 'Disconnected';
                             status.className = 'connection-status disconnected';
+                            this.log('⚠️ Connection disconnected');
                             break;
                         case 'failed':
-                            status.textContent = 'Connection Failed';
+                            status.textContent = 'Connection Failed ✗';
                             status.className = 'connection-status disconnected';
-                            console.error('ICE connection failed');
+                            this.log('❌ ICE connection failed');
                             break;
                         case 'checking':
                             status.textContent = 'Connecting...';
                             status.className = 'connection-status';
+                            this.log('🔄 Checking connectivity...');
                             break;
                     }
                 };
 
                 this.pc.onicegatheringstatechange = () => {
-                    console.log('ICE gathering state:', this.pc.iceGatheringState);
+                    this.log('📡 Gathering state: ' + this.pc.iceGatheringState);
+                    if (this.pc.iceGatheringState === 'complete') {
+                        const msg = `📊 Candidates: host=${this.candidateCount.host} srflx=${this.candidateCount.srflx} relay=${this.candidateCount.relay}`;
+                        this.log(msg);
+                        
+                        if (this.candidateCount.relay === 0) {
+                            this.log('⚠️ No TURN candidates - may fail behind strict NATs');
+                        }
+                    }
                 };
 
                 this.pc.onicecandidate = (event) => {
                     if (event.candidate) {
-                        console.log('ICE candidate:', event.candidate.type, event.candidate.protocol);
+                        const type = event.candidate.type;
+                        const protocol = event.candidate.protocol;
+                        this.candidateCount[type] = (this.candidateCount[type] || 0) + 1;
+                        this.log(`🌐 Candidate: ${type} (${protocol})`);
                     }
+                };
+
+                this.pc.onconnectionstatechange = () => {
+                    this.log('🔌 Connection state: ' + this.pc.connectionState);
                 };
             }
 
@@ -490,16 +616,50 @@
             }
         }
 
+        // Debug Logger
+        class DebugLogger {
+            constructor() {
+                this.panel = document.getElementById('debugPanel');
+                this.toggle = document.getElementById('debugToggle');
+                this.logs = [];
+                this.maxLogs = 50;
+                
+                this.toggle.addEventListener('click', () => {
+                    this.panel.classList.toggle('visible');
+                });
+            }
+
+            log(message, type = 'info') {
+                const timestamp = new Date().toLocaleTimeString();
+                const logEntry = `[${timestamp}] ${message}`;
+                this.logs.push(logEntry);
+                
+                if (this.logs.length > this.maxLogs) {
+                    this.logs.shift();
+                }
+                
+                this.panel.innerHTML = this.logs.map(log => `<div>${log}</div>`).join('');
+                this.panel.scrollTop = this.panel.scrollHeight;
+                
+                // Also log to console
+                console.log(message);
+            }
+        }
+
         // Whiteboard Application
         class Whiteboard {
             constructor() {
                 this.canvas = document.getElementById('canvas');
                 this.ctx = this.canvas.getContext('2d');
+                this.debug = new DebugLogger();
                 this.p2p = new P2PManager();
+                this.p2p.debug = this.debug; // Share debug logger
                 this.strokes = [];
                 this.currentStroke = null;
                 this.isDrawing = false;
                 this.peerCursor = null;
+                
+                this.debug.log('🎨 Whiteboard initialized');
                 
                 this.setupCanvas();
                 this.setupControls();
@@ -544,44 +704,79 @@
 
             setupConnection() {
                 const modal = document.getElementById('connectionModal');
+                const statusDiv = document.getElementById('statusDiv');
+                
+                const showError = (message) => {
+                    statusDiv.innerHTML = `<div class="status error">${message}</div>`;
+                    console.error(message);
+                };
+
+                const showInfo = (message) => {
+                    statusDiv.innerHTML = `<div class="status info">${message}</div>`;
+                    console.log(message);
+                };
                 
                 document.getElementById('createBtn').addEventListener('click', async () => {
-                    const offer = await this.p2p.createOffer();
-                    document.getElementById('offerText').value = offer;
-                    this.showStep('step2');
+                    try {
+                        this.debug.log('🚀 Starting as host...');
+                        showInfo('Creating connection...');
+                        const offer = await this.p2p.createOffer();
+                        document.getElementById('offerText').value = offer;
+                        this.showStep('step2');
+                        statusDiv.innerHTML = '';
+                    } catch (error) {
+                        showError('Failed to create offer: ' + error.message);
+                    }
                 });
 
                 document.getElementById('joinBtn').addEventListener('click', () => {
+                    this.debug.log('👥 Starting as peer...');
                     this.showStep('step3');
                 });
 
                 document.getElementById('copyOfferBtn').addEventListener('click', () => {
                     const text = document.getElementById('offerText').value;
                     navigator.clipboard.writeText(text);
-                    alert('Copied to clipboard!');
+                    alert('Copied to clipboard! Send this to your peer.');
                 });
 
                 document.getElementById('submitAnswerBtn').addEventListener('click', async () => {
                     const answer = document.getElementById('answerInput').value;
                     if (answer) {
-                        await this.p2p.handleAnswer(answer);
-                        modal.classList.add('hidden');
+                        try {
+                            showInfo('Processing answer...');
+                            await this.p2p.handleAnswer(answer);
+                            showInfo('Answer processed. Connecting...');
+                            // Don't close modal yet, wait for connection
+                        } catch (error) {
+                            showError('Failed to process answer: ' + error.message);
+                        }
+                    } else {
+                        showError('Please paste the answer from your peer');
                     }
                 });
 
                 document.getElementById('submitOfferBtn').addEventListener('click', async () => {
                     const offer = document.getElementById('offerInput').value;
                     if (offer) {
-                        const answer = await this.p2p.createAnswer(offer);
-                        document.getElementById('answerText').value = answer;
-                        this.showStep('step4');
+                        try {
+                            showInfo('Processing offer...');
+                            const answer = await this.p2p.createAnswer(offer);
+                            document.getElementById('answerText').value = answer;
+                            this.showStep('step4');
+                            statusDiv.innerHTML = '';
+                        } catch (error) {
+                            showError('Failed to create answer: ' + error.message);
+                        }
+                    } else {
+                        showError('Please paste the offer from your peer');
                     }
                 });
 
                 document.getElementById('copyAnswerBtn').addEventListener('click', () => {
                     const text = document.getElementById('answerText').value;
                     navigator.clipboard.writeText(text);
-                    alert('Copied to clipboard!');
+                    alert('Copied to clipboard! Send this back to your peer.');
                 });
 
                 this.p2p.onConnectionChange = (connected) => {
