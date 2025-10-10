@@ -6,7 +6,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Creating experiences for people to use, enjoy and explore." />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-touch-fullscreen" content="yes" />
 
@@ -55,10 +55,16 @@
     <div class="top">
       <div class="top-content">
         <h1>
-          What's crackalackin, I'm Brian!
+          What's crackalackin, <span class="name-mobile">I'm Brian</span>!
           <hr size="16px" />
           Creating beautifully engineered experiences for people to use, enjoy
-          and explore at <a class="name-logo" href="https://www.meta.com/superintelligence/" target="_blank">Meta</a>.
+          and explore at <a class="name-logo underline-animated" href="https://www.meta.ai/"
+            target="_blank">Meta<svg viewBox="0 0 43 8" fill="none" xmlns="http://www.w3.org/2000/svg"
+              class="underline-svg">
+              <path class="animated-path"
+                d="M1.5 5.07308C3.2469 2.46052 7.24094 0.532012 7.81266 1.82928C8.5273 3.45087 7 8.4948 10.6251 5.39898C13.6548 2.81167 17 -0.275465 17 2.37043C17 5.01632 17.6179 6.88665 20 4.9948C22.3821 3.10295 26.6731 -1.19338 26 2.37052C25.2854 6.15423 26.5943 6.61622 28.5 4.99463C30.4057 3.37304 34.7382 -1.14292 34.5 2.37052C34.2618 5.88396 35.0484 7.65782 41.5 1.33751"
+                stroke="#78B0FF" stroke-width="1.5" stroke-linecap="round"></path>
+            </svg></a>.
         </h1>
       </div>
     </div>
@@ -121,59 +127,44 @@
 
   <footer id="footer" class="footer-filled">
     <div class="footer-wrapper">
-      <div class="social-links bot-space">
-        <a href="mailto:latxhman@gmail.com" target="_blank" class="underline">
-          <span>latxhman@gmail.com</span><svg viewBox="0 0 13 20">
-            <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5" />
-          </svg>
-        </a>
-        <hr size="16px" />
-        <a href="https://www.linkedin.com/in/brian-latchman/" target="_blank" class="underline">
-          <span>Linkedin</span><svg viewBox="0 0 13 20">
-            <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5" />
-          </svg>
-        </a>
-        <hr size="16px" />
-        <a href="https://www.instagram.com/latxhman/" target="_blank" class="underline">
-          <span>Instagram</span><svg viewBox="0 0 13 20">
-            <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5" />
-          </svg>
-        </a>
-        <hr size="16px" />
-        <a href="https://github.com/latxh/" target="_blank" class="underline">
-          <span>Github</span><svg viewBox="0 0 13 20">
-            <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5" />
-          </svg>
-        </a>
-      </div>
-
-      <a id="music-link" class="music-link" target="_blank">
-        <div id="music">
-          <img id="album-cover" class="album-cover" alt="Album art" />
-          <div class="music-details">
-            <p id="song-name">Song Name</p>
-            <p id="artist-name" class="artist-name">by Artist Name</p>
-          </div>
-          <svg fill="var(--font-2)" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M6.25 4.5A1.75 1.75 0 0 0 4.5 6.25v11.5c0 .966.783 1.75 1.75 1.75h11.5a1.75 1.75 0 0 0 1.75-1.75v-4a.75.75 0 0 1 1.5 0v4A3.25 3.25 0 0 1 17.75 21H6.25A3.25 3.25 0 0 1 3 17.75V6.25A3.25 3.25 0 0 1 6.25 3h4a.75.75 0 0 1 0 1.5h-4ZM13 3.75a.75.75 0 0 1 .75-.75h6.5a.75.75 0 0 1 .75.75v6.5a.75.75 0 0 1-1.5 0V5.56l-5.22 5.22a.75.75 0 0 1-1.06-1.06l5.22-5.22h-4.69a.75.75 0 0 1-.75-.75Z" />
-          </svg>
+      <div class="footer-space bot-space">
+        <div class="social-links">
+          <p class="social-links-header">Contact</p>
+          <a href="https://www.linkedin.com/in/brian-latchman/" target="_blank" class="social-link">
+            <p>Linkedin</p>
+          </a>
+          <a href="https://www.instagram.com/latxhman/" target="_blank" class="social-link">
+            <p>Instagram</p>
+          </a>
+          <a href="https://github.com/latxh/" target="_blank" class="social-link">
+            <p>Github</p>
+          </a>
+          <a href="mailto:latxhman@gmail.com" target="_blank" class="social-link">
+            <p>Email me</p>
+          </a>
         </div>
-      </a>
 
-      <div class="random-message-wrapper row" onclick="toggleMessage()">
-        <p id="random-message" class="clamp-text"></p>
-        <p class="clamp-text">2025 TM</p>
+        <div class="rand-text">
+          <p id="random-message" class="clamp-text"></p>
+          <p class="tm">2025 TM</p>
+        </div>
       </div>
 
-      <div id="hidden-message" class="hide">
-        <p class="hidden-message-text">
-          Analyzing and making sense of design details beyond just "it feels
-          nice" helps nurture taste, amplify level of execution, and grow
-          appreciation for how hard the pursuit of excellence is.
-        </p>
+      <div class="card-stack-container">
+        <a id="music-card-1" class="music-card card-1" target="_blank">
+          <img id="album-cover-1" alt="Album art" />
+          <div id="music-tooltip-1" class="music-tooltip">Song 1</div>
+        </a>
+        <a id="music-card-2" class="music-card card-2" target="_blank">
+          <img id="album-cover-2" alt="Album art" />
+          <div id="music-tooltip-2" class="music-tooltip">Song 2</div>
+        </a>
+        <a id="music-card-3" class="music-card card-3" target="_blank">
+          <img id="album-cover-3" alt="Album art" />
+          <div id="music-tooltip-3" class="music-tooltip">Song 3</div>
+        </a>
       </div>
+
     </div>
   </footer>
 
@@ -416,7 +407,6 @@
     let canvasRef = document.getElementsByTagName("canvas")[0];
     let canvasButtonOn = document.getElementById("canvas-on");
     let canvasButtonOff = document.getElementById("canvas-off");
-    let hiddenMessage = document.getElementById("hidden-message");
 
     let reducedMotionQuery = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
@@ -453,19 +443,12 @@
       updateCanvas();
     };
 
-    function toggleMessage() {
-      hiddenMessage.classList.toggle("hide");
-    }
-
     let messageList = [
       "Painting with code",
       "Going with the flow",
       "Hello from Toronto",
       "Meapless in Seattle",
-      "I love easter eggs",
-      "Coded by yours truly",
-      "Awaiting Book 7 of the Red Rising Saga",
-      "Crafted in the PNW",
+      "Lo' Howler",
       "Till the next",
     ];
 
@@ -553,11 +536,20 @@
     document.getElementById("random-message").innerHTML =
       messageList[Math.floor(Math.random() * messageList.length)];
 
-    let song = musicList[Math.floor(Math.random() * musicList.length)];
-    document.getElementById("music-link").href = song[0];
-    document.getElementById("album-cover").src = song[1];
-    document.getElementById("song-name").innerHTML = song[2];
-    document.getElementById("artist-name").innerHTML = song[3];
+
+    // Get 3 random songs for the card stack
+    let shuffled = [...musicList].sort(() => 0.5 - Math.random());
+    let selectedSongs = shuffled.slice(0, 3);
+
+    // Set up card stack with random songs
+    for (let i = 0; i < 3; i++) {
+      let song = selectedSongs[i];
+      let cardIndex = i + 1;
+
+      document.getElementById(`music-card-${cardIndex}`).href = song[0];
+      document.getElementById(`album-cover-${cardIndex}`).src = song[1];
+      document.getElementById(`music-tooltip-${cardIndex}`).innerHTML = song[2];
+    }
   </script>
 </body>
 

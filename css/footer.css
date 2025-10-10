@@ -1,29 +1,31 @@
 footer {
-  padding: 24px 0;
+  overflow: hidden;
 }
 
 .footer-wrapper {
   position: relative;
+  overflow: visible;
+  padding: 24px 0 0 0;
 }
 
-.footer-filled {
-  background-color: var(--footer);
+.rand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: end;
 }
 
-.random-message-wrapper {
-  cursor: help;
+.footer-space {
+  display: flex;
   justify-content: space-between;
 }
 
-#hidden-message {
-  margin-top: 12px;
-  padding: 12px 16px;
-  width: 100%;
-  border-radius: 8px;
-  background-color: var(--hidden-message-background);
-  color: var(--hidden-message-font);
+.social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
-.hidden-message-text {
-  color: var(--hidden-message-font);
+.social-links-header {
+  margin-bottom: 2px;
 }

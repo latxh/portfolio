@@ -27,7 +27,7 @@
   color-scheme: dark;
   font-family: Latch, Arial, Helvetica, sans-serif;
   --canvas-opacity: 0.6;
-  --focus-blue: #1a73e8;
+  --focus-blue: #78B0FF;
 
   --background: #101112;
   --footer: #17181a;
@@ -180,8 +180,16 @@ main,
 }
 
 @media only screen and (max-width: 670px) {
+  .top-content h1 {
+    color: var(--font-2);
+  }
+
+  .name-mobile {
+    color: var(--font-1);
+  }
+
   h1 {
-    font-size: 18px;
+    font-size: 24px;
   }
 
   h2 {
@@ -210,7 +218,9 @@ main,
   }
 
   .site-wrapper .top {
-    min-height: 400px;
+    /* min-height: 400px; */
+    min-height: auto;
+    padding-bottom: 96px;
   }
 
   .site-wrapper .top-content {
@@ -221,6 +231,8 @@ main,
     gap: 12px;
   }
 
+  .card-stack-container,
+  .site-wrapper nav,
   .show,
   #canvas-state {
     display: none;
@@ -246,6 +258,10 @@ main,
 
   .site-wrapper {
     margin-bottom: 0;
+  }
+
+  footer {
+    padding: 0 16px;
   }
 }
 
