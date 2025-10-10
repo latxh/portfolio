@@ -86,6 +86,66 @@ const MUSIC_LIST = [
     "Devil in a New Dress",
     "by Kanye",
   ],
+  [
+    "https://www.youtube.com/watch?v=WSSShAOKYfo",
+    "/assets/music/anti.png",
+    "Consideration",
+    "by Rihanna",
+  ],
+  [
+    "https://www.youtube.com/watch?v=FTIvFD7TCVg",
+    "/assets/music/brat.png",
+    "Everything is Romantic",
+    "by Charli XCX",
+  ],
+  [
+    "https://www.youtube.com/watch?v=-gc1O5VImyY",
+    "/assets/music/chri.png",
+    "Christmas & Chill",
+    "by Ariana Grande",
+  ],
+  [
+    "https://www.youtube.com/watch?v=SHP-xh5NnVs",
+    "/assets/music/dc.png",
+    "Toronto 2014",
+    "by Daniel Caesar",
+  ],
+  [
+    "https://www.youtube.com/watch?v=e0JhRAxlQ1I",
+    "/assets/music/eter.png",
+    "Imperfect For You",
+    "by Ariana Grande",
+  ],
+  [
+    "https://www.youtube.com/watch?v=Q86_nlRoIGw",
+    "/assets/music/mrs.png",
+    "Hello Miss Johnson",
+    "by Jack Harlow",
+  ],
+  [
+    "https://www.youtube.com/watch?v=72wCf0yG9Wo",
+    "/assets/music/mys.png",
+    "Through the Sea of Time",
+    "by Arata Iiyoshi",
+  ],
+  [
+    "https://www.youtube.com/watch?v=8O01B5BN298",
+    "/assets/music/nemz.png",
+    "1942",
+    "by NEMZZZ",
+  ],
+  [
+    "https://www.youtube.com/watch?v=X2DTROC4JCI",
+    "/assets/music/solo.png",
+    "Solo",
+    "by Future",
+  ],
+  [
+    "https://www.youtube.com/watch?v=i-DK2XUsKuw",
+    "/assets/music/sss.png",
+    "Spiderman Superman",
+    "by PartyNextDoor",
+  ],
 ];
 
 const MUSIC_CARD_COUNT = 3;
