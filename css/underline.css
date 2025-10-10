@@ -14,7 +14,6 @@
   }
 }
 
-/* Animated SVG underline for Meta link */
 .underline-animated {
   position: relative;
   display: inline-block;
@@ -41,26 +40,16 @@
   }
 }
 
-/* Trigger animation on hover */
 .underline-animated:hover .animated-path {
   animation: draw 0.6s ease-in-out forwards;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  span {
-    text-decoration: underline;
-  }
-
-  .social-links span {
-    margin-right: 40px;
-  }
-
   canvas,
   #canvas-state {
     display: none;
   }
 
-  /* Disable animation for reduced motion */
   .animated-path {
     stroke-dasharray: none;
     stroke-dashoffset: 0;

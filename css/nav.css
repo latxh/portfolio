@@ -55,7 +55,6 @@ button {
   transition: background-color 0.2s;
 }
 
-#music svg,
 button svg {
   transition: all 0.2s;
 }
@@ -64,26 +63,22 @@ button:hover {
   background-color: var(--button-hover);
 }
 
-#music:hover svg,
 button:hover svg {
   fill: var(--font-1);
 }
 
 a:focus-visible,
 button:focus-visible,
-.music-link:focus-visible #music,
 .link-item:focus-visible {
   outline: 2px solid var(--focus-blue);
 }
 
 a:not(:active):focus-visible,
-button:not(:active):focus-visible,
-.music-link:not(:active):focus-visible #music {
+button:not(:active):focus-visible {
   outline-offset: 0.3rem;
 }
 
-.link-item:hover,
-.canvas-off .music-link:hover #music {
+.link-item:hover {
   outline: 2px solid var(--focus-blue);
   outline-offset: 0.3rem;
 }

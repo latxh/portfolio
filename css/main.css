@@ -10,20 +10,10 @@
   margin-bottom: 248px;
 }
 
-.title-wrapper {
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 36px;
-}
-
 hr {
   clear: both;
   visibility: hidden;
   margin: 0;
-}
-
-.top-space {
-  margin-top: 48px;
 }
 
 .bot-space {
@@ -60,10 +50,6 @@ hr {
   outline: 2px solid transparent;
   transition: all 0.2s;
 }
-
-/* .canvas-on .link-item {
-  outline: 1px solid var(--music-border);
-} */
 
 .link-text {
   height: 100%;

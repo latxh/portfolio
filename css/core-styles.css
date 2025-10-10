@@ -118,11 +118,8 @@ h6 {
 }
 
 p {
-  line-height: 20px;
-}
-
-p {
   font-size: 16px;
+  line-height: 20px;
 }
 
 .clamp-text {
@@ -218,7 +215,6 @@ main,
   }
 
   .site-wrapper .top {
-    /* min-height: 400px; */
     min-height: auto;
     padding-bottom: 96px;
   }
