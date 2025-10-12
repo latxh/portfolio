@@ -11,9 +11,10 @@
   position: absolute;
   width: 80px;
   height: 80px;
-  background-color: var(--music-background);
+  background-color: var(--work-background);
   border-radius: 8px;
-  transition: transform 0.3s ease, background-color 0.2s, opacity 0.2s, filter 0.3s ease, outline 0.2s;
+  transition: transform 0.3s ease, background-color 0.2s, opacity 0.2s,
+    filter 0.3s ease, outline 0.2s;
   cursor: pointer;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   display: flex;
@@ -23,18 +24,6 @@
   opacity: 1;
   scroll-margin-bottom: 120px;
   outline: 2px solid transparent;
-}
-
-.canvas-on .music-card {
-  background-color: var(--button);
-}
-
-.music-card:hover {
-  background-color: var(--music-hover);
-}
-
-.canvas-on .music-card:hover {
-  background-color: var(--button-hover);
 }
 
 .music-card img {

@@ -78,7 +78,7 @@ hr {
 }
 
 .link-item:hover {
-  background-color: var(--music-hover);
+  background-color: var(--work-hover);
 }
 
 .link-item:hover img,

@@ -27,23 +27,14 @@
   color-scheme: dark;
   font-family: Latch, Arial, Helvetica, sans-serif;
   --canvas-opacity: 0.6;
-  --focus-blue: #78B0FF;
-
+  --focus-blue: #78b0ff;
   --background: #101112;
-  --footer: #17181a;
   --font-1: #f3f4f5;
   --font-2: #9fa4ab;
-
   --button: #323338;
   --button-hover: #28292b;
-
-  --work-background: var(--footer);
-  --music-background: #28292b;
-  --music-border: #323338;
-  --music-hover: #000;
-
-  --hidden-message-font: #8fb9ef;
-  --hidden-message-background: #2f3849;
+  --work-background: #17181a;
+  --work-hover: #000;
 }
 
 ::selection {
@@ -223,19 +214,11 @@ main,
     margin-bottom: 40px;
   }
 
-  .button-wrapper {
-    gap: 12px;
-  }
-
   .card-stack-container,
   .site-wrapper nav,
   .show,
   #canvas-state {
     display: none;
-  }
-
-  .footer-filled {
-    background-color: transparent !important;
   }
 
   div.link-img img,

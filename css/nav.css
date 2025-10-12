@@ -16,22 +16,6 @@ a.name-logo:hover {
   color: var(--font-1);
 }
 
-.canvas-on .social-link p,
-.canvas-on .name-logo h6,
-.canvas-on a.name-logo {
-  color: var(--font-1);
-}
-
-.canvas-on .social-link:hover p,
-.canvas-on .name-logo:hover h6,
-.canvas-on a.name-logo:hover {
-  color: var(--font-2);
-}
-
-.button-wrapper {
-  gap: 24px;
-}
-
 a,
 a:link,
 a:visited,
