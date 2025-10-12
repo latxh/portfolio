@@ -35,7 +35,7 @@ const MUSIC_LIST = [
   [
     "https://www.youtube.com/watch?v=T5-faDLv1Vs",
     "/assets/music/mc.png",
-    "Mice On Venus",
+    "Mice on Venus",
     "by C418",
   ],
   [
@@ -65,7 +65,7 @@ const MUSIC_LIST = [
   [
     "https://www.youtube.com/watch?v=MRMhH1mnEg4",
     "/assets/music/ssc.png",
-    "Live Performance",
+    "Father Stretch My Hands",
     "by Sunday Service",
   ],
   [
