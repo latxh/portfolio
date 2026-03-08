@@ -159,14 +159,16 @@ const canvasButtonOn = document.getElementById("canvas-on");
 const canvasButtonOff = document.getElementById("canvas-off");
 
 const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+const mobileQuery = window.matchMedia("(max-width: 670px)");
 let motion = localStorage.getItem("motion") ?? "system";
 let systemReducedMotion = reducedMotionQuery.matches;
+let isMobile = mobileQuery.matches;
 
 const updateCanvas = () => {
   localStorage.setItem("motion", motion);
   const isReducedMotion = motion === "system" ? systemReducedMotion : motion === "reduce";
 
-  if (isReducedMotion) {
+  if (isReducedMotion || isMobile) {
     canvasButtonOn.classList.remove("hide");
     canvasButtonOff.classList.add("hide");
     canvas.classList.remove("show");
@@ -191,6 +193,10 @@ const toggleCanvas = () => {
 const initCanvasMotion = () => {
   reducedMotionQuery.addEventListener("change", (m) => {
     systemReducedMotion = m.matches;
+    updateCanvas();
+  });
+  mobileQuery.addEventListener("change", (m) => {
+    isMobile = m.matches;
     updateCanvas();
   });
   updateCanvas();
