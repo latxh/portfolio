@@ -13,15 +13,13 @@
   height: 80px;
   background-color: var(--work-background);
   border-radius: 8px;
-  transition: transform 0.3s ease, background-color 0.2s, opacity 0.2s,
-    filter 0.3s ease, outline 0.2s;
+  transition: transform 0.3s ease, background-color 0.2s, outline 0.2s;
   cursor: pointer;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: visible;
-  opacity: 1;
   scroll-margin-bottom: 120px;
   outline: 2px solid transparent;
 }
@@ -33,21 +31,43 @@
   border-radius: 6px;
 }
 
+.music-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--card-overlay-clear);
+  border-radius: 6px;
+  transition: background 0.3s ease;
+  pointer-events: none;
+}
+
 .card-1 {
   top: 24px;
   left: 8px;
   z-index: 1;
   transform: rotate(-8deg);
-  opacity: 0.7;
+}
+
+.card-1::after,
+.card-3::after {
+  background: var(--card-overlay);
 }
 
 .music-card.card-1:hover {
   transform: rotate(-8deg) translateY(-16px);
-  opacity: 1;
+}
+
+.music-card.card-1:hover::after,
+.music-card.card-3:hover::after {
+  background: var(--card-overlay-clear);
 }
 
 .music-card.card-1:hover ~ .music-card.card-2 {
   transform: translateX(20px) translateY(-8px) rotate(15deg);
+}
+
+.music-card.card-1:hover ~ .music-card.card-2::after {
+  background: var(--card-overlay);
 }
 
 .music-card.card-1:hover ~ .music-card.card-3 {
@@ -58,12 +78,10 @@
   top: 11px;
   left: 58px;
   z-index: 3;
-  opacity: 1;
 }
 
 .music-card.card-2:hover {
   transform: translateY(-8px);
-  opacity: 1;
 }
 
 .card-3 {
@@ -71,12 +89,10 @@
   left: 108px;
   z-index: 2;
   transform: rotate(8deg);
-  opacity: 0.7;
 }
 
 .music-card.card-3:hover {
   transform: rotate(8deg) translateY(-16px);
-  opacity: 1;
 }
 
 .card-stack-container:has(.music-card.card-3:hover) .music-card.card-1 {
@@ -87,38 +103,39 @@
   transform: translateX(-20px) translateY(-8px) rotate(-15deg);
 }
 
-.music-card.card-1:hover ~ .music-card.card-2 {
-  filter: brightness(0.5);
-}
-
-.card-stack-container:has(.music-card.card-3:hover) .music-card.card-2 {
-  filter: brightness(0.5);
+.card-stack-container:has(.music-card.card-3:hover) .music-card.card-2::after {
+  background: var(--card-overlay);
 }
 
 .music-card.card-1:focus-visible {
   outline: 2px solid var(--focus-blue);
   outline-offset: 2px;
   transform: rotate(-8deg) translateY(-16px);
-  opacity: 1;
+}
+
+.music-card.card-1:focus-visible::after,
+.music-card.card-3:focus-visible::after {
+  background: var(--card-overlay-clear);
 }
 
 .music-card.card-2:focus-visible {
   outline: 2px solid var(--focus-blue);
   outline-offset: 2px;
   transform: translateY(-8px);
-  opacity: 1;
 }
 
 .music-card.card-3:focus-visible {
   outline: 2px solid var(--focus-blue);
   outline-offset: 2px;
   transform: rotate(8deg) translateY(-16px);
-  opacity: 1;
 }
 
 .music-card.card-1:focus-visible ~ .music-card.card-2 {
   transform: translateX(20px) translateY(-8px) rotate(15deg);
-  filter: brightness(0.5);
+}
+
+.music-card.card-1:focus-visible ~ .music-card.card-2::after {
+  background: var(--card-overlay);
 }
 
 .music-card.card-1:focus-visible ~ .music-card.card-3 {
@@ -131,7 +148,10 @@
 
 .card-stack-container:has(.music-card.card-3:focus-visible) .music-card.card-2 {
   transform: translateX(-20px) translateY(-8px) rotate(-15deg);
-  filter: brightness(0.5);
+}
+
+.card-stack-container:has(.music-card.card-3:focus-visible) .music-card.card-2::after {
+  background: var(--card-overlay);
 }
 
 .music-tooltip {

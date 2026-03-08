@@ -35,6 +35,8 @@
   --button-hover: #28292b;
   --work-background: #17181a;
   --work-hover: #000;
+  --card-overlay: rgba(0, 0, 0, 0.4);
+  --card-overlay-clear: rgba(0, 0, 0, 0);
 }
 
 ::selection {
