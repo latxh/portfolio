@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>AI Prototyping</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Documentation and guides." />
+
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <link rel="stylesheet" type="text/css" href="css/core-styles.css" />
+  <link rel="stylesheet" type="text/css" href="css/nav.css" />
+  <link rel="stylesheet" type="text/css" href="css/tooltip.css" />
+  <link rel="stylesheet" type="text/css" href="css/docs.css" />
+</head>
+
+<body>
+  <div class="site-wrapper">
+    <nav class="row">
+      <a class="name-logo" href="/">
+        <h6>Brian Latchman</h6>
+      </a>
+
+      <button id="canvas-state" aria-label="Toggle visual effects" onclick="toggleCanvas()">
+        <p class="tool-tip">Toggle visual effects</p>
+        <svg id="canvas-on" class="hide" aria-hidden="true" fill="var(--font-2)" width="24" height="24"
+          viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M7.909 5h1.34a.75.75 0 0 1 .102 1.493L9.25 6.5H7.91a.75.75 0 0 0-.477.17l-.075.073-2.074 2.256h3.466a2.25 2.25 0 0 1 2.237 2.005h2.027A2.25 2.25 0 0 1 15.25 9l3.477-.001-2.083-2.258a.75.75 0 0 0-.448-.234l-.104-.007h-1.345a.75.75 0 0 1-.102-1.493L14.747 5h1.346a2.25 2.25 0 0 1 1.52.592l.133.132 3.642 3.947c.05.055.091.115.122.178.306.384.489.871.489 1.4v3.497a3.25 3.25 0 0 1-3.25 3.25H16.25a3.25 3.25 0 0 1-3.25-3.25l-.001-2.242h-2.001v2.242a3.25 3.25 0 0 1-3.25 3.25H5.25A3.25 3.25 0 0 1 2 14.746V11.25c0-.562.206-1.076.546-1.47l.038-.055.044-.052 3.624-3.945a2.25 2.25 0 0 1 1.469-.72L7.909 5h1.34-1.34Zm.84 5.5H4.25a.75.75 0 0 0-.75.75v3.496c0 .967.784 1.75 1.75 1.75h2.499a1.75 1.75 0 0 0 1.75-1.75V11.25a.75.75 0 0 0-.75-.75Zm11 0H15.25a.75.75 0 0 0-.75.75v3.496c0 .967.784 1.75 1.75 1.75h2.499a1.75 1.75 0 0 0 1.75-1.75V11.25a.75.75 0 0 0-.75-.75Z" />
+        </svg>
+        <svg id="canvas-off" aria-hidden="true" fill="var(--font-2)" width="24" height="24" viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M3.28 2.22a.75.75 0 1 0-1.06 1.06l3.273 3.274-2.865 3.119-.044.052-.038.055c-.34.394-.546.908-.546 1.47v3.496a3.25 3.25 0 0 0 3.25 3.25h2.499a3.25 3.25 0 0 0 3.25-3.25l-.001-2.242h.445L13 14.061v.685a3.25 3.25 0 0 0 3.25 3.25h.685l3.784 3.785a.75.75 0 0 0 1.061-1.061L3.28 2.22ZM7.94 9l-2.656-.001 1.272-1.384L7.939 9ZM4.25 10.5h4.499a.75.75 0 0 1 .75.75v3.496a1.75 1.75 0 0 1-1.75 1.75H5.25a1.75 1.75 0 0 1-1.75-1.75V11.25a.75.75 0 0 1 .75-.75ZM13.303 10.121l1.197 1.197v-.068a.75.75 0 0 1 .75-.75h4.499a.75.75 0 0 1 .75.75v3.496a1.75 1.75 0 0 1-.993 1.578l1.094 1.094a3.246 3.246 0 0 0 1.399-2.672V11.25c0-.53-.183-1.017-.489-1.4a.748.748 0 0 0-.122-.179l-3.642-3.947-.133-.132A2.25 2.25 0 0 0 16.093 5h-1.346l-.102.007a.75.75 0 0 0 .102 1.493h1.346l.103.007a.75.75 0 0 1 .448.234L18.727 9H15.25c-.831 0-1.557.452-1.947 1.122Z" />
+        </svg>
+      </button>
+    </nav>
+
+    <div class="docs-layout">
+      <!-- Left sidebar -->
+      <aside class="docs-sidebar">
+        <div class="docs-sidebar-group">
+          <h4>Article</h4>
+          <ul>
+            <li><a href="#prototyping-with-ai">Prototyping with AI</a></li>
+            <li><a href="#claude-and-frontend">Claude & Frontend</a></li>
+            <li><a href="#good-enough">The Good Enough Trap</a></li>
+            <li><a href="#closing">Make It</a></li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- Main article -->
+      <article class="docs-content">
+        <h1 id="prototyping-with-ai">AI Prototyping</h1>
+
+        <p>
+          <a href="https://rauno.me" target="_blank">Rauno</a> put it best:
+        </p>
+
+        <div class="callout">
+          <p>Make it fast.<br>Make it beautiful.<br>Make it consistent.<br>Make it carefully.<br>Make it timeless.<br>Make it soulful.<br>Make it.</p>
+        </div>
+
+        <h2 id="claude-and-frontend">Claude & Frontend</h2>
+
+        <p>
+          Claude has gotten genuinely good at frontend. Not "generates a passable div" good —
+          like, understands component architecture, writes clean CSS, respects design tokens,
+          and produces markup that actually feels like something a human would write. The gap
+          between what you prompt and what you get back has shrunk dramatically.
+        </p>
+
+        <p>
+          You can go from a rough idea to a working prototype in a single conversation. Layouts,
+          responsive breakpoints, interactions, accessibility — it handles the mechanical parts
+          with enough competence that the bottleneck shifts entirely to you. The tool is no
+          longer the limiting factor. Your taste is.
+        </p>
+
+        <h2 id="good-enough">The Good Enough Trap</h2>
+
+        <p>
+          And that's the problem. When iteration is this cheap, everything reaches "good enough"
+          almost immediately. The first pass looks fine. The layout works. The spacing is
+          reasonable. You could ship it. So you do.
+        </p>
+
+        <p>
+          But "good enough" is the enemy of great. The pursuit of excellence is harder than
+          ever — not because the tools can't keep up, but because they've made it so easy to
+          stop early. When the cost of another iteration is basically zero, the discipline to
+          actually do it has to come from somewhere deeper than efficiency.
+        </p>
+
+        <p>
+          The feeling of "this works" is seductive. It kills the instinct to push further, to
+          question the defaults, to spend twenty more minutes on the thing nobody will
+          consciously notice but everyone will feel. AI removes the excuse of not having time.
+          What's left is whether you care enough to keep going.
+        </p>
+
+        <h2 id="closing">Make It</h2>
+
+        <p>
+          Cheap iteration is a superpower — but only if you refuse to stop at the first
+          thing that works. The craft isn't in the generation. It's in the tenth tweak,
+          the one that turns good enough into something you're proud of.
+        </p>
+
+        <p>
+          You've already tried the tools. You know they work. The question isn't whether
+          AI can build your next prototype — it's whether you'll push past the first
+          version that feels done. Go make something you can't stop tweaking.
+        </p>
+
+        <hr class="docs-divider" />
+
+        <p>
+          This entire page — layout, styles, scroll-spy, responsive breakpoints, and the
+          words you just read — was built in under 30 minutes with
+          <a href="https://www.anthropic.com/claude" target="_blank">Claude Opus 4.6</a>.
+        </p>
+
+        <p>
+          March 8, 2025
+        </p>
+      </article>
+
+      <!-- Right sidebar — Contact -->
+      <aside class="docs-on-page">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="https://www.linkedin.com/in/brian-latchman/" target="_blank">Linkedin</a></li>
+          <li><a href="https://www.instagram.com/latxhman/" target="_blank">Instagram</a></li>
+          <li><a href="https://github.com/latxh/" target="_blank">Github</a></li>
+          <li><a href="mailto:latxhman@gmail.com">Email me</a></li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r67/three.min.js"></script>
+  <script src="js/canvas.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    const sections = document.querySelectorAll('.docs-content h1[id], .docs-content h2[id]');
+    const sidebarLinks = document.querySelectorAll('.docs-sidebar a');
+
+    const updateActiveSection = () => {
+      const scrollY = window.scrollY;
+      let current = sections[0];
+
+      sections.forEach((section) => {
+        if (section.offsetTop - 120 <= scrollY) {
+          current = section;
+        }
+      });
+
+      const atBottom = (window.innerHeight + scrollY) >= document.documentElement.scrollHeight - 2;
+      if (atBottom) {
+        current = sections[sections.length - 1];
+      }
+
+      sidebarLinks.forEach((link) => link.classList.remove('active'));
+      const activeLink = document.querySelector(
+        `.docs-sidebar a[href="#${current.id}"]`
+      );
+      if (activeLink) activeLink.classList.add('active');
+    };
+
+    window.addEventListener('scroll', updateActiveSection, { passive: true });
+    updateActiveSection();
+  </script>
+</body>
+
+</html>
