@@ -1,4 +1,5 @@
 nav {
+  position: relative;
   gap: 8px;
   justify-content: space-between;
 }
@@ -65,4 +66,45 @@ button:not(:active):focus-visible {
 .link-item:hover {
   outline: 2px solid var(--focus-blue);
   outline-offset: 0.3rem;
+}
+
+.top-banner {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 48px;
+  background-color: var(--button);
+  color: var(--font-2);
+  font-size: 14px;
+  white-space: nowrap;
+  transition: all 0.2s;
+  animation: banner-in 0.6s ease 0.6s both;
+}
+
+@keyframes banner-in {
+  from {
+    opacity: 0;
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+.top-banner svg {
+  transition: transform 0.2s ease;
+}
+
+.top-banner:hover svg {
+  transform: translateX(3px);
+}
+
+.top-banner:hover {
+  background-color: var(--button-hover);
+  color: var(--font-1);
 }
