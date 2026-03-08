@@ -153,6 +153,7 @@
   opacity: 0;
 }
 
-.music-card:hover .music-tooltip {
+.music-card:hover .music-tooltip,
+.music-card:focus-visible .music-tooltip {
   opacity: 1;
 }
