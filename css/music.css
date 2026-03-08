@@ -121,15 +121,15 @@
   filter: brightness(0.5);
 }
 
-.music-card.card-1:focus ~ .music-card.card-3 {
+.music-card.card-1:focus-visible ~ .music-card.card-3 {
   transform: translateX(25px) translateY(5px) rotate(25deg);
 }
 
-.card-stack-container:has(.music-card.card-3:focus) .music-card.card-1 {
+.card-stack-container:has(.music-card.card-3:focus-visible) .music-card.card-1 {
   transform: translateX(-25px) translateY(5px) rotate(-25deg);
 }
 
-.card-stack-container:has(.music-card.card-3:focus) .music-card.card-2 {
+.card-stack-container:has(.music-card.card-3:focus-visible) .music-card.card-2 {
   transform: translateX(-20px) translateY(-8px) rotate(-15deg);
   filter: brightness(0.5);
 }

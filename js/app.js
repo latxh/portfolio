@@ -216,6 +216,12 @@ const initMusicCards = () => {
     if (albumCover) albumCover.src = imageSrc;
     if (musicTooltip) musicTooltip.innerHTML = title;
   }
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") {
+      document.querySelectorAll(".music-card").forEach((card) => card.blur());
+    }
+  });
 };
 
 initCanvasMotion();
