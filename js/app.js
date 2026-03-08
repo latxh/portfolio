@@ -232,6 +232,28 @@ const initMusicCards = () => {
   });
 };
 
+const copyEmail = (el) => {
+  navigator.clipboard.writeText("latxhman@gmail.com").then(() => {
+    const text = el.querySelector("p") || el;
+    const original = text.textContent;
+    el.style.pointerEvents = "none";
+    text.style.transition = "filter 0.2s ease";
+    text.style.filter = "blur(4px)";
+    setTimeout(() => {
+      text.textContent = "Copied!";
+      text.style.filter = "blur(0)";
+    }, 200);
+    setTimeout(() => {
+      text.style.filter = "blur(4px)";
+      setTimeout(() => {
+        text.textContent = original;
+        text.style.filter = "blur(0)";
+        el.style.pointerEvents = "";
+      }, 200);
+    }, 1000);
+  });
+};
+
 initCanvasMotion();
 initRandomMessage();
 initMusicCards();
