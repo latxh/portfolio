@@ -172,12 +172,14 @@ const updateCanvas = () => {
     canvas.classList.remove("show");
     document.body.classList.add("canvas-off");
     document.body.classList.remove("canvas-on");
+    if (window.stopCanvasAnimation) window.stopCanvasAnimation();
   } else {
     canvasButtonOn.classList.add("hide");
     canvasButtonOff.classList.remove("hide");
     canvas.classList.add("show");
     document.body.classList.remove("canvas-off");
     document.body.classList.add("canvas-on");
+    if (window.startCanvasAnimation) window.startCanvasAnimation();
   }
 };
 
