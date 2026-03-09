@@ -117,6 +117,15 @@ button:not(:active):focus-visible {
 
 .color-picker-wrapper {
   position: relative;
+  opacity: 1;
+  filter: blur(0);
+  transition: opacity 0.2s ease, filter 0.2s ease;
+}
+
+.color-picker-wrapper.hide {
+  opacity: 0;
+  filter: blur(4px);
+  pointer-events: none;
 }
 
 .color-picker-btn {

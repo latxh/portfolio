@@ -44,7 +44,7 @@
   color: var(--background);
 }
 
-.hide {
+.hide:not(.color-picker-wrapper) {
   display: none;
 }
 
