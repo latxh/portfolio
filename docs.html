@@ -149,7 +149,7 @@
           <li><a href="https://www.linkedin.com/in/brian-latchman/" target="_blank">Linkedin</a></li>
           <li><a href="https://www.instagram.com/latxhman/" target="_blank">Instagram</a></li>
           <li><a href="https://github.com/latxh/" target="_blank">Github</a></li>
-          <li><a onclick="copyEmail(this)" style="cursor:pointer">Email</a></li>
+          <li><a tabindex="0" onclick="copyEmail(this)" onkeydown="if(event.key==='Enter')copyEmail(this)" style="cursor:pointer">Email</a></li>
         </ul>
       </aside>
     </div>
