@@ -41,7 +41,8 @@ button {
   transition: background-color 0.2s;
 }
 
-button:not(.color-swatch) svg {
+button:not(.color-swatch) svg,
+button:not(.color-swatch) svg path {
   transition: all 0.2s;
 }
 
@@ -122,7 +123,8 @@ button:not(:active):focus-visible {
   height: 42px;
 }
 
-.color-picker-btn:hover svg {
+.color-picker-btn:hover svg,
+.color-picker-btn:hover svg path {
   fill: var(--font-1);
 }
 
