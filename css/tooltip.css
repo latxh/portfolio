@@ -8,16 +8,16 @@ button .tool-tip {
   border-radius: 8px;
   position: absolute;
   z-index: 1;
-  width: 156px;
-  margin-left: -78px;
-  padding: 4px;
+  white-space: nowrap;
+  padding: 4px 8px;
   top: 125%;
   left: 50%;
+  translate: -50% 0;
+  transform-origin: top;
 
   visibility: hidden;
   opacity: 0;
   transform: scale(0.9);
-  transform-origin: top;
   transition: all 0.2s;
   transition-delay: 0.2s;
 }
@@ -26,4 +26,9 @@ button:hover .tool-tip {
   visibility: visible;
   opacity: 1;
   transform: scale(1);
+}
+
+button.popup-open:hover .tool-tip {
+  visibility: hidden;
+  opacity: 0;
 }

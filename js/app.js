@@ -154,6 +154,47 @@ const getRandomElement = (array) => array[Math.floor(Math.random() * array.lengt
 
 const shuffleArray = (array) => [...array].sort(() => 0.5 - Math.random());
 
+const COLOR_PRESETS = {
+  cyan:    { r: 3,   g: 2,   b: 1   },
+  emerald: { r: 2.5, g: 1,   b: 3   },
+  coral:   { r: 1,   g: 2.8, b: 3.2 },
+  amber:   { r: 1.2, g: 2,   b: 3.8 },
+};
+
+const colorPickerWrapper = document.getElementById("color-picker-wrapper");
+const colorPopup = document.getElementById("color-popup");
+
+const setColor = (name) => {
+  const preset = COLOR_PRESETS[name];
+  if (!preset) return;
+  localStorage.setItem("canvasColor", name);
+  if (window.setCanvasColor) {
+    window.setCanvasColor(preset.r, preset.g, preset.b);
+  }
+  document.querySelectorAll(".color-swatch").forEach((swatch) => {
+    swatch.classList.toggle("active", swatch.dataset.color === name);
+  });
+};
+
+const toggleColorPicker = () => {
+  const isOpen = colorPopup.classList.toggle("open");
+  document.getElementById("color-picker-btn").classList.toggle("popup-open", isOpen);
+};
+
+document.addEventListener("click", (e) => {
+  if (!colorPopup.classList.contains("open")) return;
+  const wrapper = document.getElementById("color-picker-wrapper");
+  if (!wrapper.contains(e.target)) {
+    colorPopup.classList.remove("open");
+    document.getElementById("color-picker-btn").classList.remove("popup-open");
+  }
+});
+
+const initCanvasColor = () => {
+  const saved = localStorage.getItem("canvasColor") || "cyan";
+  setColor(saved);
+};
+
 const canvas = document.querySelector("canvas");
 const canvasButtonOn = document.getElementById("canvas-on");
 const canvasButtonOff = document.getElementById("canvas-off");
@@ -172,6 +213,8 @@ const updateCanvas = () => {
     canvasButtonOn.classList.remove("hide");
     canvasButtonOff.classList.add("hide");
     canvas.classList.remove("show");
+    colorPickerWrapper.classList.add("hide");
+    colorPopup.classList.remove("open");
     document.body.classList.add("canvas-off");
     document.body.classList.remove("canvas-on");
     if (window.stopCanvasAnimation) window.stopCanvasAnimation();
@@ -179,6 +222,7 @@ const updateCanvas = () => {
     canvasButtonOn.classList.add("hide");
     canvasButtonOff.classList.remove("hide");
     canvas.classList.add("show");
+    colorPickerWrapper.classList.remove("hide");
     document.body.classList.remove("canvas-off");
     document.body.classList.add("canvas-on");
     if (window.startCanvasAnimation) window.startCanvasAnimation();
@@ -255,5 +299,6 @@ const copyEmail = (el) => {
 };
 
 initCanvasMotion();
+initCanvasColor();
 initRandomMessage();
 initMusicCards();

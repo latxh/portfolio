@@ -219,7 +219,8 @@ main,
   .card-stack-container,
   .site-wrapper nav,
   .show,
-  #canvas-state {
+  #canvas-state,
+  .color-picker-wrapper {
     display: none;
   }
 

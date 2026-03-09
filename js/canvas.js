@@ -10,6 +10,10 @@
   const startTime = Date.now();
   const seed = -25;
 
+  let rPhase = 3;
+  let gPhase = 2;
+  let bPhase = 1;
+
   const scene = new THREE.Scene();
   const camera = new THREE.OrthographicCamera(
     window.innerWidth / -2,
@@ -157,9 +161,9 @@
       const scaleYDiv = cube.scale.y / 3.5;
       const distNegPI = distnegNorm * PI * 1.5;
 
-      const r = 0.4 + 0.4 * sin(distNegPI - tDiv3_0 + 3 + heldDiv80 + scaleYDiv);
-      const g = 0.4 + 0.4 * sin(distNegPI - tDiv3_1 + 2 + heldDiv81 + scaleYDiv);
-      const b = 0.4 + 0.4 * sin(distNegPI - tDiv3_2 + 1 + heldDiv82 + scaleYDiv);
+      const r = 0.4 + 0.4 * sin(distNegPI - tDiv3_0 + rPhase + heldDiv80 + scaleYDiv);
+      const g = 0.4 + 0.4 * sin(distNegPI - tDiv3_1 + gPhase + heldDiv81 + scaleYDiv);
+      const b = 0.4 + 0.4 * sin(distNegPI - tDiv3_2 + bPhase + heldDiv82 + scaleYDiv);
 
       cube.material.color.setRGB(r, g, b);
     }
@@ -181,6 +185,11 @@
 
   window.startCanvasAnimation = startAnimation;
   window.stopCanvasAnimation = stopAnimation;
+  window.setCanvasColor = (r, g, b) => {
+    rPhase = r;
+    gPhase = g;
+    bPhase = b;
+  };
 
   animloop();
 }).call(this);
