@@ -163,7 +163,6 @@ button:not(:active):focus-visible {
   height: 42px;
   min-width: 42px;
   padding: 0;
-  border-radius: 50% !important;
   border: 2px solid transparent;
   background: transparent;
   cursor: pointer;
