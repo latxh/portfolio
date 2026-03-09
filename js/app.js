@@ -209,11 +209,14 @@ const updateCanvas = () => {
   localStorage.setItem("motion", motion);
   const isReducedMotion = motion === "system" ? systemReducedMotion : motion === "reduce";
 
+  const pickerButtons = colorPickerWrapper.querySelectorAll("button");
+
   if (isReducedMotion || isMobile) {
     canvasButtonOn.classList.remove("hide");
     canvasButtonOff.classList.add("hide");
     canvas.classList.remove("show");
     colorPickerWrapper.classList.add("hide");
+    pickerButtons.forEach((btn) => btn.setAttribute("tabindex", "-1"));
     colorPopup.classList.remove("open");
     document.body.classList.add("canvas-off");
     document.body.classList.remove("canvas-on");
@@ -223,6 +226,7 @@ const updateCanvas = () => {
     canvasButtonOff.classList.remove("hide");
     canvas.classList.add("show");
     colorPickerWrapper.classList.remove("hide");
+    pickerButtons.forEach((btn) => btn.removeAttribute("tabindex"));
     document.body.classList.remove("canvas-off");
     document.body.classList.add("canvas-on");
     if (window.startCanvasAnimation) window.startCanvasAnimation();
