@@ -2,15 +2,16 @@
 <html lang="en">
 
 <head>
-  <title>AI Prototyping</title>
+  <title>Brian's Notepad</title>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Documentation and guides." />
+  <meta name="description" content="A place for thoughts, ideas, and mini articles." />
 
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <link rel="stylesheet" type="text/css" href="css/core-styles.css" />
   <link rel="stylesheet" type="text/css" href="css/nav.css" />
   <link rel="stylesheet" type="text/css" href="css/tooltip.css" />
+  <link rel="stylesheet" type="text/css" href="css/underline.css" />
   <link rel="stylesheet" type="text/css" href="css/notepad.css" />
 </head>
 
@@ -55,92 +56,113 @@
       <!-- Left sidebar -->
       <aside class="docs-sidebar">
         <div class="docs-sidebar-group">
-          <h4>Article</h4>
+          <h4>Notepad</h4>
           <ul>
-            <li><a href="#prototyping-with-ai">Prototyping with AI</a></li>
-            <li><a href="#claude-and-frontend">Claude & Frontend</a></li>
-            <li><a href="#good-enough">The Good Enough Trap</a></li>
-            <li><a href="#closing">Make It</a></li>
+            <li><a href="#a-place-for-thoughts" class="active">A Place for Thoughts</a></li>
+            <li><a href="#ai-prototyping">AI Prototyping</a></li>
           </ul>
         </div>
       </aside>
 
-      <!-- Main article -->
-      <article class="docs-content">
-        <h1 id="prototyping-with-ai">AI Prototyping</h1>
+      <!-- Main content — stacked articles -->
+      <main class="docs-content">
 
-        <p>
-          <a href="https://rauno.me" target="_blank">Rauno</a> put it best:
-        </p>
+        <!-- Article: A Place for Thoughts -->
+        <article class="notepad-article" id="a-place-for-thoughts">
+          <div class="article-header">
+            <h1>A Place for Thoughts</h1>
+            <time>March 9, 2026</time>
+          </div>
 
-        <div class="callout">
-          <p>Make it fast.<br>Make it beautiful.<br>Make it consistent.<br>Make it carefully.<br>Make it timeless.<br>Make it soulful.<br>Make it.</p>
-        </div>
+          <p>
+            I like the idea of having a place to write down whatever's on my mind — no
+            structure, no theme, no obligation. Just a running stack of thoughts, ideas,
+            and things I've been chewing on. Some of these will be polished, most won't.
+            That's the point.
+          </p>
 
-        <h2 id="claude-and-frontend">Claude & Frontend</h2>
+          <p>
+            Not everything needs to be a blog post or a case study. Sometimes you just
+            want to put a thought somewhere it won't disappear. This is that place.
+          </p>
+        </article>
 
-        <p>
-          Claude has gotten genuinely good at frontend. Not "generates a passable div" good —
-          like, understands component architecture, writes clean CSS, respects design tokens,
-          and produces markup that actually feels like something a human would write. The gap
-          between what you prompt and what you get back has shrunk dramatically.
-        </p>
+        <!-- Article: AI Prototyping -->
+        <article class="notepad-article" id="ai-prototyping">
+          <div class="article-header">
+            <h1>AI Prototyping</h1>
+            <time>March 8, 2026</time>
+          </div>
 
-        <p>
-          You can go from a rough idea to a working prototype in a single conversation. Layouts,
-          responsive breakpoints, interactions, accessibility — it handles the mechanical parts
-          with enough competence that the bottleneck shifts entirely to you. The tool is no
-          longer the limiting factor. Your taste is.
-        </p>
+          <p>
+            <a href="https://rauno.me" target="_blank">Rauno</a> put it best:
+          </p>
 
-        <h2 id="good-enough">The Good Enough Trap</h2>
+          <div class="callout">
+            <p>Make it fast.<br>Make it beautiful.<br>Make it consistent.<br>Make it carefully.<br>Make it timeless.<br>Make it soulful.<br>Make it.</p>
+          </div>
 
-        <p>
-          And that's the problem. When iteration is this cheap, everything reaches "good enough"
-          almost immediately. The first pass looks fine. The layout works. The spacing is
-          reasonable. You could ship it. So you do.
-        </p>
+          <h2 id="claude-and-frontend">Claude & Frontend</h2>
 
-        <p>
-          But "good enough" is the enemy of great. The pursuit of excellence is harder than
-          ever — not because the tools can't keep up, but because they've made it so easy to
-          stop early. When the cost of another iteration is basically zero, the discipline to
-          actually do it has to come from somewhere deeper than efficiency.
-        </p>
+          <p>
+            Claude has gotten genuinely good at frontend. Not "generates a passable div" good —
+            like, understands component architecture, writes clean CSS, respects design tokens,
+            and produces markup that actually feels like something a human would write. The gap
+            between what you prompt and what you get back has shrunk dramatically.
+          </p>
 
-        <p>
-          The feeling of "this works" is seductive. It kills the instinct to push further, to
-          question the defaults, to spend twenty more minutes on the thing nobody will
-          consciously notice but everyone will feel. AI removes the excuse of not having time.
-          What's left is whether you care enough to keep going.
-        </p>
+          <p>
+            You can go from a rough idea to a working prototype in a single conversation. Layouts,
+            responsive breakpoints, interactions, accessibility — it handles the mechanical parts
+            with enough competence that the bottleneck shifts entirely to you. The tool is no
+            longer the limiting factor. Your taste is.
+          </p>
 
-        <h2 id="closing">Make It</h2>
+          <h2 id="good-enough">The Good Enough Trap</h2>
 
-        <p>
-          Cheap iteration is a superpower — but only if you refuse to stop at the first
-          thing that works. The craft isn't in the generation. It's in the tenth tweak,
-          the one that turns good enough into something you're proud of.
-        </p>
+          <p>
+            And that's the problem. When iteration is this cheap, everything reaches "good enough"
+            almost immediately. The first pass looks fine. The layout works. The spacing is
+            reasonable. You could ship it. So you do.
+          </p>
 
-        <p>
-          You've already tried the tools. You know they work. The question isn't whether
-          AI can build your next prototype — it's whether you'll push past the first
-          version that feels done. Go make something you can't stop tweaking.
-        </p>
+          <p>
+            But "good enough" is the enemy of great. The pursuit of excellence is harder than
+            ever — not because the tools can't keep up, but because they've made it so easy to
+            stop early. When the cost of another iteration is basically zero, the discipline to
+            actually do it has to come from somewhere deeper than efficiency.
+          </p>
 
-        <hr class="docs-divider" />
+          <p>
+            The feeling of "this works" is seductive. It kills the instinct to push further, to
+            question the defaults, to spend twenty more minutes on the thing nobody will
+            consciously notice but everyone will feel. AI removes the excuse of not having time.
+            What's left is whether you care enough to keep going.
+          </p>
 
-        <p>
-          This entire page — layout, styles, scroll-spy, responsive breakpoints, and the
-          words you just read — was built in under 30 minutes with
-          <a href="https://www.anthropic.com/claude" target="_blank">Claude Opus 4.6</a>.
-        </p>
+          <h2 id="closing">Make It</h2>
 
-        <p>
-          March 8, 2026
-        </p>
-      </article>
+          <p>
+            Cheap iteration is a superpower — but only if you refuse to stop at the first
+            thing that works. The craft isn't in the generation. It's in the tenth tweak,
+            the one that turns good enough into something you're proud of.
+          </p>
+
+          <p>
+            You've already tried the tools. You know they work. The question isn't whether
+            AI can build your next prototype — it's whether you'll push past the first
+            version that feels done. Go make something you can't stop tweaking.
+          </p>
+
+          <hr class="docs-divider" />
+
+          <p>
+            This entire page — layout, styles, scroll-spy, responsive breakpoints, and most of the words — was built with
+            <a href="https://www.anthropic.com/claude" target="_blank">Claude Opus 4.6</a>.
+          </p>
+        </article>
+
+      </main>
 
       <!-- Right sidebar — Contact -->
       <aside class="docs-on-page">
@@ -159,22 +181,22 @@
   <script src="js/canvas.js"></script>
   <script src="js/app.js"></script>
   <script>
-    const sections = document.querySelectorAll('.docs-content h1[id], .docs-content h2[id]');
+    const articles = document.querySelectorAll('.notepad-article');
     const sidebarLinks = document.querySelectorAll('.docs-sidebar a');
 
-    const updateActiveSection = () => {
+    const updateActiveArticle = () => {
       const scrollY = window.scrollY;
-      let current = sections[0];
+      let current = articles[0];
 
-      sections.forEach((section) => {
-        if (section.offsetTop - 120 <= scrollY) {
-          current = section;
+      articles.forEach((article) => {
+        if (article.offsetTop - 120 <= scrollY) {
+          current = article;
         }
       });
 
       const atBottom = (window.innerHeight + scrollY) >= document.documentElement.scrollHeight - 2;
       if (atBottom) {
-        current = sections[sections.length - 1];
+        current = articles[articles.length - 1];
       }
 
       sidebarLinks.forEach((link) => link.classList.remove('active'));
@@ -184,8 +206,8 @@
       if (activeLink) activeLink.classList.add('active');
     };
 
-    window.addEventListener('scroll', updateActiveSection, { passive: true });
-    updateActiveSection();
+    window.addEventListener('scroll', updateActiveArticle, { passive: true });
+    updateActiveArticle();
   </script>
 </body>
 

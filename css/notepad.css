@@ -40,7 +40,7 @@
   font-size: 14px;
   color: var(--font-2);
   padding: 6px 0 6px 16px;
-  transition: color 0.2s;
+  transition: color 0.2s, border-left-color 0.2s, outline-offset 0.2s;
   border-left: 2px solid transparent;
   margin-left: -1px;
 }
@@ -53,17 +53,43 @@
   border-left-color: var(--focus-blue);
 }
 
-/* Main article content */
+/* Main content */
 .docs-content {
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
-.docs-content h1 {
-  font-size: 32px;
-  font-weight: 700;
+/* Stacked article cards */
+.notepad-article {
+  padding-bottom: 48px;
+  margin-bottom: 48px;
+  border-bottom: 1px solid var(--button);
+}
+
+.notepad-article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.article-header {
   margin-bottom: 16px;
 }
 
+.article-header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 4px 0;
+}
+
+.article-header time {
+  font-size: 14px;
+  color: var(--font-2);
+  opacity: 0.6;
+}
+
+/* Article content typography */
 .docs-content h2 {
   font-size: 22px;
   font-weight: 600;
@@ -89,10 +115,21 @@
   color: var(--focus-blue);
   text-decoration: underline;
   text-underline-offset: 3px;
+  border-radius: 2px;
+  transition: color 0.2s, outline-offset 0.2s;
 }
 
 .docs-content a:hover {
   color: var(--font-1);
+}
+
+.docs-content a:focus-visible {
+  outline: 2px solid var(--focus-blue);
+  outline-offset: 0.3rem;
+}
+
+.docs-content a:active:focus-visible {
+  outline-offset: 0;
 }
 
 .docs-content code {
@@ -153,7 +190,7 @@
   visibility: visible;
 }
 
-/* Right sidebar — On this page */
+/* Right sidebar — Contact */
 .docs-on-page {
   position: sticky;
   top: 80px;
@@ -179,11 +216,21 @@
   font-size: 14px;
   color: var(--font-2);
   padding: 6px 0;
-  transition: color 0.2s;
+  border-radius: 2px;
+  transition: color 0.2s, outline-offset 0.2s;
 }
 
 .docs-on-page ul li a:hover {
   color: var(--font-1);
+}
+
+.docs-on-page ul li a:focus-visible {
+  outline: 2px solid var(--focus-blue);
+  outline-offset: 0.3rem;
+}
+
+.docs-on-page ul li a:active:focus-visible {
+  outline-offset: 0;
 }
 
 /* Responsive */
