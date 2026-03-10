@@ -34,7 +34,6 @@
   gap: 48px;
   max-width: 1124px;
   margin-inline: auto;
-  padding-top: 48px;
 }
 
 /* Left sidebar — Table of Contents */
@@ -44,6 +43,7 @@
   align-self: start;
   max-height: calc(100vh - 100px);
   overflow-y: auto;
+  padding-top: 36px;
 }
 
 .docs-sidebar-group {
@@ -89,6 +89,7 @@
   display: flex;
   flex-direction: column;
   gap: 0;
+  padding-top: 48px;
 }
 
 /* Stacked article cards */
@@ -225,6 +226,7 @@
   position: sticky;
   top: 80px;
   align-self: start;
+  padding-top: 36px;
 }
 
 .docs-on-page h5 {
@@ -279,8 +281,11 @@
   .docs-layout {
     grid-template-columns: 1fr;
     max-width: 612px;
-    padding-top: 32px;
     gap: 0;
+  }
+
+  .docs-content {
+    padding-top: 32px;
   }
 
   .docs-sidebar {
@@ -291,7 +296,10 @@
 @media only screen and (max-width: 670px) {
   .docs-layout {
     max-width: 100%;
-    padding-top: 24px;
+  }
+
+  .docs-content {
+        padding-top: 24px;
   }
 
   .docs-sidebar {
