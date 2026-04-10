@@ -239,6 +239,11 @@ html {
   color: var(--font-2);
   font-size: 16px;
   line-height: 26px;
+  margin-bottom: 16px;
+}
+
+.showcase-hero-text p:last-child {
+  margin-bottom: 0;
 }
 
 .showcase-hero-text a {
@@ -380,6 +385,31 @@ html {
 
 .carousel-next {
   right: 12px;
+}
+
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.lightbox.active {
+  display: flex;
+  animation: fade-in 0.2s ease;
+}
+
+.lightbox img {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 12px;
+  object-fit: contain;
 }
 
 @media only screen and (max-width: 1236px) {
