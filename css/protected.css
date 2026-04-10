@@ -1,9 +1,7 @@
-/* Prevent horizontal scrollbar from full-width carousels */
 html {
   overflow-x: clip;
 }
 
-/* Auth prompt */
 .auth-prompt {
   display: flex;
   justify-content: center;
@@ -26,7 +24,6 @@ html {
 
 .auth-heading {
   font-size: 20px;
-  font-weight: 400;
   margin-bottom: 4px;
 }
 
@@ -46,7 +43,7 @@ html {
   height: 42px;
   padding: 0 20px;
   background: var(--button);
-  border: 1px solid transparent;
+  border: none;
   border-radius: 48px;
   color: var(--font-1);
   font-family: Latch, Arial, Helvetica, sans-serif;
@@ -83,29 +80,31 @@ html {
   opacity: 0.4;
 }
 
-.showcase-footer,
-.auth-footer {
-  position: absolute;
-  bottom: 32px;
+.auth-footer,
+.showcase-footer {
   color: var(--font-2);
   font-size: 14px;
   opacity: 0.4;
 }
 
+.auth-footer {
+  position: absolute;
+  bottom: 32px;
+}
+
 .showcase-footer {
-  position: static;
   text-align: center;
   padding: 64px 0 40px;
 }
 
-.showcase-footer a,
-.auth-footer a {
+.auth-footer a,
+.showcase-footer a {
   color: var(--font-2);
   transition: color 0.2s;
 }
 
-.showcase-footer a:hover,
-.auth-footer a:hover {
+.auth-footer a:hover,
+.showcase-footer a:hover {
   color: var(--font-1);
 }
 
@@ -135,7 +134,6 @@ html {
   margin-bottom: 0;
 }
 
-/* Decrypted content container */
 .protected-content {
   max-width: 1124px;
   margin-inline: auto;
@@ -147,7 +145,6 @@ html {
   to { opacity: 1; filter: blur(0); }
 }
 
-/* About section */
 .showcase-about {
   padding: 56px 0 48px;
   display: flex;
@@ -198,7 +195,6 @@ html {
   position: absolute;
   top: 4px;
   left: 184px;
-  transform: rotate(6deg);
   z-index: 4;
   transform: rotate(6deg);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -206,7 +202,6 @@ html {
 
 .about-text h1 {
   font-size: 28px;
-  font-weight: 400;
   margin-bottom: 8px;
 }
 
@@ -216,7 +211,6 @@ html {
   line-height: 26px;
 }
 
-/* Showcase hero */
 .showcase-hero {
   display: flex;
   align-items: center;
@@ -238,7 +232,6 @@ html {
 
 .showcase-hero-text h2 {
   font-size: 20px;
-  font-weight: 400;
   margin-bottom: 4px;
 }
 
@@ -259,7 +252,6 @@ html {
   color: var(--font-1);
 }
 
-/* Showcase sections */
 .showcase-section {
   padding-bottom: 64px;
   margin-bottom: 64px;
@@ -278,7 +270,6 @@ html {
 
 .showcase-header h2 {
   font-size: 20px;
-  font-weight: 400;
   margin-bottom: 4px;
 }
 
@@ -288,14 +279,12 @@ html {
   line-height: 20px;
 }
 
-/* Full-width carousel wrapper */
 .carousel-wrapper {
   position: relative;
   width: 100vw;
   margin-left: calc(-50vw + 50%);
 }
 
-/* Gradient edge masks */
 .carousel-wrapper::before,
 .carousel-wrapper::after {
   content: '';
@@ -323,7 +312,6 @@ html {
   -webkit-mask-image: linear-gradient(to left, black, transparent);
 }
 
-/* Carousel */
 .carousel {
   display: flex;
   gap: 16px;
@@ -357,7 +345,6 @@ html {
   aspect-ratio: 231 / 130;
 }
 
-/* Arrow buttons */
 .carousel-arrow {
   position: absolute;
   top: 50%;
@@ -395,7 +382,6 @@ html {
   right: 12px;
 }
 
-/* Responsive */
 @media only screen and (max-width: 1236px) {
   .protected-content {
     max-width: 828px;
@@ -468,7 +454,6 @@ html {
 
   .about-text h1 {
     font-size: 24px;
-    font-weight: 400;
   }
 
   .about-text p {
@@ -479,6 +464,8 @@ html {
   .showcase-hero {
     flex-direction: column;
     gap: 24px;
+    padding-bottom: 40px;
+    margin-bottom: 40px;
   }
 
   .showcase-hero-img {
@@ -488,11 +475,6 @@ html {
 
   .showcase-hero-text h2 {
     font-size: 18px;
-  }
-
-  .showcase-hero {
-    padding-bottom: 40px;
-    margin-bottom: 40px;
   }
 
   .showcase-section {
