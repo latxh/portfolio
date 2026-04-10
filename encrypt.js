@@ -4,7 +4,7 @@ const readline = require("readline");
 const path = require("path");
 
 const SOURCE_FILE = path.join(__dirname, "protected-source.html");
-const TARGET_FILE = path.join(__dirname, "protected.html");
+const TARGET_FILE = path.join(__dirname, "shopify.html");
 
 const SALT_LENGTH = 16;
 const IV_LENGTH = 12;
@@ -59,7 +59,7 @@ async function main() {
   );
   fs.writeFileSync(TARGET_FILE, html, "utf8");
 
-  console.log(`Encrypted ${content.length} bytes into protected.html`);
+  console.log(`Encrypted ${content.length} bytes into ${path.basename(TARGET_FILE)}`);
 }
 
 main();
