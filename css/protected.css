@@ -145,11 +145,18 @@ html {
   to { opacity: 1; filter: blur(0); }
 }
 
+.showcase-intro-card {
+  background: var(--work-background);
+  border-radius: 20px;
+  padding: 0 48px;
+  margin-bottom: 48px;
+}
+
 .showcase-about {
-  padding: 56px 0 48px;
+  padding: 40px 0 36px;
   display: flex;
   align-items: center;
-  gap: 48px;
+  gap: 32px;
 }
 
 .about-images {
@@ -170,6 +177,7 @@ html {
   z-index: 1;
   transform: rotate(-8deg);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.4s ease, left 0.4s ease;
 }
 
 .about-headshot {
@@ -182,6 +190,7 @@ html {
   left: 80px;
   z-index: 3;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.4s ease, left 0.4s ease;
 }
 
 .about-flag {
@@ -197,6 +206,24 @@ html {
   left: 184px;
   z-index: 4;
   transform: rotate(6deg);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  will-change: transform, left;
+  transition: transform 0.4s ease, left 0.4s ease;
+}
+
+.showcase-intro-card:hover .about-portrait {
+  transform: rotate(-12deg);
+  left: -10px;
+}
+
+.showcase-intro-card:hover .about-headshot {
+  transform: rotate(2deg);
+  left: 90px;
+}
+
+.showcase-intro-card:hover .about-flag {
+  transform: rotate(10deg);
+  left: 200px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
@@ -221,9 +248,10 @@ html {
 }
 
 .showcase-hero-img {
-  width: 50%;
+  width: 40%;
   flex-shrink: 0;
   border-radius: 16px;
+  aspect-ratio: 16 / 9;
 }
 
 .showcase-hero-text {
@@ -232,7 +260,7 @@ html {
 
 .showcase-hero-text h2 {
   font-size: 20px;
-  margin-bottom: 4px;
+  margin-bottom: 12px;
 }
 
 .showcase-hero-text p {
@@ -305,16 +333,16 @@ html {
 
 .carousel-wrapper::before {
   left: 0;
-  background: linear-gradient(to right, var(--background), transparent);
-  mask-image: linear-gradient(to right, black, transparent);
-  -webkit-mask-image: linear-gradient(to right, black, transparent);
+  background: linear-gradient(to right, var(--background) 10%, transparent);
+  mask-image: linear-gradient(to right, black 10%, transparent);
+  -webkit-mask-image: linear-gradient(to right, black 10%, transparent);
 }
 
 .carousel-wrapper::after {
   right: 0;
-  background: linear-gradient(to left, var(--background), transparent);
-  mask-image: linear-gradient(to left, black, transparent);
-  -webkit-mask-image: linear-gradient(to left, black, transparent);
+  background: linear-gradient(to left, var(--background) 10%, transparent);
+  mask-image: linear-gradient(to left, black 10%, transparent);
+  -webkit-mask-image: linear-gradient(to left, black 10%, transparent);
 }
 
 .carousel {
@@ -358,6 +386,10 @@ html {
   width: 48px;
   height: 48px;
   color: var(--font-2);
+  background-color: rgba(16, 17, 18, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 50%;
   opacity: 0;
   transition: opacity 0.2s, background-color 0.2s, color 0.2s;
 }
@@ -380,11 +412,11 @@ html {
 }
 
 .carousel-prev {
-  left: 12px;
+  left: 18px;
 }
 
 .carousel-next {
-  right: 12px;
+  right: 18px;
 }
 
 .lightbox {
@@ -447,6 +479,12 @@ html {
 @media only screen and (max-width: 670px) {
   .protected-content {
     max-width: 100%;
+  }
+
+  .showcase-intro-card {
+    padding: 0 24px;
+    border-radius: 16px;
+    margin-bottom: 40px;
   }
 
   .showcase-about {

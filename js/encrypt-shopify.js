@@ -3,8 +3,8 @@ const fs = require("fs");
 const readline = require("readline");
 const path = require("path");
 
-const SOURCE_FILE = path.join(__dirname, "shopify-source.html");
-const TARGET_FILE = path.join(__dirname, "shopify.html");
+const SOURCE_FILE = path.join(__dirname, "..", "shopify-source.html");
+const TARGET_FILE = path.join(__dirname, "..", "shopify.html");
 
 const SALT_LENGTH = 16;
 const IV_LENGTH = 12;
