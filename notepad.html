@@ -81,7 +81,8 @@
         <div class="docs-sidebar-group">
           <h4>Notepad</h4>
           <ul>
-            <li><a href="#a-place-for-thoughts" class="active">A Place for Thoughts</a></li>
+            <li><a href="#client-side-encryption" class="active">Client-Side Encryption</a></li>
+            <li><a href="#a-place-for-thoughts">A Place for Thoughts</a></li>
             <li><a href="#ai-prototyping">AI Prototyping</a></li>
           </ul>
         </div>
@@ -89,6 +90,41 @@
 
       <!-- Main content — stacked articles -->
       <main class="docs-content">
+
+        <!-- Article: Client-Side Encryption -->
+        <article class="notepad-article" id="client-side-encryption">
+          <div class="article-header">
+            <h1>Client-Side Encryption</h1>
+            <time>April 15, 2026</time>
+          </div>
+
+          <p>
+            Been looking into AES-256-GCM lately — specifically how to use it entirely
+            in the browser. The whole flow is surprisingly
+            elegant once you understand the pieces.
+          </p>
+
+          <p>
+            You start with a password, derive a cryptographic key from it using PBKDF2
+            (with a random salt and enough iterations to make brute-forcing painful),
+            and then use that key with AES-GCM to encrypt or decrypt content. The salt
+            and initialization vector get packed alongside the ciphertext so the
+            decryption side can reconstruct everything it needs from just the password.
+          </p>
+
+          <p>
+            What makes it interesting is that the server never sees the plaintext. The
+            encrypted payload is just an opaque Base64 blob sitting in the HTML. All
+            the cryptography happens client-side — the browser does the key derivation and
+            decryption on the fly. No backend, no key management service, no token
+            exchange. Just a password and math.
+          </p>
+
+          <p>
+            It's not the right fit for everything, but for gating static content behind
+            a password without standing up infrastructure, it's hard to beat.
+          </p>
+        </article>
 
         <!-- Article: A Place for Thoughts -->
         <article class="notepad-article" id="a-place-for-thoughts">
