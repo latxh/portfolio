@@ -99,18 +99,20 @@
       });
     }
 
+    let savedBodyOverflow = '';
     function openLightbox(src) {
       const lb = document.getElementById('lightbox');
       const img = document.getElementById('lightbox-img');
       img.src = src;
       lb.classList.add('active');
+      savedBodyOverflow = document.body.style.overflow;
       document.body.style.overflow = 'hidden';
     }
 
     function closeLightbox() {
       const lb = document.getElementById('lightbox');
       lb.classList.remove('active');
-      document.body.style.overflow = '';
+      document.body.style.overflow = savedBodyOverflow;
     }
 
     document.addEventListener('keydown', (e) => {

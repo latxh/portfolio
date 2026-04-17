@@ -152,7 +152,14 @@ const MUSIC_CARD_COUNT = 3;
 
 const getRandomElement = (array) => array[Math.floor(Math.random() * array.length)];
 
-const shuffleArray = (array) => [...array].sort(() => 0.5 - Math.random());
+const shuffleArray = (array) => {
+  const result = [...array];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+};
 
 const COLOR_PRESETS = {
   cyan:    { r: 3,   g: 2,   b: 1   },
@@ -214,7 +221,7 @@ const updateCanvas = () => {
     canvasButtonOn.classList.remove("hide");
     canvasButtonOff.classList.add("hide");
     canvas.classList.remove("show");
-    colorPickerWrapper.classList.add("hide");
+    colorPickerWrapper.classList.add("fade-hidden");
     pickerButtons.forEach((btn) => btn.setAttribute("tabindex", "-1"));
     colorPopup.classList.remove("open");
     document.body.classList.add("canvas-off");
@@ -224,7 +231,7 @@ const updateCanvas = () => {
     canvasButtonOn.classList.add("hide");
     canvasButtonOff.classList.remove("hide");
     canvas.classList.add("show");
-    colorPickerWrapper.classList.remove("hide");
+    colorPickerWrapper.classList.remove("fade-hidden");
     pickerButtons.forEach((btn) => btn.removeAttribute("tabindex"));
     document.body.classList.remove("canvas-off");
     document.body.classList.add("canvas-on");

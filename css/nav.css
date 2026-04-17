@@ -128,14 +128,15 @@ button:not(:active):focus-visible {
   transition: opacity 0.2s ease, filter 0.2s ease;
 }
 
-.color-picker-wrapper.hide {
+.color-picker-wrapper.fade-hidden {
   opacity: 0;
   filter: blur(4px);
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: reduce), (max-width: 670px) {
-  .color-picker-wrapper.hide {
+@media (prefers-reduced-motion: reduce) {
+  #canvas-state,
+  .color-picker-wrapper {
     display: none;
   }
 }

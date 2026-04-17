@@ -44,7 +44,7 @@
   color: var(--background);
 }
 
-.hide:not(.color-picker-wrapper) {
+.hide {
   display: none;
 }
 
@@ -218,9 +218,7 @@ main,
 
   .card-stack-container,
   .site-wrapper nav,
-  .show,
-  #canvas-state,
-  .color-picker-wrapper {
+  .show {
     display: none;
   }
 

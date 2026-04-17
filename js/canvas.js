@@ -5,6 +5,11 @@
   const hypotenuse = (a, b) => Math.sqrt(a * a + b * b);
   const distance = (x1, y1, x2, y2) => hypotenuse(x2 - x1, y2 - y1);
 
+  // Skip scene/WebGL setup when canvas can never be enabled.
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    return;
+  }
+
   let t = 0;
   let animId = null;
   const startTime = Date.now();
@@ -31,9 +36,9 @@
   const canvas = {
     width: window.innerWidth,
     height: window.innerHeight,
-    hyp: hypotenuse(window.innerWidth, window.innerHeight),
-    hypInv: 1 / hypotenuse(window.innerWidth, window.innerHeight),
   };
+  canvas.hyp = hypotenuse(canvas.width, canvas.height);
+  canvas.hypInv = 1 / canvas.hyp;
 
   const updateCanvasSize = () => {
     camera.left = window.innerWidth / -2;
@@ -62,11 +67,9 @@
   const side = hypotenuse(canvas.width, canvas.height) / 45;
   const geometry = new THREE.BoxGeometry(side + 1, side + 1, side + 5);
   const cubes = [];
-  const xside = side;
-  const yside = side;
 
-  for (let x = camera.left * 1.3; x <= camera.right * 1.3; x += xside) {
-    for (let y = camera.bottom * 1.3; y <= camera.top * 1.3; y += yside) {
+  for (let x = camera.left * 1.3; x <= camera.right * 1.3; x += side) {
+    for (let y = camera.bottom * 1.3; y <= camera.top * 1.3; y += side) {
       const material = new THREE.MeshBasicMaterial({
         color: 0x00ffff,
         transparent: true,
@@ -97,11 +100,11 @@
         Mouse.x0 = Mouse.x - canvas.width / 2;
         return (Mouse.y0 = Mouse.y - canvas.height / 2);
       },
-      down: function (e) {
-        return (Mouse.down = !Mouse.down);
+      down: function () {
+        Mouse.down = true;
       },
-      up: function (e) {
-        return (Mouse.down = !Mouse.down);
+      up: function () {
+        Mouse.down = false;
       },
     },
   };
@@ -192,4 +195,4 @@
   };
 
   animloop();
-}).call(this);
+})();

@@ -45,11 +45,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  canvas,
-  #canvas-state {
-    display: none;
-  }
-
   .animated-path {
     stroke-dasharray: none;
     stroke-dashoffset: 0;
