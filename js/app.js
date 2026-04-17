@@ -201,17 +201,16 @@ const canvasButtonOff = document.getElementById("canvas-off");
 
 const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 const mobileQuery = window.matchMedia("(max-width: 670px)");
-let motion = localStorage.getItem("motion") ?? "system";
+let canvasEnabled = localStorage.getItem("canvasEnabled") === "true";
 let systemReducedMotion = reducedMotionQuery.matches;
 let isMobile = mobileQuery.matches;
 
 const updateCanvas = () => {
-  localStorage.setItem("motion", motion);
-  const isReducedMotion = motion === "system" ? systemReducedMotion : motion === "reduce";
+  const canvasOff = !canvasEnabled || systemReducedMotion;
 
   const pickerButtons = colorPickerWrapper.querySelectorAll("button");
 
-  if (isReducedMotion || isMobile) {
+  if (canvasOff || isMobile) {
     canvasButtonOn.classList.remove("hide");
     canvasButtonOff.classList.add("hide");
     canvas.classList.remove("show");
@@ -234,7 +233,8 @@ const updateCanvas = () => {
 };
 
 const toggleCanvas = () => {
-  motion = motion === "reduce" ? "no-preference" : "reduce";
+  canvasEnabled = !canvasEnabled;
+  localStorage.setItem("canvasEnabled", String(canvasEnabled));
   updateCanvas();
 };
 
