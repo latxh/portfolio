@@ -32,12 +32,18 @@ nav {
 }
 
 .pill-tab:hover {
+  background-color: var(--button-hover);
   color: var(--font-1);
 }
 
 .pill-tab.active {
   background-color: var(--button-hover);
   color: var(--font-1);
+}
+
+.pill-nav:has(.pill-tab:not(.active):hover) .pill-tab.active {
+  background-color: transparent;
+  color: var(--font-2);
 }
 
 .social-link p,
