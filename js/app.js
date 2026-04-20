@@ -321,6 +321,43 @@ const copyEmail = (el) => {
   });
 };
 
+const initPillNav = () => {
+  document.querySelectorAll(".pill-nav").forEach((pill) => {
+    const tabs = pill.querySelectorAll(".pill-tab");
+    if (!tabs.length) return;
+
+    const indicator = document.createElement("span");
+    indicator.className = "pill-indicator";
+    pill.prepend(indicator);
+
+    const setIndicator = (target) => {
+      if (!target) {
+        indicator.style.opacity = "0";
+        return;
+      }
+      indicator.style.width = `${target.offsetWidth}px`;
+      indicator.style.transform = `translateX(${target.offsetLeft}px)`;
+      indicator.style.opacity = "1";
+    };
+
+    const getActive = () => pill.querySelector(".pill-tab.active");
+
+    indicator.classList.add("no-transition");
+    setIndicator(getActive());
+    requestAnimationFrame(() => indicator.classList.remove("no-transition"));
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("mouseenter", () => setIndicator(tab));
+    });
+    pill.addEventListener("mouseleave", () => setIndicator(getActive()));
+    window.addEventListener("resize", () => setIndicator(getActive()));
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => setIndicator(getActive()));
+    }
+  });
+};
+
+initPillNav();
 initCanvasMotion();
 initCanvasColor();
 initRandomMessage();
