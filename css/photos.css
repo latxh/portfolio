@@ -14,11 +14,29 @@
   margin: 0 0 16px;
 }
 
-.photo-item img {
-  width: 100%;
-  height: auto;
+.photo-frame {
+  background-color: var(--work-background);
   border-radius: 10px;
+  overflow: hidden;
+}
+
+.photo-frame img {
+  width: 100%;
+  height: 100%;
   display: block;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.photo-frame img.is-loaded {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photo-frame img {
+    transition: none;
+  }
 }
 
 .photo-info {
