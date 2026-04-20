@@ -33,10 +33,13 @@
   --font-2: #9fa4ab;
   --button: #323338;
   --button-hover: #28292b;
+  --button-shadow: rgb(255, 255, 255, 0.15);
   --work-background: #17181a;
-  --work-hover: #000;
+  --work-hover: #0a0b0d;
   --card-overlay: rgba(0, 0, 0, 0.4);
   --card-overlay-clear: rgba(0, 0, 0, 0);
+  --shadow: rgba(0, 0, 0, 0.3);
+  --surface-blur: rgba(16, 17, 18, 0.6);
 }
 
 ::selection {

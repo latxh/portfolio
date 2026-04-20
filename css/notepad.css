@@ -1,16 +1,18 @@
-/* Sticky nav — notepad only */
-.notepad-page .site-wrapper {
+/* Sticky nav — notepad + photos */
+.notepad-page .site-wrapper,
+.photos-page .site-wrapper {
   padding-top: 0;
 }
 
-.notepad-page nav {
+.notepad-page nav,
+.photos-page nav {
   position: sticky;
   top: 0;
   padding-top: 24px;
 }
 
 /* Fade overlay — top of viewport */
-.notepad-fade {
+.scroll-fade {
   position: fixed;
   top: 0;
   left: 0;
@@ -18,14 +20,7 @@
   height: 72px;
   pointer-events: none;
   z-index: 9;
-}
-
-.canvas-off .notepad-fade {
   background: linear-gradient(to bottom, var(--background), transparent);
-}
-
-.canvas-on .notepad-fade {
-  display: none;
 }
 
 .docs-layout {
@@ -307,7 +302,7 @@
     display: none;
   }
 
-  .notepad-fade {
+  .scroll-fade {
     display: none;
   }
 }

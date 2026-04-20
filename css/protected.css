@@ -570,7 +570,7 @@ html {
   left: 0;
   z-index: 1;
   transform: rotate(-8deg);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 15px var(--shadow);
   transition: transform 0.4s ease, left 0.4s ease;
 }
 
@@ -583,7 +583,7 @@ html {
   top: 16px;
   left: 80px;
   z-index: 3;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 15px var(--shadow);
   transition: transform 0.4s ease, left 0.4s ease;
 }
 
@@ -592,7 +592,7 @@ html {
   height: auto;
   border-radius: 8px;
   padding: 5px;
-  background-color: rgba(16, 17, 18, 0.6);
+  background-color: var(--surface-blur);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   position: absolute;
@@ -600,7 +600,7 @@ html {
   left: 184px;
   z-index: 4;
   transform: rotate(6deg);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 12px var(--shadow);
   will-change: transform, left;
   transition: transform 0.4s ease, left 0.4s ease;
 }
@@ -618,7 +618,7 @@ html {
 .showcase-intro-card:hover .about-flag {
   transform: rotate(10deg);
   left: 200px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 12px var(--shadow);
 }
 
 .about-text h1 {
@@ -780,7 +780,7 @@ html {
   width: 48px;
   height: 48px;
   color: var(--font-2);
-  background-color: rgba(16, 17, 18, 0.6);
+  background-color: var(--surface-blur);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-radius: 50%;

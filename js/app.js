@@ -33,7 +33,7 @@ const MUSIC_LIST = [
     "by Curtis Schweitzer",
   ],
   [
-    "https://www.youtube.com/watch?v=T5-faDLv1Vs",
+    "https://www.youtube.com/watch?v=eMGRt0A9Yns",
     "/assets/music/mc.png",
     "Mice on Venus",
     "by C418",
@@ -84,6 +84,12 @@ const MUSIC_LIST = [
     "https://www.youtube.com/watch?v=_h2WpMH_q-I",
     "/assets/music/ye.png",
     "Devil in a New Dress",
+    "by Kanye",
+  ],
+    [
+    "https://www.youtube.com/watch?v=SNCqYFYMkT8",
+    "/assets/music/bully.png",
+    "Whatever Works",
     "by Kanye",
   ],
   [
@@ -146,6 +152,12 @@ const MUSIC_LIST = [
     "Spiderman Superman",
     "by PartyNextDoor",
   ],
+    [
+    "https://www.youtube.com/watch?v=K9OzeJauM0Q",
+    "/assets/music/trini.png",
+    "Trini 2 De Bone",
+    "by David Rudder",
+  ],
 ];
 
 const MUSIC_CARD_COUNT = 3;
@@ -189,9 +201,8 @@ const toggleColorPicker = () => {
 };
 
 document.addEventListener("click", (e) => {
-  if (!colorPopup.classList.contains("open")) return;
-  const wrapper = document.getElementById("color-picker-wrapper");
-  if (!wrapper.contains(e.target)) {
+  if (!colorPopup || !colorPopup.classList.contains("open")) return;
+  if (!colorPickerWrapper.contains(e.target)) {
     colorPopup.classList.remove("open");
     document.getElementById("color-picker-btn").classList.remove("popup-open");
   }
@@ -246,6 +257,7 @@ const toggleCanvas = () => {
 };
 
 const initCanvasMotion = () => {
+  if (!canvas || !canvasButtonOn || !canvasButtonOff || !colorPickerWrapper) return;
   reducedMotionQuery.addEventListener("change", (m) => {
     systemReducedMotion = m.matches;
     updateCanvas();
