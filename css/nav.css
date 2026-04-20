@@ -5,14 +5,43 @@ nav {
   justify-content: center;
 }
 
+@media (min-width: 671px) {
+  nav {
+    position: sticky;
+    top: 0;
+    padding-top: 24px;
+  }
+}
+
+/* Top fade overlay — used with sticky nav */
+.scroll-fade {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 72px;
+  pointer-events: none;
+  z-index: 9;
+  background: linear-gradient(to bottom, var(--background), transparent);
+}
+
+@media (max-width: 670px) {
+  .scroll-fade {
+    display: none;
+  }
+}
+
 .pill-nav {
   display: inline-flex;
   align-items: center;
   gap: 2px;
   padding: 3px;
   border-radius: 48px;
-  background-color: var(--button);
+  background-color: var(--surface-blur);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-top: 1px solid var(--button-shadow);
+  box-shadow: 0 8px 24px var(--shadow);
 }
 
 .pill-tab {
@@ -77,7 +106,10 @@ button {
   align-items: center;
   border: none;
   border-top: 1px solid var(--button-shadow);
-  background-color: var(--button);
+  background-color: var(--surface-blur);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 8px 24px var(--shadow);
   transition: background-color 0.2s;
 }
 
@@ -118,8 +150,7 @@ button:not(:active):focus-visible {
 .canvas-controls {
   position: absolute;
   right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  bottom: 0;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -163,13 +194,6 @@ button:not(:active):focus-visible {
     margin: 0;
     padding: 0;
     z-index: 100;
-  }
-
-  .pill-nav {
-    background-color: var(--surface-blur);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    box-shadow: 0 8px 24px var(--shadow);
   }
 
   .canvas-controls {
