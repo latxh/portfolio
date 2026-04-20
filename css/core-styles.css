@@ -220,7 +220,7 @@ main,
   }
 
   .card-stack-container,
-  .site-wrapper nav,
+  .canvas-controls,
   .show {
     display: none;
   }

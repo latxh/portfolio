@@ -145,6 +145,38 @@ button:not(:active):focus-visible {
   }
 }
 
+/* Mobile: nav floats at bottom */
+@media (max-width: 670px) {
+  body {
+    padding-bottom: 80px;
+  }
+
+  nav,
+  .notepad-page nav,
+  .photos-page nav {
+    position: fixed;
+    top: auto;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    margin: 0;
+    padding: 0;
+    z-index: 100;
+  }
+
+  .pill-nav {
+    background-color: var(--surface-blur);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 8px 24px var(--shadow);
+  }
+
+  .canvas-controls {
+    display: none;
+  }
+}
+
 .color-picker-btn {
   width: 38px;
   height: 38px;
