@@ -209,6 +209,21 @@ button:not(:active):focus-visible {
   .canvas-controls {
     display: none;
   }
+
+  .pill-nav {
+    padding: 4px;
+  }
+
+  .pill-tab {
+    height: 40px;
+    padding: 0 18px;
+    font-size: 15px;
+  }
+
+  .pill-indicator {
+    top: 4px;
+    height: 40px;
+  }
 }
 
 .color-picker-btn {
