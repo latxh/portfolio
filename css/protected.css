@@ -206,6 +206,7 @@ footer {
 
 .case-hero-media img {
   width: 100%;
+  height: auto;
   border-radius: 20px;
   display: block;
 }
