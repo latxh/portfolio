@@ -25,8 +25,8 @@ nav {
   background: linear-gradient(to bottom, var(--background), transparent);
 }
 
-@media (max-width: 670px) {
-  .scroll-fade {
+@media (min-width: 671px) {
+  .home-page .scroll-fade {
     display: none;
   }
 }
