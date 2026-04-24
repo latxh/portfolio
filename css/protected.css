@@ -2,16 +2,23 @@ footer {
   padding-bottom: 64px;
 }
 
-.meta-page,
-.meta-page .site-wrapper {
+.meta-page {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  margin-bottom: 0;
+  min-height: 100dvh;
+  padding-top: 0;
+  padding-bottom: 0;
+  box-sizing: border-box;
 }
 
 .meta-page .site-wrapper {
+  display: flex;
+  flex-direction: column;
   flex: 1;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  box-sizing: border-box;
 }
 
 .auth-prompt {
@@ -19,6 +26,7 @@ footer {
   justify-content: center;
   align-items: center;
   flex: 1;
+  min-height: 0;
 }
 
 .auth-content {
@@ -146,7 +154,15 @@ footer {
 .protected-content {
   max-width: 1124px;
   margin-inline: auto;
+  padding-bottom: 64px;
   animation: fade-in 0.3s ease;
+}
+
+@media (max-width: 670px) {
+  .protected-content {
+    padding-top: 24px;
+    padding-bottom: 40px;
+  }
 }
 
 @keyframes fade-in {
