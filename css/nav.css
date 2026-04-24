@@ -186,18 +186,18 @@ button:not(:active):focus-visible {
   }
 }
 
-/* Mobile: nav floats at bottom */
+/* Mobile: nav floats at top */
 @media (max-width: 670px) {
   body {
-    padding-bottom: 80px;
+    padding-top: 64px;
   }
 
   nav,
   .notepad-page nav,
   .photos-page nav {
     position: fixed;
-    top: auto;
-    bottom: 16px;
+    top: 16px;
+    bottom: auto;
     left: 50%;
     transform: translateX(-50%);
     width: auto;

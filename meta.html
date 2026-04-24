@@ -10,12 +10,10 @@
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <link rel="stylesheet" type="text/css" href="css/core-styles.css" />
   <link rel="stylesheet" type="text/css" href="css/nav.css" />
-  <link rel="stylesheet" type="text/css" href="css/footer.css" />
-  <link rel="stylesheet" type="text/css" href="css/music.css" />
   <link rel="stylesheet" type="text/css" href="css/protected.css" />
 </head>
 
-<body>
+<body class="meta-page">
   <div class="site-wrapper">
     <nav class="row">
       <div class="pill-nav">
@@ -48,49 +46,6 @@
       <img id="lightbox-img" alt="" />
     </div>
   </div>
-
-  <footer id="footer" class="footer-filled">
-    <div class="footer-wrapper">
-      <div class="footer-space bot-space">
-        <div class="social-links">
-          <p class="social-links-header">Contact</p>
-          <a href="https://www.linkedin.com/in/brian-latchman/" target="_blank" class="social-link">
-            <p>Linkedin</p>
-          </a>
-          <a href="https://www.instagram.com/latxhman/" target="_blank" class="social-link">
-            <p>Instagram</p>
-          </a>
-          <a href="https://github.com/latxh/" target="_blank" class="social-link">
-            <p>Github</p>
-          </a>
-          <a class="social-link" tabindex="0" onclick="copyEmail(this)"
-            onkeydown="if(event.key==='Enter')copyEmail(this)" style="cursor:pointer">
-            <p>Email</p>
-          </a>
-        </div>
-
-        <div class="rand-text">
-          <p id="random-message" class="clamp-text"></p>
-          <p class="tm">2026 TM</p>
-        </div>
-      </div>
-
-      <div class="card-stack-container">
-        <a id="music-card-1" class="music-card card-1" target="_blank">
-          <img id="album-cover-1" alt="Album art" />
-          <div id="music-tooltip-1" class="music-tooltip">Song 1</div>
-        </a>
-        <a id="music-card-2" class="music-card card-2" target="_blank">
-          <img id="album-cover-2" alt="Album art" />
-          <div id="music-tooltip-2" class="music-tooltip">Song 2</div>
-        </a>
-        <a id="music-card-3" class="music-card card-3" target="_blank">
-          <img id="album-cover-3" alt="Album art" />
-          <div id="music-tooltip-3" class="music-tooltip">Song 3</div>
-        </a>
-      </div>
-    </div>
-  </footer>
 
   <script src="js/app.js"></script>
   <script>

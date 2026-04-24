@@ -167,20 +167,9 @@ main,
     display: none;
   }
 
-  h1 {
-    text-wrap: balance;
-  }
 }
 
 @media only screen and (max-width: 670px) {
-  .top-content h1 {
-    color: var(--font-2);
-  }
-
-  .name-mobile {
-    color: var(--font-1);
-  }
-
   h1 {
     font-size: 24px;
   }
@@ -212,6 +201,7 @@ main,
 
   .site-wrapper .top {
     min-height: auto;
+    padding-top: 24px;
     padding-bottom: 96px;
   }
 
@@ -231,12 +221,33 @@ main,
     height: 200px;
   }
 
+  a.link-item {
+    position: relative;
+    background-color: transparent;
+    border-radius: 0;
+  }
+
+  a.link-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -16px;
+    right: -16px;
+    height: 1px;
+    background-color: var(--button);
+  }
+
+  div.link-img {
+    border-radius: 0;
+    margin-right: -16px;
+  }
+
   .flow-img {
     padding: 12px;
   }
 
   div.link-text {
-    padding: 0 0 16px 16px;
+    padding: 0 0 16px 0;
   }
 
   .site-wrapper {

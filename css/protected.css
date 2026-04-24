@@ -2,11 +2,23 @@ footer {
   padding-bottom: 64px;
 }
 
+.meta-page,
+.meta-page .site-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin-bottom: 0;
+}
+
+.meta-page .site-wrapper {
+  flex: 1;
+}
+
 .auth-prompt {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 120px);
+  flex: 1;
 }
 
 .auth-content {

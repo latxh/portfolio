@@ -71,17 +71,23 @@ hr {
 
 .link-img img {
   user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  pointer-events: none;
   height: 318px;
   margin-right: -1px;
   object-fit: cover;
   transition: all 0.3s ease;
 }
 
-.link-item:hover {
-  background-color: var(--work-hover);
-}
+@media (hover: hover) {
+  .link-item:hover {
+    background-color: var(--work-hover);
+  }
 
-.link-item:hover img,
-.link-item:focus-visible img {
-  transform: scale(1.1);
+  .link-item:hover img,
+  .link-item:focus-visible img {
+    transform: scale(1.1);
+  }
 }
