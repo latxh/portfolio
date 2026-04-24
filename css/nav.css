@@ -152,9 +152,11 @@ button:not(:active):focus-visible {
   outline-offset: 0.3rem;
 }
 
-.link-item:hover {
-  outline: 2px solid var(--focus-blue);
-  outline-offset: 0.3rem;
+@media (hover: hover) {
+  .link-item:hover {
+    outline: 2px solid var(--focus-blue);
+    outline-offset: 0.3rem;
+  }
 }
 
 .canvas-controls {
