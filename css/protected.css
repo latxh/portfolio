@@ -331,6 +331,18 @@ footer {
 .case-photo-stack:hover img:nth-child(2) { transform: translateY(-12px) rotate(-1deg); }
 .case-photo-stack:hover img:nth-child(3) { transform: translateX(40px) rotate(11deg); }
 
+@media (max-width: 600px) {
+  .case-photo-stack img {
+    width: 130px;
+    height: 170px;
+    margin: 0 -18px;
+  }
+
+  .case-photo-stack:hover img:nth-child(1) { transform: translateX(-24px) rotate(-12deg); }
+  .case-photo-stack:hover img:nth-child(2) { transform: translateY(-8px) rotate(-1deg); }
+  .case-photo-stack:hover img:nth-child(3) { transform: translateX(24px) rotate(11deg); }
+}
+
 .case-figure .case-grid + .case-grid {
   margin-top: 16px;
 }
@@ -1125,6 +1137,10 @@ footer {
 
   .case-section {
     padding-top: 48px;
+  }
+
+  .case-section:first-child {
+    padding-top: 80px;
   }
 
   .case-section-title {
