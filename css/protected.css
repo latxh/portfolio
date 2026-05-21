@@ -383,6 +383,22 @@ footer {
   object-fit: cover;
 }
 
+.case-figure img,
+.case-stack img,
+.case-hero-media img,
+.case-blur-set img,
+.case-marquee-track img {
+  transition: transform 0.3s ease;
+}
+
+.case-figure img:hover,
+.case-stack img:hover,
+.case-hero-media img:hover,
+.case-blur-set img:hover,
+.case-marquee-track img:hover {
+  transform: scale(1.02);
+}
+
 .case-grid-item figcaption {
   margin-top: 8px;
   text-align: center;
@@ -940,9 +956,9 @@ footer {
   background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  cursor: zoom-out;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
 }
 
 .lightbox.active {
