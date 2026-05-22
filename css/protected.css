@@ -459,7 +459,8 @@ footer {
   position: relative;
   width: 100vw;
   margin-left: calc(-50vw + 50%);
-  margin-top: 48px;
+  margin-top: 40px;
+  padding: 8px 0;
   overflow: hidden;
 }
 
@@ -485,7 +486,7 @@ footer {
 }
 
 .case-marquee + .case-marquee {
-  margin-top: 24px;
+  margin-top: 16px;
 }
 
 .case-marquee-track {
@@ -1182,6 +1183,10 @@ footer {
     gap: 12px;
   }
 
+  .case-figure .case-grid-3 > :last-child {
+    display: none;
+  }
+
   .case-grid-tight {
     gap: 6px;
   }
@@ -1204,11 +1209,11 @@ footer {
 
   .case-marquee::before,
   .case-marquee::after {
-    width: 96px;
+    width: 48px;
   }
 
   .case-marquee-track img {
-    height: 240px;
-    border-radius: 20px;
+    height: 180px;
+    border-radius: 16px;
   }
 }
