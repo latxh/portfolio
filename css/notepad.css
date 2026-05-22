@@ -79,8 +79,8 @@
 }
 
 .article-header h1 {
-  font-size: 32px;
-  font-weight: 700;
+  font-size: 28px;
+  font-weight: 400;
   margin: 0 0 4px 0;
 }
 
@@ -92,8 +92,8 @@
 
 /* Article content typography */
 .docs-content h2 {
-  font-size: 22px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 400;
   margin-top: 48px;
   margin-bottom: 12px;
 }
@@ -200,7 +200,7 @@
 }
 
 .docs-on-page h5 {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--font-2);
   margin: 0 0 12px 0;
@@ -277,4 +277,18 @@
     display: none;
   }
 
+  .article-header h1 {
+    font-size: 20px;
+  }
+
+  .docs-content p,
+  .docs-content ul,
+  .docs-content ol {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .docs-content h2 {
+    font-size: 18px;
+  }
 }

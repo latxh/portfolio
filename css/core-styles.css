@@ -183,6 +183,10 @@ main,
     font-size: 16px;
   }
 
+  .home-page h3 {
+    font-size: 14px;
+  }
+
   p {
     font-size: 14px;
   }
@@ -201,7 +205,7 @@ main,
 
   .site-wrapper .top {
     min-height: auto;
-    padding-top: 24px;
+    padding-top: 48px;
     padding-bottom: 96px;
   }
 
@@ -218,7 +222,7 @@ main,
   div.link-img img,
   div.link-img,
   a.link-item {
-    height: 200px;
+    height: 170px;
   }
 
   a.link-item {
@@ -248,6 +252,15 @@ main,
 
   div.link-text {
     padding: 0 0 16px 0;
+  }
+
+  .home-page h1,
+  .notepad-page h1 {
+    font-size: 20px;
+  }
+
+  .new-work-label {
+    margin-bottom: 16px;
   }
 
   .site-wrapper {

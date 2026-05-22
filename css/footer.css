@@ -8,6 +8,12 @@ footer {
   padding: 24px 0 0 0;
 }
 
+@media only screen and (max-width: 670px) {
+  .footer-wrapper {
+    padding-top: 64px;
+  }
+}
+
 .rand-text {
   display: flex;
   flex-direction: column;

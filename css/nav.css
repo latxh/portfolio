@@ -219,7 +219,7 @@ button:not(:active):focus-visible {
   .pill-tab {
     height: 40px;
     padding: 0 18px;
-    font-size: 15px;
+    font-size: 14px;
   }
 
   .pill-indicator {

@@ -91,3 +91,14 @@ hr {
     transform: scale(1.1);
   }
 }
+
+@media only screen and (max-width: 1236px) {
+  .new-work {
+    gap: 0;
+    margin-bottom: 0;
+  }
+
+  .first-row {
+    margin-bottom: 0;
+  }
+}
