@@ -384,16 +384,22 @@ footer {
 }
 
 .case-figure img,
+.case-figure video,
 .case-stack img,
+.case-stack video,
 .case-hero-media img,
+.case-hero-media video,
 .case-blur-set img,
 .case-marquee-track img {
   transition: transform 0.3s ease;
 }
 
 .case-figure img:hover,
+.case-figure video:hover,
 .case-stack img:hover,
+.case-stack video:hover,
 .case-hero-media img:hover,
+.case-hero-media video:hover,
 .case-blur-set img:hover,
 .case-marquee-track img:hover {
   transform: scale(1.02);
@@ -966,7 +972,8 @@ footer {
   animation: fade-in 0.2s ease;
 }
 
-.lightbox img {
+.lightbox img,
+.lightbox video {
   max-width: 90vw;
   max-height: 90vh;
   border-radius: 20px;
