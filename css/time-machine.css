@@ -1,0 +1,112 @@
+/* Time machine, current-site half.
+ *
+ * On this site the control lives in the nav pill, so it is styled here with the
+ * same tokens as everything else. The archived versions get a self-contained
+ * floating pill instead, styled inside js/time-machine.js — their own CSS is
+ * decades apart and cannot be inherited from, so that half lives in a shadow
+ * root. Behaviour for both halves is in that one script. */
+
+.year-icon-chevron {
+  width: 15px;
+  height: 15px;
+  opacity: 0;
+  transform: rotate(0deg);
+}
+
+.year-toggle[aria-expanded="true"] .year-icon-sliders {
+  opacity: 0;
+}
+
+.year-toggle[aria-expanded="true"] .year-icon-chevron {
+  opacity: 1;
+  transform: rotate(180deg);
+}
+
+/* The pill morphs instead of dropping a menu: the page tabs and the theme
+   control fold away and the year run unfolds in their place, the same move the
+   archived pill makes. Both directions animate a grid track between 1fr and
+   0fr, which collapses to exactly the content width without anything having to
+   be measured. */
+.fold-slot,
+.years-slot {
+  display: grid;
+  transition: grid-template-columns 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fold-slot {
+  grid-template-columns: 1fr;
+}
+
+.years-slot {
+  grid-template-columns: 0fr;
+}
+
+.pill-nav.is-timeline .fold-slot {
+  grid-template-columns: 0fr;
+}
+
+.pill-nav.is-timeline .years-slot {
+  grid-template-columns: 1fr;
+}
+
+/* Plain boxes: min-width: 0 cannot shrink a control past its own padding, so
+   the thing being clipped has to be the wrapper, not the controls. */
+.fold-run,
+.years-run {
+  display: flex;
+  gap: 2px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* Clipping is only wanted while the fold is moving. Each control's tooltip is
+   positioned against the control, which is inside the run, so a run that keeps
+   clipping cuts the tooltip off below the pill. Once the fold has settled, a
+   run that is on screen has nothing left to hide and lets them through.
+
+   The year run is exempt: it stays clipped so it can scroll, and its label is
+   parented to the pill for exactly that reason. */
+.pill-nav.is-settled:not(.is-timeline) .fold-run {
+  overflow: visible;
+}
+
+/* Six years overflow a narrow phone, so the run scrolls once it is open. */
+.pill-nav.is-timeline .years-run {
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.years-run::-webkit-scrollbar {
+  display: none;
+}
+
+.year-item {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 48px;
+  color: var(--font-2);
+  font-size: var(--text-label);
+  font-variant-numeric: tabular-nums;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+
+.year-item:hover,
+.year-item[aria-current="true"] {
+  color: var(--font-1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fold-slot,
+  .years-slot,
+  .year-item {
+    transition: none;
+  }
+}

@@ -1,0 +1,68 @@
+nav {
+  gap: 8px;
+  justify-content: space-between;
+}
+
+.social-link p,
+.name-logo h6,
+a.name-logo {
+  color: var(--font-2);
+  transition: all 0.2s;
+}
+
+.social-link:hover p,
+.name-logo:hover h6,
+a.name-logo:hover {
+  color: var(--font-1);
+}
+
+a,
+a:link,
+a:visited,
+a:active {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+button {
+  position: relative;
+  cursor: pointer;
+  height: 42px;
+  width: 42px;
+  padding: 8px;
+  border-radius: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: var(--button);
+  transition: background-color 0.2s;
+}
+
+button svg {
+  transition: all 0.2s;
+}
+
+button:hover {
+  background-color: var(--button-hover);
+}
+
+button:hover svg {
+  fill: var(--font-1);
+}
+
+a:focus-visible,
+button:focus-visible,
+.link-item:focus-visible {
+  outline: 2px solid var(--focus-blue);
+}
+
+a:not(:active):focus-visible,
+button:not(:active):focus-visible {
+  outline-offset: 0.3rem;
+}
+
+.link-item:hover {
+  outline: 2px solid var(--focus-blue);
+  outline-offset: 0.3rem;
+}

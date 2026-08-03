@@ -253,6 +253,16 @@ const initFooterYear = () => {
   });
 };
 
+// The pill's fold animation, in ms — keep in step with the 0.34s transitions in
+// css/time-machine.css. The indicator re-measures for this long because the
+// layout it measures against is still moving.
+const FOLD_MS = 360;
+
+// Everything that shares the nav pill. Written once: these used to be three
+// separate lists that had already drifted apart on whether year entries count.
+const PILL_CONTROLS = ".pill-tab, .theme-toggle, .year-toggle, .year-item";
+const PILL_HOVER = ".pill-tab:hover, .theme-toggle:hover, .year-toggle:hover, .year-item:hover";
+
 const THEME_KEY = "theme";
 const THEME_COLORS = { light: "#f7f8f9", dark: "#121315" };
 
@@ -347,6 +357,18 @@ const initTheme = () => {
       const tipWasUp = toggle.matches(":hover");
       if (tipWasUp) toggle.classList.add("is-tip-held");
 
+      // The dimmed active tab has the same problem again. It is dimmed by a
+      // :has(:hover) rule, so the snapshot stealing the pointer un-dims it for
+      // the length of the swap and it flashes back to full strength. Holding
+      // the state on the pill keeps it steady.
+      //
+      // Skipped when the pointer is on the active tab itself, which is lit on
+      // its own account and has nothing to hold.
+      const pill = toggle.closest(".pill-nav");
+      const hovered = pill && pill.querySelector(PILL_HOVER);
+      const dimWasHeld = hovered && !hovered.classList.contains("active");
+      if (dimWasHeld) pill.classList.add("is-hover-held");
+
       // Settles either way — a transition that gets skipped rejects rather than
       // resolving, and these have to come down for both.
       const released = () => {
@@ -354,6 +376,7 @@ const initTheme = () => {
         // Handing back to :hover: still pointed at and it stays up untouched,
         // moved away and it fades out from here as it normally would.
         toggle.classList.remove("is-tip-held");
+        if (pill) pill.classList.remove("is-hover-held");
         document.dispatchEvent(new CustomEvent(THEME_SWAP_END));
       };
       document.startViewTransition(swap).finished.then(released, released);
@@ -457,16 +480,71 @@ const initPillNav = () => {
       indicator.style.opacity = "1";
     };
 
-    const getActive = () => pill.querySelector(".pill-tab.active");
+    // Where the indicator rests. While the pill is showing the year run, the
+    // year you are on stands in for the active tab; a control holding something
+    // open is where you are as much as a tab is.
+    const getActive = () =>
+      (pill.classList.contains("is-timeline") &&
+        pill.querySelector('.year-item[aria-current="true"]')) ||
+      pill.querySelector(".pill-tab.active");
+
+    const getHovered = () => pill.querySelector(PILL_HOVER);
+
+    const syncIndicator = () => setIndicator(getHovered() || getActive());
+
+    /* Folding the tabs away and the years in moves everything the indicator
+       measures against, so a single reading taken as the click lands is stale
+       by the time the pill settles. Re-read each frame instead, with the
+       indicator's own transition off so the two are not animating the same
+       thing at once. */
+    let settling = 0;
+    const settleIndicator = () => {
+      // Nothing moves under prefers-reduced-motion, so the layout is already
+      // final and a loop would be pure forced reflow.
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        syncIndicator();
+        return;
+      }
+      cancelAnimationFrame(settling);
+      const started = performance.now();
+      indicator.classList.add("no-transition");
+      const step = (now) => {
+        syncIndicator();
+        if (now - started < FOLD_MS) settling = requestAnimationFrame(step);
+        else indicator.classList.remove("no-transition");
+      };
+      settling = requestAnimationFrame(step);
+    };
 
     indicator.classList.add("no-transition");
     setIndicator(getActive());
     requestAnimationFrame(() => indicator.classList.remove("no-transition"));
 
-    // The theme toggle shares the pill but is not a destination, so it takes
-    // the indicator on hover without ever being what the indicator returns to.
-    pill.querySelectorAll(".pill-tab, .theme-toggle").forEach((target) => {
-      target.addEventListener("mouseenter", () => setIndicator(target));
+    // Watching the attribute rather than having the menu's own script call in:
+    // aria-expanded is already the state, and this keeps every decision about
+    // where the indicator belongs in one place.
+    const expansions = new MutationObserver(settleIndicator);
+    pill.querySelectorAll("[aria-expanded]").forEach((control) => {
+      expansions.observe(control, { attributes: true, attributeFilter: ["aria-expanded"] });
+    });
+
+    // Delegated rather than bound per control: the year entries are built later
+    // by the time machine script, and would otherwise never be picked up.
+    //
+    // The toggles share the pill but are not destinations, so they take the
+    // indicator on hover without ever being what it returns to — unless one of
+    // them is holding the run open.
+    let lastHovered = null;
+    pill.addEventListener("mouseover", (event) => {
+      // mouseover refires as the pointer crosses into an icon or path inside
+      // the control, so without this each traverse forces several reflows.
+      const target = event.target.closest(PILL_CONTROLS);
+      if (!target || target === lastHovered) return;
+      lastHovered = target;
+      setIndicator(target);
+    });
+    pill.addEventListener("mouseleave", () => {
+      lastHovered = null;
     });
     pill.addEventListener("mouseleave", () => {
       // Ignore the phantom leave a theme swap causes; a real one still lands,
@@ -476,9 +554,7 @@ const initPillNav = () => {
       setIndicator(getActive());
     });
 
-    document.addEventListener(THEME_SWAP_END, () => {
-      setIndicator(pill.querySelector(".pill-tab:hover, .theme-toggle:hover") || getActive());
-    });
+    document.addEventListener(THEME_SWAP_END, syncIndicator);
 
     window.addEventListener("resize", () => setIndicator(getActive()));
     if (document.fonts && document.fonts.ready) {

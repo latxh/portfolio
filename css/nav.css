@@ -18,7 +18,7 @@ nav {
   display: inline-flex;
   align-items: center;
   gap: 2px;
-  padding: 3px;
+  padding: 4px;
   border-radius: 48px;
   background-color: var(--surface-blur);
   backdrop-filter: blur(20px);
@@ -37,14 +37,15 @@ nav {
 
    Hidden until the inline head script marks the document — the control is
    JS-only, and without it the system preference is already being honoured. */
-.theme-toggle {
+.theme-toggle,
+.year-toggle {
   position: relative;
   z-index: 1;
   display: none;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   padding: 0;
   border: none;
   border-radius: 48px;
@@ -54,17 +55,21 @@ nav {
   transition: color 0.2s;
 }
 
-:root.has-js .theme-toggle {
+:root.has-js .theme-toggle,
+:root.has-js .year-toggle {
   display: inline-flex;
 }
 
-.theme-toggle:hover {
+.theme-toggle:hover,
+.year-toggle:hover,
+.year-toggle[aria-expanded="true"] {
   color: var(--font-1);
 }
 
 /* Tucked in rather than offset like the rest, because the ring would otherwise
-   sit outside the pill it lives in. */
-.theme-toggle:focus-visible {
+   sit outside the pill it lives in. One rule for every member — each used to
+   carry its own identical copy. */
+.pill-nav :focus-visible {
   outline: 2px solid var(--focus-blue);
   outline-offset: -2px;
 }
@@ -76,7 +81,8 @@ nav {
    They turn the same way through the hand-off — the outgoing icon carries on
    clockwise while the incoming one completes the turn — so it reads as one
    object rotating rather than two crossfading. */
-.theme-icon {
+.theme-icon,
+.year-icon {
   position: absolute;
   /* inset + auto margins rather than leaning on the flex container's static
      position for an out-of-flow child, which is correct per spec but a
@@ -84,8 +90,8 @@ nav {
   inset: 0;
   margin: auto;
   display: block;
-  width: 18px;
-  height: 18px;
+  width: 21px;
+  height: 21px;
 }
 
 .theme-icon-moon {
@@ -104,7 +110,8 @@ nav {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .theme-icon {
+  .theme-icon,
+  .year-icon {
     transition: opacity 0.3s ease,
       transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
   }
@@ -138,10 +145,10 @@ nav {
   animation: none;
 }
 
-/* The pill sits at the very top of the page, so this one hangs below the
-   control rather than above it — the default direction, but worth stating
-   since every other tooltip on the site is attached to something mid-page. */
-.theme-toggle .tool-tip {
+/* The pill sits at the very top of the page, so these hang below the control
+   rather than above it — the default direction, but worth stating since every
+   other tooltip on the site is attached to something mid-page. */
+.pill-nav .tool-tip {
   top: calc(100% + 12px);
 }
 
@@ -160,9 +167,9 @@ nav {
 
 .pill-indicator {
   position: absolute;
-  top: 3px;
+  top: 4px;
   left: 0;
-  height: 32px;
+  height: 40px;
   width: 0;
   opacity: 0;
   border-radius: 48px;
@@ -175,21 +182,23 @@ nav {
   transition: none;
 }
 
+/* Icon-only, so square like the two toggles beside them — the indicator lands
+   on every member of the pill as the same circle. The label each one used to
+   carry now lives in its aria-label and its tooltip. */
 .pill-tab {
   position: relative;
   z-index: 1;
   display: inline-flex;
   align-items: center;
-  height: 32px;
-  width: auto;
-  padding: 0 14px;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
   border: none;
   background: transparent;
-  font-family: inherit;
   cursor: pointer;
   border-radius: 48px;
   color: var(--font-2);
-  font-size: var(--text-label);
   transition: color 0.2s;
 }
 
@@ -198,7 +207,43 @@ nav {
   color: var(--font-1);
 }
 
-/* Mobile: nav floats at top */
+/* Only one thing in the pill looks lit at a time. Three things can be lit on
+   their own account — the active tab, a toggle holding the year run open, and
+   the year you are viewing — and any of them yields the moment the pointer is
+   on something else, because the indicator has slid off it.
+
+   One rule rather than the three near-copies this used to be, which had already
+   drifted apart on which controls they listed.
+
+   Scoped to a hovered control rather than :hover on the pill itself, so
+   crossing the few pixels of padding between icons doesn't flicker it. */
+.pill-nav:has(:is(.pill-tab, .theme-toggle, .year-toggle, .year-item):hover)
+  :is(
+    .pill-tab.active,
+    .year-toggle[aria-expanded="true"],
+    .year-item[aria-current="true"]
+  ):not(:hover),
+/* While the run is open the tabs are folding away behind it, so the active one
+   should not still read as where you are. */
+.pill-nav:has([aria-expanded="true"]) .pill-tab.active:not(:hover),
+/* Held across a theme swap, for the same reason .is-tip-held exists: the view
+   transition paints a snapshot the pointer is not over, :hover drops for its
+   duration, and the tab above would flash back to full strength and straight
+   out again. Added only if the dim was already showing, and dropped the moment
+   the swap ends, at which point :hover takes the state back over. */
+.pill-nav.is-hover-held .pill-tab.active {
+  color: var(--font-2);
+}
+
+.pill-icon {
+  display: block;
+  width: 21px;
+  height: 21px;
+}
+
+/* Mobile: nav floats at top. Sizing is no longer part of this — the controls
+   are icons now, compact enough that the roomier scale reads well at every
+   width, so it is the base. */
 @media (max-width: 670px) {
   body {
     padding-top: 64px;
@@ -215,31 +260,4 @@ nav {
     padding: 0;
     z-index: 100;
   }
-
-  .pill-nav {
-    padding: 4px;
-  }
-
-  .pill-tab {
-    height: 40px;
-    padding: 0 18px;
-  }
-
-  .pill-indicator {
-    top: 4px;
-    height: 40px;
-  }
-
-  /* Square to the taller mobile tab, so the indicator still lands on it as a
-     circle. The icon grows with it. */
-  .theme-toggle {
-    width: 40px;
-    height: 40px;
-  }
-
-  .theme-icon {
-    width: 21px;
-    height: 21px;
-  }
-
 }

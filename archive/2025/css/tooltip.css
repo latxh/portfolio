@@ -1,0 +1,29 @@
+button .tool-tip {
+  font-family: Latch, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  text-align: center;
+  color: var(--font-1);
+  background-color: var(--button-hover);
+  border: none;
+  border-radius: 8px;
+  position: absolute;
+  z-index: 1;
+  width: 156px;
+  margin-left: -78px;
+  padding: 4px;
+  top: 125%;
+  left: 50%;
+
+  visibility: hidden;
+  opacity: 0;
+  transform: scale(0.9);
+  transform-origin: top;
+  transition: all 0.2s;
+  transition-delay: 0.2s;
+}
+
+button:hover .tool-tip {
+  visibility: visible;
+  opacity: 1;
+  transform: scale(1);
+}

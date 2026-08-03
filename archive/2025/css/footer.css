@@ -1,0 +1,31 @@
+footer {
+  overflow: hidden;
+}
+
+.footer-wrapper {
+  position: relative;
+  overflow: visible;
+  padding: 24px 0 0 0;
+}
+
+.rand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: end;
+}
+
+.footer-space {
+  display: flex;
+  justify-content: space-between;
+}
+
+.social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.social-links-header {
+  margin-bottom: 2px;
+}

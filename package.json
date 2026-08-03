@@ -1,6 +1,9 @@
 {
   "private": true,
   "scripts": {
-    "dev": "npx browser-sync start --server --extensions html --no-ui --files \"**/*.html,css/*.css,js/*.js\""
+    "dev": "npx browser-sync start --server --extensions html --no-ui --files \"**/*.html,css/*.css,js/*.js\"",
+    "archive": "node tools/build-archive.mjs",
+    "pretest": "node -e \"require.resolve('jsdom')\" 2>/dev/null || npm install --no-save jsdom",
+    "test": "node tools/test-time-machine.mjs && node tools/test-theme-sync.mjs"
   }
 }
