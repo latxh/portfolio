@@ -87,6 +87,33 @@
   margin-bottom: 48px;
 }
 
+/* Registering these makes them animatable. An unregistered custom property has
+   no type, so the browser can only flip it from one value to the next — which
+   is why letting go of a card used to teleport the highlight to the middle
+   while the foil was still fading out. Typed, they interpolate, and the light
+   can travel back to rest instead of cutting there.
+
+   Only the three the pointer writes. --rx and --ry stay unregistered on
+   purpose: they feed transform, which is already transitioned, and animating
+   both would leave the tilt easing toward a target that is itself easing. */
+@property --holo-x {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 50%;
+}
+
+@property --holo-y {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 50%;
+}
+
+@property --holo-dist {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
 /* Every state is driven through these four variables so there is exactly one
    transform declaration — hover states change values, never the function list,
    which keeps the interpolation clean. --shift is a share of the card's own
@@ -98,6 +125,63 @@
   --shift: 0%;
   --lift: 0px;
   --pop: 1;
+  /* Lean toward the cursor, written by initWorkCardHolo. Zero here, so a card
+     that is never pointed at is transformed exactly as it always was. */
+  --rx: 0deg;
+  --ry: 0deg;
+
+  /* How much of each layer survives onto the plate — the dials for the whole
+     effect. Opacities and blend keywords are neither of them colours, so
+     light-dark() can't carry either and dark needs its own lines below.
+
+     The blend modes are themed, not just the amounts. Both recipes assume a
+     dark substrate, and these plates are bright in light mode — around 215 of
+     255 for the Copilot and Meta AI cuts:
+
+     - color-dodge is backdrop / (1 - source), which on a near-white plate
+       saturates to white before any hue can show. hard-light lets a saturated
+       source impose its own colour instead, which is where the iridescence
+       comes from on a light card.
+     - the bloom's gradient is dark by design, and hard-light multiplies
+       anything under 0.5. Over white that reads as a grey veil rather than as
+       a tint, so light steps down to soft-light, which shades gently instead
+       of multiplying. */
+  --holo-shine: 0.55;
+  --holo-bloom: 0.4;
+  --holo-glare: 0.35;
+  --holo-shine-blend: hard-light;
+  --holo-bloom-blend: soft-light;
+  /* Where the shine's brightness starts before distance from centre adds to
+     it. hard-light pivots at 0.5 — below that it multiplies the plate down,
+     above it screens the plate up — so this floor decides which half of that
+     the foil mostly lands in. 0.55 sat barely over the line and spent most of
+     its range multiplying, which is what kept the light cards dim; 0.68 puts
+     the bulk of the band on the screening side while leaving the darker stops
+     below the pivot, so the ripples still have somewhere to darken into. */
+  --holo-shine-floor: 0.68;
+  /* How hard the contours carve the band. overlay screens and multiplies at
+     full strength, which is what the ripples need to register against a dark
+     plate. Against a bright one the same carve is far louder — a dark contour
+     over white is about the highest contrast the card can produce — so light
+     steps down to soft-light, which shades the band rather than cutting it.
+     Adjusts the texture alone, leaving the band's own colour untouched. */
+  --holo-texture-blend: soft-light;
+  /* Grey laid over the contours to dilute them, as a share of the way to flat.
+     soft-light was already the gentlest keyword available, so the rest of the
+     way down has to come from here. */
+  --holo-texture-wash: rgb(128 128 128 / 0.55);
+  /* Chroma of the band. hard-light hands the source's colour straight to the
+     plate, where color-dodge spends most of its climb on brightness, so the
+     same figure comes out markedly more vivid over a light card than a dark
+     one. Light is pulled back to compensate. */
+  --holo-shine-saturate: 1.1;
+  /* Lightness of the bloom's tinted midtone, and the floor its own brightness
+     filter starts from. The recipe puts the midtone near black and then halves
+     it, which over a dark plate is a tint and over a white one is a grey cast.
+     Lifting both toward the soft-light pivot turns it back into a tint here:
+     the hue still reads, but as the card's colour rather than as a shadow. */
+  --holo-bloom-mid-l: 48%;
+  --holo-bloom-floor: 0.85;
 
   position: relative;
   flex: 0 0 26.5%;
@@ -106,13 +190,74 @@
   background-color: var(--work-background);
   border-radius: 8%;
   box-shadow: 0 8px 24px var(--shadow);
-  transform: translateX(var(--shift)) rotate(var(--tilt))
-    translateY(calc(var(--stagger) + var(--lift))) scale(var(--pop));
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+  /* perspective() has to lead the list for the rotations after it to read as
+     depth. It changes nothing while --rx and --ry are 0, since none of the
+     other functions displace on z. */
+  transform: perspective(700px) translateX(var(--shift)) rotate(var(--tilt))
+    translateY(calc(var(--stagger) + var(--lift))) scale(var(--pop))
+    rotateX(var(--rx)) rotateY(var(--ry));
+  /* The pointer properties are transitioned here but not under :hover, so they
+     track the cursor instantly while the card is held and ease home once it
+     isn't. Same trick the transform above uses for its own two speeds. */
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s ease,
+    --holo-x 0.4s ease-out,
+    --holo-y 0.4s ease-out,
+    --holo-dist 0.4s ease-out;
+}
+
+/* Dark is where both recipes were designed to sit, so this block is less a set
+   of corrections than the originals restored — the light values above are the
+   substitutions, made because a bright plate breaks the blend modes these two
+   layers were written around.
+
+   Keyed to the attribute alone, not also to a prefers-color-scheme copy of the
+   rule: the attribute is always set when JS is on, and the only visitor this
+   misses is a no-JS one in system dark, who gets the light-plate blends over a
+   dark card. Weaker than intended, but not wrong. */
+:root[data-theme="dark"] .work-card {
+  --holo-shine: 0.5;
+  --holo-bloom: 0.35;
+  --holo-glare: 0.32;
+  /* The recipes as written. On a dark plate color-dodge has room to climb
+     without blowing out, and the bloom's dark gradient barely darkens what is
+     already dark — so both land as intended and neither needs substituting. */
+  --holo-shine-blend: color-dodge;
+  --holo-bloom-blend: hard-light;
+  /* color-dodge has no pivot to sit either side of — it climbs the whole way —
+     so this is a plain intensity here, and the calmer figure is the one that
+     stopped the edges blowing out. */
+  --holo-shine-floor: 0.55;
+  --holo-texture-blend: overlay;
+  /* Nothing to dilute — the contours read correctly against a dark plate. */
+  --holo-texture-wash: rgb(128 128 128 / 0);
+  --holo-shine-saturate: 1.6;
+  --holo-bloom-mid-l: 11%;
+  --holo-bloom-floor: 0.45;
 }
 
 .work-card + .work-card {
   margin-left: -2%;
+}
+
+/* <picture> is inline by default, which would put a line box under the logo and
+   break the square. The img inside it carries the sizing.
+
+   It doubles as the clip box for the foil below. The card itself can't be the
+   one to clip: the tooltip hangs 10px past its bottom edge, and hiding overflow
+   there would cut it off. Radius matches the img's so the corners coincide.
+
+   isolate keeps the foil's blend modes talking to the logo and nothing else —
+   without it they would reach past the card and blend with the page.
+   pointer-events: none leaves the card the only hit target under the cursor,
+   so the pointer maths can read offsetX/offsetY straight off it. */
+.work-card picture {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  border-radius: 6%;
+  isolation: isolate;
+  pointer-events: none;
 }
 
 /* height: auto is load-bearing — the width/height attributes on the markup are
@@ -132,11 +277,48 @@
   pointer-events: none;
 }
 
-/* Hand-scattered rather than a mechanical fan — each angle is its own. */
-.work-card:nth-child(1) { --tilt: -5.6deg; z-index: 1; }
-.work-card:nth-child(2) { --tilt: 3.3deg;  --stagger: 1.1%;  z-index: 2; }
-.work-card:nth-child(3) { --tilt: -6deg;   --stagger: -1.6%; z-index: 3; }
-.work-card:nth-child(4) { --tilt: 9.3deg;  --stagger: 2.6%;  z-index: 4; }
+/* Hand-scattered rather than a mechanical fan — each angle is its own.
+
+   --holo-mark is the silhouette the foil is cut around. One per card rather
+   than one per theme: the light and dark cuts of each logo sit on the same
+   canvas at the same size, so a single mask registers against both.
+
+   --card-hue tints the bloom under the band. The recipe pins this to a single
+   magenta; keying it to the brand instead costs nothing and lets each card
+   bloom in its own colour — the dominant hue of its own logo, sampled off the
+   artwork: violet, orange, green and blue. It only ever reaches the plate as a
+   midtone under the foil, so it reads as the card's own colour rather than as a
+   coloured lamp pointed at it. */
+.work-card:nth-child(1) {
+  --tilt: -5.6deg;
+  --holo-mark: url("../assets/companies/meta-ai-mask.png");
+  --card-hue: 288;
+  z-index: 1;
+}
+
+.work-card:nth-child(2) {
+  --tilt: 3.3deg;
+  --stagger: 1.1%;
+  --holo-mark: url("../assets/companies/copilot-daily-mask.png");
+  --card-hue: 24;
+  z-index: 2;
+}
+
+.work-card:nth-child(3) {
+  --tilt: -6deg;
+  --stagger: -1.6%;
+  --holo-mark: url("../assets/companies/shopify-flow-mask.png");
+  --card-hue: 84;
+  z-index: 3;
+}
+
+.work-card:nth-child(4) {
+  --tilt: 9.3deg;
+  --stagger: 2.6%;
+  --holo-mark: url("../assets/companies/start-gg-mask.png");
+  --card-hue: 216;
+  z-index: 4;
+}
 
 /* Width-scoped as well as hover-scoped: a narrow desktop window still matches
    (hover: hover), and cards sliding sideways looks wrong in the 2x2 grid. */
@@ -146,6 +328,231 @@
     --pop: 1.03;
     box-shadow: 0 18px 40px var(--shadow);
     z-index: 5;
+  }
+
+  /* Trainer-gallery holofoil, after the trainer-gallery-holo recipe in
+     simeydotme/pokemon-cards-css.
+
+     Where radiant builds its surface from crossed bar grids, this one is a
+     single wide band of colour raked across the card — an oil slick rather than
+     brushed metal. Three things make it read that way: the band tracks only
+     vertically, so the colour rises and falls instead of chasing the cursor
+     around; a heavy contrast filter compresses the hues into distinct ribbons;
+     and both the band and the bloom under it brighten as the pointer moves away
+     from centre, which is the card catching light as it turns edge-on.
+
+     This recipe has no glitter layer — the original explicitly switches it off.
+
+     All three layers are transparent at rest, so an un-hovered card paints
+     nothing. */
+  .work-card picture::before,
+  .work-card picture::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    will-change: opacity, background-position;
+
+    /* Holds the foil off the mark, so it plays on the plate behind it and the
+       logo itself stays exactly as drawn.
+
+       Two mask layers: a flood that is opaque everywhere, and the mark's own
+       alpha. subtract takes the second out of the first, which is why the
+       artwork can be an ordinary logo export rather than a pre-inverted hole.
+       subtract rather than exclude because the band below replaces this flood
+       with a gradient — exclude only reads as a subtraction while the first
+       layer is fully opaque, and inverts once it isn't.
+
+       Unprefixed only, deliberately. -webkit-mask-image without a matching
+       -webkit-mask-composite would apply the flood and the mark as a union and
+       paint the foil over the logo instead of around it. A browser that knows
+       neither drops both and simply gets the unmasked foil, which is the old
+       behaviour rather than an inverted one.
+
+       cover is load-bearing: the masks are 512px and the card is nearer 300, so
+       at the default auto size the mask would be cropped to its top-left. */
+    mask-image: linear-gradient(#000, #000), var(--holo-mark);
+    mask-composite: subtract;
+    mask-size: cover;
+    mask-repeat: no-repeat;
+    mask-position: center;
+  }
+
+  /* The band. One repeating sweep at -22 degrees, closing on the hue it opened
+     with so the tile joins never show.
+
+     It is positioned on Y only — the X term is a literal 0%. That is the
+     signature of this recipe rather than an oversight: the colour rides up and
+     down the card as the pointer rises and falls, and holding it still
+     horizontally is what makes it read as one raked sheet instead of something
+     chasing the cursor.
+
+     Brightness rides distance from centre, so the band is dimmest with the
+     pointer dead centre and brightest at the edges — the card catching light as
+     it turns edge-on. */
+  .work-card picture::before {
+    --holo-space: 5%;
+    /* Half the card, so the 600px source lands at roughly 150px — a 4x
+       downscale that packs the contour rings to about a pixel apart. At this
+       density what shows is partly interference between the rings and the
+       display's own grid rather than the texture itself, which is what gives it
+       the fingerprint shimmer. It also means this figure, unlike a
+       looser one, renders differently at 1x and 2x. */
+    --holo-texture-size: 50%;
+
+    /* Band over texture, with the texture deciding — both carve blends read
+       from the lower layer, so the contours brighten the band along their light
+       side and darken it along their dark side. That difference between
+       adjacent rings is the whole illusion of a raised surface; flatten it and
+       the waves go back to looking printed on. Which of the two blends applies
+       is themed, and the reasoning sits with --holo-texture-blend above.
+
+       The texture is centred and still. Only the band moves under it, the same
+       way the repo pins its glitter and lets the light travel — a surface that
+       slid around with the cursor would stop reading as the card's own.
+
+       Between the two sits a flat wash of mid grey. Both carve blends measure
+       the texture's distance from 0.5 and do nothing at all when it lands
+       there, so laying grey over the contours at a given alpha scales the whole
+       carve by the remainder — 0 leaves the texture untouched, 1 erases it, and
+       anything between is a smooth dial. That is finer control than the blend
+       keyword alone offers, which only steps between two fixed strengths. */
+    background-image: repeating-linear-gradient(
+        -22deg,
+        var(--holo-1) calc(var(--holo-space) * 1),
+        var(--holo-2) calc(var(--holo-space) * 2),
+        var(--holo-3) calc(var(--holo-space) * 3),
+        var(--holo-4) calc(var(--holo-space) * 4),
+        var(--holo-5) calc(var(--holo-space) * 5),
+        var(--holo-6) calc(var(--holo-space) * 6),
+        var(--holo-7) calc(var(--holo-space) * 7)
+      ),
+      linear-gradient(var(--holo-texture-wash), var(--holo-texture-wash)),
+      var(--holo-texture);
+    background-size: 300% 400%, 100% 100%, var(--holo-texture-size);
+    background-position: 0% var(--holo-y, 50%), center, center;
+    background-blend-mode: var(--holo-texture-blend), normal, normal;
+    /* Three parts, all of them tuned down from the recipe:
+
+       brightness rides distance from centre, but on a shallower coefficient.
+       The recipe's is steeper because it runs over busy mid-tone card art;
+       these plates are flat, which gives either blend far more room to climb,
+       and the same swing that reads as a card turning there reads as a lamp
+       switching on here. The floor came up as the coefficient came down —
+       cutting the coefficient alone would just make the card's middle go dead.
+
+       contrast is what compresses the hues into distinct ribbons rather than a
+       wash, and is the one figure left at the recipe's own value.
+
+       saturate turns the lit ridges into colour rather than grey highlights.
+       Themed, because the two blends carry chroma very differently. */
+    filter: brightness(calc((var(--holo-dist, 0) * 0.15) + var(--holo-shine-floor)))
+      contrast(2.3) saturate(var(--holo-shine-saturate));
+    mix-blend-mode: var(--holo-shine-blend);
+
+    /* The angle fade. brightness() above is a single multiplier over the whole
+       layer, so on its own it swings the card between invisible and blanketed
+       without ever favouring one part of it — which is why the foil sat at full
+       strength corner to corner.
+
+       This replaces the flood in the shared mask with a falloff centred on the
+       cursor, so the foil is strongest where the light is and thins out across
+       the card. The repo does the equivalent with a pointer-tracked dark radial
+       at the bottom of its background stack; doing it in the mask keeps it out
+       of the blend chain, where it would have had to fight overlay for the same
+       pixels. The mark is still subtracted, so the logo stays clear. */
+    mask-image: radial-gradient(
+        farthest-corner circle at var(--holo-x, 50%) var(--holo-y, 50%),
+        rgb(0 0 0) 0%,
+        var(--holo-gate-mid) 40%,
+        var(--holo-gate-edge) 100%
+      ),
+      var(--holo-mark);
+  }
+
+  /* The bloom beneath the band: a wide soft ellipse riding a halved pointer, so
+     it drifts across a quarter of the card while the cursor crosses all of it.
+     Its midtone is tinted to the card's own hue, which is where each logo's
+     colour enters the effect. Blend and tone are both themed — see
+     --holo-bloom-blend and --holo-bloom-mid-l above. */
+  .work-card picture::after {
+    background-image: radial-gradient(
+      farthest-corner ellipse at
+        calc((var(--holo-x, 50%) * 0.5) + 25%)
+        calc((var(--holo-y, 50%) * 0.5) + 25%),
+      hsl(0 0% 100%) 5%,
+      hsl(var(--card-hue) 100% var(--holo-bloom-mid-l) / 0.6) 40%,
+      hsl(0 0% 22%) 120%
+    );
+    background-position: center center;
+    background-size: 400% 500%;
+    /* Flattened alongside the band's. These two multiply onto the same pixels,
+       so their swings compound — leaving this one steep would have undone most
+       of the calming done above. */
+    filter: brightness(calc((var(--holo-dist, 0) * 0.1) + var(--holo-bloom-floor)))
+      contrast(0.85) saturate(1.1);
+    mix-blend-mode: var(--holo-bloom-blend);
+  }
+
+  /* The glare, pinned hard to the cursor rather than damped like the bloom.
+     soft-light rather than dodge — it should read as a sheen lying on the
+     surface, not as light coming through it.
+
+     This one hangs off the card instead of the picture, because the picture's
+     two pseudo-elements are already spent and this layer needs a blend mode of
+     its own. Inset by the card's padding and carrying the image's radius, it
+     lands exactly over the artwork; the card makes a stacking context of its
+     own via transform, so the blending stays inside it. */
+  .work-card::after {
+    content: "";
+    position: absolute;
+    inset: 0.65%;
+    border-radius: 6%;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+    background-image: radial-gradient(
+      farthest-corner circle at var(--holo-x, 50%) var(--holo-y, 50%),
+      hsl(0 0% 100%) 10%,
+      hsl(0 0% 100% / 0.6) 35%,
+      hsl(180 11% 35%) 60%
+    );
+    mix-blend-mode: soft-light;
+    mask-image: linear-gradient(#000, #000), var(--holo-mark);
+    mask-composite: subtract;
+    mask-size: cover;
+    mask-repeat: no-repeat;
+    mask-position: center;
+  }
+
+  .work-card:hover::after {
+    opacity: var(--holo-glare);
+  }
+
+  /* Quick in, slow out. The rest-state 0.5s above is what plays on leave; this
+     shortens only the arrival, so the foil catches immediately under the cursor
+     but takes its time letting go. */
+  .work-card:hover picture::before,
+  .work-card:hover picture::after,
+  .work-card:hover::after {
+    transition-duration: 0.3s;
+  }
+
+  .work-card:hover picture::before {
+    opacity: var(--holo-shine);
+  }
+
+  .work-card:hover picture::after {
+    opacity: var(--holo-bloom);
+  }
+
+  /* Tracking the cursor at the resting 0.35s reads as lag. Shortening it only
+     while hovered keeps the lean responsive and still hands the settle back to
+     the longer ease the moment the pointer leaves. */
+  .work-card:hover {
+    transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.3s ease;
   }
 
   /* Cards on both sides push away from the hovered one by the same amount, so
@@ -185,20 +592,63 @@
   }
 }
 
-/* Four tilted cards get too small to read on a phone — go two up. */
+/* The lean is motion; the foil is not. Under reduced motion the card stays flat
+   and the pointer script never runs, so the foil settles at its rest position
+   and simply fades up on hover — the colour survives, the movement doesn't. */
+@media (prefers-reduced-motion: reduce) {
+  .work-card {
+    --rx: 0deg;
+    --ry: 0deg;
+  }
+}
+
+/* Four tilted cards get too small to read on a phone — stack them full width. */
 @media only screen and (max-width: 670px) {
   .work-fan {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 16px;
     margin-bottom: 32px;
   }
 
-  /* Two up, so each card is ~48% of the row rather than 26.5% — the frame is a
-     share of the row, so it needs restating to stay 2.45% of the card. */
+  /* Full width and a fixed height, so the square plate is cropped to a banner.
+     240px is measured rather than picked: the tallest of the four marks covers
+     53% of its tile's height, and object-fit: cover shows a centred band of
+     height/width of the source. At 240px that band runs from 83% of the image
+     on a 320px phone down to 60% on a 430px one, so every mark clears its crop
+     with room to spare at any width a phone actually is.
+
+     A fixed height doesn't scale with the viewport the way the rest of the card
+     does; aspect-ratio: 3 / 2 would, and lands in the same place at common
+     widths, if that trade reads better later.
+
+     The frame is pinned to 7px rather than carried over as a percentage. The
+     0.65%-of-the-row rule exists so the frame keeps its proportion as the row
+     divides into four; here the card is the row, so the same rule would draw
+     7.1px on a 320px phone and 9.8px on a 430px one — up to a third heavier
+     than the 7.31px a full-width desktop card gets. Against a short banner the
+     percentage also misleads, being a share of the width while the eye reads it
+     against the much shorter height. A flat 7px matches desktop at every phone
+     size, which is what a frame this thin should do.
+
+     Radius has to leave percentages behind here. 8% of a rectangle is 8% of the
+     width horizontally and 8% of the height vertically, which draws an ellipse
+     at the corners; the same reason memories.css sizes its card radius in px. */
   .work-card {
     flex: none;
-    padding: 1.17%;
+    padding: 7px;
+    aspect-ratio: auto;
+    height: 240px;
+    border-radius: 24px;
+  }
+
+  /* The plate fills the card and crops, rather than setting the card's height
+     from its own square. object-fit: cover is already on the img. */
+  .work-card picture,
+  .work-card img {
+    height: 100%;
+    aspect-ratio: auto;
+    border-radius: 18px;
   }
 
   /* The fan reads as scatter at full width, but as sloppiness in a 2x2 grid —
@@ -209,16 +659,38 @@
     --stagger: 0%;
   }
 
-  /* Nothing can be hovered, so the label is always on — sitting on the card,
-     centred, pinned to its bottom edge. With nothing to dismiss it, it reads as
-     a caption rather than a tooltip, so the chrome comes off: the surface and
-     its shadow only existed to lift a floating white label off the near-white
-     page, and this one is neither floating nor over the page. */
+  /* Nothing can be hovered, so the label is always on — set into the card's
+     bottom-left corner. With nothing to dismiss it, it reads as a caption
+     rather than a tooltip, so the chrome comes off: the surface and its shadow
+     only existed to lift a floating white label off the near-white page, and
+     this one is neither floating nor over the page.
+
+     It sits directly on the artwork now the plate fills the card, so the corner
+     it lands in was checked rather than assumed: across all eight plates the
+     region under the label is background rather than mark, and the weakest
+     contrast against the label colour is 13.6:1. Comfortably AAA in both
+     themes, which is why it can go without a scrim.
+
+     The inset is carried as padding rather than folded into the offsets, so the
+     label stays a self-contained box: the two together put the text 20px in
+     from the card's left edge and 18px up from its bottom, which is 13px and
+     11px clear of the artwork inside the 7px frame. Bottom runs a touch tighter
+     than left on purpose — the line box carries its own descender space below
+     the text, so equal numbers would sit optically low.
+
+     min-width is dropped so the box hugs its text; the 60px floor exists to
+     stop a short tooltip looking mean against its surface, and there is no
+     surface here. */
   .work-card .tool-tip {
     top: auto;
-    bottom: 10px;
+    bottom: 6px;
+    left: 6px;
+    min-width: 0;
+    padding: 12px 14px;
+    translate: none;
     background-color: transparent;
     box-shadow: none;
+    font-size: var(--text-title);
     visibility: visible;
     opacity: 1;
     transform: none;

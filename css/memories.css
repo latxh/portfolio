@@ -130,7 +130,7 @@
   justify-content: center;
   align-items: center;
   padding: 24px;
-  background: rgba(247, 248, 249, 0.8);
+  background: var(--scrim);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   cursor: zoom-out;

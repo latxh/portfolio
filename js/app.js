@@ -253,6 +253,191 @@ const initFooterYear = () => {
   });
 };
 
+const THEME_KEY = "theme";
+const THEME_COLORS = { light: "#f7f8f9", dark: "#121315" };
+
+// A view transition paints the page as a snapshot for its duration, and the
+// pointer is not over that snapshot — so the browser fires a mouseleave the
+// visitor never performed, then a mouseenter when the live DOM returns. On the
+// pill that reads as the indicator darting to the active tab and back for no
+// reason. This is raised for the length of the swap so the nav can tell that
+// kind of leave from a real one, and THEME_SWAP_END lets it resync afterwards
+// against wherever the pointer actually ended up.
+const THEME_SWAP_END = "themeswapend";
+let themeSwapInFlight = false;
+
+// Only ever holds a theme the visitor picked themselves — absent means "follow
+// the system", which is what keeps the site tracking the OS until it's told
+// otherwise. Storage throws outright in some privacy modes.
+const readStoredTheme = () => {
+  try {
+    const stored = localStorage.getItem(THEME_KEY);
+    return stored === "light" || stored === "dark" ? stored : null;
+  } catch (error) {
+    return null;
+  }
+};
+
+const initTheme = () => {
+  const root = document.documentElement;
+  const toggle = document.querySelector(".theme-toggle");
+  const systemDark = window.matchMedia("(prefers-color-scheme: dark)");
+  const themeColors = document.querySelectorAll('meta[name="theme-color"]');
+  const darkArt = document.querySelectorAll("picture source[data-dark]");
+
+  const apply = (theme, isOverride) => {
+    root.dataset.theme = theme;
+
+    // The work-card logos ship a dark cut as a <source>, so the browser fetches
+    // only the one it needs rather than loading both and hiding one. Its media
+    // query reads the system setting, which is right until the toggle disagrees
+    // with it — so the resolved theme is pinned here instead. Changing .media
+    // re-runs the browser's source selection.
+    darkArt.forEach((source) => {
+      source.media = theme === "dark" ? "all" : "not all";
+    });
+
+    // The markup ships a media-scoped pair, which is already right whenever the
+    // system is in charge. An override has to outrank both, so it collapses
+    // them onto the one colour.
+    if (isOverride) {
+      themeColors.forEach((meta) => {
+        meta.content = THEME_COLORS[theme];
+      });
+    }
+
+    if (toggle) {
+      toggle.setAttribute(
+        "aria-label",
+        theme === "dark" ? "Switch to light theme" : "Switch to dark theme"
+      );
+    }
+  };
+
+  const stored = readStoredTheme();
+  apply(stored || (systemDark.matches ? "dark" : "light"), Boolean(stored));
+
+  systemDark.addEventListener("change", (event) => {
+    if (readStoredTheme()) return; // their choice outranks the OS
+    apply(event.matches ? "dark" : "light", false);
+  });
+
+  if (!toggle) return;
+
+  toggle.addEventListener("click", () => {
+    const next = root.dataset.theme === "dark" ? "light" : "dark";
+    try {
+      localStorage.setItem(THEME_KEY, next);
+    } catch (error) {
+      // Not persisting is survivable — the switch still applies for this visit.
+    }
+
+    const swap = () => apply(next, true);
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    if (document.startViewTransition && !reducedMotion.matches) {
+      themeSwapInFlight = true;
+
+      // The tooltip has the same problem as the indicator, and needs the same
+      // treatment for a different reason: it is shown by :hover in CSS, so the
+      // snapshot stealing the pointer blinks the label out and back. Pinning it
+      // open for the swap holds it steady. Only worth doing if it was actually
+      // up — a keyboard press keeps :focus-visible throughout and needs nothing,
+      // and a tap has no tooltip to hold.
+      const tipWasUp = toggle.matches(":hover");
+      if (tipWasUp) toggle.classList.add("is-tip-held");
+
+      // Settles either way — a transition that gets skipped rejects rather than
+      // resolving, and these have to come down for both.
+      const released = () => {
+        themeSwapInFlight = false;
+        // Handing back to :hover: still pointed at and it stays up untouched,
+        // moved away and it fades out from here as it normally would.
+        toggle.classList.remove("is-tip-held");
+        document.dispatchEvent(new CustomEvent(THEME_SWAP_END));
+      };
+      document.startViewTransition(swap).finished.then(released, released);
+    } else {
+      swap();
+    }
+  });
+};
+
+// Degrees of lean at the very edge of a card. Small on purpose — the foil is
+// doing the talking, and the tilt is only there to give it an angle to catch.
+const HOLO_TILT = 5;
+
+// Where the cursor is over a work card, as a share of the card, driving both
+// the foil's position and the card's lean. Mirrors the approach in
+// simeydotme/pokemon-cards-css, trimmed to the two layers this site uses.
+const initWorkCardHolo = () => {
+  const cards = document.querySelectorAll(".work-card");
+  if (!cards.length) return;
+
+  // Matches the media query the foil is declared under, so the two can't
+  // disagree about when the effect exists.
+  const fine = window.matchMedia("(hover: hover) and (min-width: 671px)");
+  const still = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  cards.forEach((card) => {
+    let frame = 0;
+    let point = null;
+
+    const paint = () => {
+      frame = 0;
+      if (!point) return;
+      card.style.setProperty("--holo-x", `${point.x * 100}%`);
+      card.style.setProperty("--holo-y", `${point.y * 100}%`);
+
+      // Distance from the middle, 0 at centre and 1 by the edges. The band and
+      // the bloom both scale their brightness off this, so the card is dimmest
+      // when looked at straight on and lights up as it turns edge-on. Corners
+      // run past 1 on the diagonal, hence the clamp.
+      const dx = point.x - 0.5;
+      const dy = point.y - 0.5;
+      card.style.setProperty(
+        "--holo-dist",
+        Math.min(Math.hypot(dx, dy) / 0.5, 1).toFixed(3)
+      );
+      // Lean away from the cursor's side: pointing at the right edge should
+      // tip that edge back, like a card being pressed at one corner.
+      card.style.setProperty("--ry", `${(point.x - 0.5) * 2 * HOLO_TILT}deg`);
+      card.style.setProperty("--rx", `${(0.5 - point.y) * 2 * HOLO_TILT}deg`);
+    };
+
+    const clear = () => {
+      point = null;
+      if (frame) {
+        cancelAnimationFrame(frame);
+        frame = 0;
+      }
+      // Dropping the properties returns the card to the resting transform, and
+      // to the longer ease, so it settles rather than snaps.
+      ["--holo-x", "--holo-y", "--holo-dist", "--rx", "--ry"].forEach((prop) =>
+        card.style.removeProperty(prop)
+      );
+    };
+
+    card.addEventListener("pointermove", (event) => {
+      if (!fine.matches || still.matches || event.pointerType === "touch") return;
+
+      // offsetX/offsetY are measured in the card's own untransformed box, so
+      // the lean can't feed back into the reading the way a transformed
+      // getBoundingClientRect() would. <picture> waives pointer events, which
+      // keeps the card the only thing these can be relative to.
+      point = {
+        x: Math.min(Math.max(event.offsetX / card.clientWidth, 0), 1),
+        y: Math.min(Math.max(event.offsetY / card.clientHeight, 0), 1),
+      };
+
+      if (!frame) frame = requestAnimationFrame(paint);
+    });
+
+    card.addEventListener("pointerleave", clear);
+    card.addEventListener("blur", clear);
+  });
+};
+
 const initPillNav = () => {
   document.querySelectorAll(".pill-nav").forEach((pill) => {
     const tabs = pill.querySelectorAll(".pill-tab");
@@ -278,10 +463,23 @@ const initPillNav = () => {
     setIndicator(getActive());
     requestAnimationFrame(() => indicator.classList.remove("no-transition"));
 
-    tabs.forEach((tab) => {
-      tab.addEventListener("mouseenter", () => setIndicator(tab));
+    // The theme toggle shares the pill but is not a destination, so it takes
+    // the indicator on hover without ever being what the indicator returns to.
+    pill.querySelectorAll(".pill-tab, .theme-toggle").forEach((target) => {
+      target.addEventListener("mouseenter", () => setIndicator(target));
     });
-    pill.addEventListener("mouseleave", () => setIndicator(getActive()));
+    pill.addEventListener("mouseleave", () => {
+      // Ignore the phantom leave a theme swap causes; a real one still lands,
+      // because the resync below reads the pointer's actual position rather
+      // than assuming it stayed put.
+      if (themeSwapInFlight) return;
+      setIndicator(getActive());
+    });
+
+    document.addEventListener(THEME_SWAP_END, () => {
+      setIndicator(pill.querySelector(".pill-tab:hover, .theme-toggle:hover") || getActive());
+    });
+
     window.addEventListener("resize", () => setIndicator(getActive()));
     if (document.fonts && document.fonts.ready) {
       document.fonts.ready.then(() => setIndicator(getActive()));
@@ -289,6 +487,8 @@ const initPillNav = () => {
   });
 };
 
+initTheme();
+initWorkCardHolo();
 initPillNav();
 initFooterYear();
 initRandomMessage();

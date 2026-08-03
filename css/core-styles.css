@@ -24,7 +24,11 @@
 }
 
 :root {
-  color-scheme: light;
+  /* Both themes ship in the same declarations: light-dark() takes the light
+     value first, the dark one second, and resolves against the used
+     color-scheme. So a theme is not a second block of overrides to keep in
+     sync — it is the second argument, right next to the value it replaces. */
+  color-scheme: light dark;
   --font-stack: Latch, Arial, Helvetica, sans-serif;
   font-family: var(--font-stack);
 
@@ -39,17 +43,87 @@
   --leading-tight: 1.25; /* headings */
   --leading-body: 1.45;  /* short-form copy */
 
-  --focus-blue: #1668dc;
-  --background: #f7f8f9;
-  --font-1: #101112;
-  --font-2: #686e78;      /* AA on both the page and a white card, with more
-                             daylight between it and --font-1 than before */
-  --surface-active: #e8eaee; /* selected nav pill */
-  --work-background: #ffffff;
-  --card-overlay: rgba(0, 0, 0, 0.22); /* dims the unfocused music cards */
+  /* Dark runs a step lighter than the page for every surface, exactly as light
+     runs a step brighter — cards stay above the page in both, so the work fan,
+     the music stack and the memory cards keep the same depth reading. */
+  --focus-blue: light-dark(#1668dc, #5ba4ff);
+  --background: light-dark(#f7f8f9, #121315);
+  --font-1: light-dark(#101112, #ececed);
+  --font-2: light-dark(#686e78, #9aa1ab); /* AA on both the page and a card in
+                                             either theme, with more daylight
+                                             between it and --font-1 than
+                                             before */
+  --surface-active: light-dark(#e8eaee, #2a2d32); /* selected nav pill */
+  --work-background: light-dark(#ffffff, #1c1e21);
+  /* dims the unfocused music cards — needs more weight in dark, where a wash
+     this light barely separates the card behind from the one in front */
+  --card-overlay: light-dark(rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.45));
   --card-overlay-clear: rgba(0, 0, 0, 0);
-  --shadow: rgba(16, 17, 18, 0.1);
-  --surface-blur: rgba(255, 255, 255, 0.72);
+  /* A 10% shadow is invisible on a dark page, so dark leans on a much heavier
+     one; the surfaces being lighter than the page does the rest of the lifting. */
+  --shadow: light-dark(rgba(16, 17, 18, 0.1), rgba(0, 0, 0, 0.55));
+  --surface-blur: light-dark(rgba(255, 255, 255, 0.72), rgba(28, 30, 33, 0.72));
+  /* The band the work-card shine cycles through, from the trainer-gallery-holo
+     recipe in simeydotme/pokemon-cards-css. Muted and half-transparent rather
+     than pastel — this one is a single wide sweep instead of a fine grid, so
+     the colours are read at size and anything more saturated turns to poster
+     paint under the contrast filter.
+
+     The seventh is the first again, a hair lighter: the gradient repeats, so
+     the run has to close on the hue it opened with or the tile joins show. */
+  --holo-1: hsl(283 49% 60% / 0.75);
+  --holo-2: hsl(2 74% 59% / 0.75);
+  --holo-3: hsl(53 67% 53% / 0.75);
+  --holo-4: hsl(93 56% 52% / 0.75);
+  --holo-5: hsl(176 38% 50% / 0.75);
+  --holo-6: hsl(228 100% 77% / 0.75);
+  --holo-7: hsl(283 49% 61% / 0.75);
+
+  /* The rippled surface the band is read through — concentric contours that
+     warp around a focus, so the colour bends rather than running straight.
+     This is illusion.png from simeydotme/pokemon-cards-css, where it is the
+     --foil for the Shiny Rare and V Full Art cards. That project is GPL-3. */
+  --holo-texture: url("../assets/holo-illusion.png");
+
+  /* Falloff of the foil away from the cursor, as mask alpha at 40% and 100% of
+     the radius. Themed, and by a wide margin: a floor that reads as nothing
+     over a dark plate still reads as legible grey lines over a white one, since
+     the eye picks up far smaller deviations against a uniform bright field. Set
+     the two to the same numbers and light looks like it has no falloff at all,
+     which is exactly what a single shared value produced.
+
+     Colours rather than numbers, so unlike the rest of the foil's dials these
+     two can ride light-dark() and stay in one declaration apiece. */
+  --holo-gate-mid: light-dark(rgb(0 0 0 / 0.3), rgb(0 0 0 / 0.55));
+  --holo-gate-edge: light-dark(rgb(0 0 0 / 0), rgb(0 0 0 / 0.12));
+  --scrim: light-dark(rgba(247, 248, 249, 0.8), rgba(18, 19, 21, 0.82));
+}
+
+/* The visitor's own choice, written to <html> by the inline script in each
+   page's <head> so a stored theme is resolved before first paint rather than
+   flashing the other one. Without JS the attribute is never set and the
+   color-scheme above leaves the decision to the system. */
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+/* Switching themes crossfades the page where View Transitions are supported.
+   Nothing else opts in: the work fan and music stack tune their own transforms
+   closely, and a blanket colour transition would have to overwrite them. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.35s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
 }
 
 ::selection {

@@ -26,6 +26,110 @@ nav {
   box-shadow: 0 8px 24px var(--shadow);
 }
 
+/* Rides inside the pill as a third child. .pill-indicator measures whatever it
+   is pointed at, so a non-tab can share the run as long as it isn't given the
+   .pill-tab class — the active-tab lookup stays tabs-only, and the indicator
+   simply slides onto this and back off again.
+
+   No surface of its own: the pill already provides one, and a second blurred
+   layer inside the first would double the shadow at the corner. Square, so the
+   indicator lands on it as a circle rather than a stretched pill.
+
+   Hidden until the inline head script marks the document — the control is
+   JS-only, and without it the system preference is already being honoured. */
+.theme-toggle {
+  position: relative;
+  z-index: 1;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 48px;
+  background: transparent;
+  color: var(--font-2);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+:root.has-js .theme-toggle {
+  display: inline-flex;
+}
+
+.theme-toggle:hover {
+  color: var(--font-1);
+}
+
+/* Tucked in rather than offset like the rest, because the ring would otherwise
+   sit outside the pill it lives in. */
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--focus-blue);
+  outline-offset: -2px;
+}
+
+/* Sun and moon are stacked rather than swapped, so one can leave while the
+   other arrives. Both are absolute and centred; only opacity and transform
+   separate them, which keeps the whole exchange on the compositor.
+
+   They turn the same way through the hand-off — the outgoing icon carries on
+   clockwise while the incoming one completes the turn — so it reads as one
+   object rotating rather than two crossfading. */
+.theme-icon {
+  position: absolute;
+  /* inset + auto margins rather than leaning on the flex container's static
+     position for an out-of-flow child, which is correct per spec but a
+     needlessly subtle thing to depend on for centring two stacked icons. */
+  inset: 0;
+  margin: auto;
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
+.theme-icon-moon {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.5);
+}
+
+:root[data-theme="dark"] .theme-icon-sun {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.5);
+}
+
+:root[data-theme="dark"] .theme-icon-moon {
+  opacity: 1;
+  transform: rotate(0) scale(1);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .theme-icon {
+    transition: opacity 0.3s ease,
+      transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+/* The pill sits at the very top of the page, so this one hangs below the
+   control rather than above it — the default direction, but worth stating
+   since every other tooltip on the site is attached to something mid-page. */
+.theme-toggle .tool-tip {
+  top: calc(100% + 12px);
+}
+
+/* Held open across a theme swap. A view transition paints the page as a
+   snapshot the pointer is not over, so :hover drops for its duration and the
+   label would blink out and straight back in. The class is added only if the
+   tooltip was already up and removed the moment the swap ends, at which point
+   :hover takes the state back over.
+
+   Matches the shown state exactly, so nothing moves at the hand-off. */
+.theme-toggle.is-tip-held > .tool-tip {
+  visibility: visible;
+  opacity: 1;
+  transform: scale(1);
+}
+
 .pill-indicator {
   position: absolute;
   top: 3px;
@@ -97,4 +201,17 @@ nav {
     top: 4px;
     height: 40px;
   }
+
+  /* Square to the taller mobile tab, so the indicator still lands on it as a
+     circle. The icon grows with it. */
+  .theme-toggle {
+    width: 40px;
+    height: 40px;
+  }
+
+  .theme-icon {
+    width: 21px;
+    height: 21px;
+  }
+
 }
