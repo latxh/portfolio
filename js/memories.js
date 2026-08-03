@@ -41,30 +41,52 @@
     const media = document.createElement(isVideo ? "video" : "img");
     const markLoaded = () => media.classList.add("is-loaded");
 
-    media.src = item.src;
     if (item.width) media.width = item.width;
     if (item.height) media.height = item.height;
 
+    // src goes on last in both branches. Safari reads muted/autoplay/playsinline
+    // when it starts loading and blocks autoplay if they arrive after, and
+    // loading="lazy" is likewise ignored once a src is already set.
     if (isVideo) {
       media.loop = true;
-      media.playsInline = true;
-      media.preload = full ? "auto" : "metadata";
-      media.setAttribute("aria-label", item.caption);
       // muted is required for autoplay to be allowed at all
       media.muted = true;
       media.setAttribute("muted", "");
+      media.playsInline = true;
+      media.setAttribute("playsinline", "");
+      media.setAttribute("aria-label", item.caption);
       // autoplaying motion should be opt-out — offer controls instead
-      if (allowMotion) media.autoplay = true;
-      else media.controls = true;
+      if (allowMotion) {
+        media.autoplay = true;
+        media.preload = "auto";
+      } else {
+        media.controls = true;
+        media.preload = "metadata";
+      }
 
+      // Reveal once the first frame is decodable. loadeddata alone isn't enough:
+      // a Safari that declines to play stops at metadata and would never fire it,
+      // leaving the video sat at opacity 0.
+      media.addEventListener("loadedmetadata", markLoaded);
       media.addEventListener("loadeddata", markLoaded);
-      if (media.readyState >= 2) markLoaded();
+
+      media.src = item.src;
+      if (media.readyState >= 1) markLoaded();
+
+      // autoplay can still be refused (Low Power Mode, per-site settings) — fall
+      // back to controls so the memory is playable rather than a frozen frame.
+      if (allowMotion) {
+        const started = media.play();
+        if (started) started.catch(() => { media.controls = true; });
+      }
     } else {
       media.alt = item.caption;
       media.decoding = "async";
       if (!full) media.loading = "lazy";
 
       media.addEventListener("load", markLoaded);
+
+      media.src = item.src;
       if (media.complete && media.naturalWidth) markLoaded();
     }
 

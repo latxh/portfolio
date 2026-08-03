@@ -43,6 +43,18 @@
   margin-top: 16px;
 }
 
+/* The hero wraps on a phone, which puts the Meta squiggle directly above the
+   next line of copy. The squiggle hangs ~6px below its line box, and at the
+   heading leading of 1.25 an 18px line leaves about that much room between the
+   descenders and the following cap height — so the two just touch. Opening the
+   leading to 1.6 buys back the 6px as clear space. Only the intro needs it; the
+   h1 is a single line, where leading doesn't show. */
+@media only screen and (max-width: 670px) {
+  .intro {
+    line-height: 1.6;
+  }
+}
+
 .bot-space {
   margin-bottom: 64px;
 }
@@ -198,10 +210,15 @@
   }
 
   /* Nothing can be hovered, so the label is always on — sitting on the card,
-     centred, pinned to its bottom edge. */
+     centred, pinned to its bottom edge. With nothing to dismiss it, it reads as
+     a caption rather than a tooltip, so the chrome comes off: the surface and
+     its shadow only existed to lift a floating white label off the near-white
+     page, and this one is neither floating nor over the page. */
   .work-card .tool-tip {
     top: auto;
     bottom: 10px;
+    background-color: transparent;
+    box-shadow: none;
     visibility: visible;
     opacity: 1;
     transform: none;
