@@ -110,6 +110,34 @@ nav {
   }
 }
 
+/* Lifted out of the page-wide view transition the swap runs.
+
+   That transition crossfades a still of the old page into the new one, and the
+   still holds the outgoing icon frozen mid-swap while the incoming one is
+   already turning underneath it. The rotation ends up rendered twice over,
+   once in each layer, and then finishes a third time in the live DOM once the
+   crossfade is done — which is the doubled animation.
+
+   Naming the control captures it as its own group instead of as part of the
+   page. Dropping the outgoing snapshot and leaving the incoming one
+   unanimated hands the whole job back to the element itself, so the only
+   thing that plays is the rotation above. */
+.theme-toggle {
+  view-transition-name: theme-toggle;
+}
+
+::view-transition-group(theme-toggle) {
+  animation: none;
+}
+
+::view-transition-old(theme-toggle) {
+  display: none;
+}
+
+::view-transition-new(theme-toggle) {
+  animation: none;
+}
+
 /* The pill sits at the very top of the page, so this one hangs below the
    control rather than above it — the default direction, but worth stating
    since every other tooltip on the site is attached to something mid-page. */
