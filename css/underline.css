@@ -12,6 +12,14 @@
   height: 12px;
 }
 
+/* Tucked closer on a phone, where the hero wraps and the squiggle has a line of
+   copy beneath it rather than open space. */
+@media only screen and (max-width: 670px) {
+  .underline-svg {
+    bottom: -5px;
+  }
+}
+
 .animated-path {
   stroke: var(--focus-blue);
   stroke-dasharray: 100;
