@@ -29,7 +29,57 @@ footer {
 .social-links {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 14px;
+}
+
+/* Pill-shaped hit targets that cost no layout. The padding grows the target
+   to ~34px; the matching negative margin pulls the box back to the text's
+   original size, so the flex gaps and the footer's footprint are unchanged —
+   the pill just expands into the gap it already had. 7px vertical is the most
+   that fits without neighbouring targets overlapping. */
+.social-link {
+  padding: 7px 12px;
+  margin: -7px -12px;
+  border-radius: 48px;
+  transition: background-color 0.2s;
+}
+
+@media (hover: hover) {
+  .social-link:hover {
+    background-color: var(--surface-active);
+  }
+}
+
+.social-link p {
+  color: var(--font-2);
+  transition: color 0.2s ease, opacity 0.12s ease,
+    transform 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.social-link:hover p {
+  color: var(--font-1);
+}
+
+/* Copy confirmation: the label lifts out, the new text rises in from below.
+   .is-entering is untransitioned so it can jump to the start position before
+   animating to rest. */
+.social-link p.is-leaving {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+.social-link p.is-entering {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .social-link p.is-leaving,
+  .social-link p.is-entering {
+    transform: none;
+  }
 }
 
 .social-links-header {

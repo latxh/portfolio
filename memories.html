@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Brian Latchman</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="js/analytics.js"></script>
+  <meta name="description" content="A collection of memories from places I've been." />
+  <meta name="theme-color" content="#f7f8f9" />
+
+  <meta property="og:title" content="Brian Latchman" />
+  <meta property="og:image" content="https://latchman.ca/assets/portrait.jpg" />
+  <meta property="og:description" content="A collection of memories from places I've been." />
+  <meta property="og:url" content="https://latchman.ca/memories" />
+
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <link rel="stylesheet" type="text/css" href="css/core-styles.css" />
+  <link rel="stylesheet" type="text/css" href="css/nav.css" />
+  <link rel="stylesheet" type="text/css" href="css/memories.css" />
+</head>
+
+<body class="memories-page">
+  <div class="site-wrapper">
+    <nav class="row">
+      <div class="pill-nav">
+        <a class="pill-tab" href="/">Home</a>
+        <a class="pill-tab active" href="/memories">Memories</a>
+      </div>
+    </nav>
+
+    <main class="memories-content">
+      <h1 class="visually-hidden">Memories</h1>
+      <div id="memories-grid" class="memories-grid"></div>
+    </main>
+  </div>
+
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Memory viewer" tabindex="-1"
+    hidden>
+    <figure class="lightbox-card">
+      <div id="lightbox-frame" class="lightbox-frame"></div>
+      <div class="memory-info">
+        <p id="lightbox-caption" class="memory-caption"></p>
+        <p id="lightbox-meta" class="memory-meta"></p>
+      </div>
+    </figure>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/memories.js"></script>
+</body>
+
+</html>

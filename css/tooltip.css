@@ -1,34 +1,51 @@
-button .tool-tip {
-  font-family: Latch, Arial, Helvetica, sans-serif;
-  font-size: 12px;
-  text-align: center;
-  color: var(--font-1);
-  background-color: var(--button-hover);
+/* Small label that appears on hover or keyboard focus. Any positioned element
+   can own one — the parent just needs position: relative.
+
+   Three details worth keeping:
+   - offset is calc(100% + 10px) rather than a percentage, so it sits the same
+     distance from a 38px control and a 300px card
+   - rotate cancels the parent's --tilt, so a tilted card gets a level tooltip.
+     Falls back to 0deg where --tilt isn't set
+   - white needs the shadow to separate it from the page, which is nearly the
+     same value */
+.tool-tip {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  z-index: 1;
+  min-width: 60px;
+  padding: 6px 10px;
   border: none;
   border-radius: 8px;
-  position: absolute;
-  z-index: 1;
+  background-color: var(--work-background);
+  box-shadow: 0 4px 12px var(--shadow);
+  color: var(--font-1);
+  font-family: var(--font-stack);
+  font-size: var(--text-micro);
+  text-align: center;
   white-space: nowrap;
-  padding: 4px 8px;
-  top: 125%;
-  left: 50%;
+  pointer-events: none;
+
   translate: -50% 0;
+  rotate: calc(-1 * var(--tilt, 0deg));
+  transform: scale(0.9);
   transform-origin: top;
 
   visibility: hidden;
   opacity: 0;
-  transform: scale(0.9);
-  transition: all 0.2s;
-  transition-delay: 0.2s;
+  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
 }
 
-button:hover .tool-tip {
+/* For anything low on the page, where a tooltip below would fall off. */
+.tool-tip.is-above {
+  top: auto;
+  bottom: calc(100% + 10px);
+  transform-origin: bottom;
+}
+
+:hover > .tool-tip,
+:focus-visible > .tool-tip {
   visibility: visible;
   opacity: 1;
   transform: scale(1);
-}
-
-button.popup-open:hover .tool-tip {
-  visibility: hidden;
-  opacity: 0;
 }

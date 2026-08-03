@@ -13,24 +13,6 @@ nav {
   }
 }
 
-/* Top fade overlay — used with sticky nav */
-.scroll-fade {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 72px;
-  pointer-events: none;
-  z-index: 9;
-  background: linear-gradient(to bottom, var(--background), transparent);
-}
-
-@media (min-width: 671px) {
-  .home-page .scroll-fade {
-    display: none;
-  }
-}
-
 .pill-nav {
   position: relative;
   display: inline-flex;
@@ -41,7 +23,6 @@ nav {
   background-color: var(--surface-blur);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-top: 1px solid var(--button-shadow);
   box-shadow: 0 8px 24px var(--shadow);
 }
 
@@ -53,7 +34,7 @@ nav {
   width: 0;
   opacity: 0;
   border-radius: 48px;
-  background-color: var(--button-hover);
+  background-color: var(--surface-active);
   transition: transform 0.25s ease, width 0.25s ease, opacity 0.2s ease;
   pointer-events: none;
 }
@@ -76,7 +57,7 @@ nav {
   cursor: pointer;
   border-radius: 48px;
   color: var(--font-2);
-  font-size: 14px;
+  font-size: var(--text-label);
   transition: color 0.2s;
 }
 
@@ -85,118 +66,13 @@ nav {
   color: var(--font-1);
 }
 
-.social-link p,
-a.name-logo {
-  color: var(--font-2);
-  transition: all 0.2s;
-}
-
-.social-link:hover p,
-a.name-logo:hover {
-  color: var(--font-1);
-}
-
-a,
-a:link,
-a:visited,
-a:active {
-  cursor: pointer;
-  text-decoration: none;
-}
-
-button {
-  position: relative;
-  cursor: pointer;
-  height: 38px;
-  width: 38px;
-  padding: 8px;
-  border-radius: 48px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: none;
-  border-top: 1px solid var(--button-shadow);
-  background-color: var(--surface-blur);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 8px 24px var(--shadow);
-  transition: background-color 0.2s;
-}
-
-button:not(.color-swatch) svg {
-  width: 18px;
-  height: 18px;
-}
-
-button:not(.color-swatch) svg,
-button:not(.color-swatch) svg path {
-  transition: all 0.2s;
-}
-
-button:hover:not(.color-swatch) {
-  background-color: var(--button-hover);
-}
-
-button:hover:not(.color-swatch) svg {
-  fill: var(--font-1);
-}
-
-a:focus-visible,
-button:focus-visible,
-.link-item:focus-visible {
-  outline: 2px solid var(--focus-blue);
-}
-
-a:not(:active):focus-visible,
-button:not(:active):focus-visible {
-  outline-offset: 0.3rem;
-}
-
-@media (hover: hover) {
-  .link-item:hover {
-    outline: 2px solid var(--focus-blue);
-    outline-offset: 0.3rem;
-  }
-}
-
-.canvas-controls {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.color-picker-wrapper {
-  position: relative;
-  opacity: 1;
-  filter: blur(0);
-  transition: opacity 0.2s ease, filter 0.2s ease;
-}
-
-.color-picker-wrapper.fade-hidden {
-  opacity: 0;
-  filter: blur(4px);
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  #canvas-state,
-  .color-picker-wrapper {
-    display: none;
-  }
-}
-
 /* Mobile: nav floats at top */
 @media (max-width: 670px) {
   body {
     padding-top: 64px;
   }
 
-  nav,
-  .notepad-page nav,
-  .photos-page nav {
+  nav {
     position: fixed;
     top: 16px;
     bottom: auto;
@@ -208,10 +84,6 @@ button:not(:active):focus-visible {
     z-index: 100;
   }
 
-  .canvas-controls {
-    display: none;
-  }
-
   .pill-nav {
     padding: 4px;
   }
@@ -219,88 +91,10 @@ button:not(:active):focus-visible {
   .pill-tab {
     height: 40px;
     padding: 0 18px;
-    font-size: 14px;
   }
 
   .pill-indicator {
     top: 4px;
     height: 40px;
   }
-}
-
-.color-picker-btn {
-  width: 38px;
-  height: 38px;
-}
-
-.color-picker-btn:hover svg,
-.color-picker-btn:hover svg path {
-  fill: var(--font-1);
-}
-
-.color-popup {
-  display: none;
-  position: absolute;
-  top: calc(100% + 10px);
-  right: 50%;
-  translate: 50% 0;
-  grid-template-columns: 1fr 1fr;
-  gap: 6px;
-  padding: 8px;
-  border-radius: 24px;
-  background-color: var(--button);
-  z-index: 10;
-  animation: popup-in 0.15s ease;
-}
-
-.color-popup.open {
-  display: grid;
-}
-
-@keyframes popup-in {
-  from {
-    opacity: 0;
-    transform: translateY(-4px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-.color-swatch {
-  width: 42px;
-  height: 42px;
-  min-width: 42px;
-  padding: 0;
-  border: 2px solid transparent;
-  background: transparent;
-  cursor: pointer;
-  overflow: hidden;
-  transition: border-color 0.2s;
-}
-
-.color-swatch svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-.color-swatch:hover {
-  border-color: var(--font-2);
-  background-color: transparent;
-}
-
-.color-swatch:focus:not(:focus-visible) {
-  outline: none;
-}
-
-.color-swatch:active,
-.color-swatch:active svg {
-  background-color: transparent;
-  transform: none;
-}
-
-.color-swatch.active {
-  border-color: var(--focus-blue);
 }

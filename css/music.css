@@ -153,27 +153,3 @@
 .card-stack-container:has(.music-card.card-3:focus-visible) .music-card.card-2::after {
   background: var(--card-overlay);
 }
-
-.music-tooltip {
-  position: absolute;
-  bottom: calc(100% + 10px);
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: var(--button-hover);
-  color: var(--font-1);
-  padding: 6px 10px;
-  border-radius: 8px;
-  font-size: 11px;
-  white-space: nowrap;
-  pointer-events: none;
-  transition: all 0.3s ease;
-  z-index: 10000;
-  min-width: 60px;
-  text-align: center;
-  opacity: 0;
-}
-
-.music-card:hover .music-tooltip,
-.music-card:focus-visible .music-tooltip {
-  opacity: 1;
-}

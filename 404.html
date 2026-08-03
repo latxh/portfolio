@@ -8,7 +8,8 @@
   <script src="js/analytics.js"></script>
   <meta name="description" content="Creating experiences for people to use, enjoy and explore." />
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="theme-color" content="#f7f8f9" />
   <meta name="apple-touch-fullscreen" content="yes" />
 
   <meta property="og:title" content="Brian Latchman" />
@@ -22,7 +23,6 @@
   <link rel="stylesheet" type="text/css" href="css/nav.css" />
   <link rel="stylesheet" type="text/css" href="css/tooltip.css" />
   <link rel="stylesheet" type="text/css" href="css/main.css" />
-  <link rel="stylesheet" type="text/css" href="css/underline.css" />
   <link rel="stylesheet" type="text/css" href="css/footer.css" />
   <link rel="stylesheet" type="text/css" href="css/music.css" />
 </head>
@@ -32,80 +32,55 @@
     <nav class="row">
       <div class="pill-nav">
         <a class="pill-tab" href="/">Home</a>
-        <a class="pill-tab" href="/photos">Photos</a>
-        <a class="pill-tab" href="/notepad">Notepad</a>
+        <a class="pill-tab" href="/memories">Memories</a>
       </div>
     </nav>
 
-    <div class="scroll-fade"></div>
-
     <div class="top">
       <div class="top-content">
-        <h1>
-          Lost? It happens to the best of us.
-          <hr size="16px" />
-          Turns out this page doesn't exist.
-        </h1>
+        <h1>Lost? It happens to the best of us.</h1>
+        <p class="intro">Turns out this page doesn't exist.</p>
       </div>
     </div>
 
     <main>
       <div class="new-work-label">
         <h2>Check out my work</h2>
-        <hr size="16px" />
       </div>
 
-      <div class="new-work first-row row">
-        <a class="link-item row" href="https://www.meta.ai/" target="_blank" rel="noopener">
-          <div class="link-text col">
-            <h1>Meta AI</h1>
-            <hr size="8px" />
-            <h3>Personal intelligence</h3>
-          </div>
-          <div class="link-img">
-            <img src="assets/work/orbit.png" alt="Meta AI logo" />
-          </div>
+      <div class="work-fan">
+        <a class="work-card" href="https://www.meta.ai/" target="_blank" rel="noopener"
+          aria-label="Meta AI — personal intelligence">
+          <img src="assets/companies/meta-ai.png" alt="Meta AI" width="1500" height="1500" loading="lazy"
+            decoding="async" />
+          <span class="tool-tip">Meta AI</span>
         </a>
 
-        <a class="link-item row" href="https://www.copilot.com/daily" target="_blank" rel="noopener">
-          <div class="link-text col">
-            <h1>Copilot Daily</h1>
-            <hr size="8px" />
-            <h3>Discover something new</h3>
-          </div>
-          <div class="link-img">
-            <img src="assets/work/copilot.png" alt="Copilot Discover feed cards" />
-          </div>
-        </a>
-      </div>
-
-      <div class="new-work row">
-        <a class="link-item row" href="https://www.shopify.com/flow" target="_blank" rel="noopener">
-          <div class="link-text col">
-            <h1>Shopify Flow</h1>
-            <hr size="8px" />
-            <h3>Automate everything</h3>
-          </div>
-          <div class="link-img">
-            <img src="assets/work/flow.png" alt="Shopify Flow product demonstration" />
-          </div>
+        <a class="work-card" href="https://www.copilot.com/daily" target="_blank" rel="noopener"
+          aria-label="Copilot Daily — discover something new">
+          <img src="assets/companies/copilot-daily.png" alt="Copilot Daily" width="1500" height="1500" loading="lazy"
+            decoding="async" />
+          <span class="tool-tip">Copilot Daily</span>
         </a>
 
-        <a class="link-item row" href="https://www.start.gg/" target="_blank" rel="noopener">
-          <div class="link-text col">
-            <h1>Start.gg</h1>
-            <hr size="8px" />
-            <h3>Powering esport communities</h3>
-          </div>
-          <div class="link-img">
-            <img src="assets/work/startgg.png" alt="Start.gg logo on headphones" />
-          </div>
+        <a class="work-card" href="https://www.shopify.com/flow" target="_blank" rel="noopener"
+          aria-label="Shopify Flow — automate everything">
+          <img src="assets/companies/shopify-flow.png" alt="Shopify Flow" width="1500" height="1500" loading="lazy"
+            decoding="async" />
+          <span class="tool-tip">Shopify Flow</span>
+        </a>
+
+        <a class="work-card" href="https://www.start.gg/" target="_blank" rel="noopener"
+          aria-label="Start.gg — powering esport communities">
+          <img src="assets/companies/start-gg.png" alt="Start.gg" width="1500" height="1500" loading="lazy"
+            decoding="async" />
+          <span class="tool-tip">Start.gg</span>
         </a>
       </div>
     </main>
   </div>
 
-  <footer id="footer" class="footer-filled">
+  <footer id="footer">
     <div class="footer-wrapper">
       <div class="footer-space bot-space">
         <div class="social-links">
@@ -120,7 +95,7 @@
             <p>Github</p>
           </a>
           <a class="social-link" tabindex="0" onclick="copyEmail(this)"
-            onkeydown="if(event.key==='Enter')copyEmail(this)" style="cursor:pointer">
+            onkeydown="if(event.key==='Enter')copyEmail(this)">
             <p>Email</p>
           </a>
         </div>
@@ -134,15 +109,15 @@
       <div class="card-stack-container">
         <a id="music-card-1" class="music-card card-1" target="_blank" rel="noopener">
           <img id="album-cover-1" alt="Album art" />
-          <div id="music-tooltip-1" class="music-tooltip">Song 1</div>
+          <div id="music-tooltip-1" class="tool-tip is-above">Song 1</div>
         </a>
         <a id="music-card-2" class="music-card card-2" target="_blank" rel="noopener">
           <img id="album-cover-2" alt="Album art" />
-          <div id="music-tooltip-2" class="music-tooltip">Song 2</div>
+          <div id="music-tooltip-2" class="tool-tip is-above">Song 2</div>
         </a>
         <a id="music-card-3" class="music-card card-3" target="_blank" rel="noopener">
           <img id="album-cover-3" alt="Album art" />
-          <div id="music-tooltip-3" class="music-tooltip">Song 3</div>
+          <div id="music-tooltip-3" class="tool-tip is-above">Song 3</div>
         </a>
       </div>
     </div>

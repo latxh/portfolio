@@ -24,22 +24,32 @@
 }
 
 :root {
-  color-scheme: dark;
-  font-family: Latch, Arial, Helvetica, sans-serif;
-  --canvas-opacity: 0.6;
-  --focus-blue: #78b0ff;
-  --background: #101112;
-  --font-1: #f3f4f5;
-  --font-2: #9fa4ab;
-  --button: #323338;
-  --button-hover: #28292b;
-  --button-shadow: rgb(255, 255, 255, 0.15);
-  --work-background: #17181a;
-  --work-hover: #0a0b0d;
-  --card-overlay: rgba(0, 0, 0, 0.4);
+  color-scheme: light;
+  --font-stack: Latch, Arial, Helvetica, sans-serif;
+  font-family: var(--font-stack);
+
+  /* Type ramp — one step per role the site actually has, each a ~1.2 interval
+     from the next so the steps read as hierarchy rather than as drift. */
+  --text-display: 21px; /* hero */
+  --text-title: 17px;   /* section headings (h2–h6) */
+  --text-body: 14px;    /* body copy */
+  --text-label: 12px;   /* nav, captions */
+  --text-micro: 11px;   /* tooltips */
+
+  --leading-tight: 1.25; /* headings */
+  --leading-body: 1.45;  /* short-form copy */
+
+  --focus-blue: #1668dc;
+  --background: #f7f8f9;
+  --font-1: #101112;
+  --font-2: #686e78;      /* AA on both the page and a white card, with more
+                             daylight between it and --font-1 than before */
+  --surface-active: #e8eaee; /* selected nav pill */
+  --work-background: #ffffff;
+  --card-overlay: rgba(0, 0, 0, 0.22); /* dims the unfocused music cards */
   --card-overlay-clear: rgba(0, 0, 0, 0);
-  --shadow: rgba(0, 0, 0, 0.3);
-  --surface-blur: rgba(16, 17, 18, 0.6);
+  --shadow: rgba(16, 17, 18, 0.1);
+  --surface-blur: rgba(255, 255, 255, 0.72);
 }
 
 ::selection {
@@ -47,28 +57,10 @@
   color: var(--background);
 }
 
-.hide {
-  display: none;
-}
-
-.show {
-  display: block;
-}
-
-canvas {
-  display: none;
-  opacity: var(--canvas-opacity);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-}
-
 body {
   background-color: var(--background);
   overflow-y: scroll;
+  scrollbar-gutter: stable;
   margin: 0;
 }
 
@@ -83,15 +75,11 @@ body {
   align-items: center;
 }
 
-.col {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 h1,
 h2,
 h3,
+h4,
+h5,
 h6,
 p,
 a {
@@ -100,22 +88,69 @@ a {
   font-weight: 400;
 }
 
-h1 {
-  font-size: 28px;
-}
-
-h2 {
-  font-size: 20px;
-}
-
+h1,
+h2,
 h3,
+h4,
+h5,
 h6 {
-  font-size: 18px;
+  line-height: var(--leading-tight);
+}
+
+h1 {
+  font-size: var(--text-display);
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: var(--text-title);
 }
 
 p {
-  font-size: 16px;
-  line-height: 20px;
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+}
+
+a,
+a:link,
+a:visited,
+a:active {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--focus-blue);
+}
+
+a:not(:active):focus-visible {
+  outline-offset: 0.3rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:focus-visible {
+    transition: outline-offset 0.075s ease-out;
+  }
+
+  a:not(:active):focus-visible {
+    transition-duration: 0.2s;
+  }
+}
+
+/* Reachable by screen readers and crawlers, invisible on screen. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 .clamp-text {
@@ -143,15 +178,6 @@ main,
   .footer-wrapper {
     max-width: 828px;
   }
-
-  .new-work {
-    flex-direction: column;
-  }
-
-  a.link-item {
-    width: 100%;
-    flex: auto;
-  }
 }
 
 @media only screen and (max-width: 940px) {
@@ -161,34 +187,13 @@ main,
   .footer-wrapper {
     max-width: 612px;
   }
-
-  .tool-tip,
-  div#music {
-    display: none;
-  }
-
 }
 
 @media only screen and (max-width: 670px) {
-  h1 {
-    font-size: 24px;
-  }
-
-  h2 {
-    font-size: 18px;
-  }
-
-  h3,
-  h6 {
-    font-size: 16px;
-  }
-
-  .home-page h3 {
-    font-size: 14px;
-  }
-
-  p {
-    font-size: 14px;
+  :root {
+    --text-display: 18px;
+    --text-title: 15px;
+    --text-body: 13px;
   }
 
   .footer-wrapper,
@@ -213,50 +218,8 @@ main,
     margin-bottom: 40px;
   }
 
-  .card-stack-container,
-  .canvas-controls,
-  .show {
+  .card-stack-container {
     display: none;
-  }
-
-  div.link-img img,
-  div.link-img,
-  a.link-item {
-    height: 170px;
-  }
-
-  a.link-item {
-    position: relative;
-    background-color: transparent;
-    border-radius: 0;
-  }
-
-  a.link-item::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: -16px;
-    right: -16px;
-    height: 1px;
-    background-color: var(--button);
-  }
-
-  div.link-img {
-    border-radius: 0;
-    margin-right: -16px;
-  }
-
-  .flow-img {
-    padding: 12px;
-  }
-
-  div.link-text {
-    padding: 0 0 16px 0;
-  }
-
-  .home-page h1,
-  .notepad-page h1 {
-    font-size: 20px;
   }
 
   .new-work-label {

@@ -1,0 +1,197 @@
+.memories-content {
+  max-width: 880px;
+  margin-inline: auto;
+  padding-top: 32px;
+}
+
+/* Columns are built in JS rather than by column-count, which fills the first
+   column top to bottom before starting the second — that reads as two separate
+   timelines instead of one. Items alternate across columns so the dates run in
+   order down the page. */
+.memories-grid {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.memories-column {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Same treatment as the work cards — white frame and soft shadow. Radius is in
+   px rather than the work cards' %, because a percentage radius on these tall,
+   variable-ratio photos would come out elliptical. */
+.memory-item {
+  margin: 0;
+  padding: 10px;
+  background-color: var(--work-background);
+  border-radius: 24px;
+  transition: box-shadow 0.3s ease;
+}
+
+/* The card's media is a real button so Enter/Space and focus work, but it
+   should look like nothing. */
+.memory-open {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  border-radius: 24px;
+  cursor: zoom-in;
+}
+
+/* Media carries the card's own radius rather than a concentric inner one, so
+   the two curves read as a single corner. */
+.memory-frame {
+  background-color: var(--background);
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.memory-frame img,
+.memory-frame video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.memory-frame img.is-loaded,
+.memory-frame video.is-loaded {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .memory-frame img,
+  .memory-frame video {
+    transition: none;
+  }
+}
+
+/* Flat until hovered, then the card takes the shadow. */
+@media (hover: hover) {
+  .memory-item:hover {
+    box-shadow: 0 8px 24px var(--shadow);
+  }
+}
+
+/* Sits inside the card now, so the card's own padding closes it off below.
+   Inset a little further than the media so the text isn't flush to its edge. */
+.memory-info {
+  margin-top: 10px;
+  padding: 0 8px 4px;
+}
+
+.memory-caption {
+  font-size: var(--text-label);
+  color: var(--font-1);
+  margin: 0 0 2px;
+}
+
+.memory-meta {
+  font-size: var(--text-label);
+  color: var(--font-2);
+  margin: 0;
+}
+
+@media only screen and (max-width: 1236px) {
+  .memories-content {
+    max-width: 720px;
+  }
+}
+
+@media only screen and (max-width: 940px) {
+  .memories-content {
+    max-width: 612px;
+  }
+}
+
+@media only screen and (max-width: 670px) {
+  .memories-content {
+    max-width: 100%;
+    padding-top: 20px;
+  }
+}
+
+/* Lightbox — the memory enlarged in the same card language, over a blurred
+   scrim of the page colour rather than the usual black. */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  background: rgba(247, 248, 249, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  cursor: zoom-out;
+  animation: lightbox-in 0.2s ease;
+}
+
+.lightbox[hidden] {
+  display: none;
+}
+
+/* No cursor of its own — it inherits zoom-out from the scrim, since clicking
+   the card closes too. Only the caption opts out, because it doesn't. */
+.lightbox-card {
+  margin: 0;
+  padding: 10px;
+  background-color: var(--work-background);
+  border-radius: 24px;
+  box-shadow: 0 24px 60px var(--shadow);
+  animation: lightbox-card-in 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.lightbox .memory-info {
+  cursor: auto;
+}
+
+.lightbox-frame {
+  border-radius: 24px;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.lightbox-frame img,
+.lightbox-frame video {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  /* leaves room for the scrim padding, the card padding and the caption */
+  max-height: calc(100vh - 170px);
+  border-radius: 24px;
+}
+
+/* The page must not scroll behind the scrim. body already reserves a
+   scrollbar gutter so hiding overflow doesn't shift the layout. */
+body.is-locked {
+  overflow: hidden;
+}
+
+@keyframes lightbox-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes lightbox-card-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lightbox,
+  .lightbox-card {
+    animation: none;
+  }
+}
