@@ -40,7 +40,7 @@
   var SETTLE_MS = 360;
 
   var OPEN_LABEL = "Time machine";
-  var CLOSE_LABEL = "Collapse time machine";
+  var CLOSE_LABEL = "Collapse";
 
 
   if (!document.body) return;
@@ -201,6 +201,32 @@
     });
   }
 
+  // The pill wants the site's own typeface, but archived pages predate it and
+  // never registered the @font-face — and a shadow root cannot register one that
+  // the outside can't already see. So load the faces straight into document.fonts
+  // from the live root (where this script is served from, alongside /fonts), which
+  // does reach into the shadow tree. On the current site they are already there;
+  // re-adding is a no-op the browser deduplicates. Guarded for eras whose browser
+  // has no FontFace API — they simply fall back to the stack below.
+  if (window.FontFace && document.fonts && document.fonts.add) {
+    [
+      { file: "LatchRegular.otf", weight: "400" },
+      { file: "LatchMedium.otf", weight: "600" },
+      { file: "LatchBold.otf", weight: "700" },
+    ].forEach(function (face) {
+      try {
+        var ff = new FontFace("Latch", "url(/fonts/" + face.file + ") format('opentype')", {
+          weight: face.weight,
+          style: "normal",
+        });
+        document.fonts.add(ff);
+        ff.load();
+      } catch (e) {
+        /* Malformed URL or blocked font — leave the fallback stack in place. */
+      }
+    });
+  }
+
   var host = document.createElement("div");
   host.id = "time-machine";
   var root = host.attachShadow({ mode: "open" });
@@ -225,7 +251,7 @@
     "  transform: translateX(-50%);",
     "  z-index: 2147483647;",
     "  max-width: calc(100vw - 24px);",
-    "  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;",
+    "  font-family: Latch, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;",
     "}",
     ":host([data-theme='dark']) {",
     "  --tm-surface: rgba(28,30,33,.72);",
