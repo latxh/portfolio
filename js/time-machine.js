@@ -246,13 +246,23 @@
     "  --tm-focus: #1668dc;",
     "  color-scheme: light;",
     "  position: fixed;",
+    /* Centred with left:50% + translateX rather than insets + auto margins: the
+       host is a plain div in the archived page's light DOM, and those pages carry
+       their own resets — 2019's is `* { margin: 0 }`, which fights an auto-margin
+       centre inside the host's cascade and pins the pill left. translateX owns
+       nothing a reset touches. width:max-content (not auto/fit-content) is the
+       other half: a fixed box centred off left:50% shrink-to-fits against only
+       the 50vw to its right, boxing the open run into half a narrow screen —
+       max-content sizes to the bar regardless, and max-width still caps it so the
+       year run scrolls with a 12px gutter each side. */
     "  left: 50%;",
+    "  transform: translateX(-50%);",
+    "  width: max-content;",
     /* Sits where the 2026 nav pill sits, so time-travelling doesn't make the
        control jump: that nav is 24px down on desktop (its 24px padding-top under
        a sticky top:0) and 16px down on the phone (its fixed top:16px). Same
        671/670 breakpoint, and env() guards a notch swallowing the phone value. */
     "  top: max(24px, env(safe-area-inset-top, 0px));",
-    "  transform: translateX(-50%);",
     "  z-index: 2147483647;",
     "  max-width: calc(100vw - 24px);",
     "  font-family: Latch, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;",

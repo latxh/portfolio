@@ -254,14 +254,21 @@ nav {
     padding-top: 64px;
   }
 
+  /* Centred with insets + auto margins, not left:50% + translateX. A fixed box
+     with left set and right auto shrink-to-fits against the space from that edge
+     to the viewport's — only 50vw here — so on a narrow phone the pill can't
+     grow past half the screen and its icons overlap. Pinning both edges hands
+     it the full width to size against; fit-content keeps it hugging its content,
+     and the max-width leaves a 16px gutter before the year run starts to scroll. */
   nav {
     position: fixed;
     top: 16px;
     bottom: auto;
-    left: 50%;
-    transform: translateX(-50%);
-    width: auto;
-    margin: 0;
+    left: 0;
+    right: 0;
+    width: fit-content;
+    max-width: calc(100vw - 32px);
+    margin: 0 auto;
     padding: 0;
     z-index: 100;
   }
