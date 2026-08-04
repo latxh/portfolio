@@ -119,6 +119,17 @@
   box-shadow: inset 0 0 0 1.5px var(--surface-active);
 }
 
+/* Tighten the year entries on a narrow phone, matching the archived pill's own
+   ≤520px step (.year in js/time-machine.js). Without it the run carries 4px
+   more padding on each of six entries, which is enough to push it past the
+   pill's max-width so it scrolls while the archived pill — same six years, less
+   padding — still fits and sits still. Keeps both pills the same size. */
+@media (max-width: 520px) {
+  .year-item {
+    padding: 0 10px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .fold-slot,
   .years-slot,

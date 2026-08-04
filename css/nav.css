@@ -255,7 +255,9 @@ nav {
      to the viewport's — only 50vw here — so on a narrow phone the pill can't
      grow past half the screen and its icons overlap. Pinning both edges hands
      it the full width to size against; fit-content keeps it hugging its content,
-     and the max-width leaves a 16px gutter before the year run starts to scroll. */
+     and the max-width leaves a 12px gutter before the year run starts to scroll —
+     the same gutter the archived pill uses (calc(100vw - 24px) in
+     js/time-machine.js), so both hit their scroll point at the same width. */
   nav {
     position: fixed;
     top: 16px;
@@ -263,7 +265,7 @@ nav {
     left: 0;
     right: 0;
     width: fit-content;
-    max-width: calc(100vw - 32px);
+    max-width: calc(100vw - 24px);
     margin: 0 auto;
     padding: 0;
     z-index: 100;
