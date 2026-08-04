@@ -384,9 +384,12 @@
     ".year { padding: 0 12px; }",
     ".year[aria-current='true'] { color: var(--tm-font-1); }",
 
-    /* Only one thing in the bar reads as lit at a time, as in the current nav. */
-    ".bar:has(button:hover) .year[aria-current='true']:not(:hover) {",
-    "  color: var(--tm-font-2);",
+    /* The fill is the only marker of where you are, and it follows the pointer,
+       so the year you are actually on outlines itself to keep its place among
+       six near-identical entries. Drawn in the fill's own colour: invisible
+       while the fill rests behind it, visible the moment it slides away. */
+    ".tm[data-open='true'] .year[aria-current='true']:not(:hover) {",
+    "  box-shadow: inset 0 0 0 1.5px var(--tm-active);",
     "}",
 
     "@media (max-width: 520px) {",

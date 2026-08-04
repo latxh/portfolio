@@ -103,6 +103,16 @@
   color: var(--font-1);
 }
 
+/* The fill is the only marker of where you are, and it follows the pointer — so
+   the moment you hover anything else the year you are actually on loses its
+   anchor among six near-identical entries. It outlines itself instead.
+
+   Drawn in the fill's own colour, so while the fill is resting behind it the
+   outline is invisible and only appears once the fill slides away. */
+.pill-nav.is-timeline .year-item[aria-current="true"]:not(:hover) {
+  box-shadow: inset 0 0 0 1.5px var(--surface-active);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .fold-slot,
   .years-slot,
