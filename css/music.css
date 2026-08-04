@@ -13,7 +13,7 @@
   height: 80px;
   background-color: var(--work-background);
   border-radius: 8px;
-  transition: transform 0.3s ease, background-color 0.2s, outline 0.2s;
+  transition: transform 0.3s ease, background-color 0.2s;
   cursor: pointer;
   box-shadow: 0 4px 15px var(--shadow);
   display: flex;
@@ -21,7 +21,6 @@
   justify-content: center;
   overflow: visible;
   scroll-margin-bottom: 120px;
-  outline: 2px solid transparent;
 }
 
 .music-card img {
@@ -107,9 +106,9 @@
   background: var(--card-overlay);
 }
 
+/* Focus only fans the card out and clears its overlay — the ring itself is the
+   site-wide :focus-visible pop in core-styles.css. */
 .music-card.card-1:focus-visible {
-  outline: 2px solid var(--focus-blue);
-  outline-offset: 2px;
   transform: rotate(-8deg) translateY(-16px);
 }
 
@@ -119,14 +118,10 @@
 }
 
 .music-card.card-2:focus-visible {
-  outline: 2px solid var(--focus-blue);
-  outline-offset: 2px;
   transform: translateY(-8px);
 }
 
 .music-card.card-3:focus-visible {
-  outline: 2px solid var(--focus-blue);
-  outline-offset: 2px;
   transform: rotate(8deg) translateY(-16px);
 }
 

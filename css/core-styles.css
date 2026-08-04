@@ -196,21 +196,32 @@ a:active {
   text-decoration: none;
 }
 
-a:focus-visible {
+/* The one focus-visible treatment for the whole site: the same blue ring on
+   everything the keyboard can land on — links, buttons, cards — hugging the
+   element (no offset) and announcing itself with a pop. On focus the outline
+   width springs from nothing (0) out past its resting weight (4px) and settles
+   at 2px. Components that want a different focus response layer their own
+   transform on top (see the music cards); none of them redraw this ring. */
+:focus-visible {
   outline: 2px solid var(--focus-blue);
-}
-
-a:not(:active):focus-visible {
-  outline-offset: 0.3rem;
+  outline-offset: 0;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  a:focus-visible {
-    transition: outline-offset 0.075s ease-out;
+  :focus-visible {
+    animation: focus-pop 0.4s;
   }
+}
 
-  a:not(:active):focus-visible {
-    transition-duration: 0.2s;
+@keyframes focus-pop {
+  0% {
+    outline-width: 0;
+  }
+  60% {
+    outline-width: 6px;
+  }
+  100% {
+    outline-width: 2px;
   }
 }
 

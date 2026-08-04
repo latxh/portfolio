@@ -70,10 +70,16 @@
   overflow: visible;
 }
 
-/* Six years overflow a narrow phone, so the run scrolls once it is open. */
+/* Six years overflow a narrow phone, so the run scrolls once it is open.
+   overflow-x: auto forces overflow-y to clip too, which would shear the focus
+   ring off the top and bottom of a year as it pops out — so the run carries a
+   band of vertical padding for the ring to live in, pulled back out with an
+   equal negative margin so the pill's height is unchanged. */
 .pill-nav.is-timeline .years-run {
   overflow-x: auto;
   scrollbar-width: none;
+  padding-block: 6px;
+  margin-block: -6px;
 }
 
 .years-run::-webkit-scrollbar {

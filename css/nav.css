@@ -69,13 +69,9 @@ nav {
   color: var(--font-1);
 }
 
-/* Tucked in rather than offset like the rest, because the ring would otherwise
-   sit outside the pill it lives in. One rule for every member — each used to
-   carry its own identical copy. */
-.pill-nav :focus-visible {
-  outline: 2px solid var(--focus-blue);
-  outline-offset: -2px;
-}
+/* The focus ring is the site-wide one — see :focus-visible in core-styles.css.
+   The pill controls take it as-is; the year run's own padding (css/time-machine
+   .css) is what keeps the popped ring from being clipped as it scrolls. */
 
 /* Sun and moon are stacked rather than swapped, so one can leave while the
    other arrives. Both are absolute and centred; only opacity and transform

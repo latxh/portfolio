@@ -466,6 +466,17 @@ const initPillNav = () => {
     const tabs = pill.querySelectorAll(".pill-tab");
     if (!tabs.length) return;
 
+    // Keep the focus pop keyboard-only. The tabs are links and the toggles are
+    // buttons, and browsers focus the two differently on a mouse click — a
+    // clicked link takes focus (and the ring) while a clicked button often does
+    // not, so the pill lit up unevenly. Cancelling mousedown's default on every
+    // control drops the focus it would grab from a pointer without touching the
+    // click itself, so navigation and toggling still fire; :focus-visible is
+    // then reached only by keyboard, and all four controls pop the same way.
+    pill.addEventListener("mousedown", (event) => {
+      if (event.target.closest(PILL_CONTROLS)) event.preventDefault();
+    });
+
     const indicator = document.createElement("span");
     indicator.className = "pill-indicator";
     pill.prepend(indicator);

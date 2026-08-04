@@ -378,7 +378,17 @@
     "  transition: color .2s;",
     "}",
     "button:hover { color: var(--tm-font-1); }",
-    "button:focus-visible { outline: 2px solid var(--tm-focus); outline-offset: -2px; }",
+    /* Same pop as the current nav's focus ring: the width springs from nothing
+       (0) out to 4px and settles at 2px, hugging the control with no offset. */
+    "button:focus-visible { outline: 2px solid var(--tm-focus); outline-offset: 0; }",
+    "@media (prefers-reduced-motion: no-preference) {",
+    "  button:focus-visible { animation: tm-focus-pop .4s;}",
+    "}",
+    "@keyframes tm-focus-pop {",
+    "  0% { outline-width: 0; }",
+    "  60% { outline-width: 6px; }",
+    "  100% { outline-width: 2px; }",
+    "}",
 
     /* Only the year folds away as the run opens — it is the one thing the run
        already shows, highlighted. The chevron stays put and becomes the way
@@ -434,7 +444,10 @@
     ".panel > .years { overflow: hidden; min-width: 0; display: flex; gap: 2px; }",
     ".years { scrollbar-width: none; }",
     ".years::-webkit-scrollbar { display: none; }",
-    ".tm[data-open='true'] .years { overflow-x: auto; }",
+    /* overflow-x: auto clips overflow-y too, which would shear the popped focus
+       ring off a year top and bottom — a band of vertical padding gives it room,
+       and an equal negative margin keeps the bar's height unchanged. */
+    ".tm[data-open='true'] .years { overflow-x: auto; padding-block: 6px; margin-block: -6px; }",
     ".year { padding: 0 12px; }",
     ".year[aria-current='true'] { color: var(--tm-font-1); }",
 
