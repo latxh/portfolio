@@ -61,8 +61,7 @@ nav {
 }
 
 .theme-toggle:hover,
-.year-toggle:hover,
-.year-toggle[aria-expanded="true"] {
+.year-toggle:hover {
   color: var(--font-1);
 }
 
@@ -207,12 +206,13 @@ nav {
   color: var(--font-1);
 }
 
-/* Only one thing in the pill looks lit at a time. Three things can be lit on
-   their own account — the active tab, a toggle holding the year run open, and
-   the year you are viewing — and any of them yields the moment the pointer is
-   on something else, because the indicator has slid off it.
+/* Only one thing in the pill looks lit at a time. Two things can be lit on
+   their own account — the active tab and the year you are viewing — and either
+   yields the moment the pointer is on something else, because the indicator has
+   slid off it. The toggles are never lit at rest: a control is primary only
+   while hovered, so there is nothing to dim when the pointer leaves.
 
-   One rule rather than the three near-copies this used to be, which had already
+   One rule rather than the near-copies this used to be, which had already
    drifted apart on which controls they listed.
 
    The year you are viewing is the exception — see the outline in
@@ -222,7 +222,7 @@ nav {
    Scoped to a hovered control rather than :hover on the pill itself, so
    crossing the few pixels of padding between icons doesn't flicker it. */
 .pill-nav:has(:is(.pill-tab, .theme-toggle, .year-toggle, .year-item):hover)
-  :is(.pill-tab.active, .year-toggle[aria-expanded="true"]):not(:hover),
+  .pill-tab.active:not(:hover),
 /* While the run is open the tabs are folding away behind it, so the active one
    should not still read as where you are. */
 .pill-nav:has([aria-expanded="true"]) .pill-tab.active:not(:hover),

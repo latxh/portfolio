@@ -386,9 +386,12 @@
        24-wide box, so it carries about 4px of its own air on each side and an
        even 12px would read as a lopsided pill. */
     ".trigger {",
-    "  gap: 7px;",
+    "  gap: 4px;",
     "  padding: 0 8px 0 12px;",
-    "  color: var(--tm-font-1);",
+    /* No colour of its own: a control is primary only while hovered, so the
+       year and chevron rest at the button's --tm-font-2 and light up on hover
+       like everything else in the bar. The current year in the open run keeps
+       its own resting primary — that is the active selection, not a control. */
     "  transition: color .2s, gap .34s cubic-bezier(.22,1,.36,1),",
     "    padding .34s cubic-bezier(.22,1,.36,1);",
     "}",
@@ -400,7 +403,9 @@
        left as-drawn while collapsed and turned to point back the other way
        once there is something to fold up. */
     ".trigger .chevron {",
-    "  width: 13px; height: 13px; flex: none; opacity: .7;",
+    /* 15px to match the current nav's chevron (.year-icon-chevron), which
+       overrides the 21px icon base — same glyph, same size across both pills. */
+    "  width: 15px; height: 15px; flex: none;",
     "  transform: rotate(0deg);",
     "  transition: transform .3s cubic-bezier(.22,1,.36,1);",
     "}",
