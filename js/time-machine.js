@@ -535,10 +535,12 @@
   }
 
   /* Where the fill sits when nothing is under the pointer: on the year you are
-     viewing once the run is open, and behind the trigger while it is closed —
-     the trigger is standing in for that year at that point. */
+     viewing once the run is open, and nowhere while it is closed. A collapsed
+     pill that keeps the fill behind its trigger reads as permanently selected
+     with no room to react to a hover — so the fill is withheld at rest and
+     hovered() alone brings it in. The surface stays put either way. */
   function resting() {
-    return open ? currentButton : trigger;
+    return open ? currentButton : null;
   }
 
   function place(target) {
