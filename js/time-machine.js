@@ -247,7 +247,11 @@
     "  color-scheme: light;",
     "  position: fixed;",
     "  left: 50%;",
-    "  top: max(16px, env(safe-area-inset-top, 0px));",
+    /* Sits where the 2026 nav pill sits, so time-travelling doesn't make the
+       control jump: that nav is 24px down on desktop (its 24px padding-top under
+       a sticky top:0) and 16px down on the phone (its fixed top:16px). Same
+       671/670 breakpoint, and env() guards a notch swallowing the phone value. */
+    "  top: max(24px, env(safe-area-inset-top, 0px));",
     "  transform: translateX(-50%);",
     "  z-index: 2147483647;",
     "  max-width: calc(100vw - 24px);",
@@ -264,6 +268,9 @@
     "  color-scheme: dark;",
     "}",
     "@media print { :host { display: none; } }",
+    "@media (max-width: 670px) {",
+    "  :host { top: max(16px, env(safe-area-inset-top, 0px)); }",
+    "}",
 
     ".tm {",
     "  display: flex;",
