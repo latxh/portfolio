@@ -1,28 +1,28 @@
 (function () {
-  const MEMORIES = [
-    { src: "assets/memories/start-gg.mp4", caption: "Start.gg Rebrand", date: "May 16, 2022", width: 1440, height: 1080 },
-    { src: "assets/memories/world-cup.jpeg", caption: "World Cup", location: "Vancouver", date: "Jul 3, 2026", width: 2268, height: 4032 },
-    { src: "assets/memories/montenegro.jpeg", caption: "Kayaking in Montenegro", location: "Montenegro", date: "Jun 25, 2026", width: 3213, height: 5712 },
-    { src: "assets/memories/greece.jpeg", caption: "Stavros Beach", location: "Greece", date: "Jun 22, 2026", width: 2268, height: 4032 },
-    { src: "assets/memories/custom-made-jerseys.jpeg", caption: "Custom Made Jerseys", location: "Seattle", date: "Feb 26, 2026", width: 2268, height: 4032 },
-    { src: "assets/memories/seahawks-super-bowl-run.jpeg", caption: "Seahawks Super Bowl Run", location: "Seattle", date: "Jan 17, 2026", width: 3114, height: 5536 },
-    { src: "assets/memories/matt-and-claudias-wedding.jpeg", caption: "Matt & Claudia's Wedding", location: "Dominican Republic", date: "Dec 11, 2025", width: 4000, height: 6000 },
-    { src: "assets/memories/jays-win-the-al-east.jpeg", caption: "Jays Win the AL East", location: "Toronto", date: "Sep 26, 2025", width: 2268, height: 4032 },
-    { src: "assets/memories/weeknd-seattle.jpeg", caption: "After Hours Til Dawn", location: "Seattle", date: "Jul 12, 2025", width: 3213, height: 5712 },
-    { src: "assets/memories/alderwood-trail.jpeg", caption: "Alderwood Trail", location: "Home", date: "May 25, 2025", width: 3213, height: 5712 },
-    { src: "assets/memories/space-needle.jpeg", caption: "Space Needle", location: "Seattle", date: "Jul 14, 2024", width: 4032, height: 3024 },
-    { src: "assets/memories/jays-world-series-run.jpeg", caption: "Jays World Series Run", location: "Seattle", date: "Oct 15, 2025", width: 1179, height: 2096 },
-    { src: "assets/memories/70-flights-and-counting.png", caption: "70 Flights & Counting", location: "Everywhere", date: "Jan 1 2026", width: 1179, height: 1572 },
-    { src: "assets/memories/xbox-forever.png", caption: "Xbox Forever", location: "Mississauga", date: "Dec 15 2004", width: 2048, height: 1536 },
-    { src: "assets/memories/killy.jpeg", caption: "Killy", location: "Toronto", date: "Mar 8 2018", width: 899, height: 899 },
-    { src: "assets/memories/price-on-my-head.jpeg", caption: "Price On My Head", location: "Toronto", date: "Feb 26 2019", width: 1080, height: 1314 },
-    { src: "assets/memories/ryan-uo.jpeg", caption: "Ryan UO", location: "New York", date: "Jul 2 2019", width: 1080, height: 1920 },
+  const PHOTOS = [
+    { src: "assets/photos/start-gg.mp4", caption: "Start.gg Rebrand", date: "May 16, 2022", width: 1440, height: 1080 },
+    { src: "assets/photos/world-cup.jpeg", caption: "World Cup", location: "Vancouver", date: "Jul 3, 2026", width: 2268, height: 4032 },
+    { src: "assets/photos/montenegro.jpeg", caption: "Kayaking in Montenegro", location: "Montenegro", date: "Jun 25, 2026", width: 3213, height: 5712 },
+    { src: "assets/photos/greece.jpeg", caption: "Stavros Beach", location: "Greece", date: "Jun 22, 2026", width: 2268, height: 4032 },
+    { src: "assets/photos/custom-made-jerseys.jpeg", caption: "Custom Made Jerseys", location: "Seattle", date: "Feb 26, 2026", width: 2268, height: 4032 },
+    { src: "assets/photos/seahawks-super-bowl-run.jpeg", caption: "Seahawks Super Bowl Run", location: "Seattle", date: "Jan 17, 2026", width: 3114, height: 5536 },
+    { src: "assets/photos/matt-and-claudias-wedding.jpeg", caption: "Matt & Claudia's Wedding", location: "Dominican Republic", date: "Dec 11, 2025", width: 4000, height: 6000 },
+    { src: "assets/photos/jays-win-the-al-east.jpeg", caption: "Jays Win the AL East", location: "Toronto", date: "Sep 26, 2025", width: 2268, height: 4032 },
+    { src: "assets/photos/weeknd-seattle.jpeg", caption: "After Hours Til Dawn", location: "Seattle", date: "Jul 12, 2025", width: 3213, height: 5712 },
+    { src: "assets/photos/alderwood-trail.jpeg", caption: "Alderwood Trail", location: "Home", date: "May 25, 2025", width: 3213, height: 5712 },
+    { src: "assets/photos/space-needle.jpeg", caption: "Space Needle", location: "Seattle", date: "Jul 14, 2024", width: 4032, height: 3024 },
+    { src: "assets/photos/jays-world-series-run.jpeg", caption: "Jays World Series Run", location: "Seattle", date: "Oct 15, 2025", width: 1179, height: 2096 },
+    { src: "assets/photos/70-flights-and-counting.png", caption: "70 Flights & Counting", location: "Everywhere", date: "Jan 1 2026", width: 1179, height: 1572 },
+    { src: "assets/photos/xbox-forever.png", caption: "Xbox Forever", location: "Mississauga", date: "Dec 15 2004", width: 2048, height: 1536 },
+    { src: "assets/photos/killy.jpeg", caption: "Killy", location: "Toronto", date: "Mar 8 2018", width: 899, height: 899 },
+    { src: "assets/photos/price-on-my-head.jpeg", caption: "Price On My Head", location: "Toronto", date: "Feb 26 2019", width: 1080, height: 1314 },
+    { src: "assets/photos/ryan-uo.jpeg", caption: "Ryan UO", location: "New York", date: "Jul 2 2019", width: 1080, height: 1920 },
     { src: "assets/portrait.jpg", caption: "Me", location: "Toronto", date: "Oct 16 2017", width: 1500, height: 994 },
   ];
 
   const VIDEO = /\.(mp4|mov|webm)$/i;
 
-  const grid = document.getElementById("memories-grid");
+  const grid = document.getElementById("photos-grid");
   const lightbox = document.getElementById("lightbox");
   if (!grid || !lightbox) return;
 
@@ -74,7 +74,7 @@
       if (media.readyState >= 1) markLoaded();
 
       // autoplay can still be refused (Low Power Mode, per-site settings) — fall
-      // back to controls so the memory is playable rather than a frozen frame.
+      // back to controls so the photo is playable rather than a frozen frame.
       if (allowMotion) {
         const started = media.play();
         if (started) started.catch(() => { media.controls = true; });
@@ -118,7 +118,7 @@
 
   // Anything but the caption closes — leaves the text selectable
   lightbox.addEventListener("click", (e) => {
-    if (e.target.closest(".memory-info")) return;
+    if (e.target.closest(".photo-info")) return;
     closeLightbox();
   });
 
@@ -137,31 +137,31 @@
 
   const buildCard = (item) => {
     const fig = document.createElement("figure");
-    fig.className = "memory-item";
+    fig.className = "photo-item";
 
     // a real button, so Enter/Space and focus come for free
     const trigger = document.createElement("button");
     trigger.type = "button";
-    trigger.className = "memory-open";
+    trigger.className = "photo-open";
     trigger.setAttribute("aria-label", `Open ${item.caption}`);
     trigger.addEventListener("click", () => openLightbox(item, trigger));
 
     const frame = document.createElement("div");
-    frame.className = "memory-frame";
+    frame.className = "photo-frame";
     if (item.width && item.height) frame.style.aspectRatio = `${item.width} / ${item.height}`;
     frame.appendChild(buildMedia(item));
     trigger.appendChild(frame);
     fig.appendChild(trigger);
 
     const info = document.createElement("div");
-    info.className = "memory-info";
+    info.className = "photo-info";
     info.append(
       Object.assign(document.createElement("p"), {
-        className: "memory-caption",
+        className: "photo-caption",
         textContent: item.caption,
       }),
       Object.assign(document.createElement("p"), {
-        className: "memory-meta",
+        className: "photo-meta",
         textContent: metaLine(item),
       })
     );
@@ -174,17 +174,17 @@
   const columnCount = () => (NARROW.matches ? 1 : 2);
 
   // Round-robin, so item 1 is top-left, item 2 top-right, item 3 below item 1 —
-  // the feed reads down the page in the order MEMORIES is written. Filling one
+  // the feed reads down the page in the order PHOTOS is written. Filling one
   // column at a time would put the whole first half on the left instead.
   const render = () => {
     const count = columnCount();
     const columns = Array.from({ length: count }, () => {
       const column = document.createElement("div");
-      column.className = "memories-column";
+      column.className = "photos-column";
       return column;
     });
 
-    MEMORIES.forEach((item, i) => columns[i % count].appendChild(buildCard(item)));
+    PHOTOS.forEach((item, i) => columns[i % count].appendChild(buildCard(item)));
     grid.replaceChildren(...columns);
   };
 

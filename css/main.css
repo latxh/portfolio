@@ -633,7 +633,7 @@
 
      Radius has to leave percentages behind here. 8% of a rectangle is 8% of the
      width horizontally and 8% of the height vertically, which draws an ellipse
-     at the corners; the same reason memories.css sizes its card radius in px. */
+     at the corners; the same reason photos.css sizes its card radius in px. */
   .work-card {
     flex: none;
     padding: 7px;

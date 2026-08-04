@@ -23,7 +23,7 @@ const PAGES = [
   { file: "archive/2023/index.html", url: "https://latchman.ca/archive/2023/", label: "2023" },
   { file: "archive/2025/index.html", url: "https://latchman.ca/archive/2025/", label: "2025" },
   { file: "index.html", url: "https://latchman.ca/", label: "2026" },
-  { file: "memories.html", url: "https://latchman.ca/memories", label: "2026" },
+  { file: "photos.html", url: "https://latchman.ca/photos", label: "2026" },
   { file: "404.html", url: "https://latchman.ca/nope", label: "2026" },
 ];
 

@@ -45,7 +45,7 @@
 
   /* Dark runs a step lighter than the page for every surface, exactly as light
      runs a step brighter — cards stay above the page in both, so the work fan,
-     the music stack and the memory cards keep the same depth reading. */
+     the music stack and the photo cards keep the same depth reading. */
   --focus-blue: light-dark(#1668dc, #5ba4ff);
   --background: light-dark(#f7f8f9, #121315);
   --font-1: light-dark(#101112, #ececed);

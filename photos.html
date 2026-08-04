@@ -37,7 +37,7 @@
   <meta property="og:title" content="Brian Latchman" />
   <meta property="og:image" content="https://latchman.ca/assets/portrait.jpg" />
   <meta property="og:description" content="Building thoughtful digital products and capturing life along the way." />
-  <meta property="og:url" content="https://latchman.ca/memories" />
+  <meta property="og:url" content="https://latchman.ca/photos" />
   <meta name="google-site-verification" content="wo_JY5tykE2gn7SuCg2PYidWUFJMeAfFG_gcD1eYCyI" />
 
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
@@ -45,10 +45,10 @@
   <link rel="stylesheet" type="text/css" href="css/nav.css" />
   <link rel="stylesheet" type="text/css" href="css/time-machine.css" />
   <link rel="stylesheet" type="text/css" href="css/tooltip.css" />
-  <link rel="stylesheet" type="text/css" href="css/memories.css" />
+  <link rel="stylesheet" type="text/css" href="css/photos.css" />
 </head>
 
-<body class="memories-page">
+<body class="photos-page">
   <div class="site-wrapper">
     <nav class="row">
       <div class="pill-nav">
@@ -58,11 +58,11 @@
           </svg>
           <span class="tool-tip">Home</span>
         </a>
-        <a class="pill-tab active" href="/memories" aria-label="Memories" aria-current="page">
+        <a class="pill-tab active" href="/photos" aria-label="Photos" aria-current="page">
           <svg class="pill-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <path d="M17.75 3A3.25 3.25 0 0 1 21 6.25v11.5A3.25 3.25 0 0 1 17.75 21H6.25A3.25 3.25 0 0 1 3 17.75V6.25A3.25 3.25 0 0 1 6.25 3h11.5Zm.58 16.401-5.805-5.686a.75.75 0 0 0-.966-.071l-.084.07-5.807 5.687c.182.064.378.099.582.099h11.5c.203 0 .399-.035.58-.099l-5.805-5.686L18.33 19.4ZM17.75 4.5H6.25A1.75 1.75 0 0 0 4.5 6.25v11.5c0 .208.036.408.103.594l5.823-5.701a2.25 2.25 0 0 1 3.02-.116l.128.116 5.822 5.702c.067-.186.104-.386.104-.595V6.25a1.75 1.75 0 0 0-1.75-1.75Zm-2.498 2a2.252 2.252 0 1 1 0 4.504 2.252 2.252 0 0 1 0-4.504Zm0 1.5a.752.752 0 1 0 0 1.504.752.752 0 0 0 0-1.504Z" fill="currentColor" />
           </svg>
-          <span class="tool-tip">Memories</span>
+          <span class="tool-tip">Photos</span>
         </a>
         <button class="year-toggle" type="button" aria-expanded="false"
           aria-label="Time machine — browse past versions of this site">
@@ -87,24 +87,24 @@
       </div>
     </nav>
 
-    <main class="memories-content">
-      <h1 class="visually-hidden">Memories</h1>
-      <div id="memories-grid" class="memories-grid"></div>
+    <main class="photos-content">
+      <h1 class="visually-hidden">Photos</h1>
+      <div id="photos-grid" class="photos-grid"></div>
     </main>
   </div>
 
-  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Memory viewer" tabindex="-1" hidden>
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" tabindex="-1" hidden>
     <figure class="lightbox-card">
       <div id="lightbox-frame" class="lightbox-frame"></div>
-      <div class="memory-info">
-        <p id="lightbox-caption" class="memory-caption"></p>
-        <p id="lightbox-meta" class="memory-meta"></p>
+      <div class="photo-info">
+        <p id="lightbox-caption" class="photo-caption"></p>
+        <p id="lightbox-meta" class="photo-meta"></p>
       </div>
     </figure>
   </div>
 
   <script src="js/app.js"></script>
-  <script src="js/memories.js"></script>
+  <script src="js/photos.js"></script>
   <script src="/js/time-machine.js" defer></script>
 </body>
 
