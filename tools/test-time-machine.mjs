@@ -151,10 +151,17 @@ for (const year of fs.readdirSync(archiveDir).sort()) {
       const ext = path.extname(rel).toLowerCase();
       if (ext && ext !== ".html" && ext !== ".htm") continue;
 
-      const candidates = rel
-        ? [rel, `${rel}.html`, path.join(rel, "index.html")]
-        : ["index.html"];
-      if (candidates.some((c) => fs.existsSync(path.join(archiveDir, year, c)))) continue;
+      // A folder shadows a same-named .html file: /ai redirects into ai/ and
+      // dies there even though ai.html sits beside it.
+      const root = path.join(archiveDir, year);
+      const full = path.join(root, rel);
+      const isDir = fs.existsSync(full) && fs.statSync(full).isDirectory();
+      const ok = !rel
+        ? fs.existsSync(path.join(root, "index.html"))
+        : isDir
+        ? fs.existsSync(path.join(full, "index.html"))
+        : fs.existsSync(full) || fs.existsSync(`${full}.html`);
+      if (ok) continue;
 
       dead += 1;
       check(`${year}: dead internal link`, false, `${url} in ${path.relative(archiveDir, file)}`);
