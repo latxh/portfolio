@@ -269,7 +269,7 @@ function ensureInHead(html, tag, present) {
   return html.replace(/<head([^>]*)>/i, (match) => `${match}\n  ${tag}`);
 }
 
-function injectWidget(html, themeKey) {
+function injectWidget(html, year, themeKey) {
   if (html.includes("time-machine.js")) return html;
 
   // Each injection gets its own guard. They were once a single block behind the
@@ -292,6 +292,16 @@ function injectWidget(html, themeKey) {
 
   // Archived pages are duplicates of the live site — keep them out of search.
   out = ensureInHead(out, '<meta name="robots" content="noindex" />', /name=["']robots["']/i);
+
+  // Which version this page belongs to, stated rather than inferred. The widget
+  // used to read it out of the URL, which is wrong for exactly one page: the
+  // live 404, which GitHub Pages serves under whatever path failed — including
+  // paths inside a snapshot.
+  out = ensureInHead(
+    out,
+    `<meta name="time-machine-version" content="${year}" />`,
+    /name=["']time-machine-version["']/i
+  );
 
   return /<\/body>/i.test(out)
     ? out.replace(/<\/body>/i, `  ${SCRIPT_TAG}\n</body>`)
@@ -373,7 +383,7 @@ function build({ year, commit, prune = [], edits = [], themeKey = null }) {
     const isHtml = ext === ".html" || ext === ".htm";
     let updated = isHtml ? rewriteHtml(original, base) : rewriteAsset(original, base);
     if (isHtml) {
-      const withWidget = injectWidget(updated, themeKey);
+      const withWidget = injectWidget(updated, year, themeKey);
       if (withWidget !== updated) injected += 1;
       updated = withWidget;
     }

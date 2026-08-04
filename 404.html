@@ -26,7 +26,7 @@
           : "light";
     })();
   </script>
-  <script src="js/analytics.js"></script>
+  <script src="/js/analytics.js"></script>
   <meta name="description" content="Building thoughtful digital products and capturing life along the way." />
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -40,14 +40,19 @@
   <meta property="og:url" content="https://latchman.ca/404" />
   <meta name="google-site-verification" content="wo_JY5tykE2gn7SuCg2PYidWUFJMeAfFG_gcD1eYCyI" />
 
-  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-  <link rel="stylesheet" type="text/css" href="css/core-styles.css" />
-  <link rel="stylesheet" type="text/css" href="css/nav.css" />
-  <link rel="stylesheet" type="text/css" href="css/time-machine.css" />
-  <link rel="stylesheet" type="text/css" href="css/tooltip.css" />
-  <link rel="stylesheet" type="text/css" href="css/main.css" />
-  <link rel="stylesheet" type="text/css" href="css/footer.css" />
-  <link rel="stylesheet" type="text/css" href="css/music.css" />
+  <!-- Paths here are root-absolute on purpose. GitHub Pages serves this file
+       for any URL it cannot resolve while leaving that URL in the address bar,
+       so a relative path would resolve against wherever the visitor happened to
+       be — /archive/2022/css/... for a bad link inside a snapshot — and the page
+       would render unstyled. -->
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+  <link rel="stylesheet" type="text/css" href="/css/core-styles.css" />
+  <link rel="stylesheet" type="text/css" href="/css/nav.css" />
+  <link rel="stylesheet" type="text/css" href="/css/time-machine.css" />
+  <link rel="stylesheet" type="text/css" href="/css/tooltip.css" />
+  <link rel="stylesheet" type="text/css" href="/css/main.css" />
+  <link rel="stylesheet" type="text/css" href="/css/footer.css" />
+  <link rel="stylesheet" type="text/css" href="/css/music.css" />
 </head>
 
 <body class="home-page">
@@ -105,9 +110,9 @@
         <a class="work-card" href="https://www.meta.ai/" target="_blank" rel="noopener"
           aria-label="Meta AI — personal intelligence">
           <picture>
-            <source data-dark srcset="assets/companies/meta-ai-dark.png"
+            <source data-dark srcset="/assets/companies/meta-ai-dark.png"
               media="(prefers-color-scheme: dark)" />
-            <img src="assets/companies/meta-ai.png" alt="Meta AI" width="1500" height="1500"
+            <img src="/assets/companies/meta-ai.png" alt="Meta AI" width="1500" height="1500"
               loading="lazy" decoding="async" />
           </picture>
           <span class="tool-tip">Meta AI</span>
@@ -116,9 +121,9 @@
         <a class="work-card" href="https://www.copilot.com/daily" target="_blank" rel="noopener"
           aria-label="Copilot Daily — discover something new">
           <picture>
-            <source data-dark srcset="assets/companies/copilot-daily-dark.png"
+            <source data-dark srcset="/assets/companies/copilot-daily-dark.png"
               media="(prefers-color-scheme: dark)" />
-            <img src="assets/companies/copilot-daily.png" alt="Copilot Daily" width="1500" height="1500"
+            <img src="/assets/companies/copilot-daily.png" alt="Copilot Daily" width="1500" height="1500"
               loading="lazy" decoding="async" />
           </picture>
           <span class="tool-tip">Copilot Daily</span>
@@ -127,9 +132,9 @@
         <a class="work-card" href="https://www.shopify.com/flow" target="_blank" rel="noopener"
           aria-label="Shopify Flow — automate everything">
           <picture>
-            <source data-dark srcset="assets/companies/shopify-flow-dark.png"
+            <source data-dark srcset="/assets/companies/shopify-flow-dark.png"
               media="(prefers-color-scheme: dark)" />
-            <img src="assets/companies/shopify-flow.png" alt="Shopify Flow" width="1500" height="1500"
+            <img src="/assets/companies/shopify-flow.png" alt="Shopify Flow" width="1500" height="1500"
               loading="lazy" decoding="async" />
           </picture>
           <span class="tool-tip">Shopify Flow</span>
@@ -138,9 +143,9 @@
         <a class="work-card" href="https://www.start.gg/" target="_blank" rel="noopener"
           aria-label="Start.gg — powering esport communities">
           <picture>
-            <source data-dark srcset="assets/companies/start-gg-dark.png"
+            <source data-dark srcset="/assets/companies/start-gg-dark.png"
               media="(prefers-color-scheme: dark)" />
-            <img src="assets/companies/start-gg.png" alt="Start.gg" width="1500" height="1500"
+            <img src="/assets/companies/start-gg.png" alt="Start.gg" width="1500" height="1500"
               loading="lazy" decoding="async" />
           </picture>
           <span class="tool-tip">Start.gg</span>
@@ -192,7 +197,7 @@
     </div>
   </footer>
 
-  <script src="js/app.js"></script>
+  <script src="/js/app.js"></script>
   <script src="/js/time-machine.js" defer></script>
 </body>
 

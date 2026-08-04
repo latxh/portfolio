@@ -46,8 +46,12 @@
   if (!document.body) return;
   if (document.getElementById("time-machine")) return;
 
-  var archived = /^\/archive\/(\d{4})(\/|$)/.exec(window.location.pathname);
-  var activeYear = archived ? archived[1] : LIVE_YEAR;
+  // Archived pages declare which version they are; the live site does not, so a
+  // missing tag means today. Read from the document rather than the URL because
+  // the live 404 is served under whatever path failed — including paths inside
+  // a snapshot, where the URL would name a version this page is not.
+  var declared = document.querySelector('meta[name="time-machine-version"]');
+  var activeYear = declared ? declared.getAttribute("content") : LIVE_YEAR;
   if (!VERSIONS.some(function (v) { return v.year === activeYear; })) {
     activeYear = LIVE_YEAR;
   }
