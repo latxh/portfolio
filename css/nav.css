@@ -44,6 +44,10 @@ nav {
   display: none;
   align-items: center;
   justify-content: center;
+  /* Hold their size when the year run overflows and scrolls on a phone —
+     without this the flex default shrinks the collapse toggle narrower than
+     its 40px, so it no longer matches the archived pill's fixed control. */
+  flex: none;
   width: 40px;
   height: 40px;
   padding: 0;
@@ -190,6 +194,7 @@ nav {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex: none;
   width: 40px;
   height: 40px;
   padding: 0;

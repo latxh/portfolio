@@ -396,9 +396,11 @@
     "    padding .34s cubic-bezier(.22,1,.36,1);",
     "}",
     /* Once the year folds away the chevron is on its own, so the padding is set
-       to square the button against its 40px height — 13.5 + 13 + 13.5 — and the
-       fill lands on it as a circle rather than a standing oval. */
-    ".tm[data-open='true'] .trigger { gap: 0; padding: 0 13.5px; }",
+       to square the button against its 40px height — 12.5 + 15 + 12.5 — so the
+       fill lands on it as a 40px circle, exactly the current nav's collapse
+       control rather than a standing oval. Padding, not width: a fixed width
+       would clip the year mid-fold instead of letting it collapse smoothly. */
+    ".tm[data-open='true'] .trigger { gap: 0; padding: 0 12.5px; }",
     /* Drawn pointing right, which is the direction the run unfolds, so it is
        left as-drawn while collapsed and turned to point back the other way
        once there is something to fold up. */
