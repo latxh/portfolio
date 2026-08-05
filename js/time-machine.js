@@ -284,13 +284,6 @@
     "@media print { :host { display: none; } }",
     "@media (max-width: 670px) {",
     "  :host { top: max(16px, env(safe-area-inset-top, 0px)); }",
-    /* Drop the blur on the fixed bar over scrolling content — it repaints the
-       blurred region every frame and stutters. Opaque fill instead. */
-    "  .bar {",
-    "    background: var(--tm-surface-solid);",
-    "    -webkit-backdrop-filter: none;",
-    "    backdrop-filter: none;",
-    "  }",
     "}",
 
     ".tm {",
@@ -347,6 +340,17 @@
     "  backdrop-filter: blur(5px);",
     "  box-shadow: 0 8px 24px var(--tm-shadow);",
     "  max-width: 100%;",
+    "}",
+
+    /* Drop the blur on the fixed bar over scrolling content — it repaints the
+       blurred region every frame and stutters. Opaque fill instead. Placed after
+       the base .bar rule above so equal-specificity source order keeps it. */
+    "@media (max-width: 670px) {",
+    "  .bar {",
+    "    background: var(--tm-surface-solid);",
+    "    -webkit-backdrop-filter: none;",
+    "    backdrop-filter: none;",
+    "  }",
     "}",
 
     /* The sliding fill the current nav uses in place of a painted-on active
