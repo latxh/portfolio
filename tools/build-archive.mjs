@@ -18,6 +18,7 @@ import { fileURLToPath } from "node:url";
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const ARCHIVE_DIR = path.join(ROOT, "archive");
 const SCRIPT_TAG = '<script src="/js/time-machine.js" defer></script>';
+const ANALYTICS_TAG = '<script src="/js/analytics.js"></script>';
 
 /**
  * One entry per major redesign, labelled with the year that design was live —
@@ -269,6 +270,40 @@ function ensureInHead(html, tag, present) {
   return html.replace(/<head([^>]*)>/i, (match) => `${match}\n  ${tag}`);
 }
 
+/** Adds a tag right after the opening <body> unless the page already carries one. */
+function ensureAfterBody(html, tag, present) {
+  if (present.test(html) || !/<body[^>]*>/i.test(html)) return html;
+  return html.replace(/<body([^>]*)>/i, (match) => `${match}\n  ${tag}`);
+}
+
+/** Adds a tag just before </body> unless the page already carries one. */
+function ensureBeforeBodyEnd(html, tag, present) {
+  if (present.test(html)) return html;
+  return /<\/body>/i.test(html)
+    ? html.replace(/<\/body>/i, `  ${tag}\n</body>`)
+    : `${html}\n${tag}\n`;
+}
+
+/**
+ * A blocking inline script for the very top of <body>. Every archived era keys
+ * .dark on <body> and only applies it from a script at the END of the body, so
+ * the page paints light first and then flips — the flash. This runs before any
+ * body content is parsed, so first paint already carries the right theme; the
+ * era's own end-of-body script then finds the class already set and does nothing
+ * visible. It reads the era key, which /js/theme-sync.js (in <head>, blocking)
+ * has already seeded from the canonical "theme" key by the time this runs.
+ */
+function themeApplyTag(key) {
+  return (
+    "<script>/* theme-apply */(function(){try{" +
+    `var a=localStorage.getItem(${JSON.stringify(key)})||"system";` +
+    'var d=a==="dark"||(a!=="light"&&matchMedia("(prefers-color-scheme: dark)").matches);' +
+    'document.documentElement.style.colorScheme=d?"dark":"light";' +
+    'if(d)document.body.classList.add("dark");' +
+    "}catch(e){}})();</script>"
+  );
+}
+
 function injectWidget(html, year, themeKey) {
   if (html.includes("time-machine.js")) return html;
 
@@ -288,6 +323,9 @@ function injectWidget(html, year, themeKey) {
       `<script src="/js/theme-sync.js" data-theme-key="${themeKey}"></script>`,
       /theme-sync\.js/
     );
+    // Paints the theme before first paint so the era's end-of-body script no
+    // longer flips it and flashes. Keyed on the era's own store, seeded above.
+    out = ensureAfterBody(out, themeApplyTag(themeKey), /theme-apply/);
   }
 
   // Archived pages are duplicates of the live site — keep them out of search.
@@ -302,6 +340,10 @@ function injectWidget(html, year, themeKey) {
     `<meta name="time-machine-version" content="${year}" />`,
     /name=["']time-machine-version["']/i
   );
+
+  // Analytics on every archived page, mirroring the live site. Sits just before
+  // the time machine at the end of the body; guarded so a rebuild stays idempotent.
+  out = ensureBeforeBodyEnd(out, ANALYTICS_TAG, /analytics\.js/);
 
   return /<\/body>/i.test(out)
     ? out.replace(/<\/body>/i, `  ${SCRIPT_TAG}\n</body>`)
