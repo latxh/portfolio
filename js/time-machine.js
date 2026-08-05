@@ -327,6 +327,11 @@
     /* No gap while closed. The panel collapses to nothing but the gap that
        separates it from the trigger does not, and it reads as the pill being
        lopsided — more air to the right of the chevron than left of the year. */
+    /* Touch-safe base: opaque fill, no backdrop-filter. This bar is position:
+       fixed at every width, so a live blur over scrolling content stutters on
+       touch. The glass is a hover-only enhancement below instead — matching how
+       the current nav pill gates its own surface, and how the site gates its
+       other hover effects with @media (hover: hover). */
     ".bar {",
     "  position: relative;",
     "  display: flex;",
@@ -335,21 +340,17 @@
     "  padding: 4px;",
     "  transition: gap .34s cubic-bezier(.22,1,.36,1);",
     "  border-radius: 48px;",
-    "  background: var(--tm-surface);",
-    "  -webkit-backdrop-filter: blur(5px);",
-    "  backdrop-filter: blur(5px);",
+    "  background: var(--tm-surface-solid);",
     "  box-shadow: 0 8px 24px var(--tm-shadow);",
     "  max-width: 100%;",
     "}",
 
-    /* Drop the blur on the fixed bar over scrolling content — it repaints the
-       blurred region every frame and stutters. Opaque fill instead. Placed after
-       the base .bar rule above so equal-specificity source order keeps it. */
-    "@media (max-width: 670px) {",
+    /* Hover-capable devices get the glass surface. */
+    "@media (hover: hover) {",
     "  .bar {",
-    "    background: var(--tm-surface-solid);",
-    "    -webkit-backdrop-filter: none;",
-    "    backdrop-filter: none;",
+    "    background: var(--tm-surface);",
+    "    -webkit-backdrop-filter: blur(5px);",
+    "    backdrop-filter: blur(5px);",
     "  }",
     "}",
 

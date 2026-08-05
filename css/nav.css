@@ -13,6 +13,10 @@ nav {
   }
 }
 
+/* Touch-safe base: an opaque fill, no backdrop-filter. A live blur on the fixed
+   pill over scrolling content stutters on touch, so the glass is a hover-only
+   enhancement (see below) rather than a mobile override — same reasoning the site
+   already applies to its other hover effects with @media (hover: hover). */
 .pill-nav {
   position: relative;
   display: inline-flex;
@@ -20,10 +24,17 @@ nav {
   gap: 2px;
   padding: 4px;
   border-radius: 48px;
-  background-color: var(--surface-blur);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
+  background-color: var(--surface-solid);
   box-shadow: 0 8px 24px var(--shadow);
+}
+
+/* Hover-capable devices get the glass surface. */
+@media (hover: hover) {
+  .pill-nav {
+    background-color: var(--surface-blur);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+  }
 }
 
 /* Rides inside the pill as a third child. .pill-indicator measures whatever it
@@ -147,8 +158,19 @@ nav {
 /* The pill sits at the very top of the page, so these hang below the control
    rather than above it — the default direction, but worth stating since every
    other tooltip on the site is attached to something mid-page. */
+/* No hover on touch, so a CSS :hover tooltip only fires on tap and then lingers.
+   Hidden by default and restored only where there is a real pointer — the same
+   gate the glass surface uses, and matching the archived pill, whose notes are
+   mouseenter-driven and so never appear on touch either. */
 .pill-nav .tool-tip {
   top: calc(100% + 12px);
+  display: none;
+}
+
+@media (hover: hover) {
+  .pill-nav .tool-tip {
+    display: block;
+  }
 }
 
 /* Held open across a theme swap. A view transition paints the page as a
@@ -269,14 +291,5 @@ nav {
     margin: 0 auto;
     padding: 0;
     z-index: 100;
-  }
-
-  /* The fixed pill sits over scrolling content, so a live backdrop-filter here
-     repaints the blurred region every frame and stutters. Drop the blur for an
-     opaque fill that matches how the translucent surface resolves over the page. */
-  .pill-nav {
-    background-color: var(--surface-solid);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
   }
 }
