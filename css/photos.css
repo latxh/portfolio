@@ -131,8 +131,8 @@
   align-items: center;
   padding: 24px;
   background: var(--scrim);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
   cursor: zoom-out;
   animation: lightbox-in 0.2s ease;
 }
