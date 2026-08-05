@@ -53,6 +53,21 @@
   overflow: hidden;
 }
 
+/* Squircle corners where supported (Chromium 139+). The superellipse can carry a
+   much rounder corner without turning blobby, so it steps the radius up to 64px;
+   the focus ring rides .photo-open's radius, so all three layers move together to
+   keep the outline hugging the new shape. corner-shape is silently ignored by
+   Safari and Firefox, which keep the 24px border-radius above — the fallback is
+   automatic, so this needs no matching @supports for the old shape. */
+@supports (corner-shape: squircle) {
+  .photo-item,
+  .photo-open,
+  .photo-frame {
+    border-radius: 64px;
+    corner-shape: squircle;
+  }
+}
+
 .photo-frame img,
 .photo-frame video {
   width: 100%;
@@ -86,7 +101,7 @@
    Inset a little further than the media so the text isn't flush to its edge. */
 .photo-info {
   margin-top: 10px;
-  padding: 0 8px 4px;
+  padding: 0 8px 8px;
 }
 
 .photo-caption {
@@ -171,6 +186,21 @@
   /* leaves room for the scrim padding, the card padding and the caption */
   max-height: calc(100vh - 170px);
   border-radius: 24px;
+}
+
+/* Squircle to match the grid cards where supported (Chromium 139+). The media
+   carries its own radius here — it is sized to its intrinsic ratio, so it does
+   not always fill the frame — so it moves up to 64px too, otherwise its inset
+   corner would sit inside the frame's clip and win. Safari and Firefox ignore
+   corner-shape and keep the 24px border-radius above. */
+@supports (corner-shape: squircle) {
+  .lightbox-card,
+  .lightbox-frame,
+  .lightbox-frame img,
+  .lightbox-frame video {
+    border-radius: 64px;
+    corner-shape: squircle;
+  }
 }
 
 /* The page must not scroll behind the scrim. body already reserves a
