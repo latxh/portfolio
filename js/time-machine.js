@@ -238,6 +238,9 @@
        values are carried here and switched off the era's own theme. */
     ":host {",
     "  --tm-surface: rgba(255,255,255,.72);",
+    /* Opaque equivalent of --tm-surface, for the mobile bar where a live
+       backdrop-filter over scrolling content stutters. */
+    "  --tm-surface-solid: #fdfdfd;",
     "  --tm-active: #e8eaee;",
     "  --tm-font-1: #101112;",
     "  --tm-font-2: #686e78;",
@@ -269,6 +272,7 @@
     "}",
     ":host([data-theme='dark']) {",
     "  --tm-surface: rgba(28,30,33,.72);",
+    "  --tm-surface-solid: #191b1e;",
     "  --tm-active: #2a2d32;",
     "  --tm-font-1: #ececed;",
     "  --tm-font-2: #9aa1ab;",
@@ -280,6 +284,13 @@
     "@media print { :host { display: none; } }",
     "@media (max-width: 670px) {",
     "  :host { top: max(16px, env(safe-area-inset-top, 0px)); }",
+    /* Drop the blur on the fixed bar over scrolling content — it repaints the
+       blurred region every frame and stutters. Opaque fill instead. */
+    "  .bar {",
+    "    background: var(--tm-surface-solid);",
+    "    -webkit-backdrop-filter: none;",
+    "    backdrop-filter: none;",
+    "  }",
     "}",
 
     ".tm {",

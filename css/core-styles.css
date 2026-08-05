@@ -63,6 +63,9 @@
      one; the surfaces being lighter than the page does the rest of the lifting. */
   --shadow: light-dark(rgba(16, 17, 18, 0.1), rgba(0, 0, 0, 0.55));
   --surface-blur: light-dark(rgba(255, 255, 255, 0.72), rgba(28, 30, 33, 0.72));
+  /* Opaque equivalent of --surface-blur resolved over --background, for the
+     mobile pill where a live backdrop-filter over scrolling content stutters. */
+  --surface-solid: light-dark(#fdfdfd, #191b1e);
   /* The band the work-card shine cycles through, from the trainer-gallery-holo
      recipe in simeydotme/pokemon-cards-css. Muted and half-transparent rather
      than pastel — this one is a single wide sweep instead of a fine grid, so

@@ -270,4 +270,13 @@ nav {
     padding: 0;
     z-index: 100;
   }
+
+  /* The fixed pill sits over scrolling content, so a live backdrop-filter here
+     repaints the blurred region every frame and stutters. Drop the blur for an
+     opaque fill that matches how the translucent surface resolves over the page. */
+  .pill-nav {
+    background-color: var(--surface-solid);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
 }
