@@ -1,8 +1,6 @@
 const MESSAGE_LIST = [
   "Painting with code",
-  "Going with the flow",
-  "Hello from Toronto",
-  "Meapless in Seattle",
+  "Be kind",
   "Lo' Howler",
   "Till the next",
 ];
@@ -86,7 +84,7 @@ const MUSIC_LIST = [
     "Devil in a New Dress",
     "by Kanye",
   ],
-    [
+  [
     "https://www.youtube.com/watch?v=SNCqYFYMkT8",
     "/assets/album-art/whatever-works.png",
     "Whatever Works",
@@ -152,7 +150,7 @@ const MUSIC_LIST = [
     "Spiderman Superman",
     "by PartyNextDoor",
   ],
-    [
+  [
     "https://www.youtube.com/watch?v=K9OzeJauM0Q",
     "/assets/album-art/trini-2-de-bone.png",
     "Trini 2 De Bone",
