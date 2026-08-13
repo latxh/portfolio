@@ -1,6 +1,6 @@
 const MESSAGE_LIST = [
   "Painting with code",
-  "Be kind",
+  "Be kind always",
   "Lo' Howler",
   "Till the next",
 ];
