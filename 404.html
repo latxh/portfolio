@@ -6,8 +6,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Resolves the theme before first paint, and ahead of the render-blocking
-       script below, so a stored choice never flashes the other theme first. -->
+  <!-- Resolves the theme before first paint, so a stored choice never flashes
+       the other theme first. -->
   <script>
     (function () {
       var root = document.documentElement;
@@ -26,7 +26,7 @@
           : "light";
     })();
   </script>
-  <script src="/js/analytics.js"></script>
+  <script src="/js/analytics.js" async></script>
   <meta name="description" content="Building thoughtful digital products and capturing life along the way." />
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -45,6 +45,7 @@
        so a relative path would resolve against wherever the visitor happened to
        be — /archive/2022/css/... for a bad link inside a snapshot — and the page
        would render unstyled. -->
+  <link rel="preload" href="/fonts/LatchRegular.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
   <link rel="stylesheet" type="text/css" href="/css/core-styles.css" />
   <link rel="stylesheet" type="text/css" href="/css/nav.css" />
@@ -110,9 +111,9 @@
         <a class="work-card" href="https://www.meta.ai/" target="_blank" rel="noopener"
           aria-label="Meta AI — personal intelligence">
           <picture>
-            <source data-dark srcset="/assets/companies/meta-ai-dark.png"
+            <source data-dark srcset="/assets/companies/meta-ai-dark.webp"
               media="(prefers-color-scheme: dark)" />
-            <img src="/assets/companies/meta-ai.png" alt="Meta AI" width="1500" height="1500"
+            <img src="/assets/companies/meta-ai.webp" alt="Meta AI" width="800" height="800"
               loading="lazy" decoding="async" />
           </picture>
           <span class="tool-tip">Meta AI</span>
@@ -121,9 +122,9 @@
         <a class="work-card" href="https://www.copilot.com/daily" target="_blank" rel="noopener"
           aria-label="Copilot Daily — discover something new">
           <picture>
-            <source data-dark srcset="/assets/companies/copilot-daily-dark.png"
+            <source data-dark srcset="/assets/companies/copilot-daily-dark.webp"
               media="(prefers-color-scheme: dark)" />
-            <img src="/assets/companies/copilot-daily.png" alt="Copilot Daily" width="1500" height="1500"
+            <img src="/assets/companies/copilot-daily.webp" alt="Copilot Daily" width="800" height="800"
               loading="lazy" decoding="async" />
           </picture>
           <span class="tool-tip">Copilot Daily</span>
@@ -132,9 +133,9 @@
         <a class="work-card" href="https://www.shopify.com/flow" target="_blank" rel="noopener"
           aria-label="Shopify Flow — automate everything">
           <picture>
-            <source data-dark srcset="/assets/companies/shopify-flow-dark.png"
+            <source data-dark srcset="/assets/companies/shopify-flow-dark.webp"
               media="(prefers-color-scheme: dark)" />
-            <img src="/assets/companies/shopify-flow.png" alt="Shopify Flow" width="1500" height="1500"
+            <img src="/assets/companies/shopify-flow.webp" alt="Shopify Flow" width="800" height="800"
               loading="lazy" decoding="async" />
           </picture>
           <span class="tool-tip">Shopify Flow</span>
@@ -143,9 +144,9 @@
         <a class="work-card" href="https://www.start.gg/" target="_blank" rel="noopener"
           aria-label="Start.gg — powering esport communities">
           <picture>
-            <source data-dark srcset="/assets/companies/start-gg-dark.png"
+            <source data-dark srcset="/assets/companies/start-gg-dark.webp"
               media="(prefers-color-scheme: dark)" />
-            <img src="/assets/companies/start-gg.png" alt="Start.gg" width="1500" height="1500"
+            <img src="/assets/companies/start-gg.webp" alt="Start.gg" width="800" height="800"
               loading="lazy" decoding="async" />
           </picture>
           <span class="tool-tip">Start.gg</span>
@@ -182,15 +183,15 @@
 
       <div class="card-stack-container">
         <a id="music-card-1" class="music-card card-1" target="_blank" rel="noopener">
-          <img id="album-cover-1" alt="Album art" />
+          <img id="album-cover-1" alt="Album art" width="120" height="120" loading="lazy" decoding="async" />
           <div id="music-tooltip-1" class="tool-tip is-above">Song 1</div>
         </a>
         <a id="music-card-2" class="music-card card-2" target="_blank" rel="noopener">
-          <img id="album-cover-2" alt="Album art" />
+          <img id="album-cover-2" alt="Album art" width="120" height="120" loading="lazy" decoding="async" />
           <div id="music-tooltip-2" class="tool-tip is-above">Song 2</div>
         </a>
         <a id="music-card-3" class="music-card card-3" target="_blank" rel="noopener">
-          <img id="album-cover-3" alt="Album art" />
+          <img id="album-cover-3" alt="Album art" width="120" height="120" loading="lazy" decoding="async" />
           <div id="music-tooltip-3" class="tool-tip is-above">Song 3</div>
         </a>
       </div>

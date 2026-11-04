@@ -1,26 +1,30 @@
 (function () {
   const PHOTOS = [
     { src: "assets/photos/start-gg.mp4", caption: "Start.gg Rebrand", date: "May 16, 2022", width: 1440, height: 1080 },
-    { src: "assets/photos/world-cup.jpeg", caption: "World Cup", location: "Vancouver", date: "Jul 3, 2026", width: 2268, height: 4032 },
-    { src: "assets/photos/montenegro.jpeg", caption: "Kayaking in Montenegro", location: "Montenegro", date: "Jun 25, 2026", width: 3213, height: 5712 },
-    { src: "assets/photos/greece.jpeg", caption: "Stavros Beach", location: "Greece", date: "Jun 22, 2026", width: 2268, height: 4032 },
-    { src: "assets/photos/custom-made-jerseys.jpeg", caption: "Custom Made Jerseys", location: "Seattle", date: "Feb 26, 2026", width: 2268, height: 4032 },
-    { src: "assets/photos/seahawks-super-bowl-run.jpeg", caption: "Seahawks Super Bowl Run", location: "Seattle", date: "Jan 17, 2026", width: 3114, height: 5536 },
-    { src: "assets/photos/matt-and-claudias-wedding.jpeg", caption: "Matt & Claudia's Wedding", location: "Dominican Republic", date: "Dec 11, 2025", width: 4000, height: 6000 },
-    { src: "assets/photos/jays-win-the-al-east.jpeg", caption: "Jays Win the AL East", location: "Toronto", date: "Sep 26, 2025", width: 2268, height: 4032 },
-    { src: "assets/photos/weeknd-seattle.jpeg", caption: "After Hours Til Dawn", location: "Seattle", date: "Jul 12, 2025", width: 3213, height: 5712 },
-    { src: "assets/photos/alderwood-trail.jpeg", caption: "Alderwood Trail", location: "Home", date: "May 25, 2025", width: 3213, height: 5712 },
-    { src: "assets/photos/space-needle.jpeg", caption: "Space Needle", location: "Seattle", date: "Jul 14, 2024", width: 4032, height: 3024 },
-    { src: "assets/photos/jays-world-series-run.jpeg", caption: "Jays World Series Run", location: "Seattle", date: "Oct 15, 2025", width: 1179, height: 2096 },
-    { src: "assets/photos/70-flights-and-counting.png", caption: "70 Flights & Counting", location: "Everywhere", date: "Jan 1 2026", width: 1179, height: 1572 },
-    { src: "assets/photos/xbox-forever.png", caption: "Xbox Forever", location: "Mississauga", date: "Dec 15 2004", width: 2048, height: 1536 },
-    { src: "assets/photos/killy.jpeg", caption: "Killy", location: "Toronto", date: "Mar 8 2018", width: 899, height: 899 },
-    { src: "assets/photos/price-on-my-head.jpeg", caption: "Price On My Head", location: "Toronto", date: "Feb 26 2019", width: 1080, height: 1314 },
-    { src: "assets/photos/ryan-uo.jpeg", caption: "Ryan UO", location: "New York", date: "Jul 2 2019", width: 1080, height: 1920 },
-    { src: "assets/portrait.jpg", caption: "Me", location: "Toronto", date: "Oct 16 2017", width: 1500, height: 994 },
+    { src: "assets/photos/world-cup.webp", caption: "World Cup", location: "Vancouver", date: "Jul 3, 2026", width: 1125, height: 2000 },
+    { src: "assets/photos/montenegro.webp", caption: "Kayaking in Montenegro", location: "Montenegro", date: "Jun 25, 2026", width: 1125, height: 2000 },
+    { src: "assets/photos/greece.webp", caption: "Stavros Beach", location: "Greece", date: "Jun 22, 2026", width: 1125, height: 2000 },
+    { src: "assets/photos/custom-made-jerseys.webp", caption: "Custom Made Jerseys", location: "Seattle", date: "Feb 26, 2026", width: 1125, height: 2000 },
+    { src: "assets/photos/seahawks-super-bowl-run.webp", caption: "Seahawks Super Bowl Run", location: "Seattle", date: "Jan 17, 2026", width: 1125, height: 2000 },
+    { src: "assets/photos/matt-and-claudias-wedding.webp", caption: "Matt & Claudia's Wedding", location: "Dominican Republic", date: "Dec 11, 2025", width: 1333, height: 2000 },
+    { src: "assets/photos/jays-win-the-al-east.webp", caption: "Jays Win the AL East", location: "Toronto", date: "Sep 26, 2025", width: 1125, height: 2000 },
+    { src: "assets/photos/weeknd-seattle.webp", caption: "After Hours Til Dawn", location: "Seattle", date: "Jul 12, 2025", width: 1125, height: 2000 },
+    { src: "assets/photos/alderwood-trail.webp", caption: "Alderwood Trail", location: "Home", date: "May 25, 2025", width: 1125, height: 2000 },
+    { src: "assets/photos/space-needle.webp", caption: "Space Needle", location: "Seattle", date: "Jul 14, 2024", width: 2000, height: 1500 },
+    { src: "assets/photos/jays-world-series-run.webp", caption: "Jays World Series Run", location: "Seattle", date: "Oct 15, 2025", width: 1125, height: 2000 },
+    { src: "assets/photos/70-flights-and-counting.webp", caption: "70 Flights & Counting", location: "Everywhere", date: "Jan 1 2026", width: 1179, height: 1572 },
+    { src: "assets/photos/xbox-forever.webp", caption: "Xbox Forever", location: "Mississauga", date: "Dec 15 2004", width: 2000, height: 1500 },
+    { src: "assets/photos/killy.webp", caption: "Killy", location: "Toronto", date: "Mar 8 2018", width: 899, height: 899 },
+    { src: "assets/photos/price-on-my-head.webp", caption: "Price On My Head", location: "Toronto", date: "Feb 26 2019", width: 1080, height: 1314 },
+    { src: "assets/photos/ryan-uo.webp", caption: "Ryan UO", location: "New York", date: "Jul 2 2019", width: 1080, height: 1920 },
+    { src: "assets/photos/portrait.webp", caption: "Me", location: "Toronto", date: "Oct 16 2017", width: 1500, height: 994 },
   ];
 
   const VIDEO = /\.(mp4|mov|webm)$/i;
+
+  // One column on a phone, two at up to ~432px each above it (see photos.css).
+  const GRID_SIZES = "(max-width: 670px) 100vw, 432px";
+  const thumbFor = (src) => src.replace(/([^/]+)$/, "thumbs/$1");
 
   const grid = document.getElementById("photos-grid");
   const lightbox = document.getElementById("lightbox");
@@ -82,7 +86,15 @@
     } else {
       media.alt = item.caption;
       media.decoding = "async";
-      if (!full) media.loading = "lazy";
+      if (!full) {
+        media.loading = "lazy";
+        // The grid never shows a photo wider than a column, so it offers the
+        // 900px thumb alongside the full copy and lets the browser pick by
+        // density; the lightbox always takes the full one. Both are written by
+        // tools/optimize-photos.mjs.
+        media.srcset = `${thumbFor(item.src)} 900w, ${item.src} ${item.width}w`;
+        media.sizes = GRID_SIZES;
+      }
 
       media.addEventListener("load", markLoaded);
 
