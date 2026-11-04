@@ -174,7 +174,7 @@ const shuffleArray = (array) => {
 const initRandomMessage = () => {
   const randomMessageElement = document.getElementById("random-message");
   if (randomMessageElement) {
-    randomMessageElement.innerHTML = getRandomElement(MESSAGE_LIST);
+    randomMessageElement.textContent = getRandomElement(MESSAGE_LIST);
   }
 };
 
@@ -193,7 +193,7 @@ const initMusicCards = () => {
 
     if (musicCard) musicCard.href = url;
     if (albumCover) albumCover.src = imageSrc;
-    if (musicTooltip) musicTooltip.innerHTML = title;
+    if (musicTooltip) musicTooltip.textContent = title;
   }
 
   document.addEventListener("visibilitychange", () => {
@@ -479,13 +479,38 @@ const initPillNav = () => {
     indicator.className = "pill-indicator";
     pill.prepend(indicator);
 
+    // The slice of a control that is actually showing, in the pill's own
+    // coordinates. offsetLeft alone misses two things the timeline brings in:
+    // the year run scrolls sideways on a phone, and every run clips its
+    // controls while it folds. Either way a control can sit partly or wholly
+    // past the pill's edge — and :hover keeps matching the one under a resting
+    // pointer even as the pill shrinks out from under it — so measuring the
+    // raw box parked the fill outside the pill. Intersecting with the run that
+    // clips it keeps the fill on what can be seen.
+    const visibleSpan = (target) => {
+      const pillBox = pill.getBoundingClientRect();
+      const box = target.getBoundingClientRect();
+      let left = box.left;
+      let right = box.right;
+      const run = target.closest(".fold-run, .years-run");
+      if (run) {
+        const clip = run.getBoundingClientRect();
+        left = Math.max(left, clip.left);
+        right = Math.min(right, clip.right);
+      }
+      return { left: left - pillBox.left - pill.clientLeft, width: Math.max(0, right - left) };
+    };
+
+    const isShowing = (target) => Boolean(target) && visibleSpan(target).width >= 1;
+
     const setIndicator = (target) => {
-      if (!target) {
+      const span = target && visibleSpan(target);
+      if (!span || span.width < 1) {
         indicator.style.opacity = "0";
         return;
       }
-      indicator.style.width = `${target.offsetWidth}px`;
-      indicator.style.transform = `translateX(${target.offsetLeft}px)`;
+      indicator.style.width = `${span.width}px`;
+      indicator.style.transform = `translateX(${span.left}px)`;
       indicator.style.opacity = "1";
     };
 
@@ -499,7 +524,11 @@ const initPillNav = () => {
 
     const getHovered = () => pill.querySelector(PILL_HOVER);
 
-    const syncIndicator = () => setIndicator(getHovered() || getActive());
+    // A hovered control that has folded out of sight no longer counts.
+    const syncIndicator = () => {
+      const hovered = getHovered();
+      setIndicator(isShowing(hovered) ? hovered : getActive());
+    };
 
     /* Folding the tabs away and the years in moves everything the indicator
        measures against, so a single reading taken as the click lands is stale
@@ -554,8 +583,6 @@ const initPillNav = () => {
     });
     pill.addEventListener("mouseleave", () => {
       lastHovered = null;
-    });
-    pill.addEventListener("mouseleave", () => {
       // Ignore the phantom leave a theme swap causes; a real one still lands,
       // because the resync below reads the pointer's actual position rather
       // than assuming it stayed put.
@@ -564,6 +591,21 @@ const initPillNav = () => {
     });
 
     document.addEventListener(THEME_SWAP_END, syncIndicator);
+
+    // Scrolling the year run sideways (it overflows on a phone) moves the
+    // entries out from under the fill, which sits outside the scroller.
+    // Captured, because the run is built later by the time machine script and
+    // scroll does not bubble. One update per frame — momentum scrolling fires
+    // far faster than that, and each pass reads layout.
+    let tracking = 0;
+    pill.addEventListener(
+      "scroll",
+      () => {
+        cancelAnimationFrame(tracking);
+        tracking = requestAnimationFrame(syncIndicator);
+      },
+      true
+    );
 
     window.addEventListener("resize", () => setIndicator(getActive()));
     if (document.fonts && document.fonts.ready) {

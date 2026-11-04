@@ -59,6 +59,24 @@
   overflow: hidden;
 }
 
+/* The pill's own 2px gap would sit either side of every slot, folded or not, so
+   a collapsed slot still left 4px between its neighbours (the toggle and the
+   theme control while closed) and 6px of edge padding once the run was open.
+   The spacing moves inside the runs instead, onto the side that faces the
+   toggle, where it is clipped away with the slot it belongs to. */
+.pill-nav:has(> .fold-slot) {
+  gap: 0;
+}
+
+.pill-nav > .fold-slot:not(.year-toggle ~ *) .fold-run > :last-child {
+  margin-right: 2px;
+}
+
+.year-toggle ~ .fold-slot .fold-run > :first-child,
+.years-run > :first-child {
+  margin-left: 2px;
+}
+
 /* Clipping is only wanted while the fold is moving. Each control's tooltip is
    positioned against the control, which is inside the run, so a run that keeps
    clipping cuts the tooltip off below the pill. Once the fold has settled, a
