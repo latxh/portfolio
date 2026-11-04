@@ -261,7 +261,7 @@
 }
 
 /* height: auto is load-bearing — the width/height attributes on the markup are
-   presentational hints, so without it each image is pinned to a literal 1500px
+   presentational hints, so without it each image is pinned to a literal 800px
    tall and aspect-ratio is ignored. The attributes stay for CLS. */
 .work-card img {
   display: block;

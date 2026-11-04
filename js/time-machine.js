@@ -148,9 +148,6 @@
       open = next;
       pill.classList.toggle("is-timeline", next);
       if (triggerTip) triggerTip.textContent = next ? CLOSE_LABEL : OPEN_LABEL;
-      // Only when it actually changes: setAttribute emits a mutation record even
-      // for an identical value, and the indicator observes this attribute — so
-      // the no-op write at init would start a settle loop over a still page.
 
       // The runs have to clip while the fold is in motion, which also clips the
       // tooltips hanging off the controls inside them. Marking the pill settled
@@ -160,7 +157,12 @@
       settleTimer = setTimeout(function () {
         pill.classList.add("is-settled");
       }, SETTLE_MS);
-      trigger.setAttribute("aria-expanded", String(next));
+      // Only when it actually changes: setAttribute emits a mutation record even
+      // for an identical value, and the indicator observes this attribute — so
+      // the no-op write at init would start a settle loop over a still page.
+      if (trigger.getAttribute("aria-expanded") !== String(next)) {
+        trigger.setAttribute("aria-expanded", String(next));
+      }
       // Folded away, so not a tab stop either.
       tabs.concat(theme || []).forEach(function (control) {
         if (next) control.setAttribute("tabindex", "-1");
@@ -170,6 +172,19 @@
         if (next) item.removeAttribute("tabindex");
         else item.setAttribute("tabindex", "-1");
       });
+
+      // The run overflows a narrow phone and the year you are on is the last
+      // entry, so it would open scrolled away from it. Centre it once the fold
+      // has settled — by hand, since scrollIntoView may scroll the page too.
+      if (next) {
+        setTimeout(function () {
+          var current = yearsRun.querySelector('[aria-current="true"]');
+          if (!open || !current) return;
+          var centered = current.offsetLeft - yearsRun.offsetLeft -
+            (yearsRun.clientWidth - current.offsetWidth) / 2;
+          yearsRun.scrollLeft = Math.max(0, centered);
+        }, SETTLE_MS);
+      }
     }
 
     setOpen(false);
@@ -210,17 +225,18 @@
   // has no FontFace API — they simply fall back to the stack below.
   if (window.FontFace && document.fonts && document.fonts.add) {
     [
-      { file: "LatchRegular.otf", weight: "400" },
-      { file: "LatchMedium.otf", weight: "600" },
-      { file: "LatchBold.otf", weight: "700" },
+      { file: "LatchRegular.woff2", weight: "400" },
+      { file: "LatchMedium.woff2", weight: "600" },
+      { file: "LatchBold.woff2", weight: "700" },
     ].forEach(function (face) {
       try {
-        var ff = new FontFace("Latch", "url(/fonts/" + face.file + ") format('opentype')", {
+        var ff = new FontFace("Latch", "url(/fonts/" + face.file + ") format('woff2')", {
           weight: face.weight,
           style: "normal",
         });
+        // Registered, not loaded: the browser fetches a face only once
+        // something renders in it, and the pill only ever uses the regular.
         document.fonts.add(ff);
-        ff.load();
       } catch (e) {
         /* Malformed URL or blocked font — leave the fallback stack in place. */
       }
@@ -563,16 +579,34 @@
   root.appendChild(wrap);
   document.body.appendChild(host);
 
-  /* offsetLeft is measured against the bar, which does not move when the year
-     run scrolls sideways on a narrow screen — so the scroll has to come off by
-     hand or the fill and the label drift away from the entry. */
-  function barOffset(el) {
-    return el.offsetLeft - (years.contains(el) ? years.scrollLeft : 0);
+  /* The slice of a control that is actually showing, measured against the bar.
+     The year run scrolls sideways on a narrow screen and clips its entries
+     while it folds, so a raw offsetLeft can put the fill (which sits outside
+     the run) past the bar's edge — most visibly when :hover still holds an
+     entry the bar has shrunk out from under. Intersecting with the run keeps
+     the fill and the label on what can be seen, and takes the scroll off for
+     free. Both boxes share the host's translateX, so it cancels out. */
+  function visibleSpan(el) {
+    var barBox = bar.getBoundingClientRect();
+    var box = el.getBoundingClientRect();
+    var left = box.left;
+    var right = box.right;
+    if (years.contains(el)) {
+      var clip = years.getBoundingClientRect();
+      left = Math.max(left, clip.left);
+      right = Math.min(right, clip.right);
+    }
+    return { left: left - barBox.left, width: Math.max(0, right - left) };
+  }
+
+  function isShowing(el) {
+    return Boolean(el) && visibleSpan(el).width >= 1;
   }
 
   function showNote(target, text) {
+    var span = visibleSpan(target);
     note.textContent = text;
-    note.style.setProperty("--at", barOffset(target) + target.offsetWidth / 2 + "px");
+    note.style.setProperty("--at", span.left + span.width / 2 + "px");
     note.classList.add("is-shown");
   }
 
@@ -590,18 +624,20 @@
   }
 
   function place(target) {
-    if (!target) {
+    var span = target && visibleSpan(target);
+    if (!span || span.width < 1) {
       indicator.style.opacity = "0";
       return;
     }
-    indicator.style.width = target.offsetWidth + "px";
-    indicator.style.transform = "translateX(" + barOffset(target) + "px)";
+    indicator.style.width = span.width + "px";
+    indicator.style.transform = "translateX(" + span.left + "px)";
     indicator.style.opacity = "1";
   }
 
+  // A hovered entry that has folded out of sight no longer counts.
   function hovered() {
     return buttons.concat(trigger).filter(function (el) {
-      return el.matches(":hover");
+      return el.matches(":hover") && isShowing(el);
     })[0];
   }
 
